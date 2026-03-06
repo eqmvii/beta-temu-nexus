@@ -5,9 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>An Open Letter to Those Without Migraine: What It's Really Like — Migraine.com</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231E7EBE'/%3E%3Ctext x='50%25' y='72%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' fill='white'%3EM%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: oblique 10deg;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
     /* === TOKENS === */
     :root {
       --cyan:        #379EC1;
@@ -34,11 +46,15 @@
 
     /* === RESET === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; }
-    body {
-      font-family: 'Lato', sans-serif;
+    html {
       font-size: 16px;
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-size: 1.1875rem;
+      line-height: 1.8;
       color: var(--cyan-darker);
       background: var(--white);
       padding-top: calc(var(--header-h) + var(--announce-h));
@@ -94,8 +110,8 @@
     .site-logo__avatar svg { width: 20px; height: 20px; }
     .site-logo__name {
       color: #fff;
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 17px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 17px; font-weight: 600;
       letter-spacing: 0.2px;
     }
 
@@ -170,8 +186,8 @@
       font-size: 20px; line-height: 1; padding: 6px;
     }
     .nav-drawer__logo {
-      color: #fff; font-family: 'Merriweather', serif;
-      font-size: 15px; font-weight: 700;
+      color: #fff; font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600;
     }
     .nav-section { padding: 8px 0; border-bottom: 1px solid var(--hu-lighter); }
     .nav-section-label {
@@ -283,8 +299,8 @@
       margin-bottom: 8px;
     }
     .post-title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 26px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 26px; font-weight: 600;
       color: var(--cyan-dark); line-height: 1.3;
       margin-bottom: 12px;
     }
@@ -339,8 +355,8 @@
     }
     .post-body p { margin-bottom: 18px; }
     .post-body h2 {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 20px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 20px; font-weight: 600;
       color: var(--cyan-dark); line-height: 1.35;
       margin: 28px 0 12px;
     }
@@ -369,13 +385,13 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       color: #fff;
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 20px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 20px; font-weight: 600;
     }
     .inline-email__content { flex: 1; min-width: 0; }
     .inline-email__label {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 16px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600;
       color: var(--cyan-dark); margin-bottom: 8px;
     }
     .inline-email__row { display: flex; height: 38px; }
@@ -443,8 +459,8 @@
     .poll-chart-icon span:nth-child(2) { height: 18px; background: var(--cyan); }
     .poll-chart-icon span:nth-child(3) { height: 14px; }
     .inline-poll__question {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 15px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600; color: var(--cyan-dark);
       line-height: 1.4; margin-bottom: 16px;
     }
     .inline-poll__options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
@@ -494,8 +510,8 @@
       letter-spacing: 0.6px; color: var(--brand); margin-bottom: 6px;
     }
     .rec-card__title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 14px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--cyan-dark);
       line-height: 1.4; margin-bottom: 12px; flex: 1;
     }
     .rec-card__meta {
@@ -588,8 +604,8 @@
       border-top: 1px solid var(--hu-lighter);
     }
     .post-join__heading {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 20px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 20px; font-weight: 600; color: var(--cyan-dark);
       margin-bottom: 6px;
     }
     .post-join__rules {
@@ -678,8 +694,8 @@
     }
     .footer-signup__form { display: flex; flex-direction: column; gap: 10px; }
     .footer-signup__label {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 18px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--cyan-dark);
     }
     .footer-signup__row { display: flex; height: 40px; }
     .footer-signup__input {
@@ -721,8 +737,8 @@
       padding: 0 8px;
     }
     .footer-hu-name {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 14px; font-weight: 700; color: #fff;
+      font-family: geologica-variable, sans-serif;
+      font-size: 14px; font-weight: 600; color: #fff;
       margin-bottom: 12px;
       display: flex; align-items: center; gap: 8px;
     }
@@ -881,7 +897,7 @@
 <!-- POST HERO - spans full layout width above both columns -->
 <div class="post-hero">
   <img
-    src="https://migraine.com/wp-content/uploads/2012/06/38655_combo-1080x412.jpg"
+    src="http://eqmvii.github.io/beta-temu-nexus/assets/38655_combo-1080x412.jpg"
     alt="An open letter to people without migraine — handwritten envelope on teal background"
     width="1080" height="412"
   >
@@ -961,7 +977,7 @@
       <!-- Inline content ad -->
       <div class="inline-ad-slot">
         <span class="ad-label">Advertisement</span>
-        <a href="#"><img src="assets/inline-ad.png" alt="" width="520" height="120"></a>
+        <a href="#"><img src="http://eqmvii.github.io/beta-temu-nexus/assets/inline-ad.png" alt="" width="520" height="120"></a>
       </div>
 
       <h2>The painful frequency of chronic migraine</h2>

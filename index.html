@@ -5,9 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Migraine.com - Migraine Information & Community</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231E7EBE'/%3E%3Ctext x='50%25' y='72%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' fill='white'%3EM%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: oblique 10deg;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
     /* === TOKENS === */
     :root {
       --cyan:        #379EC1;
@@ -35,11 +47,15 @@
 
     /* === RESET === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; }
-    body {
-      font-family: 'Lato', sans-serif;
+    html {
       font-size: 16px;
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-size: 1.1875rem;
+      line-height: 1.8;
       color: var(--cyan-darker);
       background: var(--white);
       padding-top: calc(var(--header-h) + var(--announce-h));
@@ -76,28 +92,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 12px;
+      padding: 0 12px 0 60px; /* 60px left = 48px logo + 12px gap */
     }
     .header__left  { display: flex; align-items: center; gap: 2px; }
     .header__right { display: flex; align-items: center; gap: 2px; }
 
-    /* site logo — far left */
+    /* site logo — far left, flush to edge, full bar height */
     .site-logo {
-      display: flex; align-items: center; gap: 8px;
-      text-decoration: none; margin-right: 6px;
-    }
-    .site-logo__avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: var(--brand);
-      display: flex; align-items: center; justify-content: center;
+      position: absolute; top: 0; left: 0;
+      width: 48px; height: 48px;
+      display: block;
+      text-decoration: none;
       flex-shrink: 0;
     }
-    .site-logo__avatar svg { width: 20px; height: 20px; }
+    .site-logo__avatar {
+      width: 48px; height: 48px;
+      overflow: hidden;
+    }
+    .site-logo__avatar svg { width: 48px; height: 48px; display: block; }
     .site-logo__name {
       color: #fff;
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 17px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 17px; font-weight: 600;
       letter-spacing: 0.2px;
     }
 
@@ -176,8 +192,8 @@
       font-size: 20px; line-height: 1; padding: 6px;
     }
     .nav-drawer__logo {
-      color: #fff; font-family: 'Merriweather', serif;
-      font-size: 15px; font-weight: 700;
+      color: #fff; font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600;
     }
     .nav-section { padding: 8px 0; border-bottom: 1px solid var(--hu-lighter); }
     .nav-section-label {
@@ -303,8 +319,8 @@
       margin-bottom: 8px;
     }
     .slide-title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 20px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 20px; font-weight: 600;
       color: var(--cyan-dark); line-height: 1.35;
       margin-bottom: 10px;
     }
@@ -399,8 +415,8 @@
       display: flex; flex-direction: column; flex: 1;
     }
     .post-card__title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 16px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600;
       color: var(--cyan-dark); line-height: 1.4;
       margin-bottom: 8px;
     }
@@ -468,15 +484,13 @@
     }
     .homepage-community:hover { text-decoration: none; }
     .community-logo {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(255,255,255,0.15);
       margin: 0 auto 14px;
       display: flex; align-items: center; justify-content: center;
     }
-    .community-logo svg { width: 32px; height: 32px; }
+    .community-logo img { width: 64px; height: 64px; object-fit: contain; }
     .community-heading {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 22px; font-weight: 700; color: #fff;
+      font-family: geologica-variable, sans-serif;
+      font-size: 22px; font-weight: 600; color: #fff;
       margin-bottom: 6px;
     }
     .community-sub {
@@ -496,8 +510,8 @@
       margin-bottom: 18px;
     }
     .section-title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 20px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 20px; font-weight: 600; color: var(--cyan-dark);
     }
     .section-link {
       font-size: 13px; font-weight: 700; color: var(--brand);
@@ -545,8 +559,8 @@
     }
     .collection-card__title {
       position: relative; z-index: 1;
-      color: #fff; font-family: 'Merriweather', Georgia, serif;
-      font-size: 16px; font-weight: 700;
+      color: #fff; font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600;
       padding: 16px 18px; line-height: 1.35;
     }
 
@@ -568,11 +582,16 @@
       margin-top: 16px;
     }
 
-    /* Left: two stacked engagement sections */
+    /* Left: category link + 2-col teaser grid */
     .popular-left {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
+    }
+    .popular-teasers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
     /* Category link — "Explore forums ›" / "Explore stories ›"
@@ -608,8 +627,8 @@
       border: 1px solid var(--hu-lighter);
     }
     .eng-teaser__title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 16px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600;
       color: var(--cyan-dark); line-height: 1.4;
       margin-bottom: 8px;
     }
@@ -654,8 +673,8 @@
     .poll-chart-icon span:nth-child(2) { height: 18px; background: var(--cyan); }
     .poll-chart-icon span:nth-child(3) { height: 14px; }
     .poll-question {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 15px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600; color: var(--cyan-dark);
       line-height: 1.4; margin-bottom: 16px;
     }
     .poll-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
@@ -683,8 +702,8 @@
     }
     .footer-signup__form { display: flex; flex-direction: column; gap: 10px; }
     .footer-signup__label {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 18px; font-weight: 700; color: var(--cyan-dark);
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--cyan-dark);
     }
     .footer-signup__row { display: flex; height: 40px; }
     .footer-signup__input {
@@ -704,6 +723,11 @@
       white-space: nowrap;
     }
     .footer-signup__btn:hover { background: var(--brand); border-color: var(--brand); }
+    .footer-signup__notice {
+      font-size: 11px; color: var(--gray-dark);
+      margin-top: 4px; line-height: 1.4;
+    }
+    .footer-signup__notice a { color: var(--gray-dark); text-decoration: underline; }
     .footer-signup__socials { display: flex; align-items: center; gap: 10px; }
     .social-circle {
       width: 36px; height: 36px; border-radius: 50%;
@@ -729,8 +753,8 @@
     @media (max-width: 767px) { .footer-inner { grid-template-columns: 1fr; gap: 24px; } }
 
     .footer-hu-name {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 14px; font-weight: 700; color: #fff;
+      font-family: geologica-variable, sans-serif;
+      font-size: 14px; font-weight: 600; color: #fff;
       margin-bottom: 12px;
       display: flex; align-items: center; gap: 8px;
     }
@@ -803,9 +827,14 @@
     <!-- Logo -->
     <a class="site-logo" href="index.html">
       <div class="site-logo__avatar">
-        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
-            font-family="Georgia,serif" font-size="22" font-weight="700" fill="white">M</text>
+        <svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g stroke="none" fill="none" fill-rule="evenodd" stroke-width="1">
+            <g transform="translate(-0.5, 0.0742)">
+              <rect fill="#1E7EBE" x="0" y="0" width="256" height="256"></rect>
+              <path d="M98.0877005,253.866667 L98.0877005,205.39623 L79.5923622,205.39623 C71.1874396,205.39623 63.0391558,201.9204 56.6335886,195.488908 C50.249697,189.078085 46.9333333,180.817391 46.9333333,172.451629 L46.9333333,77.3778519 C46.9333333,68.9845313 50.1959415,61.2879269 56.7471686,55.4833936 C62.9680599,49.9716706 71.0747266,46.9333333 79.5923622,46.9333333 L178.200642,46.9333333 C195.587924,46.9333333 209.066667,59.5947945 209.066667,77.3778519 L209.066667,172.451629 C209.066667,181.093838 205.711287,189.085836 200.397302,195.342503 C194.774657,201.96346 186.615102,205.39623 178.200642,205.39623 L149.593212,205.39623 L98.0877005,253.866667 Z M79.5923622,52.1005736 C72.2911601,52.1005736 65.4928314,54.5885998 60.1805804,59.2950945 C54.7105312,64.1411047 52.1354724,70.4261913 52.1354724,77.3778519 L52.1354724,172.451629 C52.1354724,187.306583 64.766266,201.090197 79.5923622,201.090197 L103.28984,201.090197 L103.28984,242.317885 L147.602527,201.090197 L178.201509,201.090197 C185.109949,201.090197 191.817241,197.945931 196.46882,192.466934 C200.953064,187.186875 203.864528,179.809779 203.864528,172.451629 L203.864528,77.3778519 C203.864528,70.1488828 201.057107,63.8147074 196.57373,59.1573015 C191.996714,54.4025792 185.420344,52.1005736 178.201509,52.1005736 L79.5923622,52.1005736 Z" fill="#FFFFFF" opacity="0.4"></path>
+              <polygon fill="#FFFFFF" fill-rule="nonzero" opacity="0.800385975" points="85.3333333 164.266667 85.3333333 87.4666667 100.983053 87.4666667 130.883482 136.75581 124.464491 136.824381 153.007056 87.4666667 168.533333 87.4666667 168.533333 164.266667 152.773887 164.266667 153.048203 108.422095 155.983383 109.478095 132.501945 149.112381 121.405869 149.112381 97.1974942 109.478095 99.926937 108.422095 100.201253 164.266667"></polygon>
+            </g>
+          </g>
         </svg>
       </div>
     </a>
@@ -882,7 +911,7 @@
 <div class="page-wrap">
   <div class="site-masthead">
     <a href="index.html" class="site-masthead__link">
-      <img src="https://migraine.com/common/logo/masthead/migraine.svg" alt="Migraine.com" class="site-masthead__img">
+      <img src="http://eqmvii.github.io/beta-temu-nexus/assets/migraine-masthead.svg" alt="Migraine.com" class="site-masthead__img">
     </a>
   </div>
 </div>
@@ -914,10 +943,7 @@
 <!-- COMMUNITY BANNER -->
 <a class="homepage-community" href="#">
   <div class="community-logo">
-    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia,serif" font-size="26" font-weight="700" fill="white">M</text>
-    </svg>
+    <img src="http://eqmvii.github.io/beta-temu-nexus/assets/community-logo.png" alt="Migraine.com" />
   </div>
   <h2 class="community-heading">Explore the Community</h2>
   <p class="community-sub">Looking for support? Have a question? The community is here for you.</p>
@@ -997,15 +1023,8 @@
         <input id="nlEmail" class="footer-signup__input" type="email" placeholder="Enter your email" aria-label="Email">
         <button class="footer-signup__btn" type="submit">Subscribe</button>
       </div>
+      <p class="footer-signup__notice">By providing your email address, you are agreeing to our <a href="#">privacy policy</a> and <a href="#">Terms of Use</a>.</p>
     </form>
-    <div class="footer-signup__socials">
-      <a href="#" class="social-circle" style="background:#002029;" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      </a>
-      <a href="#" class="social-circle" style="background:#002029;" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" style="width:16px;height:16px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="white"/></svg>
-      </a>
-    </div>
   </div>
 </div>
 
@@ -1066,7 +1085,7 @@ const slides = [
     author: 'Andrea B.',
     authorColor: '#4A8CB5',
     readTime: '4 min read',
-    imgSrc: 'https://migraine.com/wp-content/uploads/2021/04/m-living-migraine-tips-preparing-next-attack.jpg',
+    imgSrc: 'http://eqmvii.github.io/beta-temu-nexus/assets/m-living-migraine-tips-preparing-next-attack.jpg',
     imgColor: '#A8C0CC',
   },
   {
@@ -1118,7 +1137,7 @@ const recents = [
 const collections = [
   {
     title: 'Migraine: The Pain of Being Misunderstood',
-    imgSrc: 'https://migraine.com/wp-content/uploads/2021/01/m-116555-misunderstood-patient-voices-1080x412.jpg',
+    imgSrc: 'http://eqmvii.github.io/beta-temu-nexus/assets/m-116555-misunderstood-patient-voices-1080x412.jpg',
     imgColor: '#8B3A38',
   },
   {
@@ -1131,32 +1150,24 @@ const collections = [
 
 const popularArticles = [
   {
-    category: 'forum',
-    categoryLabel: 'Explore forums',
+    eyebrow: 'Featured Forum',
     title: 'Migraine and Missing Out',
     excerpt: 'I was diagnosed with chronic migraine when I was 28, and with it came an endless cycle of cancelled plans, missed milestones, and an identity crisis I hadn\'t expected.',
     author: 'Kerrie S.',
     authorInitials: 'KS',
     authorColor: '#9B59B6',
-    reactions: [
-      { icon: '❤️', count: 68 },
-      { icon: '💪', count: 34 },
-      { icon: '💬', count: 47 },
-    ],
+    reactions: 68,
+    replies: 47,
   },
   {
-    category: 'story',
-    categoryLabel: 'Explore stories',
+    eyebrow: 'Featured Forum',
     title: 'Migraines From MS and No Support',
     excerpt: 'I was diagnosed with MS three years ago, and no one warned me about the migraines. I had to fight every step of the way to be taken seriously by my care team.',
     author: 'Donna V.',
     authorInitials: 'DV',
     authorColor: '#E67E22',
-    reactions: [
-      { icon: '❤️', count: 112 },
-      { icon: '💪', count: 56 },
-      { icon: '💬', count: 83 },
-    ],
+    reactions: 112,
+    replies: 83,
   },
 ];
 
@@ -1251,7 +1262,6 @@ function renderTopArticles() {
     <div class="top-articles__card">
       <article class="post-card">
         <div class="post-card__body">
-          <div class="post-type">${r.type}</div>
           <h3 class="post-card__title"><a href="post.html" style="color:inherit;text-decoration:none;">${r.title}</a></h3>
           <p class="post-card__summary">${r.excerpt}</p>
           <div class="post-card__footer">
@@ -1299,23 +1309,25 @@ function renderCollections() {
 const CARET_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`;
 
 function renderPopular() {
-  document.getElementById('popularEngagement').innerHTML = popularArticles.map(a => `
-    <div class="engagement-section">
-      <a href="#" class="engagement-cat-link">
-        ${a.categoryLabel} ${CARET_SVG}
-      </a>
-      <div class="eng-teaser">
-        <h3 class="eng-teaser__title"><a href="post.html" style="color:inherit;text-decoration:none;">${a.title}</a></h3>
-        <p class="eng-teaser__excerpt">${a.excerpt}</p>
-        <div class="eng-teaser__footer">
-          <div class="byline__avatar" style="background:${a.authorColor};width:28px;height:28px;font-size:11px;">${a.authorInitials}</div>
-          <span style="font-size:13px;font-weight:700;color:#5E676D;">${a.author}</span>
-          <div class="eng-reactions">
-            ${a.reactions.map(r => `<span class="eng-reaction"><span>${r.icon}</span><span>${r.count}</span></span>`).join('')}
+  document.getElementById('popularEngagement').innerHTML = `
+    <a href="#" class="engagement-cat-link">Explore forums ${CARET_SVG}</a>
+    <div class="popular-teasers-grid">
+      ${popularArticles.map(a => `
+        <div class="eng-teaser">
+          <div class="post-type">${a.eyebrow}</div>
+          <h3 class="eng-teaser__title"><a href="post.html" style="color:inherit;text-decoration:none;">${a.title}</a></h3>
+          <p class="eng-teaser__excerpt">${a.excerpt}</p>
+          <div class="eng-teaser__footer">
+            <div class="byline__avatar" style="background:${a.authorColor};width:28px;height:28px;font-size:11px;">${a.authorInitials}</div>
+            <span style="font-size:13px;font-weight:700;color:#5E676D;">${a.author}</span>
+            <button class="bookmark-btn" aria-label="Bookmark" style="margin-left:auto;">${ICON_RIBBON}</button>
           </div>
-        </div>
-      </div>
-    </div>`).join('');
+          <div class="post-card__engagement" style="margin-top:10px;">
+            <button class="eng-action">${ICON_LIKE} ${a.reactions} reactions</button>
+            <a href="#" class="eng-action">${ICON_COMMENT} ${a.replies} replies</a>
+          </div>
+        </div>`).join('')}
+    </div>`;
 }
 
 function renderAd(containerId, ad, type) {
