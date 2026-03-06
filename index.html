@@ -801,7 +801,7 @@
 <header class="header">
   <div class="header__left">
     <!-- Logo -->
-    <a class="site-logo" href="#">
+    <a class="site-logo" href="index.html">
       <div class="site-logo__avatar">
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
@@ -850,7 +850,7 @@
   <div class="nav-section">
     <div class="nav-section-label">Browse</div>
     <ul>
-      <li class="nav-item"><a href="#">Home</a></li>
+      <li class="nav-item"><a href="index.html">Home</a></li>
       <li class="nav-item"><a href="#">Forum</a></li>
       <li class="nav-item"><a href="#">Articles</a></li>
       <li class="nav-item"><a href="#">Stories</a></li>
@@ -881,7 +881,7 @@
 <!-- SITE MASTHEAD LOGO -->
 <div class="page-wrap">
   <div class="site-masthead">
-    <a href="#" class="site-masthead__link">
+    <a href="index.html" class="site-masthead__link">
       <img src="https://migraine.com/common/logo/masthead/migraine.svg" alt="Migraine.com" class="site-masthead__img">
     </a>
   </div>
@@ -907,7 +907,7 @@
 <div class="top-articles">
   <div class="top-articles__grid" id="topArticlesGrid"></div>
   <div class="top-articles__cta">
-    <a href="#" class="btn-solid">Read recent articles</a>
+    <a href="post.html" class="btn-solid">Read recent articles</a>
   </div>
 </div>
 
@@ -1178,17 +1178,17 @@ const footerLinks = ['About Us','Terms of Use','Privacy Policy','Cookie Settings
 const ads = {
   leaderboard: {
     bg: 'linear-gradient(100deg,#0f1b35 0%,#1a3a6b 50%,#0f1b35 100%)',
-    brand: 'Nurteva™',
-    tagline: 'For adults with 4 or more migraine days per month. Ask your doctor.',
+    brand: 'Relivio™',
+    tagline: 'Fast-acting migraine relief for adults. Ask your doctor about Relivio.',
     cta: 'Learn More',
-    isi: 'Important Safety Information: See full Prescribing Information. Rx only.',
+    isi: 'Important Safety Information: Talk to your doctor before use. Rx only. See full Prescribing Information.',
   },
   leaderboard2: {
     bg: 'linear-gradient(100deg,#1a3a2e 0%,#1f6b45 50%,#1a3a2e 100%)',
-    brand: 'Emgality®',
-    tagline: 'For preventive treatment of migraine in adults. Once-monthly self-injection.',
+    brand: 'Neurozen™',
+    tagline: 'Monthly preventive treatment for migraine. Self-administered. Once a month.',
     cta: 'See If It\'s Right for You',
-    isi: 'Important Safety Information: May cause injection-site reactions. Rx only. See full Prescribing Information.',
+    isi: 'Important Safety Information: May cause reactions at injection site. Talk to your doctor. Rx only.',
   },
   square: {
     bg: 'linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%)',
@@ -1222,7 +1222,7 @@ function renderSlider() {
           : `<div class="hp-slide__img-placeholder" style="background:${s.imgColor};height:100%;min-height:220px;"></div>`
         }
       </div>
-      <div class="hp-slide__content">
+      <a href="post.html" class="hp-slide__content" style="text-decoration:none;color:inherit;">
         <div class="post-type">${s.type}</div>
         <h2 class="slide-title">${s.title}</h2>
         <p class="slide-summary">${s.summary}</p>
@@ -1234,9 +1234,9 @@ function renderSlider() {
               <div class="byline__time">${s.readTime}</div>
             </div>
           </div>
-          <button class="bookmark-btn" aria-label="Bookmark for later">${ICON_RIBBON}</button>
+          <button class="bookmark-btn" aria-label="Bookmark for later" onclick="event.preventDefault()">${ICON_RIBBON}</button>
         </div>
-      </div>
+      </a>
     </div>`).join('');
 
   dotsEl.innerHTML = slides.map((_, i) =>
@@ -1252,7 +1252,7 @@ function renderTopArticles() {
       <article class="post-card">
         <div class="post-card__body">
           <div class="post-type">${r.type}</div>
-          <h3 class="post-card__title"><a href="#" style="color:inherit;text-decoration:none;">${r.title}</a></h3>
+          <h3 class="post-card__title"><a href="post.html" style="color:inherit;text-decoration:none;">${r.title}</a></h3>
           <p class="post-card__summary">${r.excerpt}</p>
           <div class="post-card__footer">
             <div class="byline">
@@ -1305,7 +1305,7 @@ function renderPopular() {
         ${a.categoryLabel} ${CARET_SVG}
       </a>
       <div class="eng-teaser">
-        <h3 class="eng-teaser__title">${a.title}</h3>
+        <h3 class="eng-teaser__title"><a href="post.html" style="color:inherit;text-decoration:none;">${a.title}</a></h3>
         <p class="eng-teaser__excerpt">${a.excerpt}</p>
         <div class="eng-teaser__footer">
           <div class="byline__avatar" style="background:${a.authorColor};width:28px;height:28px;font-size:11px;">${a.authorInitials}</div>

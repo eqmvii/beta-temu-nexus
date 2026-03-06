@@ -193,7 +193,7 @@
       margin-bottom: 6px;
     }
     .ad-leaderboard {
-      max-width: 728px; height: 90px;
+      width: 728px; height: 90px;
       margin: 0 auto; border-radius: var(--radius); overflow: hidden;
       border: 1px solid var(--hu-lighter);
     }
@@ -242,7 +242,7 @@
       border-bottom: 1px solid var(--hu-lighter);
     }
     .post-leaderboard .page-wrap {
-      display: flex; flex-direction: column; align-items: center;
+      display: flex; flex-direction: column; align-items: stretch;
     }
 
     /* === POST LAYOUT (2-col grid) === */
@@ -253,24 +253,22 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 32px;
-      align-items: start;
     }
 
     /* === POST MAIN === */
     .post-main { min-width: 0; }
 
-    /* Hero image */
+    /* Hero image - spans full layout width above both columns */
     .post-hero {
-      width: 100%;
-      margin-bottom: 0;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
       overflow: hidden;
     }
     .post-hero img {
       width: 100%;
       height: auto;
       display: block;
-      max-height: 420px;
-      object-fit: cover;
     }
 
     /* Article header */
@@ -320,11 +318,10 @@
     }
     .share-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
     .share-btn:hover { color: var(--cyan); text-decoration: none; }
-    .share-btn--fb svg { fill: #1877F2; }
+    .share-btn--fb svg { fill: var(--gray-dark); }
     .share-btn--print svg { fill: var(--gray-dark); }
-    .share-btn--bookmark svg { fill: var(--cyan); }
+    .share-btn--bookmark svg { fill: var(--gray-dark); }
     .share-bar__right {
-      margin-left: auto;
       display: flex; align-items: center; gap: 12px;
     }
     .share-count {
@@ -405,34 +402,18 @@
     }
     .inline-email__notice a { color: var(--gray); text-decoration: underline; }
 
-    /* === GET THE LATEST NEWS CTA === */
-    .get-latest {
-      background: var(--cyan-dark);
-      border-radius: var(--radius-card);
-      padding: 20px 24px;
+    /* === INLINE CONTENT AD === */
+    .inline-ad-slot {
       margin: 24px 0;
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      text-align: center;
     }
-    .get-latest__text { flex: 1; }
-    .get-latest__heading {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 17px; font-weight: 700;
-      color: #fff; margin-bottom: 4px;
+    .inline-ad-slot .ad-label {
+      display: block;
+      font-size: 10px; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 6px;
     }
-    .get-latest__sub {
-      font-size: 13px; color: var(--hu-light);
-    }
-    .get-latest__btn {
-      padding: 10px 20px;
-      background: #fff; color: var(--cyan-dark);
-      border: none; border-radius: var(--radius);
-      font-size: 13px; font-weight: 700; font-family: inherit;
-      cursor: pointer; white-space: nowrap;
-      text-decoration: none; display: inline-block;
-    }
-    .get-latest__btn:hover { background: var(--hu-lighter); text-decoration: none; }
+    .inline-ad-slot img { display: inline-block; max-width: 100%; }
 
     /* === INLINE COMMUNITY POLL === */
     .inline-poll {
@@ -664,12 +645,27 @@
 
     /* === SIDEBAR === */
     .post-sidebar { min-width: 0; }
+    /*
+     * Mirrors .sidebar-ads + .sidebar-ads__placeholder + .ad-slot sticky pattern:
+     * The container fills the full article height. Each ad-wrap is a flex child that
+     * occupies its region of the article. The ad-slot inside is individually sticky,
+     * so the first ad sticks in the top half, the second takes over in the bottom half.
+     */
     .sidebar-sticky {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar-ad-wrap {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+    .sidebar-ad-wrap .ad-slot {
       position: sticky;
       top: calc(var(--header-h) + var(--announce-h) + 16px);
-      display: flex; flex-direction: column; gap: 20px;
+      padding-top: 12px;
     }
-    .sidebar-ad-wrap { text-align: center; }
 
     /* === FOOTER SIGNUP === */
     .footer-signup {
@@ -872,14 +868,23 @@
       <div class="ad-leaderboard">
         <div class="fake-ad" style="background:linear-gradient(100deg,#0f1b35 0%,#1a3a6b 50%,#0f1b35 100%);">
           <div class="fake-ad__rx">Rx Only</div>
-          <div class="fake-ad__brand">Nurtec ODT™</div>
-          <div class="fake-ad__tagline">For the acute treatment of migraine with or without aura in adults.</div>
-          <div class="fake-ad__cta">See Full Prescribing Information</div>
-          <div class="fake-ad__isi">Important Safety Information: Do not take if allergic to rimegepant. Rx only. See full Prescribing Information.</div>
+          <div class="fake-ad__brand">Relivio™</div>
+          <div class="fake-ad__tagline">Fast-acting migraine relief. Ask your doctor if Relivio is right for you.</div>
+          <div class="fake-ad__cta">Learn More</div>
+          <div class="fake-ad__isi">Important Safety Information: Talk to your doctor before taking Relivio. Not for everyone. Rx only. See full Prescribing Information.</div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- POST HERO - spans full layout width above both columns -->
+<div class="post-hero">
+  <img
+    src="https://migraine.com/wp-content/uploads/2012/06/38655_combo-1080x412.jpg"
+    alt="An open letter to people without migraine — handwritten envelope on teal background"
+    width="1080" height="412"
+  >
 </div>
 
 <!-- POST LAYOUT: main content + sidebar -->
@@ -888,18 +893,8 @@
   <!-- =================== MAIN CONTENT =================== -->
   <main class="post-main">
 
-    <!-- Hero Image -->
-    <div class="post-hero">
-      <img
-        src="https://migraine.com/wp-content/uploads/2012/06/38655_combo-1080x412.jpg"
-        alt="An open letter to people without migraine — handwritten envelope on teal background"
-        width="1080" height="412"
-      >
-    </div>
-
     <!-- Article Header -->
     <div class="post-header">
-      <div class="post-type-tag">Story</div>
       <h1 class="post-title">An Open Letter to Those Without Migraine: What It's Really Like</h1>
       <div class="post-byline">
         <div class="post-byline__avatar">KS</div>
@@ -963,13 +958,10 @@
       <h2>The realities of life</h2>
       <p>The misunderstanding that migraine is just a headache that can be treated with over-the-counter painkillers and a nap or avoided entirely by not eating chocolate or not getting stressed is not only wrong but disregards the enormous suffering of the more than <a href="#">37 million migraineurs in the US</a>. Sure, some people could have a radical reduction in the frequency and severity of their migraine attacks with increased migraine awareness, preventive medication, and lifestyle and behavioral changes. Many others, like me, strive tirelessly to improve their health to no avail.</p>
 
-      <!-- Get the latest news CTA -->
-      <div class="get-latest">
-        <div class="get-latest__text">
-          <div class="get-latest__heading">Get the latest news.</div>
-          <div class="get-latest__sub">Sign up now — get the latest from migraine.com</div>
-        </div>
-        <a href="#" class="get-latest__btn">Register Now</a>
+      <!-- Inline content ad -->
+      <div class="inline-ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <a href="#"><img src="examples/inline-ad.png" alt="" width="520" height="120"></a>
       </div>
 
       <h2>The painful frequency of chronic migraine</h2>
@@ -1005,7 +997,7 @@
 
     <!-- Recommended Articles -->
     <div class="post-recommended">
-      <a href="#" class="rec-card">
+      <a href="post.html" class="rec-card">
         <div class="rec-card__img-placeholder">
           <div style="background:linear-gradient(135deg,#4A8CB5,#002E3B);width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;fill:rgba(255,255,255,0.3);"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23z"/></svg>
@@ -1026,7 +1018,7 @@
           </div>
         </div>
       </a>
-      <a href="#" class="rec-card">
+      <a href="post.html" class="rec-card">
         <div class="rec-card__img-placeholder" style="background:linear-gradient(135deg,#c0392b,#8e1a10);">
           <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:4px;padding:12px;">
             <div style="background:rgba(255,255,255,0.15);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;">
@@ -1155,8 +1147,8 @@
           <div class="ad-square">
             <div class="fake-ad" style="background:linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%);">
               <div class="fake-ad__rx">Rx Only</div>
-              <div class="fake-ad__brand">Nurtec ODT™</div>
-              <div class="fake-ad__tagline">For the acute treatment of migraine with or without aura in adults.</div>
+              <div class="fake-ad__brand">Relivio™</div>
+              <div class="fake-ad__tagline">When migraine strikes, be ready. Talk to your doctor today.</div>
               <div class="fake-ad__cta">Learn More</div>
               <div class="fake-ad__isi">Important Safety Information: See full Prescribing Information.</div>
             </div>
@@ -1171,21 +1163,21 @@
           <div class="ad-tall">
             <div class="fake-ad" style="background:linear-gradient(175deg,#0d1f3c 0%,#1c3d6b 40%,#2979b5 100%);">
               <div class="fake-ad__rx">Rx Only</div>
-              <div class="fake-ad__brand" style="font-size:24px;">Nurtec ODT™</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.7);margin:4px 0 10px;font-style:italic;">(rimegepant)</div>
+              <div class="fake-ad__brand" style="font-size:24px;">Relivio™</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7);margin:4px 0 10px;font-style:italic;">(relizumavant)</div>
               <div class="fake-ad__tagline" style="font-size:13px;max-width:220px;margin-bottom:8px;">
-                When migraine's not on the itinerary...
+                Don't let migraine control your day.
               </div>
               <div style="width:180px;height:180px;border-radius:8px;overflow:hidden;margin:8px 0;">
                 <div style="width:100%;height:100%;background:linear-gradient(135deg,#3d6b9c,#1a3a5e);display:flex;align-items:center;justify-content:center;">
                   <svg viewBox="0 0 80 80" fill="white" opacity="0.3" xmlns="http://www.w3.org/2000/svg" style="width:60px;height:60px;"><path d="M40 5a35 35 0 100 70A35 35 0 0040 5zm0 10a25 25 0 110 50 25 25 0 010-50z"/><path d="M52 28l-18 10-4-14"/></svg>
                 </div>
               </div>
-              <div class="fake-ad__cta" style="margin-top:12px;font-size:13px;">My Ticket to Migraine Relief</div>
+              <div class="fake-ad__cta" style="margin-top:12px;font-size:13px;">Talk to Your Doctor</div>
               <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:10px;line-height:1.4;padding:0 8px;">
-                For the preventive treatment of episodic migraine in adults.<br><br>
+                For adults with chronic migraine who need preventive treatment.<br><br>
                 <strong>IMPORTANT SAFETY INFORMATION</strong><br>
-                Do not take Nurtec ODT if you are allergic to rimegepant or any of its ingredients. Before you take Nurtec ODT, tell your healthcare provider (HCP) about all your medical conditions, including if you have high blood pressure, circulation problems, or liver or kidney problems.<br><br>
+                Do not take Relivio if you have had a serious reaction to relizumavant. Tell your healthcare provider about all medications you take and any other medical conditions before starting Relivio.<br><br>
                 Please see full <u>Prescribing Information</u>.
               </div>
             </div>
