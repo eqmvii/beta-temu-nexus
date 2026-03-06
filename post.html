@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An Open Letter to Those Without Migraine: What It's Really Like — Migraine.com</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231E7EBE'/%3E%3Ctext x='50%25' y='72%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* === TOKENS === */
+    :root {
+      --cyan:        #379EC1;
+      --cyan-dark:   #002E3B;
+      --cyan-darker: #002029;
+      --cyan-light:  #67C7E5;
+      --cyan-lighter:#EAF8FC;
+      --brand:       #1E7EBE;
+      --white:       #ffffff;
+      --gray:        #8C9BA5;
+      --gray-dark:   #5E676D;
+      --hu-light:    #B3C4CD;
+      --hu-lighter:  #ECF0F3;
+      --hu-lightest: #F5F7F9;
+      --hu-neutral:  #4A6572;
+      --shadow:      0 0 10px 2px rgba(179,196,205,0.3);
+      --shadow-card: 0 2px 8px rgba(0,32,41,0.08);
+      --radius:      4px;
+      --radius-card: 6px;
+      --max-w:       1080px;
+      --header-h:    48px;
+      --announce-h:  32px;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--cyan-darker);
+      background: var(--white);
+      padding-top: calc(var(--header-h) + var(--announce-h));
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* === ANNOUNCE BAR === */
+    .announce-bar {
+      position: fixed;
+      top: var(--header-h); left: 0; right: 0;
+      z-index: 298;
+      height: var(--announce-h);
+      background: var(--hu-lightest);
+      border-bottom: 1px solid var(--hu-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      color: var(--gray-dark);
+      text-align: center;
+      padding: 0 16px;
+    }
+    .announce-bar a { color: var(--brand); font-weight: 700; }
+
+    /* === HEADER === */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 299;
+      height: var(--header-h);
+      background: var(--cyan-darker);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+    }
+    .header__left  { display: flex; align-items: center; gap: 2px; }
+    .header__right { display: flex; align-items: center; gap: 2px; }
+
+    .site-logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; margin-right: 6px;
+    }
+    .site-logo__avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .site-logo__avatar svg { width: 20px; height: 20px; }
+    .site-logo__name {
+      color: #fff;
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 17px; font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .hdr-btn {
+      background: none; border: none; cursor: pointer;
+      color: #fff;
+      display: flex; align-items: center; gap: 5px;
+      padding: 6px 8px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; font-family: inherit;
+      border-radius: var(--radius);
+      white-space: nowrap;
+    }
+    .hdr-btn:hover { background: rgba(255,255,255,0.08); }
+    .hdr-btn svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      fill: none; stroke: #fff; stroke-width: 1.8;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hdr-btn svg.filled { fill: #fff; stroke: none; }
+
+    .hamburger {
+      width: 16px; height: 13px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .hamburger span { display: block; height: 2px; background: #fff; border-radius: 1px; }
+
+    .hdr-subscribe {
+      padding: 0 16px;
+      height: 30px;
+      background: var(--cyan); color: #fff;
+      border: none; border-radius: 15px;
+      font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer;
+      white-space: nowrap; margin-left: 4px;
+    }
+    .hdr-subscribe:hover { background: var(--brand); }
+
+    .avatar-btn {
+      display: none;
+      width: 30px; height: 30px;
+      background: #4CAF7D; border: 2px solid #fff;
+      border-radius: 50%;
+      color: #fff; font-size: 11px; font-weight: 700;
+      align-items: center; justify-content: center;
+      margin-left: 4px;
+    }
+    .avatar-btn.show { display: flex; }
+
+    /* === NAV DRAWER === */
+    .nav-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45); z-index: 400;
+    }
+    .nav-overlay.open { display: block; }
+    .nav-drawer {
+      position: fixed; top: 0; left: -290px; bottom: 0;
+      width: 290px; background: #fff; z-index: 401;
+      transition: left 0.22s ease;
+      overflow-y: auto;
+      box-shadow: 3px 0 16px rgba(0,0,0,0.18);
+    }
+    .nav-drawer.open { left: 0; }
+    .nav-drawer__hdr {
+      background: var(--cyan-darker);
+      height: var(--header-h);
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 10px;
+    }
+    .nav-drawer__close {
+      background: none; border: none; color: #fff;
+      font-size: 20px; line-height: 1; padding: 6px;
+    }
+    .nav-drawer__logo {
+      color: #fff; font-family: 'Merriweather', serif;
+      font-size: 15px; font-weight: 700;
+    }
+    .nav-section { padding: 8px 0; border-bottom: 1px solid var(--hu-lighter); }
+    .nav-section-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.9px; color: var(--gray);
+      padding: 8px 20px 4px;
+    }
+    .nav-item a {
+      display: block; padding: 10px 20px;
+      color: var(--cyan-darker); font-size: 15px;
+    }
+    .nav-item a:hover { background: var(--hu-lightest); text-decoration: none; }
+
+    /* === AD SLOTS === */
+    .ad-slot { text-align: center; position: relative; }
+    .ad-label {
+      display: block; font-size: 10px; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .ad-leaderboard {
+      max-width: 728px; height: 90px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-square {
+      width: 300px; height: 250px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-tall {
+      width: 300px; height: 600px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .fake-ad {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 5px; padding: 10px;
+      text-align: center; color: #fff;
+      position: relative;
+    }
+    .fake-ad__rx  { font-size: 10px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; }
+    .fake-ad__brand { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .fake-ad__tagline { font-size: 11px; line-height: 1.35; opacity: 0.88; max-width: 260px; }
+    .fake-ad__cta {
+      margin-top: 6px; padding: 5px 14px;
+      border-radius: 3px; font-size: 11px; font-weight: 700;
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5);
+    }
+    .fake-ad__isi {
+      position: absolute; bottom: 5px; left: 8px; right: 8px;
+      font-size: 8.5px; opacity: 0.55; line-height: 1.3;
+    }
+
+    /* === PAGE WRAP === */
+    .page-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* === POST LEADERBOARD === */
+    .post-leaderboard {
+      padding: 14px 0 12px;
+      background: var(--hu-lightest);
+      border-bottom: 1px solid var(--hu-lighter);
+    }
+    .post-leaderboard .page-wrap {
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* === POST LAYOUT (2-col grid) === */
+    .post-layout {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* === POST MAIN === */
+    .post-main { min-width: 0; }
+
+    /* Hero image */
+    .post-hero {
+      width: 100%;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+    .post-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 420px;
+      object-fit: cover;
+    }
+
+    /* Article header */
+    .post-header {
+      padding: 20px 0 16px;
+      border-bottom: 1px solid var(--hu-lighter);
+      margin-bottom: 20px;
+    }
+    .post-type-tag {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--brand);
+      margin-bottom: 8px;
+    }
+    .post-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--cyan-dark); line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .post-byline {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .post-byline__avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      background: #9B59B6;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 12px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .post-byline__meta { font-size: 13px; color: var(--gray-dark); }
+    .post-byline__author { font-weight: 700; color: var(--cyan); }
+    .post-byline__author:hover { text-decoration: underline; }
+    .post-byline__date { color: var(--gray); }
+    .post-byline__read { color: var(--gray); }
+
+    /* Share bar */
+    .post-share-bar {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .share-btn {
+      background: none; border: none; cursor: pointer; padding: 0;
+      display: flex; align-items: center; gap: 5px;
+      color: var(--gray-dark); font-size: 13px; font-weight: 600;
+      text-decoration: none;
+    }
+    .share-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .share-btn:hover { color: var(--cyan); text-decoration: none; }
+    .share-btn--fb svg { fill: #1877F2; }
+    .share-btn--print svg { fill: var(--gray-dark); }
+    .share-btn--bookmark svg { fill: var(--cyan); }
+    .share-bar__right {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .share-count {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 13px; color: var(--gray-dark);
+      font-weight: 600;
+    }
+    .share-count svg { width: 18px; height: 18px; fill: var(--gray); }
+
+    /* === ARTICLE BODY === */
+    .post-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--cyan-darker);
+    }
+    .post-body p { margin-bottom: 18px; }
+    .post-body h2 {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--cyan-dark); line-height: 1.35;
+      margin: 28px 0 12px;
+    }
+    .post-body a { color: var(--cyan); text-decoration: underline; }
+    .post-body a:hover { color: var(--brand); }
+    .post-signature {
+      font-style: italic;
+      font-size: 16px; color: var(--gray-dark);
+      margin: 24px 0 32px;
+    }
+
+    /* === INLINE EMAIL SIGNUP === */
+    .inline-email {
+      background: var(--hu-lightest);
+      border: 1px solid var(--hu-lighter);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .inline-email__icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 20px; font-weight: 700;
+    }
+    .inline-email__content { flex: 1; min-width: 0; }
+    .inline-email__label {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--cyan-dark); margin-bottom: 8px;
+    }
+    .inline-email__row { display: flex; height: 38px; }
+    .inline-email__input {
+      flex: 1; padding: 0 14px;
+      border: 1px solid var(--hu-light); border-right: none;
+      border-radius: 19px 0 0 19px;
+      font-size: 14px; font-family: inherit; outline: none;
+      color: var(--cyan-darker);
+    }
+    .inline-email__input:focus { border-color: var(--cyan); }
+    .inline-email__btn {
+      padding: 0 20px;
+      background: var(--cyan); color: #fff;
+      border: 1px solid var(--cyan);
+      border-radius: 0 19px 19px 0;
+      font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer;
+      white-space: nowrap;
+    }
+    .inline-email__btn:hover { background: var(--brand); border-color: var(--brand); }
+    .inline-email__notice {
+      font-size: 11px; color: var(--gray);
+      margin-top: 6px; line-height: 1.4;
+    }
+    .inline-email__notice a { color: var(--gray); text-decoration: underline; }
+
+    /* === GET THE LATEST NEWS CTA === */
+    .get-latest {
+      background: var(--cyan-dark);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .get-latest__text { flex: 1; }
+    .get-latest__heading {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 17px; font-weight: 700;
+      color: #fff; margin-bottom: 4px;
+    }
+    .get-latest__sub {
+      font-size: 13px; color: var(--hu-light);
+    }
+    .get-latest__btn {
+      padding: 10px 20px;
+      background: #fff; color: var(--cyan-dark);
+      border: none; border-radius: var(--radius);
+      font-size: 13px; font-weight: 700; font-family: inherit;
+      cursor: pointer; white-space: nowrap;
+      text-decoration: none; display: inline-block;
+    }
+    .get-latest__btn:hover { background: var(--hu-lighter); text-decoration: none; }
+
+    /* === INLINE COMMUNITY POLL === */
+    .inline-poll {
+      border: 1px solid var(--hu-lighter);
+      border-radius: var(--radius-card);
+      padding: 22px 24px 24px;
+      margin: 32px 0;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+    }
+    .inline-poll__top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .poll-eyebrow {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--brand);
+    }
+    .poll-chart-icon {
+      display: flex; align-items: flex-end; gap: 3px; height: 22px;
+    }
+    .poll-chart-icon span {
+      display: block; width: 6px; border-radius: 2px 2px 0 0;
+      background: var(--hu-light);
+    }
+    .poll-chart-icon span:nth-child(1) { height: 10px; }
+    .poll-chart-icon span:nth-child(2) { height: 18px; background: var(--cyan); }
+    .poll-chart-icon span:nth-child(3) { height: 14px; }
+    .inline-poll__question {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 15px; font-weight: 700; color: var(--cyan-dark);
+      line-height: 1.4; margin-bottom: 16px;
+    }
+    .inline-poll__options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+    .inline-poll__option {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--gray-dark); cursor: pointer;
+    }
+    .inline-poll__option input[type="radio"] { accent-color: var(--brand); width: 16px; height: 16px; flex-shrink: 0; }
+    .inline-poll__submit {
+      padding: 10px 32px;
+      background: var(--brand); color: #fff;
+      border: none; border-radius: var(--radius);
+      font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
+      cursor: pointer;
+    }
+    .inline-poll__submit:hover { background: #1668a0; }
+
+    /* === RECOMMENDED ARTICLES === */
+    .post-recommended {
+      margin: 32px 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .rec-card {
+      border: 1px solid var(--hu-lighter);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      text-decoration: none;
+      display: flex; flex-direction: column;
+      background: #fff;
+    }
+    .rec-card:hover { box-shadow: 0 4px 14px rgba(0,32,41,0.14); text-decoration: none; }
+    .rec-card__img {
+      width: 100%; height: 140px;
+      object-fit: cover; display: block;
+    }
+    .rec-card__img-placeholder {
+      width: 100%; height: 140px;
+      background: var(--hu-lighter);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rec-card__body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+    .rec-card__eyebrow {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; color: var(--brand); margin-bottom: 6px;
+    }
+    .rec-card__title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 14px; font-weight: 700; color: var(--cyan-dark);
+      line-height: 1.4; margin-bottom: 12px; flex: 1;
+    }
+    .rec-card__meta {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .rec-meta-item {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 12px; color: var(--gray);
+    }
+    .rec-meta-item svg { width: 15px; height: 15px; fill: var(--gray); }
+
+    /* === POST FOOTER META (comment/reaction counts) === */
+    .post-footer-meta {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0;
+      border-top: 1px solid var(--hu-lighter);
+      margin-top: 8px;
+    }
+    .post-meta-count {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--gray-dark); font-weight: 600;
+    }
+    .post-meta-count svg { width: 18px; height: 18px; fill: var(--gray); }
+
+    /* === OPINION DISCLAIMER === */
+    .post-disclaimer {
+      font-size: 12px; color: var(--gray-dark);
+      line-height: 1.65;
+      padding: 16px 0;
+      border-top: 1px solid var(--hu-lighter);
+      font-style: italic;
+    }
+    .post-disclaimer a { color: var(--gray-dark); text-decoration: underline; }
+
+    /* === VIEW REFERENCES === */
+    .view-references {
+      padding: 14px 0;
+      border-top: 1px solid var(--hu-lighter);
+    }
+    .view-references__toggle {
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 700; color: var(--cyan-dark);
+      padding: 0;
+    }
+    .view-references__toggle svg {
+      width: 16px; height: 16px;
+      fill: none; stroke: var(--cyan-dark); stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.2s;
+    }
+    .view-references__toggle.open svg { transform: rotate(180deg); }
+    .view-references__content {
+      display: none;
+      font-size: 12px; color: var(--gray-dark);
+      line-height: 1.7; padding-top: 12px;
+    }
+    .view-references__content.open { display: block; }
+    .view-references__content ol { padding-left: 18px; list-style: decimal; }
+    .view-references__content li { margin-bottom: 6px; }
+
+    /* === REACTIONS BAR === */
+    .post-reactions {
+      display: flex; align-items: center; gap: 6px;
+      padding: 16px 0;
+      border-top: 1px solid var(--hu-lighter);
+      flex-wrap: wrap;
+    }
+    .reaction-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px;
+      background: var(--hu-lightest);
+      border: 1px solid var(--hu-lighter);
+      border-radius: 20px;
+      font-size: 13px; font-weight: 600; color: var(--gray-dark);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .reaction-btn:hover { background: var(--cyan-lighter); border-color: var(--cyan); }
+    .reaction-btn--active {
+      background: var(--cyan-lighter); border-color: var(--cyan);
+      color: var(--cyan-dark);
+    }
+    .reaction-btn svg { width: 18px; height: 18px; fill: var(--cyan); }
+    .reaction-btn__count { font-weight: 700; }
+
+    /* === JOIN THE CONVERSATION === */
+    .post-join {
+      padding: 24px 0 20px;
+      border-top: 1px solid var(--hu-lighter);
+    }
+    .post-join__heading {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 20px; font-weight: 700; color: var(--cyan-dark);
+      margin-bottom: 6px;
+    }
+    .post-join__rules {
+      font-size: 13px; color: var(--gray-dark); margin-bottom: 10px;
+    }
+    .post-join__rules a { color: var(--cyan); text-decoration: underline; }
+    .post-join__view-comments {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 14px; font-weight: 700; color: var(--cyan);
+      margin-bottom: 18px;
+      cursor: pointer;
+      background: none; border: none; padding: 0;
+    }
+    .post-join__view-comments svg {
+      width: 14px; height: 14px;
+      fill: none; stroke: var(--cyan); stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .post-join__input {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid var(--hu-light);
+      border-radius: var(--radius);
+      font-size: 14px; font-family: inherit;
+      color: var(--cyan-darker); outline: none;
+      margin-bottom: 12px;
+    }
+    .post-join__input:focus { border-color: var(--cyan); }
+    .post-join__submit {
+      display: block; margin: 0 auto;
+      padding: 11px 40px;
+      background: var(--cyan); color: #fff;
+      border: none; border-radius: var(--radius);
+      font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
+      cursor: pointer;
+    }
+    .post-join__submit:hover { background: var(--brand); }
+
+    /* === BOTTOM COMMUNITY POLL === */
+    .post-community-poll {
+      padding: 24px 0 8px;
+    }
+    .community-poll-card {
+      border: 1px solid var(--hu-lighter);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 22px 24px 24px;
+      background: #fff;
+    }
+    .community-poll-card .poll-eyebrow { margin-bottom: 10px; display: block; }
+    .community-poll-card .inline-poll__question {
+      font-size: 17px;
+    }
+
+    /* === SIDEBAR === */
+    .post-sidebar { min-width: 0; }
+    .sidebar-sticky {
+      position: sticky;
+      top: calc(var(--header-h) + var(--announce-h) + 16px);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .sidebar-ad-wrap { text-align: center; }
+
+    /* === FOOTER SIGNUP === */
+    .footer-signup {
+      background: var(--hu-lighter);
+      padding: 28px 0;
+    }
+    .footer-signup__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 32px;
+    }
+    .footer-signup__form { display: flex; flex-direction: column; gap: 10px; }
+    .footer-signup__label {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 18px; font-weight: 700; color: var(--cyan-dark);
+    }
+    .footer-signup__row { display: flex; height: 40px; }
+    .footer-signup__input {
+      width: 280px; padding: 0 16px;
+      border: 1px solid #b3c4cd; border-right: none;
+      border-radius: 20px 0 0 20px;
+      font-size: 15px; font-family: inherit; outline: none;
+      color: var(--cyan-darker);
+    }
+    .footer-signup__input:focus { border-color: var(--cyan); }
+    .footer-signup__btn {
+      padding: 0 22px;
+      background: var(--cyan); color: #fff;
+      border: 1px solid var(--cyan);
+      border-radius: 0 20px 20px 0;
+      font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
+      white-space: nowrap;
+    }
+    .footer-signup__btn:hover { background: var(--brand); border-color: var(--brand); }
+    .footer-signup__socials { display: flex; align-items: center; gap: 10px; }
+    .social-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; flex-shrink: 0;
+    }
+    .social-circle:hover { opacity: 0.85; text-decoration: none; }
+    .social-circle svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* === FOOTER === */
+    .footer-bottom {
+      background: var(--cyan-dark);
+      padding: 36px 16px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      padding: 0 8px;
+    }
+    .footer-hu-name {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 14px; font-weight: 700; color: #fff;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .footer-hu-badge {
+      font-family: 'Lato', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase;
+      background: var(--cyan); color: #fff;
+      padding: 2px 6px; border-radius: 2px;
+    }
+    .footer-intro {
+      font-size: 12px; line-height: 1.75;
+      color: var(--hu-light); margin-bottom: 16px;
+    }
+    .footer-socials { display: flex; gap: 8px; }
+    .footer-social {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+    }
+    .footer-social:hover { background: rgba(255,255,255,0.2); }
+    .footer-social svg { width: 14px; height: 14px; fill: #fff; }
+    .footer-communities h3 {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.7px; color: var(--cyan-light);
+      margin-bottom: 12px;
+    }
+    .communities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 12px;
+    }
+    .communities-grid a {
+      font-size: 12px; color: var(--hu-light);
+      line-height: 2; display: block;
+    }
+    .communities-grid a:hover { color: #fff; text-decoration: none; }
+    .footer-divider {
+      max-width: var(--max-w); margin: 20px auto 0;
+      padding: 16px 8px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 6px 18px;
+      margin-bottom: 14px;
+    }
+    .footer-links a { font-size: 11px; color: var(--hu-light); }
+    .footer-links a:hover { color: #fff; text-decoration: none; }
+    .footer-disclaimer {
+      font-size: 11px; color: var(--gray); line-height: 1.7;
+    }
+    .footer-disclaimer a { color: var(--gray); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCE BAR -->
+<div class="announce-bar">
+  Tell us about your symptom and treatment experience. <a href="#">Take our survey here</a>.
+</div>
+
+<!-- ===================== BEGIN HEADER ===================== -->
+<header class="header">
+  <div class="header__left">
+    <a class="site-logo" href="index.html">
+      <div class="site-logo__avatar">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
+            font-family="Georgia,serif" font-size="22" font-weight="700" fill="white">M</text>
+        </svg>
+      </div>
+    </a>
+    <button class="hdr-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+      Menu
+    </button>
+    <button class="hdr-btn" id="searchBtn" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      Search
+    </button>
+  </div>
+
+  <div class="header__right">
+    <button class="hdr-btn" aria-label="Accessibility options">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;fill:white;flex-shrink:0;"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg>
+      Accessibility
+    </button>
+    <button class="hdr-btn" id="loginBtn" aria-label="Log in">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Log in
+    </button>
+    <button class="avatar-btn" id="avatarBtn" aria-label="My profile">AB</button>
+    <button class="hdr-subscribe">Subscribe</button>
+  </div>
+</header>
+
+<!-- Nav Overlay -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- Nav Drawer -->
+<nav class="nav-drawer" id="navDrawer" aria-label="Site navigation">
+  <div class="nav-drawer__hdr">
+    <button class="nav-drawer__close" id="navClose" aria-label="Close menu">&#x2715;</button>
+    <span class="nav-drawer__logo">Migraine.com</span>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Browse</div>
+    <ul>
+      <li class="nav-item"><a href="index.html">Home</a></li>
+      <li class="nav-item"><a href="#">Forum</a></li>
+      <li class="nav-item"><a href="#">Articles</a></li>
+      <li class="nav-item"><a href="#">Stories</a></li>
+      <li class="nav-item"><a href="#">Videos</a></li>
+      <li class="nav-item"><a href="#">Featured Collections</a></li>
+      <li class="nav-item"><a href="#">Recipes</a></li>
+    </ul>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Community</div>
+    <ul>
+      <li class="nav-item"><a href="#">Share Your Story</a></li>
+      <li class="nav-item"><a href="#">Member Spotlight</a></li>
+      <li class="nav-item"><a href="#">Advocate Leaders</a></li>
+    </ul>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">About</div>
+    <ul>
+      <li class="nav-item"><a href="#">About Migraine.com</a></li>
+      <li class="nav-item"><a href="#">Editorial Policies</a></li>
+      <li class="nav-item"><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- ===================== END HEADER ===================== -->
+
+<!-- LEADERBOARD AD -->
+<div class="post-leaderboard">
+  <div class="page-wrap">
+    <div class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-leaderboard">
+        <div class="fake-ad" style="background:linear-gradient(100deg,#0f1b35 0%,#1a3a6b 50%,#0f1b35 100%);">
+          <div class="fake-ad__rx">Rx Only</div>
+          <div class="fake-ad__brand">Nurtec ODT™</div>
+          <div class="fake-ad__tagline">For the acute treatment of migraine with or without aura in adults.</div>
+          <div class="fake-ad__cta">See Full Prescribing Information</div>
+          <div class="fake-ad__isi">Important Safety Information: Do not take if allergic to rimegepant. Rx only. See full Prescribing Information.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST LAYOUT: main content + sidebar -->
+<div class="post-layout">
+
+  <!-- =================== MAIN CONTENT =================== -->
+  <main class="post-main">
+
+    <!-- Hero Image -->
+    <div class="post-hero">
+      <img
+        src="https://migraine.com/wp-content/uploads/2012/06/38655_combo-1080x412.jpg"
+        alt="An open letter to people without migraine — handwritten envelope on teal background"
+        width="1080" height="412"
+      >
+    </div>
+
+    <!-- Article Header -->
+    <div class="post-header">
+      <div class="post-type-tag">Story</div>
+      <h1 class="post-title">An Open Letter to Those Without Migraine: What It's Really Like</h1>
+      <div class="post-byline">
+        <div class="post-byline__avatar">KS</div>
+        <div class="post-byline__meta">
+          <div>
+            By <a href="#" class="post-byline__author">Kerrie Smyres</a>
+            <span class="post-byline__date"> &bull; Last Updated: July 8, 2025</span>
+          </div>
+          <div class="post-byline__read">3 min read</div>
+        </div>
+      </div>
+
+      <!-- Share Bar -->
+      <div class="post-share-bar">
+        <button class="share-btn share-btn--fb" aria-label="Share on Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </button>
+        <button class="share-btn share-btn--print" aria-label="Print">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+        <button class="share-btn share-btn--bookmark" aria-label="Save for later">
+          <!-- ribbon icon -->
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="var(--cyan)"><path d="m36.77 22.72c-1.1 0-2 .9-2 2v15.98l-10.48-8.39c-.73-.59-1.77-.58-2.5 0l-10.38 8.36v-29.59h8.98c1.1 0 2-.9 2-2s-.9-2-2-2h-10.98c-1.1 0-2 .9-2 2v35.78c0 .77.44 1.47 1.14 1.8.27.13.57.2.86.2.45 0 .89-.15 1.26-.44l12.38-9.98 12.48 9.99c.6.48 1.42.57 2.12.24.69-.33 1.13-1.03 1.13-1.8v-20.14c0-1.1-.9-2-2-2z"/><path d="m43.71 7.08h-4.94v-4.94c0-1.1-.9-2-2-2s-2 .9-2 2v4.94h-4.94c-1.1 0-2 .9-2 2s.9 2 2 2h4.94v4.94c0 1.1.9 2 2 2s2-.9 2-2v-4.94h4.94c1.1 0 2-.9 2-2s-.9-2-2-2z"/></svg>
+        </button>
+        <div class="share-bar__right">
+          <span class="share-count">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23zm-9.42-6.33c.32 0 .64.08.93.23 2.6 1.37 5.54 2.1 8.49 2.1 10.05 0 18.23-8.18 18.23-18.23s-8.18-18.24-18.23-18.24-18.23 8.18-18.23 18.24c0 2.41.47 4.76 1.39 6.98.5 1.2 1.12 5.82-.48 11.04.59-.05 1.27-.15 2.03-.29 2.91-.57 4.94-1.59 4.96-1.6.29-.15.6-.22.91-.22z"/></svg>
+            90
+          </span>
+          <span class="share-count">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>
+            271
+          </span>
+        </div>
+      </div>
+    </div><!-- /post-header -->
+
+    <!-- Article Body -->
+    <div class="post-body">
+      <p>"I have a migraine" does not mean I have a headache. I mean that I am horribly nauseated, dizzy, weak, and have flu-like lethargy and fatigue. My legs tremble so much that my knees buckle. I cannot think clearly enough to string together a coherent sentence. Common words elude me, and decision-making is nearly impossible. I am overwhelmed by mood swings, including suicidal depression. Light, sounds, smells and touch are all magnified to a level that even short exposure to them can cause agony.</p>
+
+      <h2>My symptoms beyond head pain</h2>
+      <p>When I say "I have a migraine," I mean that I am horribly nauseated, dizzy, weak, and have flu-like lethargy and fatigue. My legs tremble so much that my knees buckle. I cannot think clearly enough to string together a coherent sentence. <a href="#">Common words elude me</a>, and decision-making is nearly impossible. I am so overwhelmed by mood swings, including <a href="#">suicidal depression</a>. Light, sounds, smells and touch are all magnified to a level that even short exposure to them can cause agony.</p>
+
+      <!-- Inline email signup -->
+      <div class="inline-email">
+        <div class="inline-email__icon">M</div>
+        <div class="inline-email__content">
+          <div class="inline-email__label">Sign up for email from Migraine.com:</div>
+          <form class="inline-email__row" onsubmit="return false;">
+            <input class="inline-email__input" type="email" placeholder="Enter your email" aria-label="Email address">
+            <button class="inline-email__btn" type="submit">Subscribe</button>
+          </form>
+          <p class="inline-email__notice">By providing your email address, you are agreeing to our <a href="#">Privacy Notice</a> and <a href="#">Terms of Use</a>.</p>
+        </div>
+      </div>
+
+      <h2>Symptoms I haven't experienced</h2>
+      <p>These aren't all my symptoms, just the most notable. Nor does the list represent all possible migraine symptoms someone can experience — I am fortunate in that I don't have endless vomiting or <a href="#">diarrhea</a>, numbness and tingling in my limbs, <a href="#">temporary paralysis</a>, or <a href="#">loss of vision</a>.</p>
+
+      <h2>The realities of life</h2>
+      <p>The misunderstanding that migraine is just a headache that can be treated with over-the-counter painkillers and a nap or avoided entirely by not eating chocolate or not getting stressed is not only wrong but disregards the enormous suffering of the more than <a href="#">37 million migraineurs in the US</a>. Sure, some people could have a radical reduction in the frequency and severity of their migraine attacks with increased migraine awareness, preventive medication, and lifestyle and behavioral changes. Many others, like me, strive tirelessly to improve their health to no avail.</p>
+
+      <!-- Get the latest news CTA -->
+      <div class="get-latest">
+        <div class="get-latest__text">
+          <div class="get-latest__heading">Get the latest news.</div>
+          <div class="get-latest__sub">Sign up now — get the latest from migraine.com</div>
+        </div>
+        <a href="#" class="get-latest__btn">Register Now</a>
+      </div>
+
+      <h2>The painful frequency of chronic migraine</h2>
+      <p>Chronic migraine, defined as 15 or more migraine days a month, at least eight of which are migraine, has its grip on 2 percent of the world's population. And that's the bare minimum; some migraineurs have an attack every single day. In addition to the excruciatingly painful migraine days, every <a href="#">migraine also has a recovery day</a> (or three) that can put alcohol hangovers to shame.</p>
+
+      <h2>A debilitating neurological disease</h2>
+      <p>Again, I do not want your pity or even your sympathy. I want you to have even the tiniest grasp that <strong>migraine is not a headache</strong>. That your brother isn't just trying to get out of Sunday dinner. Your coworker isn't taking the day off to go shopping. That your wife isn't a whiner who doesn't want to do housework. Migraine is a real, debilitating neurological disease that no amount of positive thinking can cure. In fact, there is no cure at all; modern medicine doesn't even know the full extent of the <a href="#">causes of migraine</a>.</p>
+
+      <h2>To those who don't live with it</h2>
+      <p>In the US, June is National Migraine Awareness Week. In the first week of September is Migraine Awareness Week. I've been doing a lot to raise awareness, but I realized I've been preaching to the choir. So, I'm writing this letter to all those without migraine. Though you may not personally suffer from the illness, there's no doubt you know someone who does. If this letter had touched you at all, please let them know that you understand migraine is not just a headache. They will thank you — that's all you learn to do when you have an illness that's so often viewed as an excuse — but I guarantee they will take your words to heart. And I hope you will, too.</p>
+
+      <p class="post-signature">-Kerrie</p>
+    </div><!-- /post-body -->
+
+    <!-- Inline Community Poll -->
+    <div class="inline-poll">
+      <div class="inline-poll__top">
+        <div class="poll-eyebrow">Community Poll</div>
+        <div class="poll-chart-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <p class="inline-poll__question">How open are you to others about migraine?</p>
+      <div class="inline-poll__options">
+        <label class="inline-poll__option"><input type="radio" name="poll-inline" value="very"> Very open</label>
+        <label class="inline-poll__option"><input type="radio" name="poll-inline" value="somewhat"> Somewhat open</label>
+        <label class="inline-poll__option"><input type="radio" name="poll-inline" value="notvery"> Not very open</label>
+        <label class="inline-poll__option"><input type="radio" name="poll-inline" value="not"> Not open at all</label>
+        <label class="inline-poll__option"><input type="radio" name="poll-inline" value="unsure"> I am not sure</label>
+      </div>
+      <button class="inline-poll__submit">Submit</button>
+    </div>
+
+    <!-- Recommended Articles -->
+    <div class="post-recommended">
+      <a href="#" class="rec-card">
+        <div class="rec-card__img-placeholder">
+          <div style="background:linear-gradient(135deg,#4A8CB5,#002E3B);width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;fill:rgba(255,255,255,0.3);"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23z"/></svg>
+          </div>
+        </div>
+        <div class="rec-card__body">
+          <div class="rec-card__eyebrow">Recommended Story</div>
+          <div class="rec-card__title">You never forget what it is like to have a migraine.</div>
+          <div class="rec-card__meta">
+            <span class="rec-meta-item">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23zm-9.42-6.33c.32 0 .64.08.93.23 2.6 1.37 5.54 2.1 8.49 2.1 10.05 0 18.23-8.18 18.23-18.23s-8.18-18.24-18.23-18.24-18.23 8.18-18.23 18.24c0 2.41.47 4.76 1.39 6.98.5 1.2 1.12 5.82-.48 11.04.59-.05 1.27-.15 2.03-.29 2.91-.57 4.94-1.59 4.96-1.6.29-.15.6-.22.91-.22z"/></svg>
+              4 comments
+            </span>
+            <span class="rec-meta-item">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>
+              13 reactions
+            </span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="rec-card">
+        <div class="rec-card__img-placeholder" style="background:linear-gradient(135deg,#c0392b,#8e1a10);">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:4px;padding:12px;">
+            <div style="background:rgba(255,255,255,0.15);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;"><circle cx="24" cy="24" r="20" fill="none" stroke="white" stroke-width="3"/><path d="M24 4a20 20 0 010 40" fill="none" stroke="white" stroke-width="3"/><line x1="4" y1="24" x2="44" y2="24" stroke="white" stroke-width="3"/><line x1="24" y1="14" x2="24" y2="34" stroke="white" stroke-width="3"/></svg>
+            </div>
+            <div style="font-size:11px;font-weight:700;color:white;text-align:center;letter-spacing:0.5px;text-transform:uppercase;line-height:1.3;">10 Ways to Help<br>Someone With Migraine</div>
+          </div>
+        </div>
+        <div class="rec-card__body">
+          <div class="rec-card__eyebrow">Recommended Article</div>
+          <div class="rec-card__title">10 Ways to Help Someone With Migraine</div>
+          <div class="rec-card__meta">
+            <span class="rec-meta-item">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23zm-9.42-6.33c.32 0 .64.08.93.23 2.6 1.37 5.54 2.1 8.49 2.1 10.05 0 18.23-8.18 18.23-18.23s-8.18-18.24-18.23-18.24-18.23 8.18-18.23 18.24c0 2.41.47 4.76 1.39 6.98.5 1.2 1.12 5.82-.48 11.04.59-.05 1.27-.15 2.03-.29 2.91-.57 4.94-1.59 4.96-1.6.29-.15.6-.22.91-.22z"/></svg>
+              12 comments
+            </span>
+            <span class="rec-meta-item">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>
+              26 reactions
+            </span>
+          </div>
+        </div>
+      </a>
+    </div><!-- /post-recommended -->
+
+    <!-- Post Footer Meta -->
+    <div class="post-footer-meta">
+      <span class="post-meta-count">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24 46.14c-3.27 0-6.52-.73-9.47-2.12-1.03.43-2.83 1.09-5.07 1.53-3.51.69-5.75.38-6 .35-.62-.09-1.17-.48-1.46-1.03s-.32-1.22-.05-1.79c2.37-5.11 1.73-9.9 1.49-10.71-1.11-2.69-1.68-5.54-1.68-8.47.01-12.25 9.98-22.23 22.24-22.23s22.23 9.97 22.23 22.23-9.97 22.23-22.23 22.23zm-9.42-6.33c.32 0 .64.08.93.23 2.6 1.37 5.54 2.1 8.49 2.1 10.05 0 18.23-8.18 18.23-18.23s-8.18-18.24-18.23-18.24-18.23 8.18-18.23 18.24c0 2.41.47 4.76 1.39 6.98.5 1.2 1.12 5.82-.48 11.04.59-.05 1.27-.15 2.03-.29 2.91-.57 4.94-1.59 4.96-1.6.29-.15.6-.22.91-.22z"/></svg>
+        10 comments
+      </span>
+      <span class="post-meta-count">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>
+        35 reactions
+      </span>
+    </div>
+
+    <!-- Opinion Disclaimer -->
+    <div class="post-disclaimer">
+      This article represents the opinions, thoughts, and experiences of the author; none of this content
+      has been paid for by any advertiser. The Migraine.com team does not recommend or endorse any
+      products or treatments discussed herein. <a href="#">Learn more about how we maintain editorial integrity here</a>.
+    </div>
+
+    <!-- View References -->
+    <div class="view-references">
+      <button class="view-references__toggle" id="refsToggle" aria-expanded="false">
+        View references
+        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="view-references__content" id="refsContent">
+        <ol>
+          <li>Buse DC, et al. <em>Migraine prevalence, disease burden, and the need for preventive therapy.</em> Neurology. 2012;78(18):1402–1410.</li>
+          <li>Lipton RB, et al. <em>Prevalence and burden of migraine in the United States.</em> Headache. 2007;47(4):519–526.</li>
+          <li>Steiner TJ, et al. <em>Migraine: the seventh disabler.</em> J Headache Pain. 2013;14:1.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Reactions Bar -->
+    <div class="post-reactions" aria-label="Article reactions">
+      <button class="reaction-btn reaction-btn--active" aria-label="Like this article">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>
+        Like <span class="reaction-btn__count">235</span>
+      </button>
+      <button class="reaction-btn" aria-label="Support">
+        <!-- fist/strength icon approximation -->
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="var(--cyan)"><path d="M38 16h-4V8a4 4 0 00-8 0v1a4 4 0 00-7-3.7A4 4 0 0014 8v2a4 4 0 00-4 4v8c0 8.8 7.2 16 16 16s16-7.2 16-16v-2a4 4 0 00-4-4z"/></svg>
+        Support <span class="reaction-btn__count">18</span>
+      </button>
+      <button class="reaction-btn" aria-label="Sad">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="var(--cyan)"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--cyan)" stroke-width="3"/><circle cx="17" cy="19" r="2.5"/><circle cx="31" cy="19" r="2.5"/><path d="M16 32c2-3 5-4 8-4s6 1 8 4" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        Sad <span class="reaction-btn__count">2</span>
+      </button>
+      <button class="reaction-btn" aria-label="Wow">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="var(--cyan)"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--cyan)" stroke-width="3"/><circle cx="17" cy="19" r="2.5"/><circle cx="31" cy="19" r="2.5"/><ellipse cx="24" cy="31" rx="5" ry="6" fill="none" stroke="var(--cyan)" stroke-width="2.5"/></svg>
+        Wow <span class="reaction-btn__count">1</span>
+      </button>
+      <button class="reaction-btn" aria-label="Same">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="var(--cyan)"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--cyan)" stroke-width="3"/><circle cx="17" cy="19" r="2.5"/><circle cx="31" cy="19" r="2.5"/><line x1="16" y1="30" x2="32" y2="30" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        Same <span class="reaction-btn__count">1</span>
+      </button>
+    </div>
+
+    <!-- Join the Conversation -->
+    <div class="post-join">
+      <h2 class="post-join__heading">Join the conversation</h2>
+      <p class="post-join__rules">Please <a href="#">read our rules</a> before commenting.</p>
+      <button class="post-join__view-comments">
+        View 90 comments
+        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <input class="post-join__input" type="text" placeholder="Write a comment..." aria-label="Write a comment">
+      <button class="post-join__submit">Post comment</button>
+    </div>
+
+    <!-- Bottom Community Poll -->
+    <div class="post-community-poll">
+      <div class="community-poll-card">
+        <div class="inline-poll__top">
+          <span class="poll-eyebrow">Community Poll</span>
+          <div class="poll-chart-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <p class="inline-poll__question" style="font-size:17px;">Do you want to help us understand migraine?</p>
+        <div class="inline-poll__options">
+          <label class="inline-poll__option"><input type="radio" name="poll-bottom" value="yes"> Yes</label>
+          <label class="inline-poll__option"><input type="radio" name="poll-bottom" value="no"> No</label>
+          <label class="inline-poll__option"><input type="radio" name="poll-bottom" value="idk"> I do not know</label>
+        </div>
+        <button class="inline-poll__submit">Submit</button>
+      </div>
+    </div>
+
+  </main><!-- /post-main -->
+
+  <!-- =================== SIDEBAR =================== -->
+  <aside class="post-sidebar" aria-label="Sidebar">
+    <div class="sidebar-sticky">
+
+      <!-- Small initial ad (300x250) -->
+      <div class="sidebar-ad-wrap">
+        <div class="ad-slot">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-square">
+            <div class="fake-ad" style="background:linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%);">
+              <div class="fake-ad__rx">Rx Only</div>
+              <div class="fake-ad__brand">Nurtec ODT™</div>
+              <div class="fake-ad__tagline">For the acute treatment of migraine with or without aura in adults.</div>
+              <div class="fake-ad__cta">Learn More</div>
+              <div class="fake-ad__isi">Important Safety Information: See full Prescribing Information.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taller ad (300x600) — appears as user scrolls deeper -->
+      <div class="sidebar-ad-wrap">
+        <div class="ad-slot">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-tall">
+            <div class="fake-ad" style="background:linear-gradient(175deg,#0d1f3c 0%,#1c3d6b 40%,#2979b5 100%);">
+              <div class="fake-ad__rx">Rx Only</div>
+              <div class="fake-ad__brand" style="font-size:24px;">Nurtec ODT™</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7);margin:4px 0 10px;font-style:italic;">(rimegepant)</div>
+              <div class="fake-ad__tagline" style="font-size:13px;max-width:220px;margin-bottom:8px;">
+                When migraine's not on the itinerary...
+              </div>
+              <div style="width:180px;height:180px;border-radius:8px;overflow:hidden;margin:8px 0;">
+                <div style="width:100%;height:100%;background:linear-gradient(135deg,#3d6b9c,#1a3a5e);display:flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 80 80" fill="white" opacity="0.3" xmlns="http://www.w3.org/2000/svg" style="width:60px;height:60px;"><path d="M40 5a35 35 0 100 70A35 35 0 0040 5zm0 10a25 25 0 110 50 25 25 0 010-50z"/><path d="M52 28l-18 10-4-14"/></svg>
+                </div>
+              </div>
+              <div class="fake-ad__cta" style="margin-top:12px;font-size:13px;">My Ticket to Migraine Relief</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:10px;line-height:1.4;padding:0 8px;">
+                For the preventive treatment of episodic migraine in adults.<br><br>
+                <strong>IMPORTANT SAFETY INFORMATION</strong><br>
+                Do not take Nurtec ODT if you are allergic to rimegepant or any of its ingredients. Before you take Nurtec ODT, tell your healthcare provider (HCP) about all your medical conditions, including if you have high blood pressure, circulation problems, or liver or kidney problems.<br><br>
+                Please see full <u>Prescribing Information</u>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </aside><!-- /post-sidebar -->
+
+</div><!-- /post-layout -->
+
+<!-- STAY CONNECTED / FOOTER SIGNUP -->
+<div class="footer-signup">
+  <div class="footer-signup__inner">
+    <form class="footer-signup__form" onsubmit="return false;">
+      <label class="footer-signup__label" for="nlEmail">Stay connected with the community</label>
+      <div class="footer-signup__row">
+        <input id="nlEmail" class="footer-signup__input" type="email" placeholder="Enter your email" aria-label="Email">
+        <button class="footer-signup__btn" type="submit">Subscribe</button>
+      </div>
+    </form>
+    <div class="footer-signup__socials">
+      <a href="#" class="social-circle" style="background:#002029;" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="#" class="social-circle" style="background:#002029;" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" style="width:16px;height:16px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="white"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== BEGIN FOOTER ===================== -->
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-hu-name">
+          Health Union <span class="footer-hu-badge">HU</span>
+        </div>
+        <p class="footer-intro">
+          Migraine.com is a Health Union community. Health Union reaches millions of people
+          through condition-specific online health communities and a Social Health Network of
+          patient leaders across virtually all health conditions.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" style="width:13px;height:13px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Twitter">
+            <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-communities">
+        <h3>Our Communities</h3>
+        <div class="communities-grid" id="footerCommunities"></div>
+      </div>
+    </div>
+    <div class="footer-divider page-wrap">
+      <div class="footer-links" id="footerLinks"></div>
+      <p class="footer-disclaimer">
+        &copy; 2026 Health Union, LLC. All rights reserved. This information is not designed to
+        replace a physician's independent judgment about the appropriateness or risks of a procedure
+        for a given patient. Always consult your doctor about your medical conditions. Migraine.com
+        does not provide medical advice, diagnosis or treatment. Use of the site is conditional upon
+        your acceptance of our terms of use. This site is protected by reCAPTCHA and the Google
+        <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- ===================== END FOOTER ===================== -->
+
+<script>
+/* ============================================================
+   FOOTER DATA
+============================================================ */
+const communities = [
+  'AdvancedBreastCancer.net','Allergies.net','AlzheimersDisease.net',
+  'Asthma.net','AtopicDermatitis.net','BloodCancer.com',
+  'COPD.net','ChronicDryEye.net','CrohnsDisease.net',
+  'Cystic-Fibrosis.com','DiabetesType2.com','Endometriosis.net',
+  'EpilepsyDisease.com','HepatitisC.net','HIV.net',
+  'IBSCrohns.net','InflammatoryBowelDisease.net','LungCancer.net',
+  'MacularDegeneration.net','MultipleSclerosis.net','Obesity.net',
+  'ParkinsonsDisease.net','PlaquePsoriasis.com','PrimaryMigraineAttacks.net',
+  'ProstateCancer.net','RareDisease.net','SkinCancer.net',
+  'SleepDisorders.net','SpinalMuscularAtrophy.net','Type2Diabetes.com',
+];
+const footerLinks = ['About Us','Terms of Use','Privacy Policy','Cookie Settings','Community Rules','Accessibility'];
+
+document.getElementById('footerCommunities').innerHTML =
+  communities.map(c => `<a href="#">${c}</a>`).join('');
+document.getElementById('footerLinks').innerHTML =
+  footerLinks.map(l => `<a href="#">${l}</a>`).join('');
+
+/* ============================================================
+   NAV DRAWER
+============================================================ */
+function openNav() {
+  document.getElementById('navDrawer').classList.add('open');
+  document.getElementById('navOverlay').classList.add('open');
+  document.getElementById('menuBtn').setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';
+}
+function closeNav() {
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.getElementById('menuBtn').setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+document.getElementById('menuBtn').addEventListener('click', openNav);
+document.getElementById('navClose').addEventListener('click', closeNav);
+document.getElementById('navOverlay').addEventListener('click', closeNav);
+
+/* ============================================================
+   LOGIN TOGGLE
+============================================================ */
+document.getElementById('loginBtn').addEventListener('click', () => {
+  document.getElementById('loginBtn').style.display = 'none';
+  document.getElementById('avatarBtn').classList.add('show');
+});
+
+/* ============================================================
+   VIEW REFERENCES TOGGLE
+============================================================ */
+document.getElementById('refsToggle').addEventListener('click', function() {
+  const open = this.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+  document.getElementById('refsContent').classList.toggle('open', open);
+});
+</script>
+</body>
+</html>
