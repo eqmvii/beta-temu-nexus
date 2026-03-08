@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>An Open Letter to Those Without Migraine: What It's Really Like — Migraine.com</title>
+  <title>An Open Letter to Those Without Migraine: What It's Really Like — Migraine.com (Community Voices)</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect fill='%231E7EBE' width='256' height='256'/%3E%3Cg transform='translate(-0.5,0.074)'%3E%3Cpath d='M98 254V205H80C71 205 63 202 57 195 50 189 47 181 47 172V77C47 69 50 61 57 55 63 50 71 47 80 47H178C196 47 209 60 209 77V172C209 181 206 189 200 195 195 202 187 205 178 205H150L98 254ZM80 52C72 52 65 55 60 59 55 64 52 70 52 77V172C52 187 65 201 80 201H103V242L148 201H178C185 201 192 198 196 192 201 187 204 180 204 172V77C204 70 201 64 197 59 192 54 185 52 178 52Z' fill='%23fff' opacity='.4'/%3E%3Cpolygon fill='%23fff' opacity='.8' points='85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164'/%3E%3C/g%3E%3C/svg%3E">
   <style>
     @font-face {
@@ -347,7 +347,7 @@
     .social-share__item {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 8px;
+      margin-right: 12px;
     }
     .social-share__link {
       display: block;
@@ -799,7 +799,7 @@
 
     /* === REACTION GRID (matches prod _reaction-grid.scss + _reaction-option.scss) === */
     .reaction-grid {
-      margin: 0 auto 32px;
+      margin: 0 auto 48px;
       padding: 0;
       text-align: center;
       list-style: none;
@@ -1114,9 +1114,679 @@
       font-size: 11px; color: var(--gray); line-height: 1.7;
     }
     .footer-disclaimer a { color: var(--gray); text-decoration: underline; }
+
+    /* === ADMIN TOOLBAR === */
+    .toolbar {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 500;
+      display: flex;
+      align-items: flex-start;
+    }
+    .toolbar__toggle {
+      width: 32px; height: 32px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-left: none;
+      border-radius: 0 6px 6px 0;
+      color: #888;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .toolbar__toggle:hover { background: #252545; color: #ccc; }
+    .toolbar__toggle--open { color: #67C7E5; background: #1a1a2e; }
+    .toolbar__panel {
+      display: none;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 8px;
+      min-width: 170px;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    }
+    .toolbar__panel--open { display: block; }
+    .toolbar__label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      padding: 0 6px 6px;
+    }
+    .toolbar__item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: 100%;
+      padding: 7px 8px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      color: #999;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      white-space: nowrap;
+    }
+    .toolbar__item:hover { background: rgba(255,255,255,0.05); color: #ccc; }
+    .toolbar__item--active {
+      background: rgba(103,199,229,0.1);
+      border-color: rgba(103,199,229,0.25);
+      color: #67C7E5;
+    }
+    .toolbar__item svg { flex-shrink: 0; }
+
+    /* === COMMUNITY VOICES COMPONENT === */
+    .cv {
+      margin: 32px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #002029 0%, #003344 40%, #00495e 100%);
+      position: relative;
+    }
+    .cv::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(55,158,193,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 30%, rgba(30,126,190,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cv__header {
+      position: relative;
+      padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cv__header-left { display: flex; align-items: center; gap: 10px; }
+    .cv__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(55,158,193,0.25);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cv__icon svg { width: 18px; height: 18px; fill: var(--cyan-light); }
+    .cv__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 0.2px;
+    }
+    .cv__live-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: rgba(55,158,193,0.2); border: 1px solid rgba(55,158,193,0.3);
+      border-radius: 12px; font-size: 11px; font-weight: 700;
+      color: var(--cyan-light); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .cv__live-dot {
+      width: 6px; height: 6px; background: #4ADE80; border-radius: 50%;
+      animation: cv-pulse 2s ease-in-out infinite;
+    }
+    @keyframes cv-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .cv__subtitle {
+      position: relative; padding: 6px 24px 0; font-size: 12px; color: rgba(255,255,255,0.5);
+    }
+    .cv__stream {
+      position: relative; padding: 16px 24px; height: 300px; overflow: hidden;
+    }
+    .cv__stream::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+      background: linear-gradient(to top, #002029, transparent); pointer-events: none; z-index: 1;
+    }
+    .cv__msg {
+      display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; margin-bottom: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; opacity: 0; transform: translateY(12px);
+      animation: cv-msg-in 0.5s ease forwards;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .cv__msg--exiting { opacity: 0 !important; transform: translateY(-8px) !important; }
+    @keyframes cv-msg-in { to { opacity: 1; transform: translateY(0); } }
+    .cv__msg-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+    .cv__msg-content { flex: 1; min-width: 0; }
+    .cv__msg-top { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+    .cv__msg-name { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .cv__msg-timer {
+      display: inline-flex; align-items: center; gap: 3px; font-size: 10px; color: rgba(255,255,255,0.35);
+    }
+    .cv__msg-timer svg {
+      width: 10px; height: 10px; fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 2; stroke-linecap: round;
+    }
+    .cv__msg-text { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.72); }
+    .cv__msg-avatar-ring { position: relative; }
+    .cv__msg-avatar-ring svg.ring {
+      position: absolute; inset: -3px; width: 34px; height: 34px; transform: rotate(-90deg);
+    }
+    .cv__msg-avatar-ring .ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 2; }
+    .cv__msg-avatar-ring .ring-fill {
+      fill: none; stroke: var(--cyan); stroke-width: 2; stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .cv__compose {
+      position: relative; padding: 0 24px 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .cv__input-wrap { flex: 1; position: relative; }
+    .cv__input {
+      width: 100%; padding: 10px 14px; padding-right: 80px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; font-size: 13px; font-family: inherit; color: #fff; outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cv__input::placeholder { color: rgba(255,255,255,0.3); }
+    .cv__input:focus { border-color: rgba(55,158,193,0.5); background: rgba(255,255,255,0.1); }
+    .cv__char-count {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); pointer-events: none;
+    }
+    .cv__char-count--warn { color: #f59e0b; }
+    .cv__char-count--over { color: #ef4444; }
+    .cv__send {
+      width: 36px; height: 36px; border-radius: 8px; background: var(--cyan); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, transform 0.1s; opacity: 0.5; pointer-events: none;
+    }
+    .cv__send--active { opacity: 1; pointer-events: auto; }
+    .cv__send:hover { background: var(--brand); }
+    .cv__send:active { transform: scale(0.95); }
+    .cv__send svg { width: 16px; height: 16px; fill: #fff; }
+    .cv__footer-note {
+      position: relative; padding: 0 24px 14px; display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: rgba(255,255,255,0.3);
+    }
+    .cv__footer-note svg {
+      width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.3);
+      stroke-width: 2; stroke-linecap: round; flex-shrink: 0;
+    }
+    .cv__toast {
+      position: absolute; bottom: 70px; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3);
+      color: #4ADE80; padding: 8px 16px; border-radius: 8px;
+      font-size: 12px; font-weight: 600; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s; z-index: 5;
+    }
+    .cv__toast--show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* === MIGRAINE WORDLE === */
+    .wordle {
+      margin: 32px 0; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 24px; position: relative;
+    }
+    .wordle__header {
+      display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;
+    }
+    .wordle__header-left { display: flex; align-items: center; gap: 10px; }
+    .wordle__icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, #379EC1, #1E7EBE);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-family: geologica-variable, sans-serif; font-size: 18px; font-weight: 700; flex-shrink: 0;
+    }
+    .wordle__title {
+      display: block; font-family: geologica-variable, sans-serif; font-size: 16px; font-weight: 600; color: #fff;
+    }
+    .wordle__subtitle { display: block; font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+    .wordle__streak {
+      padding: 4px 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5);
+    }
+    .wordle__board { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .wordle__row { display: flex; gap: 6px; }
+    .wordle__cell {
+      width: 48px; height: 48px; border: 2px solid rgba(255,255,255,0.15); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: geologica-variable, sans-serif; font-size: 22px; font-weight: 700;
+      color: #fff; text-transform: uppercase;
+      transition: transform 0.15s, border-color 0.15s, background 0.3s;
+    }
+    .wordle__cell--filled { border-color: rgba(255,255,255,0.35); transform: scale(1.05); }
+    .wordle__cell--pop { animation: wordle-pop 0.1s ease; }
+    @keyframes wordle-pop { 50% { transform: scale(1.12); } }
+    .wordle__cell--correct { background: #538d4e; border-color: #538d4e; animation: wordle-flip 0.5s ease forwards; }
+    .wordle__cell--present { background: #b59f3b; border-color: #b59f3b; animation: wordle-flip 0.5s ease forwards; }
+    .wordle__cell--absent { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.08); animation: wordle-flip 0.5s ease forwards; }
+    @keyframes wordle-flip { 0% { transform: scaleY(1); } 50% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
+    .wordle__msg { text-align: center; min-height: 28px; font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .wordle__msg--win { color: #538d4e; }
+    .wordle__msg--lose { color: #b59f3b; }
+    .wordle__keyboard { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .wordle__kb-row { display: flex; gap: 4px; }
+    .wordle__key {
+      min-width: 30px; height: 38px; padding: 0 6px; border: none; border-radius: 5px;
+      background: rgba(255,255,255,0.15); color: #fff; font-size: 12px; font-weight: 700;
+      font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      text-transform: uppercase; transition: background 0.15s, transform 0.08s;
+    }
+    .wordle__key:hover { background: rgba(255,255,255,0.22); }
+    .wordle__key:active { transform: scale(0.95); }
+    .wordle__key--wide { min-width: 52px; font-size: 11px; }
+    .wordle__key--correct { background: #538d4e; }
+    .wordle__key--present { background: #b59f3b; }
+    .wordle__key--absent { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
+
+    /* === EXPLORE THE COMMUNITY (Semantic Search) === */
+    .explore {
+      margin: 32px 0; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #002029 0%, #0a2f3d 40%, #0d3b4d 100%);
+      position: relative; min-height: 200px;
+    }
+    .explore::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(55,158,193,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse at 70% 70%, rgba(30,126,190,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .explore__header {
+      position: relative; padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .explore__header-left { display: flex; align-items: center; gap: 10px; }
+    .explore__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(55,158,193,0.25);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .explore__icon svg { width: 18px; height: 18px; fill: none; stroke: var(--cyan-light); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .explore__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 0.2px;
+    }
+    .explore__ai-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(103,199,229,0.15), rgba(30,126,190,0.2));
+      border: 1px solid rgba(103,199,229,0.25);
+      border-radius: 12px; font-size: 10px; font-weight: 700;
+      color: var(--cyan-light); text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .explore__ai-badge svg { width: 12px; height: 12px; fill: none; stroke: var(--cyan-light); stroke-width: 2; }
+    .explore__body { position: relative; padding: 16px 24px 20px; }
+    .explore__prompt-text {
+      font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+    }
+    .explore__prompt-text strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+    .explore__textarea {
+      width: 100%; min-height: 80px; max-height: 160px; padding: 14px 16px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; font-size: 14px; font-family: inherit; color: #fff;
+      line-height: 1.6; outline: none; resize: vertical;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .explore__textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .explore__textarea:focus {
+      border-color: rgba(55,158,193,0.5);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 3px rgba(55,158,193,0.1);
+    }
+    .explore__submit-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px;
+    }
+    .explore__hint {
+      font-size: 11px; color: rgba(255,255,255,0.3);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .explore__hint svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.3); stroke-width: 2; stroke-linecap: round; }
+    .explore__submit {
+      padding: 10px 28px; border: none; border-radius: 8px;
+      background: linear-gradient(135deg, var(--cyan), var(--brand));
+      color: #fff; font-size: 13px; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: transform 0.1s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 2px 12px rgba(55,158,193,0.3);
+    }
+    .explore__submit:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(55,158,193,0.4); }
+    .explore__submit:active { transform: scale(0.98); }
+    .explore__submit:disabled { opacity: 0.4; cursor: default; transform: none; box-shadow: none; }
+    .explore__submit svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Thinking state */
+    .explore__thinking { display: none; padding: 40px 24px; text-align: center; position: relative; }
+    .explore__thinking--active { display: block; }
+    .explore__thinking-orb {
+      width: 64px; height: 64px; margin: 0 auto 20px; border-radius: 50%; position: relative;
+      background: radial-gradient(circle, rgba(103,199,229,0.3) 0%, transparent 70%);
+    }
+    .explore__thinking-orb::before {
+      content: ''; position: absolute; inset: 4px; border-radius: 50%;
+      border: 2px solid transparent; border-top-color: var(--cyan-light); border-right-color: var(--cyan);
+      animation: explore-spin 1s linear infinite;
+    }
+    .explore__thinking-orb::after {
+      content: ''; position: absolute; inset: 12px; border-radius: 50%;
+      border: 2px solid transparent; border-bottom-color: var(--brand); border-left-color: var(--cyan-light);
+      animation: explore-spin 1.5s linear infinite reverse;
+    }
+    @keyframes explore-spin { to { transform: rotate(360deg); } }
+    .explore__thinking-text {
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85);
+      margin-bottom: 6px;
+    }
+    .explore__thinking-sub {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+    }
+    .explore__thinking-dots {
+      display: inline-flex; gap: 4px; margin-left: 2px;
+    }
+    .explore__thinking-dots span {
+      width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5);
+      animation: explore-dot 1.4s ease-in-out infinite;
+    }
+    .explore__thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .explore__thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes explore-dot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
+    }
+    .explore__thinking-scanlines {
+      margin: 16px auto 0; width: 200px; height: 3px; border-radius: 2px;
+      background: rgba(255,255,255,0.06); overflow: hidden; position: relative;
+    }
+    .explore__thinking-scanlines::after {
+      content: ''; position: absolute; top: 0; left: -60%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, var(--cyan-light), transparent);
+      animation: explore-scan 1.8s ease-in-out infinite;
+    }
+    @keyframes explore-scan { to { left: 100%; } }
+
+    /* Results state */
+    .explore__results { display: none; padding: 0 24px 24px; position: relative; }
+    .explore__results--active { display: block; animation: explore-fade-in 0.6s ease; }
+    @keyframes explore-fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .explore__encouragement {
+      padding: 16px 20px; margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(55,158,193,0.08));
+      border: 1px solid rgba(74,222,128,0.15); border-radius: 10px;
+      font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.75);
+    }
+    .explore__encouragement strong { color: #4ADE80; font-weight: 600; }
+    .explore__results-section {
+      margin-bottom: 16px;
+    }
+    .explore__results-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.35); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .explore__results-label svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .explore__result-card {
+      display: block; padding: 14px 16px; margin-bottom: 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      cursor: pointer; opacity: 0; animation: explore-card-in 0.5s ease forwards;
+    }
+    .explore__result-card:nth-child(2) { animation-delay: 0.15s; }
+    .explore__result-card:nth-child(3) { animation-delay: 0.3s; }
+    .explore__result-card:hover {
+      background: rgba(255,255,255,0.08); border-color: rgba(55,158,193,0.3);
+      transform: translateX(4px); text-decoration: none;
+    }
+    @keyframes explore-card-in { to { opacity: 1; } }
+    .explore__result-type {
+      display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; padding: 2px 8px; border-radius: 3px; margin-bottom: 6px;
+    }
+    .explore__result-type--article { background: rgba(30,126,190,0.2); color: var(--cyan-light); }
+    .explore__result-type--forum { background: rgba(74,222,128,0.15); color: #4ADE80; }
+    .explore__result-title {
+      font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9);
+      margin-bottom: 4px; line-height: 1.4;
+    }
+    .explore__result-excerpt {
+      font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5;
+    }
+    .explore__result-meta {
+      display: flex; align-items: center; gap: 10px; margin-top: 8px;
+      font-size: 11px; color: rgba(255,255,255,0.35);
+    }
+    .explore__result-meta svg { width: 11px; height: 11px; fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 2; stroke-linecap: round; }
+    .explore__result-meta-item { display: flex; align-items: center; gap: 3px; }
+    .explore__reset {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 8px;
+      padding: 8px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .explore__reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+    .explore__reset svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* === ONBOARDING WIZARD === */
+    .onboarding-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0, 32, 41, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 300ms, visibility 300ms;
+    }
+    .onboarding-overlay.active { opacity: 1; visibility: visible; }
+    .onboarding-modal {
+      background: #fff;
+      border-radius: 16px;
+      width: 520px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 32, 41, 0.25);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .onboarding-overlay.active .onboarding-modal { transform: translateY(0) scale(1); }
+    .onboarding-progress { display: flex; gap: 6px; padding: 20px 32px 0; }
+    .onboarding-progress__bar {
+      flex: 1; height: 4px;
+      background: var(--hu-lighter);
+      border-radius: 2px; overflow: hidden;
+    }
+    .onboarding-progress__fill {
+      height: 100%; width: 0;
+      background: var(--cyan);
+      border-radius: 2px;
+      transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .onboarding-progress__bar.complete .onboarding-progress__fill { width: 100%; }
+    .onboarding-progress__bar.active .onboarding-progress__fill { width: 50%; }
+    .onboarding-step { padding: 32px 32px 28px; display: none; }
+    .onboarding-step.active { display: block; animation: fadeSlideIn 400ms ease; }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .onboarding-step__eyebrow {
+      font-family: geologica-variable, sans-serif;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--cyan); margin-bottom: 8px;
+    }
+    .onboarding-step__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--cyan-darker); line-height: 1.3; margin-bottom: 8px;
+    }
+    .onboarding-step__subtext {
+      font-size: 14px; color: var(--gray-dark);
+      line-height: 1.5; margin-bottom: 24px;
+    }
+    .onboarding-field { position: relative; margin-bottom: 20px; }
+    .onboarding-field__label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--cyan-dark); margin-bottom: 6px;
+    }
+    .onboarding-field__input {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid var(--hu-lighter);
+      border-radius: 10px;
+      font-size: 15px; font-family: 'Lato', sans-serif;
+      color: var(--cyan-darker);
+      transition: border-color 200ms;
+      box-sizing: border-box;
+    }
+    .onboarding-field__input:focus { outline: none; border-color: var(--cyan); }
+    .onboarding-field__input::placeholder { color: #B0B8BE; }
+    .onboarding-field__hint { font-size: 12px; color: var(--gray-dark); margin-top: 4px; }
+    .onboarding-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .onboarding-chip {
+      padding: 10px 18px;
+      border: 2px solid var(--hu-lighter);
+      border-radius: 24px;
+      font-size: 14px; font-weight: 600;
+      color: var(--cyan-dark);
+      background: #fff; cursor: pointer;
+      transition: all 200ms;
+    }
+    .onboarding-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+    .onboarding-chip.selected {
+      border-color: var(--cyan); background: var(--cyan-lighter); color: var(--cyan);
+    }
+    .onboarding-actions {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 32px 28px;
+    }
+    .onboarding-actions__skip {
+      background: none; border: none;
+      font-size: 14px; font-weight: 600;
+      color: var(--gray-dark); cursor: pointer; padding: 8px 0;
+    }
+    .onboarding-actions__skip:hover { color: var(--cyan); }
+    .onboarding-actions__next {
+      padding: 12px 32px;
+      background: var(--cyan); color: #fff; border: none;
+      border-radius: 8px;
+      font-size: 15px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      cursor: pointer;
+      transition: background 200ms, transform 150ms;
+    }
+    .onboarding-actions__next:hover { background: #2E8DAE; }
+    .onboarding-actions__next:active { transform: scale(0.97); }
+    .onboarding-done {
+      text-align: center; padding: 48px 32px; display: none;
+    }
+    .onboarding-done.active { display: block; animation: fadeSlideIn 400ms ease; }
+    .onboarding-done__icon {
+      width: 64px; height: 64px;
+      background: var(--cyan-lighter);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .onboarding-done__icon svg { width: 32px; height: 32px; fill: var(--cyan); }
+    .onboarding-done__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--cyan-darker); margin-bottom: 8px;
+    }
+    .onboarding-done__text {
+      font-size: 15px; color: var(--gray-dark);
+      line-height: 1.6; margin-bottom: 28px;
+    }
+    .onboarding-done__cta {
+      padding: 14px 40px;
+      background: var(--cyan); color: #fff; border: none;
+      border-radius: 8px;
+      font-size: 16px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      cursor: pointer; transition: background 200ms;
+    }
+    .onboarding-done__cta:hover { background: #2E8DAE; }
   </style>
 </head>
 <body>
+
+<!-- ONBOARDING WIZARD -->
+<div class="onboarding-overlay" id="onboardingOverlay">
+  <div class="onboarding-modal">
+    <div class="onboarding-progress">
+      <div class="onboarding-progress__bar active" id="prog1"><div class="onboarding-progress__fill"></div></div>
+      <div class="onboarding-progress__bar" id="prog2"><div class="onboarding-progress__fill"></div></div>
+      <div class="onboarding-progress__bar" id="prog3"><div class="onboarding-progress__fill"></div></div>
+    </div>
+    <div class="onboarding-step active" id="step1">
+      <p class="onboarding-step__eyebrow">Step 1 of 3</p>
+      <h2 class="onboarding-step__heading">What best describes you?</h2>
+      <p class="onboarding-step__subtext">This helps us recommend content that's most relevant to where you are.</p>
+      <div class="onboarding-chips" id="step1Chips">
+        <button class="onboarding-chip" data-value="patient">I live with migraine</button>
+        <button class="onboarding-chip" data-value="caregiver">I care for someone with migraine</button>
+        <button class="onboarding-chip" data-value="newly-diagnosed">I was recently diagnosed</button>
+        <button class="onboarding-chip" data-value="exploring">I think I might have migraine</button>
+        <button class="onboarding-chip" data-value="professional">I'm a healthcare professional</button>
+      </div>
+    </div>
+    <div class="onboarding-step" id="step2">
+      <p class="onboarding-step__eyebrow">Step 2 of 3</p>
+      <h2 class="onboarding-step__heading">Where are you in your journey?</h2>
+      <p class="onboarding-step__subtext">No wrong answers here — just help us understand what you're going through.</p>
+      <div class="onboarding-field">
+        <label class="onboarding-field__label" for="journeyInput">Tell us a little about your experience</label>
+        <input class="onboarding-field__input" id="journeyInput" type="text" placeholder="e.g. Diagnosed 5 years ago, still finding what works" maxlength="200" autocomplete="off">
+        <p class="onboarding-field__hint">A sentence or two is perfect.</p>
+      </div>
+    </div>
+    <div class="onboarding-step" id="step3">
+      <p class="onboarding-step__eyebrow">Step 3 of 3</p>
+      <h2 class="onboarding-step__heading">What are you most interested in?</h2>
+      <p class="onboarding-step__subtext">Pick as many as you like — we'll personalize your feed.</p>
+      <div class="onboarding-chips" id="step3Chips">
+        <button class="onboarding-chip" data-value="treatments">Treatments &amp; medications</button>
+        <button class="onboarding-chip" data-value="community">Community stories</button>
+        <button class="onboarding-chip" data-value="triggers">Triggers &amp; prevention</button>
+        <button class="onboarding-chip" data-value="coping">Coping strategies</button>
+        <button class="onboarding-chip" data-value="research">Latest research</button>
+        <button class="onboarding-chip" data-value="lifestyle">Lifestyle &amp; wellness</button>
+        <button class="onboarding-chip" data-value="advocacy">Advocacy &amp; awareness</button>
+      </div>
+    </div>
+    <div class="onboarding-done" id="stepDone">
+      <div class="onboarding-done__icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      </div>
+      <h2 class="onboarding-done__heading">You're all set!</h2>
+      <p class="onboarding-done__text">We'll use your preferences to surface the articles, stories, and conversations that matter most to you.</p>
+      <button class="onboarding-done__cta" id="onboardingFinish">Start exploring</button>
+    </div>
+    <div class="onboarding-actions" id="onboardingActions">
+      <button class="onboarding-actions__skip" id="onboardingSkip">Skip for now</button>
+      <button class="onboarding-actions__next" id="onboardingNext">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ADMIN TOOLBAR ========== -->
+<div class="toolbar" id="adminToolbar">
+  <button class="toolbar__toggle" id="toolbarToggle" aria-label="Toggle component selector">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  </button>
+  <div class="toolbar__panel" id="toolbarPanel">
+    <div class="toolbar__label">Component Slot</div>
+    <button class="toolbar__item toolbar__item--active" data-target="community-voices">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+      Community Voices
+    </button>
+    <button class="toolbar__item" data-target="migraine-wordle">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+      Migraine Wordle
+    </button>
+    <button class="toolbar__item" data-target="explore-community">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+      Explore Community
+    </button>
+  </div>
+</div>
 
 <!-- ANNOUNCE BAR -->
 <div class="announce-bar">
@@ -1317,6 +1987,99 @@
         <span class="ad-label">Advertisement</span>
         <a href="#"><img src="http://eqmvii.github.io/beta-temu-nexus/assets/inline-ad.png" alt="" width="520" height="120"></a>
       </div>
+
+      <!-- ========== COMPONENT SLOT ========== -->
+      <div id="componentSlot">
+        <div class="cv" id="communityVoices" data-component="community-voices">
+          <div class="cv__header">
+            <div class="cv__header-left">
+              <div class="cv__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <span class="cv__title">Community Voices</span>
+            </div>
+            <span class="cv__live-badge"><span class="cv__live-dot"></span> Live</span>
+          </div>
+          <div class="cv__subtitle">Messages disappear after 24 hours. Share what's on your mind.</div>
+          <div class="cv__stream" id="cvStream"></div>
+          <div class="cv__compose">
+            <div class="cv__input-wrap">
+              <input class="cv__input" id="cvInput" type="text" placeholder="Share your voice..." maxlength="180" aria-label="Share a community message">
+              <span class="cv__char-count" id="cvCharCount"></span>
+            </div>
+            <button class="cv__send" id="cvSend" aria-label="Send message">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+            </button>
+          </div>
+          <div class="cv__footer-note">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Messages auto-expire in 24h. Be kind. Community guidelines apply.
+          </div>
+          <div class="cv__toast" id="cvToast">Your voice has been shared!</div>
+        </div>
+        <div class="wordle" id="migraineWordle" data-component="migraine-wordle" style="display:none;">
+          <div class="wordle__header">
+            <div class="wordle__header-left">
+              <div class="wordle__icon">M</div>
+              <div>
+                <span class="wordle__title">Migraine Wordle</span>
+                <span class="wordle__subtitle">Guess the migraine-related word in 6 tries</span>
+              </div>
+            </div>
+            <div class="wordle__streak" id="wordleStreak">0 streak</div>
+          </div>
+          <div class="wordle__board" id="wordleBoard"></div>
+          <div class="wordle__msg" id="wordleMsg"></div>
+          <div class="wordle__keyboard" id="wordleKeyboard"></div>
+        </div>
+
+        <div class="explore" id="exploreCommunity" data-component="explore-community" style="display:none;">
+          <div class="explore__header">
+            <div class="explore__header-left">
+              <div class="explore__icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </div>
+              <span class="explore__title">Explore the Community</span>
+            </div>
+            <span class="explore__ai-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Smart Match
+            </span>
+          </div>
+
+          <!-- Input state -->
+          <div class="explore__body" id="exploreInput">
+            <p class="explore__prompt-text">
+              <strong>Tell us where you are in your journey</strong> &mdash; newly diagnosed, years in, searching for answers, or just need to know you're not alone. We'll surface the most valuable posts and conversations for you.
+            </p>
+            <textarea class="explore__textarea" id="exploreTextarea" placeholder="e.g. &quot;I was just diagnosed last month and I'm overwhelmed by all the treatment options...&quot;" rows="3"></textarea>
+            <div class="explore__submit-row">
+              <span class="explore__hint">
+                <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Your input isn't stored or shared
+              </span>
+              <button class="explore__submit" id="exploreSubmit" disabled>
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                Find my community
+              </button>
+            </div>
+          </div>
+
+          <!-- Thinking state -->
+          <div class="explore__thinking" id="exploreThinking">
+            <div class="explore__thinking-orb"></div>
+            <div class="explore__thinking-text" id="exploreThinkingText">
+              Reading your story<span class="explore__thinking-dots"><span></span><span></span><span></span></span>
+            </div>
+            <div class="explore__thinking-sub" id="exploreThinkingSub">Matching you with community wisdom</div>
+            <div class="explore__thinking-scanlines"></div>
+          </div>
+
+          <!-- Results state -->
+          <div class="explore__results" id="exploreResults"></div>
+        </div>
+      </div>
+      <!-- ========== END COMPONENT SLOT ========== -->
 
       <h2>The painful frequency of chronic migraine</h2>
       <p>Chronic migraine, defined as 15 or more migraine days a month, at least eight of which are migraine, has its grip on 2 percent of the world's population. And that's the bare minimum; some migraineurs have an attack every single day. In addition to the excruciatingly painful migraine days, every <a href="#">migraine also has a recovery day</a> (or three) that can put alcohol hangovers to shame.</p>
@@ -1802,12 +2565,74 @@ document.getElementById('navClose').addEventListener('click', closeNav);
 document.getElementById('navOverlay').addEventListener('click', closeNav);
 
 /* ============================================================
-   LOGIN TOGGLE
+   LOGIN → ONBOARDING WIZARD
 ============================================================ */
-document.getElementById('loginBtn').addEventListener('click', () => {
-  document.getElementById('loginBtn').style.display = 'none';
-  document.getElementById('avatarBtn').classList.add('show');
-});
+(function() {
+  const overlay = document.getElementById('onboardingOverlay');
+  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')];
+  const done = document.getElementById('stepDone');
+  const actions = document.getElementById('onboardingActions');
+  const nextBtn = document.getElementById('onboardingNext');
+  const skipBtn = document.getElementById('onboardingSkip');
+  const progBars = [document.getElementById('prog1'), document.getElementById('prog2'), document.getElementById('prog3')];
+  let current = 0;
+
+  function updateProgress() {
+    progBars.forEach((bar, i) => {
+      bar.classList.remove('active', 'complete');
+      if (i < current) bar.classList.add('complete');
+      else if (i === current) bar.classList.add('active');
+    });
+  }
+
+  function showStep(index) {
+    steps.forEach(s => s.classList.remove('active'));
+    done.classList.remove('active');
+    if (index < 3) {
+      steps[index].classList.add('active');
+      actions.style.display = '';
+      nextBtn.textContent = index === 2 ? 'Finish' : 'Continue';
+    } else {
+      done.classList.add('active');
+      actions.style.display = 'none';
+      progBars.forEach(b => { b.classList.remove('active'); b.classList.add('complete'); });
+    }
+    current = index;
+    updateProgress();
+  }
+
+  function closeWizard() {
+    overlay.classList.remove('active');
+    document.getElementById('loginBtn').style.display = 'none';
+    document.getElementById('avatarBtn').classList.add('show');
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    current = 0;
+    showStep(0);
+    overlay.classList.add('active');
+  });
+
+  document.querySelectorAll('.onboarding-chips').forEach(container => {
+    container.addEventListener('click', (e) => {
+      const chip = e.target.closest('.onboarding-chip');
+      if (!chip) return;
+      if (container.id === 'step1Chips') {
+        container.querySelectorAll('.onboarding-chip').forEach(c => c.classList.remove('selected'));
+      }
+      chip.classList.toggle('selected');
+    });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (current < 2) showStep(current + 1);
+    else showStep(3);
+  });
+
+  skipBtn.addEventListener('click', closeWizard);
+  document.getElementById('onboardingFinish').addEventListener('click', closeWizard);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeWizard(); });
+})();
 
 /* ============================================================
    VIEW REFERENCES TOGGLE
@@ -1835,6 +2660,367 @@ document.getElementById('repliesToggle1').addEventListener('click', function() {
   list.style.display = showing ? 'none' : 'block';
   this.textContent = showing ? 'View 1 previous reply' : 'Hide 1 previous reply';
 });
+
+/* ============================================================
+   COMMUNITY VOICES
+============================================================ */
+(function() {
+  var CLOCK_SVG = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+  var MAX_CHARS = 180;
+  var RING_CIRC = 2 * Math.PI * 13;
+  var seedMessages = [
+    { name: 'Sarah M.', initials: 'SM', color: '#9B59B6', text: 'The part about not being able to find words during an attack hit me so hard. That cognitive fog is real.', hoursLeft: 22 },
+    { name: 'James K.', initials: 'JK', color: '#2ECC71', text: 'Shared this with my entire family group chat. Finally, someone put it into words.', hoursLeft: 18 },
+    { name: 'Priya D.', initials: 'PD', color: '#E67E22', text: 'I cried reading this. 15 years with chronic migraine and people still say "just take an aspirin."', hoursLeft: 14 },
+    { name: 'Michael T.', initials: 'MT', color: '#3498DB', text: 'The mood swings are the worst part nobody talks about. Thank you for naming it.', hoursLeft: 11 },
+    { name: 'Lisa R.', initials: 'LR', color: '#E74C3C', text: 'Day 4 of a migraine cycle right now. Reading this from a dark room. You get it.', hoursLeft: 8 },
+    { name: 'David W.', initials: 'DW', color: '#1ABC9C', text: 'My wife has chronic migraine and I learned more from this letter than any doctor visit.', hoursLeft: 5 },
+    { name: 'Carla N.', initials: 'CN', color: '#8E44AD', text: '"Not just a headache" should be on a billboard. Sending this to my boss right now.', hoursLeft: 19 },
+    { name: 'Ryan G.', initials: 'RG', color: '#D35400', text: 'Lost my last job because they thought I was faking. This disease takes everything.', hoursLeft: 3 },
+    { name: 'Mia H.', initials: 'MH', color: '#16A085', text: 'The recovery day comparison to hangovers is so accurate. Sometimes it takes me 3 days to feel normal.', hoursLeft: 16 },
+    { name: 'Elena V.', initials: 'EV', color: '#C0392B', text: 'Kerrie, you are a voice for so many of us who cannot speak during attacks. Thank you.', hoursLeft: 9 },
+  ];
+  var stream = document.getElementById('cvStream');
+  var input = document.getElementById('cvInput');
+  var sendBtn = document.getElementById('cvSend');
+  var charCount = document.getElementById('cvCharCount');
+  var toast = document.getElementById('cvToast');
+  var displayedMessages = [];
+  var seedIndex = 0;
+  var animating = false;
+  function renderTimerRing(hoursLeft) {
+    var pct = hoursLeft / 24;
+    var offset = RING_CIRC * (1 - pct);
+    return '<svg class="ring" viewBox="0 0 34 34"><circle class="ring-track" cx="17" cy="17" r="13"/><circle class="ring-fill" cx="17" cy="17" r="13" stroke-dasharray="' + RING_CIRC + '" stroke-dashoffset="' + offset + '"/></svg>';
+  }
+  function createMsgEl(msg) {
+    var el = document.createElement('div');
+    el.className = 'cv__msg';
+    el.innerHTML =
+      '<div class="cv__msg-avatar-ring"><div class="cv__msg-avatar" style="background:' + msg.color + ';">' + msg.initials + '</div>' + renderTimerRing(msg.hoursLeft) + '</div>' +
+      '<div class="cv__msg-content"><div class="cv__msg-top"><span class="cv__msg-name">' + msg.name + '</span><span class="cv__msg-timer">' + CLOCK_SVG + ' ' + msg.hoursLeft + 'h left</span></div><p class="cv__msg-text">' + msg.text + '</p></div>';
+    return el;
+  }
+  function showInitialMessages() {
+    seedMessages.slice(0, 3).forEach(function(msg, i) {
+      var el = createMsgEl(msg);
+      el.style.animationDelay = (i * 0.15) + 's';
+      stream.appendChild(el);
+      displayedMessages.push(el);
+    });
+    seedIndex = 3;
+  }
+  function cycleMessage() {
+    if (animating) return;
+    animating = true;
+    var msg = seedMessages[seedIndex % seedMessages.length];
+    seedIndex++;
+    if (displayedMessages.length >= 3) {
+      var oldest = displayedMessages.shift();
+      oldest.classList.add('cv__msg--exiting');
+      setTimeout(function() { oldest.remove(); }, 400);
+    }
+    setTimeout(function() {
+      stream.appendChild(createMsgEl(msg));
+      displayedMessages.push(stream.lastChild);
+      animating = false;
+    }, 500);
+  }
+  input.addEventListener('input', function() {
+    var len = this.value.length;
+    if (!len) { charCount.textContent = ''; sendBtn.classList.remove('cv__send--active'); return; }
+    charCount.textContent = len + '/' + MAX_CHARS;
+    sendBtn.classList.add('cv__send--active');
+    charCount.className = 'cv__char-count' + (len > 160 ? (len > MAX_CHARS ? ' cv__char-count--over' : ' cv__char-count--warn') : '');
+  });
+  function sendMessage() {
+    var text = input.value.trim();
+    if (!text || text.length > MAX_CHARS) return;
+    if (displayedMessages.length >= 3) {
+      var oldest = displayedMessages.shift();
+      oldest.classList.add('cv__msg--exiting');
+      setTimeout(function() { oldest.remove(); }, 400);
+    }
+    setTimeout(function() {
+      stream.appendChild(createMsgEl({ name: 'You', initials: 'Y', color: '#379EC1', text: text, hoursLeft: 24 }));
+      displayedMessages.push(stream.lastChild);
+    }, 500);
+    input.value = ''; charCount.textContent = ''; sendBtn.classList.remove('cv__send--active');
+    toast.classList.add('cv__toast--show');
+    setTimeout(function() { toast.classList.remove('cv__toast--show'); }, 2500);
+  }
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') sendMessage(); });
+  showInitialMessages();
+  setInterval(cycleMessage, 4000);
+})();
+
+/* ============================================================
+   ADMIN TOOLBAR
+============================================================ */
+(function() {
+  var toggle = document.getElementById('toolbarToggle');
+  var panel = document.getElementById('toolbarPanel');
+  var items = panel.querySelectorAll('.toolbar__item');
+  var slot = document.getElementById('componentSlot');
+  toggle.addEventListener('click', function() {
+    var open = panel.classList.toggle('toolbar__panel--open');
+    toggle.classList.toggle('toolbar__toggle--open', open);
+  });
+  items.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      items.forEach(function(b) { b.classList.remove('toolbar__item--active'); });
+      btn.classList.add('toolbar__item--active');
+      var target = btn.getAttribute('data-target');
+      slot.querySelectorAll('[data-component]').forEach(function(c) {
+        c.style.display = c.getAttribute('data-component') === target ? '' : 'none';
+      });
+      slot.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+})();
+
+/* ============================================================
+   MIGRAINE WORDLE
+============================================================ */
+(function() {
+  var WORDS = ['AURA','PAIN','NUMB','DOSE','ACHE','MEDS','REST','DARK','GLOW','BLUR','HAZE','CALM','EASE','SORE','DULL','CURE','TRIG','FADE'];
+  var WORD_LEN = 4, MAX_GUESSES = 6;
+  var answer = WORDS[Math.floor(Math.random() * WORDS.length)];
+  var currentRow = 0, currentCol = 0, currentGuess = '', gameOver = false, streak = 0;
+  var board = document.getElementById('wordleBoard');
+  var keyboard = document.getElementById('wordleKeyboard');
+  var msgEl = document.getElementById('wordleMsg');
+  var streakEl = document.getElementById('wordleStreak');
+  var keyStates = {};
+  var KB_ROWS = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['ENTER','Z','X','C','V','B','N','M','DEL']];
+  function buildBoard() {
+    board.innerHTML = '';
+    for (var r = 0; r < MAX_GUESSES; r++) {
+      var row = document.createElement('div'); row.className = 'wordle__row'; row.id = 'wrow-' + r;
+      for (var c = 0; c < WORD_LEN; c++) {
+        var cell = document.createElement('div'); cell.className = 'wordle__cell'; cell.id = 'wcell-' + r + '-' + c;
+        row.appendChild(cell);
+      }
+      board.appendChild(row);
+    }
+  }
+  function buildKeyboard() {
+    keyboard.innerHTML = '';
+    KB_ROWS.forEach(function(row) {
+      var rowEl = document.createElement('div'); rowEl.className = 'wordle__kb-row';
+      row.forEach(function(key) {
+        var btn = document.createElement('button'); btn.className = 'wordle__key';
+        btn.setAttribute('data-key', key); btn.textContent = key === 'DEL' ? '\u232B' : key;
+        if (key === 'ENTER' || key === 'DEL') btn.classList.add('wordle__key--wide');
+        btn.addEventListener('click', function() { handleKey(key); });
+        rowEl.appendChild(btn);
+      });
+      keyboard.appendChild(rowEl);
+    });
+  }
+  function updateKeyboard() {
+    keyboard.querySelectorAll('.wordle__key').forEach(function(btn) {
+      var k = btn.getAttribute('data-key');
+      if (k.length === 1 && keyStates[k]) btn.className = 'wordle__key wordle__key--' + keyStates[k];
+    });
+  }
+  function revealRow(row, guess, cb) {
+    var delay = 0;
+    for (var i = 0; i < WORD_LEN; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          var cell = document.getElementById('wcell-' + row + '-' + idx);
+          var letter = guess[idx];
+          var state = letter === answer[idx] ? 'correct' : answer.indexOf(letter) >= 0 ? 'present' : 'absent';
+          cell.classList.add('wordle__cell--' + state);
+          if (!keyStates[letter] || state === 'correct' || (state === 'present' && keyStates[letter] === 'absent')) keyStates[letter] = state;
+          if (idx === WORD_LEN - 1) { updateKeyboard(); if (cb) cb(); }
+        }, delay);
+        delay += 300;
+      })(i);
+    }
+  }
+  function resetGame() {
+    answer = WORDS[Math.floor(Math.random() * WORDS.length)];
+    currentRow = 0; currentCol = 0; currentGuess = ''; gameOver = false; keyStates = {};
+    msgEl.textContent = ''; msgEl.className = 'wordle__msg';
+    buildBoard(); buildKeyboard();
+  }
+  function handleKey(key) {
+    if (gameOver) { resetGame(); return; }
+    if (key === 'DEL') {
+      if (currentCol > 0) { currentCol--; currentGuess = currentGuess.slice(0, -1);
+        var cell = document.getElementById('wcell-' + currentRow + '-' + currentCol);
+        cell.textContent = ''; cell.classList.remove('wordle__cell--filled');
+      } return;
+    }
+    if (key === 'ENTER') {
+      if (currentCol < WORD_LEN) { msgEl.textContent = 'Not enough letters'; return; }
+      var guess = currentGuess.toUpperCase();
+      revealRow(currentRow, guess, function() {
+        if (guess === answer) { streak++; streakEl.textContent = streak + ' streak'; msgEl.textContent = 'Brilliant! Press any key to play again.'; msgEl.className = 'wordle__msg wordle__msg--win'; gameOver = true; }
+        else if (currentRow >= MAX_GUESSES - 1) { streak = 0; streakEl.textContent = '0 streak'; msgEl.textContent = 'The word was ' + answer + '. Press any key to try again.'; msgEl.className = 'wordle__msg wordle__msg--lose'; gameOver = true; }
+        else { currentRow++; currentCol = 0; currentGuess = ''; }
+      });
+      return;
+    }
+    if (currentCol < WORD_LEN && key.length === 1) {
+      var cell = document.getElementById('wcell-' + currentRow + '-' + currentCol);
+      cell.textContent = key; cell.classList.add('wordle__cell--filled', 'wordle__cell--pop');
+      currentGuess += key; currentCol++;
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('migraineWordle').style.display === 'none') return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key.toUpperCase();
+    if (k === 'ENTER') handleKey('ENTER');
+    else if (k === 'BACKSPACE') handleKey('DEL');
+    else if (/^[A-Z]$/.test(k)) handleKey(k);
+  });
+  buildBoard(); buildKeyboard();
+})();
+
+/* ============================================================
+   EXPLORE THE COMMUNITY (Semantic Search)
+============================================================ */
+(function() {
+  var textarea = document.getElementById('exploreTextarea');
+  var submitBtn = document.getElementById('exploreSubmit');
+  var inputPane = document.getElementById('exploreInput');
+  var thinkingPane = document.getElementById('exploreThinking');
+  var thinkingText = document.getElementById('exploreThinkingText');
+  var thinkingSub = document.getElementById('exploreThinkingSub');
+  var resultsPane = document.getElementById('exploreResults');
+  var dots = '<span class="explore__thinking-dots"><span></span><span></span><span></span></span>';
+
+  var RESULT_SETS = [
+    {
+      encouragement: 'You\'re taking a brave step by looking for answers. <strong>Thousands of community members have walked this same path</strong>, and their stories are here to light the way. You are not alone in this.',
+      articles: [
+        { title: 'Navigating Your First Year With Migraine', excerpt: 'From the shock of diagnosis to finding your footing — a guide by someone who\'s been there.', author: 'Kerrie S.', readTime: '8 min', reactions: 47 },
+        { title: 'The Treatment Landscape: What I Wish I\'d Known Sooner', excerpt: 'A breakdown of preventive vs. acute treatments, CGRP inhibitors, and what questions to ask your neurologist.', author: 'Dr. Marcus R.', readTime: '12 min', reactions: 112 }
+      ],
+      forums: [
+        { title: 'Just diagnosed — what do I do first?', excerpt: '142 members shared their "first steps" stories', replies: 142 },
+        { title: 'Building a migraine toolkit that actually works', excerpt: 'Community-sourced tips from ice packs to meditation apps', replies: 89 }
+      ]
+    },
+    {
+      encouragement: 'Living with migraine for years takes a kind of resilience that deserves to be seen. <strong>This community gets it — deeply.</strong> Here are voices and stories that speak to the long road.',
+      articles: [
+        { title: 'When Migraine Becomes Your Unwanted Companion', excerpt: 'After a decade of chronic migraine, here\'s how I stopped fighting and started adapting.', author: 'Lisa T.', readTime: '10 min', reactions: 203 },
+        { title: 'Redefining "Good Days" With Chronic Migraine', excerpt: 'What does a good day look like when you\'ve had migraine for 15 years? It\'s more than pain-free.', author: 'James W.', readTime: '6 min', reactions: 88 }
+      ],
+      forums: [
+        { title: 'Veterans check-in: how are you really doing?', excerpt: 'An honest space for long-term migraineurs', replies: 267 },
+        { title: 'Has anyone switched treatments after 5+ years?', excerpt: 'Stories of hope from members who found new relief', replies: 134 }
+      ]
+    },
+    {
+      encouragement: 'Looking for connection is one of the most powerful things you can do. <strong>You belong here.</strong> These community spaces are full of people who truly understand.',
+      articles: [
+        { title: 'An Open Letter to Those Without Migraine', excerpt: 'Migraine is not "just a headache." This letter bridges the gap between patients and the people who love them.', author: 'Kerrie S.', readTime: '7 min', reactions: 340 }
+      ],
+      forums: [
+        { title: 'Tell us your migraine story', excerpt: 'Over 500 members have shared their journeys — add yours', replies: 531 },
+        { title: 'Things people say that make you feel unseen', excerpt: 'A cathartic thread about the invisible side of migraine', replies: 312 }
+      ]
+    }
+  ];
+
+  var thinkingSteps = [
+    { text: 'Reading your story', sub: 'Understanding your experience' },
+    { text: 'Searching the community', sub: 'Matching with relevant discussions' },
+    { text: 'Finding the best matches', sub: 'Curating posts and forums for you' },
+    { text: 'Preparing your results', sub: 'Almost there' }
+  ];
+
+  textarea.addEventListener('input', function() {
+    submitBtn.disabled = textarea.value.trim().length < 10;
+  });
+
+  submitBtn.addEventListener('click', function() {
+    if (submitBtn.disabled) return;
+    startExplore();
+  });
+
+  textarea.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey && !submitBtn.disabled) {
+      e.preventDefault();
+      startExplore();
+    }
+  });
+
+  function startExplore() {
+    inputPane.style.display = 'none';
+    thinkingPane.classList.add('explore__thinking--active');
+
+    var step = 0;
+    function nextStep() {
+      if (step < thinkingSteps.length) {
+        thinkingText.innerHTML = thinkingSteps[step].text + dots;
+        thinkingSub.textContent = thinkingSteps[step].sub;
+        step++;
+        setTimeout(nextStep, 900 + Math.random() * 400);
+      } else {
+        showResults();
+      }
+    }
+    nextStep();
+  }
+
+  function showResults() {
+    thinkingPane.classList.remove('explore__thinking--active');
+
+    var set = RESULT_SETS[Math.floor(Math.random() * RESULT_SETS.length)];
+    var html = '';
+
+    html += '<div class="explore__encouragement">' + set.encouragement + '</div>';
+
+    html += '<div class="explore__results-section">';
+    html += '<div class="explore__results-label"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Recommended Articles</div>';
+    set.articles.forEach(function(a) {
+      html += '<a class="explore__result-card" href="#">';
+      html += '<span class="explore__result-type explore__result-type--article">Article</span>';
+      html += '<div class="explore__result-title">' + a.title + '</div>';
+      html += '<div class="explore__result-excerpt">' + a.excerpt + '</div>';
+      html += '<div class="explore__result-meta">';
+      html += '<span class="explore__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + a.author + '</span>';
+      html += '<span class="explore__result-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + a.readTime + '</span>';
+      html += '<span class="explore__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ' + a.reactions + '</span>';
+      html += '</div></a>';
+    });
+    html += '</div>';
+
+    html += '<div class="explore__results-section">';
+    html += '<div class="explore__results-label"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Community Conversations</div>';
+    set.forums.forEach(function(f) {
+      html += '<a class="explore__result-card" href="#">';
+      html += '<span class="explore__result-type explore__result-type--forum">Forum</span>';
+      html += '<div class="explore__result-title">' + f.title + '</div>';
+      html += '<div class="explore__result-excerpt">' + f.excerpt + '</div>';
+      html += '<div class="explore__result-meta">';
+      html += '<span class="explore__result-meta-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> ' + f.replies + ' replies</span>';
+      html += '</div></a>';
+    });
+    html += '</div>';
+
+    html += '<button class="explore__reset" id="exploreReset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Start over</button>';
+
+    resultsPane.innerHTML = html;
+    resultsPane.classList.add('explore__results--active');
+
+    document.getElementById('exploreReset').addEventListener('click', function() {
+      resultsPane.classList.remove('explore__results--active');
+      resultsPane.innerHTML = '';
+      textarea.value = '';
+      submitBtn.disabled = true;
+      inputPane.style.display = '';
+    });
+  }
+})();
 </script>
 </body>
 </html>

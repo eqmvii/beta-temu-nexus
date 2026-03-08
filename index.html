@@ -146,14 +146,17 @@
 
     /* subscribe pill */
     .hdr-subscribe {
-      padding: 0 16px;
-      height: 30px;
-      background: var(--cyan); color: #fff;
-      border: none; border-radius: 15px;
-      font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer;
-      white-space: nowrap; margin-left: 4px;
+      padding: 4px 24px;
+      min-height: 36px;
+      background: #0B474E; color: #39E3E1;
+      border: none; border-radius: 32px;
+      font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer;
+      white-space: nowrap; margin: 0 8px;
+      line-height: 1;
+      transition: background 200ms;
+      display: inline-flex; align-items: center; justify-content: center;
     }
-    .hdr-subscribe:hover { background: var(--brand); }
+    .hdr-subscribe:hover { background: #06343C; color: #39E3E1; }
 
     /* avatar (logged-in) */
     .avatar-btn {
@@ -645,51 +648,135 @@
       font-size: 12px; color: var(--gray);
     }
 
-    /* Poll card */
-    .poll-card {
+    /* Poll — matches prod engagement-toolkit + poll component */
+    .poll {
       background: #fff;
       border-radius: var(--radius-card);
-      box-shadow: var(--shadow-card);
-      padding: 20px 22px 22px;
-      border: 1px solid var(--hu-lighter);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      max-width: 320px;
+      margin: 0;
     }
-    .poll-card__top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 12px;
+    .poll__image-container {
+      background: var(--cyan-lighter);
+      padding: 16px;
+      text-align: center;
     }
-    .poll-eyebrow {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.8px; color: var(--brand);
+    .poll__icon {
+      margin: 0 auto;
+      width: 125px;
     }
-    /* small bar-chart icon in top-right of poll */
-    .poll-chart-icon {
-      display: flex; align-items: flex-end; gap: 3px; height: 22px;
+    .poll__icon svg { display: block; width: 100%; height: auto; }
+    .poll__content-container {
+      padding: 24px 16px 40px;
+      background: #fff;
     }
-    .poll-chart-icon span {
-      display: block; width: 6px; border-radius: 2px 2px 0 0;
-      background: var(--hu-light);
+    .poll__heading {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cyan);
+      text-align: center;
+      margin-bottom: 4px;
     }
-    .poll-chart-icon span:nth-child(1) { height: 10px; }
-    .poll-chart-icon span:nth-child(2) { height: 18px; background: var(--cyan); }
-    .poll-chart-icon span:nth-child(3) { height: 14px; }
-    .poll-question {
+    .poll__question {
       font-family: geologica-variable, sans-serif;
-      font-size: 15px; font-weight: 600; color: var(--cyan-dark);
-      line-height: 1.4; margin-bottom: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 24px;
     }
-    .poll-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
-    .poll-option {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 14px; color: var(--gray-dark); cursor: pointer;
+    .poll-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px;
     }
-    .poll-option input[type="radio"] { accent-color: var(--brand); width: 16px; height: 16px; flex-shrink: 0; }
-    .poll-submit {
-      width: 100%; padding: 11px;
-      background: var(--brand); color: #fff;
-      border: none; border-radius: var(--radius);
-      font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
+    .poll-form__options {
+      margin-bottom: 8px;
+      width: 100%;
     }
-    .poll-submit:hover { background: #1668a0; }
+    .radio-button {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 4px;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      cursor: pointer;
+    }
+    .radio-button__input {
+      position: relative;
+      flex-shrink: 0;
+      margin: 2px 8px 0 0;
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--cyan);
+      border-radius: 50%;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: background 200ms;
+      background: #fff;
+    }
+    .radio-button__input:hover {
+      background: var(--cyan-lighter);
+    }
+    .radio-button__input:checked {
+      background: var(--cyan);
+      box-shadow: inset 0 0 0 2px #fff;
+    }
+    .radio-button__label {
+      display: inline-block;
+      font-weight: 600;
+      line-height: 1.3;
+      cursor: pointer;
+      padding-top: 2px;
+    }
+    .poll-form__submit-button {
+      min-width: 150px;
+      padding: 11px 24px;
+      background: var(--cyan);
+      border: 1px solid var(--cyan);
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      margin-top: 8px;
+    }
+    .poll-form__submit-button:hover { background: #2C7D99; border-color: #2C7D99; }
+
+    /* Poll icon animation (from _poll-icon.scss) */
+    @keyframes poll-line-1 {
+      0% {height: 32px;}
+      8% {height: 55px;}
+      16% {height: 50px;}
+      24% {height: 32px;}
+      100% {height: 32px;}
+    }
+    @keyframes poll-line-2 {
+      0% {height: 66px;}
+      8% {height: 40px;}
+      24% {height: 66px;}
+      100% {height: 66px;}
+    }
+    @keyframes poll-line-3 {
+      0% {height: 49px;}
+      8% {height: 40px;}
+      16% {height: 60px;}
+      24% {height: 49px;}
+      100% {height: 49px;}
+    }
+    .poll__icon--animated .poll-icon__line-1 {
+      animation: poll-line-1 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
+    .poll__icon--animated .poll-icon__line-2 {
+      animation: poll-line-2 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
+    .poll__icon--animated .poll-icon__line-3 {
+      animation: poll-line-3 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
 
     /* === NEWSLETTER / FOOTER TOP === */
     .footer-signup {
@@ -994,20 +1081,31 @@
     <div class="popular-grid">
       <div class="popular-left" id="popularEngagement"></div>
       <div>
-        <div class="poll-card">
-          <div class="poll-card__top">
-            <div class="poll-eyebrow">Community Poll</div>
-            <div class="poll-chart-icon" aria-hidden="true">
-              <span></span><span></span><span></span>
+        <div class="poll">
+          <div class="poll__image-container">
+            <div class="poll__icon poll__icon--animated">
+              <svg class="poll-icon" display="block" viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+                <circle class="poll-icon__bg" cx="59" cy="59" fill="#fff" r="59"/>
+                <g class="poll-icon__main-group" fill="#379ec1" transform="translate(25 89), scale(1 -1)">
+                  <rect class="poll-icon__line-1" height="32" width="16" rx="8" x="0" y="0"/>
+                  <rect class="poll-icon__line-2" height="66" width="16" opacity=".8" rx="8" x="24.5" y="0"/>
+                  <rect class="poll-icon__line-3" height="49" width="16" opacity=".65" rx="8" x="51" y="0"/>
+                </g>
+              </svg>
             </div>
           </div>
-          <p class="poll-question">Do you want to help us understand migraine better?</p>
-          <div class="poll-options">
-            <label class="poll-option"><input type="radio" name="poll" value="yes"> Yes, I'd like to participate</label>
-            <label class="poll-option"><input type="radio" name="poll" value="no"> Not right now</label>
-            <label class="poll-option"><input type="radio" name="poll" value="maybe"> I'm not sure yet</label>
+          <div class="poll__content-container">
+            <h2 class="poll__heading">Community Poll</h2>
+            <p class="poll__question">Do you want to help us understand migraine better?</p>
+            <form class="poll-form" onsubmit="return false;">
+              <div class="poll-form__options">
+                <label class="radio-button"><input type="radio" name="poll" value="yes" class="radio-button__input"><span class="radio-button__label">Yes, I'd like to participate</span></label>
+                <label class="radio-button"><input type="radio" name="poll" value="no" class="radio-button__input"><span class="radio-button__label">Not right now</span></label>
+                <label class="radio-button"><input type="radio" name="poll" value="maybe" class="radio-button__input"><span class="radio-button__label">I'm not sure yet</span></label>
+              </div>
+              <button type="submit" class="poll-form__submit-button">Submit</button>
+            </form>
           </div>
-          <button class="poll-submit">Submit</button>
         </div>
       </div>
     </div>
