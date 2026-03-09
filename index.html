@@ -35,8 +35,8 @@
       --hu-lighter:  #ECF0F3;
       --hu-lightest: #F5F7F9;
       --hu-neutral:  #4A6572;
-      --shadow:      0 0 10px 2px rgba(179,196,205,0.3);
-      --shadow-card: 0 2px 8px rgba(0,32,41,0.08);
+      --shadow:      0 0 10px 2px rgba(179,196,205,0.30);
+      --shadow-card: 0 0 10px 2px rgba(179,196,205,0.30);
       --radius:      4px;
       --radius-card: 6px;
       --max-w:       1080px;
@@ -58,7 +58,7 @@
       line-height: 1.8;
       color: var(--cyan-darker);
       background: var(--white);
-      padding-top: calc(var(--header-h) + var(--announce-h));
+      padding-top: var(--header-h);
     }
     a { color: var(--cyan); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -66,21 +66,19 @@
     ul { list-style: none; }
     img { display: block; max-width: 100%; }
 
-    /* === ANNOUNCE BAR === */
+    /* === CONTENT DRIVER BANNER (announce bar) === */
     .announce-bar {
-      position: fixed;
+      position: sticky;
       top: var(--header-h); left: 0; right: 0;
       z-index: 298;
-      height: var(--announce-h);
-      background: var(--hu-lightest);
-      border-bottom: 1px solid var(--hu-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px;
-      color: var(--gray-dark);
+      background: #ACE3ED;
+      display: flex; justify-content: center;
       text-align: center;
-      padding: 0 16px;
+      padding: 12px 16px;
+      line-height: 1.2;
+      color: var(--cyan-darker);
     }
-    .announce-bar a { color: var(--brand); font-weight: 700; }
+    .announce-bar a { font-weight: 600; }
 
     /* === HEADER === */
     .header {
@@ -88,22 +86,24 @@
       top: 0; left: 0; right: 0;
       z-index: 299;
       height: var(--header-h);
+      min-width: 320px;
       background: var(--cyan-darker);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 12px 0 60px; /* 60px left = 48px logo + 12px gap */
+      padding: 0 0 0 0;
     }
-    .header__left  { display: flex; align-items: center; gap: 2px; }
-    .header__right { display: flex; align-items: center; gap: 2px; }
+    .header__left  { display: flex; align-items: center; }
+    .header__right { display: flex; align-items: center; margin-left: auto; }
 
-    /* site logo — far left, flush to edge, full bar height */
+    /* site logo — first item in header flex row */
     .site-logo {
-      position: absolute; top: 0; left: 0;
+      display: inline-block;
       width: 48px; height: 48px;
-      display: block;
+      min-width: 48px;
+      margin-right: 8px;
       text-decoration: none;
       flex-shrink: 0;
+      padding: 0;
     }
     .site-logo__avatar {
       width: 48px; height: 48px;
@@ -119,30 +119,54 @@
 
     /* icon+label buttons (Menu, Search, Accessibility, Log in) */
     .hdr-btn {
-      background: none; border: none; cursor: pointer;
+      background: transparent; border: none; cursor: pointer;
       color: #fff;
-      display: flex; align-items: center; gap: 5px;
-      padding: 6px 8px;
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.5px; font-family: inherit;
-      border-radius: var(--radius);
+      display: flex; align-items: center;
+      height: 48px; min-width: 48px;
+      padding: 4px;
+      margin-left: 4px;
+      font-size: 1rem; font-weight: 600;
+      font-family: inherit;
       white-space: nowrap;
     }
-    .hdr-btn:hover { background: rgba(255,255,255,0.08); }
+    .hdr-btn:hover { opacity: 0.85; }
     .hdr-btn svg {
-      width: 18px; height: 18px; flex-shrink: 0;
-      fill: none; stroke: #fff; stroke-width: 1.8;
-      stroke-linecap: round; stroke-linejoin: round;
+      width: 20px; height: 20px; flex-shrink: 0;
+      fill: #fff; pointer-events: none;
     }
-    /* filled icons (accessibility person) */
-    .hdr-btn svg.filled { fill: #fff; stroke: none; }
+    .hdr-btn__text {
+      font-weight: 600; margin-left: 8px;
+    }
 
     .hamburger {
-      width: 16px; height: 13px;
-      display: flex; flex-direction: column; justify-content: space-between;
+      width: 16px; height: 16px;
+      position: relative;
       flex-shrink: 0;
     }
-    .hamburger span { display: block; height: 2px; background: #fff; border-radius: 1px; }
+    .hamburger::before, .hamburger::after,
+    .hamburger__filling::before, .hamburger__filling::after {
+      content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 2px; background: #fff; border-radius: 1px;
+      transition: transform 300ms, opacity 300ms;
+    }
+    .hamburger::before { top: 0; }
+    .hamburger::after { bottom: 0; }
+    .hamburger__filling {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; height: 2px;
+    }
+    .hamburger__filling::before, .hamburger__filling::after {
+      top: 0;
+    }
+    /* Animate to X when open */
+    .hdr-btn--menu-open .hamburger::before,
+    .hdr-btn--menu-open .hamburger::after { opacity: 0; }
+    .hdr-btn--menu-open .hamburger__filling::before {
+      transform: translateX(-50%) rotate(45deg) scaleX(1.3);
+    }
+    .hdr-btn--menu-open .hamburger__filling::after {
+      transform: translateX(-50%) rotate(-45deg) scaleX(1.3);
+    }
 
     /* subscribe pill */
     .hdr-subscribe {
@@ -172,43 +196,69 @@
 
     /* === NAV DRAWER === */
     .nav-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.45); z-index: 400;
+      display: none; position: fixed; inset: 0; z-index: 400;
     }
     .nav-overlay.open { display: block; }
     .nav-drawer {
-      position: fixed; top: 0; left: -290px; bottom: 0;
-      width: 290px; background: #fff; z-index: 401;
-      transition: left 0.22s ease;
-      overflow-y: auto;
-      box-shadow: 3px 0 16px rgba(0,0,0,0.18);
+      position: fixed; top: var(--header-h); left: 0; bottom: 0;
+      width: 320px; max-width: calc(100vw - 32px);
+      background: var(--cyan-dark);
+      z-index: 401;
+      display: flex; flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.2s ease-in-out;
     }
-    .nav-drawer.open { left: 0; }
-    .nav-drawer__hdr {
-      background: var(--cyan-darker);
-      height: var(--header-h);
-      display: flex; align-items: center;
-      padding: 0 16px; gap: 10px;
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer__nav {
+      flex: 1; overflow-x: hidden; overflow-y: auto;
+      padding: 0 0 32px 0;
     }
-    .nav-drawer__close {
-      background: none; border: none; color: #fff;
-      font-size: 20px; line-height: 1; padding: 6px;
+    .nav-drawer__list {
+      list-style: none; padding: 0; margin: 0;
     }
-    .nav-drawer__logo {
-      color: #fff; font-family: geologica-variable, sans-serif;
-      font-size: 15px; font-weight: 600;
+    /* Search bar inside drawer */
+    .nav-search {
+      display: flex; margin: 16px; border-radius: 24px; overflow: hidden;
+      box-shadow: none;
     }
-    .nav-section { padding: 8px 0; border-bottom: 1px solid var(--hu-lighter); }
-    .nav-section-label {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.9px; color: var(--gray);
-      padding: 8px 20px 4px;
+    .nav-search__input {
+      flex: 1; min-width: 0; padding: 8px 8px 8px 16px;
+      font-size: 18px; font-family: inherit; border: 0;
+      background: #fff; color: var(--cyan-darker); outline: none;
     }
-    .nav-item a {
-      display: block; padding: 10px 20px;
-      color: var(--cyan-darker); font-size: 15px;
+    .nav-search__btn {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 14px; background: var(--cyan); border: 0; cursor: pointer;
     }
-    .nav-item a:hover { background: var(--hu-lightest); text-decoration: none; }
+    .nav-search__btn svg { width: 16px; height: 16px; fill: #fff; display: block; }
+    /* Nav items */
+    .nav-item {
+      display: flex; flex-wrap: wrap;
+      font-weight: 800;
+    }
+    .nav-item--child { font-weight: 400; }
+    .nav-item__link {
+      flex: 1; display: block; padding: 4px 16px;
+      color: #fff; font-size: 16px; text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-item__link:hover { background: #2C7D99; color: #fff; text-decoration: none; }
+    .nav-item--selected > .nav-item__link { background: #2C7D99; }
+    .nav-item__expand {
+      display: flex; align-items: center; justify-content: center;
+      padding: 4px 16px; background: transparent; border: 0;
+      border-left: 2px solid #819CAC; cursor: pointer;
+    }
+    .nav-item__expand:hover { background: #2C7D99; }
+    .nav-item__expand svg {
+      width: 16px; height: 16px; fill: #fff; display: block;
+      transition: transform 0.2s;
+    }
+    .nav-item__expand--open svg { transform: rotate(180deg); }
+    .nav-item__children {
+      width: 100%; padding: 0 0 0 16px;
+      list-style: none; overflow: hidden;
+    }
 
     /* === PAGE WRAP === */
     .page-wrap {
@@ -220,7 +270,7 @@
 
     /* === SITE MASTHEAD === */
     .site-masthead {
-      padding: 16px 24px 14px;
+      padding: 24px 24px 16px;
       text-align: center;
     }
     .site-masthead__link { display: inline-block; }
@@ -272,7 +322,7 @@
       position: relative; left: 50%;
       width: 100vw; transform: translateX(-50%);
       background: var(--cyan-lighter);
-      padding: 24px 16px 16px;
+      padding: 24px 24px 8px;
     }
     .homepage-slider__container {
       max-width: var(--max-w); margin: 0 auto;
@@ -281,7 +331,7 @@
     /* The card: full bleed white card with shadow */
     .hp-slide {
       background: #fff;
-      border-radius: var(--radius-card);
+      border-radius: 6px;
       box-shadow: var(--shadow-card);
       overflow: hidden;
       display: none;
@@ -335,29 +385,35 @@
       overflow: hidden;
     }
     .byline {
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center;
+      font-size: 0.875rem;
+      margin: 8px 0;
     }
     .byline__avatar {
-      width: 30px; height: 30px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; color: #fff;
+      font-size: 13px; font-weight: 700; color: #fff;
       flex-shrink: 0;
+      margin-right: 8px;
+      cursor: pointer;
     }
-    .byline__author { font-size: 13px; font-weight: 700; color: var(--gray-dark); }
-    .byline__time   { font-size: 12px; color: var(--gray); }
+    .byline__content { flex-grow: 1; line-height: 1.5; }
+    .byline__author { font-size: inherit; }
+    .byline__name { font-weight: 600; text-decoration: underline; text-decoration-color: var(--cyan); text-underline-offset: 1px; }
+    .byline__time   { font-size: inherit; color: var(--gray-dark); }
 
     /* nav dots + arrows */
     .hp-slider-actions {
       display: flex; align-items: center; justify-content: center;
-      gap: 0; margin-top: 12px; padding-bottom: 4px;
+      gap: 0; margin-top: 8px;
     }
     .hp-nav-btn {
       background: none; border: none;
       width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
     }
-    .hp-nav-btn svg { width: 16px; height: 16px; fill: var(--cyan); }
-    .hp-nav-btn:hover svg { fill: var(--cyan-light); }
+    .hp-nav-btn svg { width: 16px; height: 16px; fill: var(--cyan); transition: fill 0.2s; }
+    .hp-nav-btn:hover svg { fill: #2c7d99; }
     .hp-dots {
       display: flex; align-items: center; gap: 12px;
       padding: 0 4px;
@@ -384,13 +440,14 @@
     .top-articles__grid {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
       margin-top: 24px;
     }
     @media (min-width: 900px) {
       .top-articles__grid {
         flex-direction: row;
         align-items: flex-start;
+        gap: 32px;
       }
     }
     /* On mobile: ad appears between the two cards.
@@ -408,77 +465,93 @@
     /* Post card — homepage-recents style: no image, card with padding */
     .post-card {
       background: #fff;
-      border-radius: var(--radius-card);
+      border-radius: 6px;
       box-shadow: var(--shadow-card);
-      border: 1px solid var(--hu-lighter);
       display: flex; flex-direction: column;
-      height: 100%; padding: 16px 18px 18px;
+      height: 100%; padding: 24px 24px 32px;
+      position: relative;
     }
     .post-card__body {
       display: flex; flex-direction: column; flex: 1;
     }
     .post-card__title {
       font-family: geologica-variable, sans-serif;
-      font-size: 16px; font-weight: 600;
-      color: var(--cyan-dark); line-height: 1.4;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--cyan-dark); line-height: 1.25;
       margin-bottom: 8px;
     }
     .post-card__summary {
       font-size: 14px; color: var(--gray-dark);
       line-height: 1.55; margin-bottom: 14px; flex: 1;
     }
-    /* footer row: byline left, bookmark right */
+    /* footer row: byline left, bookmark right (prod: post-teaser__footer) */
     .post-card__footer {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 12px;
+      display: flex; align-items: center;
+      margin-bottom: 0;
     }
     /* engagement bar: flex row of pill action buttons */
     .post-card__engagement {
-      display: flex; gap: 8px; flex-wrap: wrap;
+      display: flex; gap: 8px; flex-wrap: wrap-reverse;
     }
     .eng-action {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 0 12px; height: 36px;
+      padding: 0 12px; height: 44px;
       background: var(--cyan-lighter);
-      border-radius: 18px;
-      font-size: 13px; font-weight: 600; color: var(--cyan-dark);
+      border-radius: 22px;
+      font-size: 0.875rem; font-weight: 600; color: var(--cyan-dark);
       text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s;
     }
+    .eng-action:hover { background: #bee1ec; }
     .eng-action svg {
-      width: 20px; height: 20px; fill: var(--cyan); flex-shrink: 0;
+      width: 28px; height: 28px; fill: var(--cyan); flex-shrink: 0;
     }
-    /* bookmark button */
+    /* bookmark button — prod has circular cyan bg */
     .bookmark-btn {
-      background: none; border: none; cursor: pointer; padding: 4px;
+      background: none; border: none; cursor: pointer;
       display: flex; align-items: center;
+      margin-left: auto;
     }
-    .bookmark-btn svg { width: 22px; height: 22px; fill: var(--cyan); }
+    .bookmark-btn svg {
+      width: 28px; height: 28px; fill: var(--cyan-dark);
+      background: var(--cyan-lighter);
+      border-radius: 50%;
+      padding: 8px;
+      box-sizing: content-box;
+      transition: background 0.2s;
+    }
+    .bookmark-btn:hover svg { background: #bee1ec; }
 
-    /* CTA button — solid rectangle */
+    /* CTA button — matches prod .button.button--block */
     .top-articles__cta {
       padding: 24px 0 8px;
       margin-right: calc(300px + 20px);
-      text-align: center;
     }
     .btn-solid {
-      display: inline-block;
+      display: block;
       background: var(--cyan);
       color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      padding: 13px 96px;
-      font-size: 15px; font-weight: 700;
-      letter-spacing: 0.2px;
-      transition: background 0.15s;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      padding: 13px 20px;
+      font-size: 1.125rem; font-weight: 600;
+      font-family: inherit;
+      text-align: center;
+      text-decoration: none;
+      max-width: 512px;
+      margin: 0 auto;
+      min-height: 48px;
+      line-height: 1;
+      transition: background 0.2s;
     }
-    .btn-solid:hover { background: #2d8aac; color: #fff; text-decoration: none; }
+    .btn-solid:hover { background: #2c7d99; color: #fff; text-decoration: none; }
 
     /* === COMMUNITY BANNER === */
     .homepage-community {
       position: relative; left: 50%;
       width: 100vw; transform: translateX(-50%);
       background: linear-gradient(135deg, #1E7EBE 0%, #0D4F7C 100%);
-      padding: 40px 16px 44px;
+      padding: 48px 24px 56px;
       text-align: center;
       text-decoration: none;
       display: block;
@@ -487,22 +560,31 @@
     }
     .homepage-community:hover { text-decoration: none; }
     .community-logo {
-      margin: 0 auto 14px;
-      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8px;
+      display: block; text-align: center;
     }
-    .community-logo img { width: 64px; height: 64px; object-fit: contain; }
+    .community-logo img { max-height: 75px; max-width: 100px; display: inline-block; }
     .community-heading {
       font-family: geologica-variable, sans-serif;
-      font-size: 22px; font-weight: 600; color: #fff;
-      margin-bottom: 6px;
+      font-size: 1.625rem; font-weight: 600; color: #fff;
+      margin-bottom: 16px;
     }
     .community-sub {
-      font-size: 14px; color: rgba(255,255,255,0.85);
-      margin-bottom: 10px;
+      color: #fff;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      line-height: 1;
+      margin: 8px 0;
     }
     .community-cta {
-      font-size: 14px; font-weight: 700; color: #fff;
+      font-weight: 600; color: #fff;
       display: inline-flex; align-items: center; gap: 4px;
+    }
+    .community-cta__icon {
+      display: inline-block; fill: #fff;
+      width: 14px; height: 14px;
+      transform: rotate(-90deg);
+      vertical-align: middle;
     }
 
     /* === FEATURED COLLECTIONS === */
@@ -514,13 +596,14 @@
     }
     .section-title {
       font-family: geologica-variable, sans-serif;
-      font-size: 20px; font-weight: 600; color: var(--cyan-dark);
+      font-size: 20px; font-weight: 700; color: var(--cyan-dark);
     }
     .section-link {
-      font-size: 13px; font-weight: 700; color: var(--brand);
-      white-space: nowrap;
+      font-size: 1.125rem; font-weight: 600; color: var(--cyan);
+      white-space: nowrap; text-decoration: none;
+      transition: color 0.2s;
     }
-    .section-link:hover { text-decoration: underline; }
+    .section-link:hover { color: #2c7d99; text-decoration: none; }
 
     .collections-wrap {
       display: grid;
@@ -621,23 +704,32 @@
     }
     .engagement-cat-link:hover svg { stroke: var(--cyan-light); }
 
-    /* Individual teaser card */
+    /* Individual teaser card — matches prod thread-teaser */
     .eng-teaser {
       background: #fff;
-      border-radius: var(--radius-card);
+      border-radius: 6px;
       box-shadow: var(--shadow-card);
-      padding: 18px 20px 20px;
-      border: 1px solid var(--hu-lighter);
+      padding: 24px 24px 32px;
+    }
+    .eng-teaser__eyebrow {
+      color: var(--gray);
+      font-family: geologica-variable, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: inline-block;
     }
     .eng-teaser__title {
       font-family: geologica-variable, sans-serif;
-      font-size: 16px; font-weight: 600;
-      color: var(--cyan-dark); line-height: 1.4;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--cyan-dark); line-height: 1.25;
       margin-bottom: 8px;
     }
     .eng-teaser__excerpt {
-      font-size: 13px; color: var(--gray-dark);
-      line-height: 1.65; margin-bottom: 14px;
+      font-size: 1rem; color: var(--gray-dark);
+      line-height: 1.6; margin-bottom: 14px;
     }
     .eng-teaser__footer {
       display: flex; align-items: center; gap: 12px;
@@ -781,124 +873,143 @@
     /* === NEWSLETTER / FOOTER TOP === */
     .footer-signup {
       background: var(--hu-lighter);
-      padding: 28px 0;
+      padding: 32px 0;
     }
     .footer-signup__inner {
       max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
-      display: flex; align-items: center; gap: 32px;
+      display: flex; align-items: flex-start;
     }
-    .footer-signup__form { display: flex; flex-direction: column; gap: 10px; }
+    .footer-signup__form {
+      display: inline-block;
+      margin-right: 48px;
+      max-width: 504px;
+    }
     .footer-signup__label {
       font-family: geologica-variable, sans-serif;
       font-size: 18px; font-weight: 600; color: var(--cyan-dark);
+      margin-bottom: 16px; display: block;
     }
-    .footer-signup__row { display: flex; height: 40px; }
+    .footer-signup__row { display: flex; height: 48px; }
     .footer-signup__input {
-      width: 280px; padding: 0 16px;
-      border: 1px solid #b3c4cd; border-right: none;
-      border-radius: 20px 0 0 20px;
-      font-size: 15px; font-family: inherit; outline: none;
+      width: 100%; min-width: 280px; padding: 8px 4px 8px 24px;
+      border: 1px solid #D9DFE3; border-right: none;
+      border-radius: 24px 0 0 24px;
+      font-size: 18px; font-family: inherit; outline: none;
       color: var(--cyan-darker);
     }
     .footer-signup__input:focus { border-color: var(--cyan); }
     .footer-signup__btn {
-      padding: 0 22px;
+      padding: 0 16px;
       background: var(--cyan); color: #fff;
-      border: 1px solid var(--cyan);
-      border-radius: 0 20px 20px 0;
-      font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
+      border: 1px solid #D9DFE3; border-left: none;
+      border-radius: 0 24px 24px 0;
+      font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer;
       white-space: nowrap;
     }
-    .footer-signup__btn:hover { background: var(--brand); border-color: var(--brand); }
+    .footer-signup__btn:hover { background: #2d8aac; }
     .footer-signup__notice {
-      font-size: 11px; color: var(--gray-dark);
-      margin-top: 4px; line-height: 1.4;
+      font-size: 14px; color: rgba(0,32,41,0.6);
+      margin-top: 16px; line-height: 1.6;
     }
-    .footer-signup__notice a { color: var(--gray-dark); text-decoration: underline; }
-    .footer-signup__socials { display: flex; align-items: center; gap: 10px; }
-    .social-circle {
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; text-decoration: none; flex-shrink: 0;
+    .footer-signup__notice a { color: inherit; text-decoration: underline; }
+    /* Social follow icons in footer top */
+    .footer-top-socials {
+      display: inline-flex; align-items: center; gap: 24px;
+      margin-top: 44px;
     }
-    .social-circle:hover { opacity: 0.85; text-decoration: none; }
-    .social-circle svg { width: 16px; height: 16px; fill: #fff; }
+    .footer-top-social {
+      display: inline-block; text-decoration: none;
+    }
+    .footer-top-social svg {
+      width: 44px; height: 44px;
+      fill: var(--cyan-dark); display: block;
+    }
+    .footer-top-social:hover svg { fill: var(--cyan); }
 
     /* === FOOTER === */
 
     .footer-bottom {
       background: var(--cyan-dark);
-      padding: 36px 16px 24px;
+      padding: 32px 24px;
     }
     .footer-inner {
       max-width: var(--max-w); margin: 0 auto;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 40px;
-      padding: 0 8px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 0;
     }
-    @media (max-width: 767px) { .footer-inner { grid-template-columns: 1fr; gap: 24px; } }
-
-    .footer-hu-name {
-      font-family: geologica-variable, sans-serif;
-      font-size: 14px; font-weight: 600; color: #fff;
-      margin-bottom: 12px;
-      display: flex; align-items: center; gap: 8px;
+    .footer-left {
+      flex-shrink: 0;
+      margin-right: 56px;
     }
-    .footer-hu-badge {
-      font-family: 'Lato', sans-serif;
-      font-size: 9px; font-weight: 700; letter-spacing: 1.2px;
-      text-transform: uppercase;
-      background: var(--cyan); color: #fff;
-      padding: 2px 6px; border-radius: 2px;
+    .footer-hu-logo {
+      display: block;
+      width: 220px; height: 52px;
+      margin-bottom: 8px;
     }
+    .footer-hu-logo svg { width: 100%; height: 100%; display: block; }
     .footer-intro {
-      font-size: 12px; line-height: 1.75;
-      color: var(--hu-light); margin-bottom: 16px;
+      font-size: 16px; line-height: 1.6;
+      color: #fff; max-width: 280px;
+      margin-bottom: 24px;
     }
-    .footer-socials { display: flex; gap: 8px; }
+    .footer-socials {
+      display: flex; gap: 4px;
+      margin-bottom: 24px;
+      margin-left: -10px;
+    }
     .footer-social {
-      width: 30px; height: 30px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none;
+      display: inline-block; text-decoration: none;
+      padding: 10px;
     }
-    .footer-social:hover { background: rgba(255,255,255,0.2); }
-    .footer-social svg { width: 14px; height: 14px; fill: #fff; }
+    .footer-social svg { width: 24px; height: 24px; fill: var(--hu-light); display: block; }
+    .footer-social:hover svg { fill: #fff; }
 
+    .footer-communities {
+      flex-grow: 1;
+    }
     .footer-communities h3 {
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.7px; color: var(--cyan-light);
-      margin-bottom: 12px;
+      font-size: 16px; font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
     }
     .communities-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      column-count: 3;
       column-gap: 12px;
+      padding-left: 0;
     }
-    @media (max-width: 500px) { .communities-grid { grid-template-columns: repeat(2, 1fr); } }
     .communities-grid a {
-      font-size: 12px; color: var(--hu-light);
+      font-size: 16px; color: #fff;
       line-height: 2;
       display: block;
     }
-    .communities-grid a:hover { color: #fff; text-decoration: none; }
+    .communities-grid a:hover { color: var(--hu-light); text-decoration: none; }
 
     .footer-divider {
       max-width: var(--max-w); margin: 20px auto 0;
-      padding: 16px 8px 0;
+      padding: 16px 0 0;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .footer-links {
-      display: flex; flex-wrap: wrap; gap: 6px 18px;
+      display: flex; flex-wrap: wrap;
+      gap: 0;
       margin-bottom: 14px;
+      padding: 0; list-style: none;
     }
-    .footer-links a { font-size: 11px; color: var(--hu-light); }
-    .footer-links a:hover { color: #fff; text-decoration: none; }
+    .footer-links li {
+      display: inline-block;
+      margin-right: 24px;
+    }
+    .footer-links a {
+      font-size: 16px; color: var(--hu-light);
+      text-transform: uppercase; line-height: 1;
+    }
+    .footer-links a:hover { color: var(--hu-light); text-decoration: none; }
     .footer-disclaimer {
-      font-size: 11px; color: var(--gray); line-height: 1.7;
+      font-size: 14px; color: var(--hu-light); line-height: 1.6;
+      margin: 16px auto;
     }
-    .footer-disclaimer a { color: var(--gray); text-decoration: underline; }
+    .footer-disclaimer a { color: inherit; text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -927,26 +1038,26 @@
     </a>
     <!-- Hamburger / Menu -->
     <button class="hdr-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">
-      <div class="hamburger"><span></span><span></span><span></span></div>
-      Menu
+      <div class="hamburger"><div class="hamburger__filling"></div></div>
+      <span class="hdr-btn__text">Menu</span>
     </button>
     <!-- Search -->
     <button class="hdr-btn" id="searchBtn" aria-label="Search">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-      Search
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m46.28 37.72-8.76-8.76c1.42-2.73 2.24-5.83 2.24-9.12-0-10.91-8.88-19.79-19.79-19.79s-19.8 8.88-19.8 19.8 8.88 19.8 19.8 19.8c3.16 0 6.14-.76 8.8-2.09l8.84 8.84c1 1 2.33 1.55 3.75 1.55s2.75-.55 3.75-1.55l1.19-1.19c1-1 1.55-2.33 1.55-3.75s-.55-2.75-1.55-3.75zm-42.11-17.87c0-8.71 7.09-15.8 15.8-15.8s15.8 7.09 15.8 15.8c0 4.14-1.62 7.91-4.24 10.73l-.83.83c-2.82 2.62-6.59 4.24-10.73 4.24-8.71 0-15.8-7.09-15.8-15.8zm39.28 22.54-1.19 1.19c-.49.49-1.34.49-1.83 0l-8.12-8.12 1.24-1.24c.27-.25.53-.51.78-.78l1-1 8.12 8.12c.25.24.38.57.38.92s-.14.67-.38.92z"/></svg>
+      <span class="hdr-btn__text">Search</span>
     </button>
   </div>
 
   <div class="header__right">
     <!-- Accessibility -->
     <button class="hdr-btn" aria-label="Accessibility options">
-      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;fill:white;flex-shrink:0;"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg>
-      Accessibility
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg>
+      <span class="hdr-btn__text">Accessibility</span>
     </button>
     <!-- Log in -->
     <button class="hdr-btn" id="loginBtn" aria-label="Log in">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      Log in
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m40.69 39.91c3.94-4.13 6.37-9.71 6.37-15.86 0-12.68-10.32-23-23-23s-23 10.33-23 23.01c0 6.14 2.43 11.73 6.37 15.86v.03s.37.36.37.36c.04.04.08.07.11.11l.22.22s.02.01.02.02c.52.5 1.06.97 1.62 1.41.03.02.06.04.08.07.54.42 1.1.83 1.67 1.2.05.04.11.07.16.1.55.35 1.12.68 1.7.99.08.04.15.08.23.12.57.29 1.15.56 1.74.8.09.04.17.07.26.1.59.23 1.2.45 1.81.63.08.02.17.05.25.07.62.18 1.26.34 1.9.46.07.01.14.02.21.04.66.12 1.32.22 2 .29.05 0 .09 0 .14.01.7.06 1.4.1 2.12.1s1.42-.04 2.12-.1c.05 0 .09 0 .14-.01.68-.07 1.34-.17 2-.29.07-.01.14-.02.21-.04.64-.13 1.27-.28 1.9-.46.08-.02.17-.05.25-.07.62-.19 1.22-.4 1.81-.63.09-.03.17-.07.26-.1.59-.24 1.17-.51 1.74-.8.08-.04.16-.08.23-.12.58-.31 1.15-.64 1.7-.99.06-.04.11-.07.17-.11.58-.38 1.13-.78 1.67-1.2.03-.02.06-.05.09-.07.56-.44 1.1-.92 1.61-1.41 0 0 .02-.02.03-.02l.28-.26s.04-.04.06-.05l.38-.36v-.03zm-16.63-34.85c10.47 0 19 8.52 19 19 0 4.11-1.33 7.91-3.55 11.02-1.63-3.69-4.89-7.14-8.94-9.03 2.01-1.79 3.28-4.39 3.28-7.29 0-5.4-4.39-9.79-9.79-9.79s-9.79 4.39-9.79 9.79c0 2.9 1.27 5.49 3.28 7.29-4.05 1.89-7.3 5.34-8.94 9.03-2.23-3.11-3.55-6.91-3.55-11.02-0-10.48 8.52-19 19-19zm-5.79 18.69c0-3.19 2.6-5.79 5.79-5.79s5.79 2.6 5.79 5.79-2.6 5.79-5.79 5.79-5.79-2.6-5.79-5.79z"/></svg>
+      <span class="hdr-btn__text">Log in</span>
     </button>
     <button class="avatar-btn" id="avatarBtn" aria-label="My profile">AB</button>
     <!-- Subscribe -->
@@ -959,37 +1070,14 @@
 
 <!-- Nav Drawer -->
 <nav class="nav-drawer" id="navDrawer" aria-label="Site navigation">
-  <div class="nav-drawer__hdr">
-    <button class="nav-drawer__close" id="navClose" aria-label="Close menu">&#x2715;</button>
-    <span class="nav-drawer__logo">Migraine.com</span>
-  </div>
-  <div class="nav-section">
-    <div class="nav-section-label">Browse</div>
-    <ul>
-      <li class="nav-item"><a href="index.html">Home</a></li>
-      <li class="nav-item"><a href="#">Forum</a></li>
-      <li class="nav-item"><a href="#">Articles</a></li>
-      <li class="nav-item"><a href="#">Stories</a></li>
-      <li class="nav-item"><a href="#">Videos</a></li>
-      <li class="nav-item"><a href="#">Featured Collections</a></li>
-      <li class="nav-item"><a href="#">Recipes</a></li>
-    </ul>
-  </div>
-  <div class="nav-section">
-    <div class="nav-section-label">Community</div>
-    <ul>
-      <li class="nav-item"><a href="#">Share Your Story</a></li>
-      <li class="nav-item"><a href="#">Member Spotlight</a></li>
-      <li class="nav-item"><a href="#">Advocate Leaders</a></li>
-    </ul>
-  </div>
-  <div class="nav-section">
-    <div class="nav-section-label">About</div>
-    <ul>
-      <li class="nav-item"><a href="#">About Migraine.com</a></li>
-      <li class="nav-item"><a href="#">Editorial Policies</a></li>
-      <li class="nav-item"><a href="#">Contact Us</a></li>
-    </ul>
+  <form class="nav-search" role="search" onsubmit="return false;">
+    <input class="nav-search__input" type="search" placeholder="Search" aria-label="Search text">
+    <button class="nav-search__btn" type="submit" aria-label="Search">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m46.28 37.72-8.76-8.76c1.42-2.73 2.24-5.83 2.24-9.12-0-10.91-8.88-19.79-19.79-19.79s-19.8 8.88-19.8 19.8 8.88 19.8 19.8 19.8c3.16 0 6.14-.76 8.8-2.09l8.84 8.84c1 1 2.33 1.55 3.75 1.55s2.75-.55 3.75-1.55l1.19-1.19c1-1 1.55-2.33 1.55-3.75s-.55-2.75-1.55-3.75zm-42.11-17.87c0-8.71 7.09-15.8 15.8-15.8s15.8 7.09 15.8 15.8c0 4.14-1.62 7.91-4.24 10.73l-.83.83c-2.82 2.62-6.59 4.24-10.73 4.24-8.71 0-15.8-7.09-15.8-15.8zm39.28 22.54-1.19 1.19c-.49.49-1.34.49-1.83 0l-8.12-8.12 1.24-1.24c.27-.25.53-.51.78-.78l1-1 8.12 8.12c.25.24.38.57.38.92s-.14.67-.38.92z"/></svg>
+    </button>
+  </form>
+  <div class="nav-drawer__nav">
+    <ul class="nav-drawer__list" id="navList"></ul>
   </div>
 </nav>
 <!-- ===================== END HEADER ===================== -->
@@ -998,7 +1086,7 @@
 <div class="page-wrap">
   <div class="site-masthead">
     <a href="index.html" class="site-masthead__link">
-      <img src="http://eqmvii.github.io/beta-temu-nexus/assets/migraine-masthead.svg" alt="Migraine.com" class="site-masthead__img">
+      <img src="http://eqmvii.github.io/beta-temu-nexus/assets/migraine.svg" alt="Migraine.com" class="site-masthead__img">
     </a>
   </div>
 </div>
@@ -1033,13 +1121,8 @@
     <img src="http://eqmvii.github.io/beta-temu-nexus/assets/community-logo.png" alt="Migraine.com" />
   </div>
   <h2 class="community-heading">Explore the Community</h2>
-  <p class="community-sub">Looking for support? Have a question? The community is here for you.</p>
-  <span class="community-cta">
-    Join us
-    <svg viewBox="0 0 12 12" width="12" height="12" fill="none">
-      <path d="M2 6h8M6 2l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
+  <p class="community-sub"><span>Looking for support? Have a question?</span><span>The community is here for you.</span></p>
+  <p class="community-cta">Join us <svg class="community-cta__icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z"/></svg></p>
 </a>
 
 <!-- LEADERBOARD AD (below Explore the Community) -->
@@ -1074,10 +1157,7 @@
 <!-- POPULAR IN THE COMMUNITY -->
 <div class="popular-wrap">
   <div class="popular-inner">
-    <div class="section-hdr">
-      <h2 class="section-title">Popular in the Community</h2>
-      <a href="#" class="section-link">Read more ›</a>
-    </div>
+    <h2 class="section-title" style="margin-bottom:8px;">Popular in the Community</h2>
     <div class="popular-grid">
       <div class="popular-left" id="popularEngagement"></div>
       <div>
@@ -1121,8 +1201,16 @@
         <input id="nlEmail" class="footer-signup__input" type="email" placeholder="Enter your email" aria-label="Email">
         <button class="footer-signup__btn" type="submit">Subscribe</button>
       </div>
-      <p class="footer-signup__notice">By providing your email address, you are agreeing to our <a href="#">privacy policy</a> and <a href="#">Terms of Use</a>.</p>
+      <p class="footer-signup__notice">By providing your email address, you are agreeing to our <a href="#">Privacy Notice</a> and <a href="#">Terms of Use</a>.</p>
     </form>
+    <div class="footer-top-socials">
+      <a href="#" class="footer-top-social" aria-label="Facebook">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 24.09c0-13.26-10.75-24-24-24s-24 10.74-24 24c0 11.26 7.75 20.7 18.2 23.29v-15.96h-4.95v-7.33h4.95v-3.16c0-8.17 3.7-11.96 11.72-11.96 1.52 0 4.14.3 5.22.6v6.65c-.57-.06-1.55-.09-2.77-.09-3.94 0-5.46 1.49-5.46 5.37v2.59h7.84l-1.35 7.33h-6.49v16.49c11.88-1.44 21.09-11.55 21.09-23.82z"/></svg>
+      </a>
+      <a href="#" class="footer-top-social" aria-label="Instagram">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 23.95c-.01-6.52-.04-7.33-.16-9.89s-.53-4.3-1.13-5.82c-.62-1.58-1.44-2.91-2.78-4.25-1.34-1.33-2.68-2.15-4.26-2.76-1.53-.59-3.27-.99-5.83-1.1-2.55-.11-3.37-.13-9.89-.13-6.52.01-7.33.04-9.89.17-2.55.12-4.3.53-5.82 1.13-1.58.61-2.92 1.44-4.25 2.78s-2.15 2.67-2.76 4.25c-.59 1.53-.99 3.27-1.1 5.83s-.13 3.37-.13 9.89.04 7.33.17 9.89c.12 2.55.53 4.3 1.13 5.82.62 1.58 1.44 2.91 2.78 4.25s2.67 2.15 4.26 2.76c1.53.59 3.27.99 5.83 1.1 2.55.11 3.38.14 9.89.13 6.52-.01 7.34-.04 9.9-.16s4.29-.53 5.82-1.13c1.58-.62 2.92-1.44 4.25-2.78s2.15-2.68 2.76-4.26c.59-1.53.99-3.27 1.1-5.82.11-2.56.14-3.38.13-9.9zm-4.45 9.71c-.1 2.34-.49 3.61-.82 4.46-.43 1.12-.95 1.92-1.79 2.76s-1.64 1.36-2.76 1.8c-.84.33-2.12.72-4.45.83-2.53.12-3.29.14-9.7.16s-7.17-.01-9.7-.12c-2.34-.1-3.61-.49-4.46-.82-1.12-.43-1.92-.95-2.76-1.79s-1.36-1.64-1.8-2.76c-.33-.85-.72-2.12-.83-4.46-.12-2.53-.14-3.29-.16-9.7s.01-7.17.12-9.7c.1-2.34.49-3.61.82-4.46.43-1.12.95-1.92 1.79-2.76s1.64-1.36 2.76-1.8c.85-.33 2.11-.72 4.45-.83 2.53-.12 3.29-.14 9.7-.16 6.41-.01 7.17.01 9.7.12 2.34.1 3.61.49 4.46.82 1.12.43 1.92.95 2.76 1.79s1.36 1.64 1.8 2.76c.33.84.72 2.11.83 4.45.12 2.53.15 3.29.16 9.7s-.01 7.17-.12 9.7z"/><path d="m33.91 11.17c0 1.59 1.29 2.88 2.88 2.88s2.88-1.29 2.88-2.88-1.29-2.88-2.88-2.88c-1.59 0-2.88 1.29-2.87 2.88"/><path d="m23.98 11.68c-6.81.01-12.31 5.54-12.3 12.35s5.54 12.31 12.35 12.3 12.31-5.54 12.3-12.35-5.54-12.31-12.35-12.3zm.04 20.32c-4.42 0-8.01-3.56-8.02-7.98 0-4.42 3.57-8.01 7.98-8.02 4.42 0 8.01 3.57 8.02 7.98s-3.57 8.01-7.98 8.02z"/></svg>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1130,41 +1218,36 @@
 <footer>
   <div class="footer-bottom">
     <div class="footer-inner">
-      <div>
-        <div class="footer-hu-name">
-          Health Union <span class="footer-hu-badge">HU</span>
-        </div>
+      <div class="footer-left">
+        <a href="#" class="footer-hu-logo" aria-label="Health Union">
+          <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 180 48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientTransform="matrix(163.73 163.1 -163.1 163.73 444.54 744.98)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1499d5"/><stop offset=".52" stop-color="#19a7d1"/><stop offset="1" stop-color="#2ad6c5"/></linearGradient><linearGradient id="b" gradientTransform="matrix(-168.32 -163.11 163.11 -168.32 592.3 796.57)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1099d5"/><stop offset=".52" stop-color="#2486d6"/><stop offset="1" stop-color="#6549db"/></linearGradient><linearGradient id="c" gradientTransform="matrix(-113.56 -40.35 40.35 -113.56 852.57 149.45)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#024fb3"/><stop offset="1" stop-color="#0162af"/></linearGradient><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="11.26" x2="313.43" y1="320" y2="320"><stop offset="0" stop-color="#bd27e9"/><stop offset="1" stop-color="#4e67d3"/></linearGradient><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="524.14" x2="788.74" y1="337.18" y2="337.18"><stop offset="0" stop-color="#35c7c3"/><stop offset="1" stop-color="#54d091"/></linearGradient><path d="m0 230.73h800v237.38h-800z" fill="none" transform="matrix(.225 0 0 .2022 0 -46.66)"/><g fill-rule="nonzero"><path d="m728.5 788.32h-34.47c-3.6 0-5.03-1.79-4.31-5.38l30.76-144.1c.72-3.59 1.82-5.37 4.44-5.38 2.15-.01 3.23 1.77 3.23 1.77 2.77 4.2 28.16 52 28.16 52h106.57c26.76 0 37.18 6.82 37.18 23.66 0 3.95-.54 8.6-1.62 13.63l-3 14.12h34.47c3.6 0 5.03 1.8 4.31 5.38l-30.76 144.1c-.72 3.6-1.83 5.37-4.45 5.38-2.14.02-3.22-1.76-3.22-1.76-2.78-4.2-28.16-52.01-28.16-52.01h-106.57c-26.76 0-37.18-6.81-37.18-23.66 0-3.94.54-8.6 1.62-13.62z" fill="#1099d5" transform="matrix(.12209 0 0 .12209 -4.62 -69.21)"/><path d="m640.76 744.24c3.78 0 5.29 1.89 4.53 5.66l-32.33 151.78c-.76 3.77-1.92 5.65-4.67 5.66a4.15 4.15 0 0 1-3.39-1.86c-2.92-4.42-29.6-54.78-29.6-54.78h-112c-28.13 0-39.08-7.17-39.08-24.91 0-4.16.57-9.06 1.7-14.35l13.03-61.54c.4-2.04 1.25-3.53 2.55-4.47-1.3.94-2.14 2.43-2.55 4.47l-9.88 46.66h158.8c3.78 0 6.05-1.89 6.8-5.66l9.88-46.66h36.22zm-197.29.27-.07.02.07-.02.07-.02zm1.74-.26h-.04.12zm.35 0 .17-.01h-.17z" fill="url(#a)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/><path d="m429.06 796.56h-36.22c-3.78 0-5.29-1.89-4.53-5.66l32.33-151.78c.76-3.77 1.92-5.64 4.67-5.66a4.15 4.15 0 0 1 3.39 1.86c2.92 4.42 29.6 54.78 29.6 54.78h112c28.13 0 39.08 7.17 39.08 24.91 0 4.16-.57 9.07-1.7 14.35l-3.15 14.88h-158.8c-3.78 0-6.05 1.89-6.8 5.66l-9.88 46.66z" fill="url(#b)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/></g><path d="m724.34 149.5 7.61-35.98c.59-2.9 2.33-4.36 5.24-4.36h122.47l-7.62 35.98c-.58 2.91-2.32 4.37-5.24 4.37h-122.46z" fill="url(#c)" transform="matrix(-.15031 0 0 -.15031 213.6 43.44)"/><path d="m22.46 291.53c-1.22 0-1.95.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.47 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm178.98 0c-1.22 0-1.95.6-2.2 1.83l-8.94 42c-.24 1.21.24 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.19-1.82l8.95-42c.24-1.22-.25-1.83-1.46-1.83zm24.25 11.32c-.97 0-1.58.49-1.77 1.46l-1.46 6.82c-.18.97.19 1.46 1.16 1.46h5.54l-2.56 12.11a25.12 25.12 0 0 0-.67 5.18c0 5.17 2.86 7.3 10.6 7.3h8.15c.97 0 1.64-.49 1.83-1.46l1.4-6.82c.18-.97-.19-1.46-1.16-1.46h-6.09c-1.64 0-2.37-.24-2.37-1.46 0-.36.06-.79.18-1.28l2.56-12.11h8.52c.97 0 1.58-.49 1.76-1.46l1.47-6.82c.18-.97-.19-1.46-1.16-1.46h-8.52l1.7-7.85c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.21 0-1.94.61-2.19 1.83l-1.7 7.85zm-130.5 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.44 12.24-2.44 13.57 0 5.73 3.53 8.1 12.6 8.1h26.48c.97 0 1.58-.49 1.83-1.46l1.46-7c.18-.97-.18-1.46-1.16-1.46h-25.26c-2.74 0-3.59-.61-3.59-2.01 0-.37.06-.8.3-2h28.37c2.43 0 3.71-.86 4.26-3.54 1.83-8.28 2-9.68 2-10.9 0-4.32-2.49-5.96-9.18-5.96zm45.63 0c-.98 0-1.58.49-1.83 1.46l-1.46 7c-.18.98.18 1.46 1.16 1.46h25.26c2.74 0 3.59.55 3.59 1.95 0 .36-.06.85-.37 2.07h-22.21c-7.37 0-10.29 2.92-11.39 8.16-.9 4.56-1.03 5.66-1.03 6.63 0 3.9 2.2 5.6 8.1 5.6h29.58c3.59 0 4.75-.91 5.6-5l3.53-16.67c.36-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm132.01-11.32c-1.21 0-1.94.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.48 3.28l-3.6 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm-109.3 36.58h-17.48c-.85 0-1.22-.36-1.22-1.03 0-.13 0-.3.25-1.52.18-1.04.85-1.59 1.89-1.59h18.68l-.55 2.68c-.18.97-.73 1.46-1.58 1.46zm-74.06-12.05c.67-3.17 1.58-4.14 5.05-4.14h14.6c.86 0 1.22.3 1.22.97 0 .19 0 .37-.48 2.56-.06.43-.3.6-.73.6h-19.66z" fill="url(#d)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -.88 -53.06)"/><path d="m758.3 302.85c-11.2 0-15.52 3.6-17.46 12.66l-4.27 19.85c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l3.58-16.87c.92-4.13 1.77-5.1 5.24-5.1h15.95c2.25 0 2.98.36 2.98 1.82 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.19-19.85c.37-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm-227.22-.03c-1.22 0-1.95.61-2.19 1.83l-4.2 19.84a22.6 22.6 0 0 0-.55 4.63c0 5.72 3.53 8.03 12.6 8.03h17.35c11.2 0 15.58-3.59 17.53-12.66l4.2-19.84c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.22 0-1.94.61-2.19 1.83l-3.59 16.86c-.85 4.14-1.76 5.11-5.23 5.11h-15.47c-2.25 0-2.98-.36-2.98-1.82 0-.8.19-1.83.49-3.3l3.6-16.85c.23-1.22-.25-1.83-1.47-1.83zm124.82 0c-1.22 0-2 .61-2.25 1.83l-6.51 30.68c-.25 1.21.24 1.82 1.46 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l6.5-30.68c.25-1.22-.17-1.83-1.4-1.83h-8.2zm40 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.43 12.24-2.43 13.58 0 5.72 3.53 8.1 12.6 8.1h17.59c11.2 0 15.64-3.6 17.53-12.67 2.25-10.71 2.43-12.17 2.43-13.51 0-5.78-3.53-8.16-12.66-8.16h-17.6zm-89.65 0c-11.2 0-15.52 3.6-17.47 12.66l-4.26 19.84c-.24 1.22.24 1.83 1.46 1.83h8.22c1.21 0 1.95-.6 2.19-1.82l3.59-16.87c.91-4.13 1.76-5.1 5.24-5.1h15.94c2.25 0 2.99.36 2.99 1.82 0 .79-.19 1.82-.5 3.28l-3.58 16.87c-.25 1.21.24 1.82 1.46 1.82h8.22c1.21 0 1.94-.6 2.19-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.62 0-5.73-3.53-8.04-12.6-8.04zm83.62 14.8c.92-4.15 1.77-5.12 5.24-5.12h15.15c2.5 0 3.47.49 3.47 2.31 0 .73-.18 1.65-1.46 7.55-.91 4.14-1.76 5.11-5.23 5.11h-15.16c-2.5 0-3.47-.48-3.47-2.31 0-.73.19-1.64 1.46-7.55zm-31.23-27.76c-1.22 0-1.95.6-2.2 1.82l-1.33 6.09c-.24 1.22.24 1.83 1.46 1.83h8.22c1.22 0 1.95-.61 2.19-1.83l1.34-6.09c.24-1.21-.25-1.82-1.46-1.82z" fill="url(#e)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -11.55 -53.06)"/></svg>
+        </a>
         <p class="footer-intro">
           Migraine.com is a Health Union community. Health Union reaches millions of people
           through condition-specific online health communities and a Social Health Network of
           patient leaders across virtually all health conditions.
         </p>
         <div class="footer-socials">
-          <a href="#" class="footer-social" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-          </a>
-          <a href="#" class="footer-social" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" style="width:13px;height:13px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
-          </a>
-          <a href="#" class="footer-social" aria-label="Twitter">
-            <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          <a href="#" class="footer-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 200 208" xmlns="http://www.w3.org/2000/svg"><path d="m185.22 0c8.16 0 14.78 6.66 14.78 14.88v177.94c0 8.22-6.62 14.88-14.78 14.88h-170.44c-8.16 0-14.78-6.66-14.78-14.88v-177.94c0-8.21 6.62-14.88 14.78-14.88zm-50.45 77.87c-15.94 0-23.13 9-27.16 15.38l-.06.1v-13.28h-30.21c.12 2.6.17 11.88.17 23.65v1.41c0 4.18-.01 8.53-.02 12.9l-.01 6.03c0 1.07 0 2.13-.01 3.19l0 1.27c-.05 18.98-.13 36.07-.14 38.49v.29h30.21v-52.37c0-2.8.2-5.6.99-7.61 2.18-5.6 7.15-11.4 15.5-11.4 10.93 0 15.3 8.6 15.3 21.21v50.17h30.21v-53.77c0-28.81-14.9-42.21-34.78-42.21zm-74.15 2.2h-30.21v93.78h30.21zm-14.9-45.21c-10.33 0-17.09 7-17.09 16.2 0 9 6.56 16.2 16.69 16.2h.2c10.53 0 17.09-7.2 17.09-16.2-.2-9.2-6.56-16.2-16.89-16.2z"/></svg>
           </a>
         </div>
       </div>
       <div class="footer-communities">
-        <h3>Our Communities</h3>
+        <h3>OUR COMMUNITIES</h3>
         <div class="communities-grid" id="footerCommunities"></div>
       </div>
     </div>
-    <div class="footer-divider page-wrap">
-      <div class="footer-links" id="footerLinks"></div>
+    <div class="footer-divider">
+      <ul class="footer-links" id="footerLinks"></ul>
       <p class="footer-disclaimer">
         &copy; 2026 Health Union, LLC. All rights reserved. This information is not designed to
         replace a physician's independent judgment about the appropriateness or risks of a procedure
         for a given patient. Always consult your doctor about your medical conditions. Migraine.com
         does not provide medical advice, diagnosis or treatment. Use of the site is conditional upon
         your acceptance of our terms of use. This site is protected by reCAPTCHA and the Google
-        <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
       </p>
     </div>
   </div>
@@ -1270,19 +1353,21 @@ const popularArticles = [
 ];
 
 const communities = [
-  'AdvancedBreastCancer.net','Allergies.net','AlzheimersDisease.net',
-  'Asthma.net','AtopicDermatitis.net','BloodCancer.com',
-  'COPD.net','ChronicDryEye.net','CrohnsDisease.net',
+  'AdvancedBreastCancer.net','AdvancedOvarianCancer.net','Allergies.net',
+  'AlzheimersDisease.net','Asthma.net','AtopicDermatitis.net',
+  'ATTR-Amyloidosis.net','BloodCancer.com','CardiovascularDisease.net',
+  'ChronicDryEye.net','COPD.net','CrohnsDisease.net',
   'Cystic-Fibrosis.com','DiabetesType2.com','Endometriosis.net',
-  'EpilepsyDisease.com','HepatitisC.net','HIV.net',
-  'IBSCrohns.net','InflammatoryBowelDisease.net','LungCancer.net',
-  'MacularDegeneration.net','MultipleSclerosis.net','Obesity.net',
-  'ParkinsonsDisease.net','PlaquePsoriasis.com','PrimaryMigraineAttacks.net',
-  'ProstateCancer.net','RareDisease.net','SkinCancer.net',
-  'SleepDisorders.net','SpinalMuscularAtrophy.net','Type2Diabetes.com',
+  'EpilepsyDisease.com','HeartFailure.net','HepatitisC.net',
+  'H-I-V.net','InflammatoryBowelDisease.net','LungCancer.net',
+  'MacularDegeneration.net','Migraine.com','MultipleSclerosis.net',
+  'Myasthenia-Gravis.net','Neuromyelitis-Optica.net','Obesity.net',
+  'ParkinsonsDisease.net','PlaquePsoriasis.com','ProstateCancer.net',
+  'RareDisease.net','RheumatoidArthritis.net','SkinCancer.net',
+  'Sleep-Disorders.net','SpinalMuscularAtrophy.net','Type2Diabetes.com',
 ];
 
-const footerLinks = ['About Us','Terms of Use','Privacy Policy','Cookie Settings','Community Rules','Accessibility'];
+const footerLinks = ['About Us','Terms of Use','Privacy Notice','Your Privacy Choices','Cookie Settings','Community Rules','Ad Choices'];
 
 const ads = {
   leaderboard: {
@@ -1338,8 +1423,8 @@ function renderSlider() {
         <div class="post-card__footer">
           <div class="byline">
             <div class="byline__avatar" style="background:${s.authorColor};">${initials(s.author)}</div>
-            <div>
-              <div class="byline__author">${s.author}</div>
+            <div class="byline__content">
+              <p class="byline__author">By <span class="byline__name">${s.author}</span></p>
               <div class="byline__time">${s.readTime}</div>
             </div>
           </div>
@@ -1364,17 +1449,17 @@ function renderTopArticles() {
           <p class="post-card__summary">${r.excerpt}</p>
           <div class="post-card__footer">
             <div class="byline">
-              <div class="byline__avatar" style="background:${r.authorColor};width:28px;height:28px;font-size:10px;">${initials(r.author)}</div>
-              <div>
-                <div class="byline__author">${r.author}</div>
+              <div class="byline__avatar" style="background:${r.authorColor};">${initials(r.author)}</div>
+              <div class="byline__content">
+                <p class="byline__author">By <span class="byline__name">${r.author}</span></p>
                 <div class="byline__time">${r.readTime}</div>
               </div>
             </div>
             <button class="bookmark-btn" aria-label="Bookmark for later">${ICON_RIBBON}</button>
           </div>
           <div class="post-card__engagement">
-            <button class="eng-action">${ICON_LIKE} ${r.reactions} Reactions</button>
-            <a href="#" class="eng-action">${ICON_COMMENT} ${r.comments} Comments</a>
+            <button class="eng-action">${ICON_LIKE} reactions</button>
+            <a href="#" class="eng-action">${ICON_COMMENT} <span>${r.comments}</span> comments</a>
           </div>
         </div>
       </article>
@@ -1412,17 +1497,21 @@ function renderPopular() {
     <div class="popular-teasers-grid">
       ${popularArticles.map(a => `
         <div class="eng-teaser">
-          <div class="post-type">${a.eyebrow}</div>
+          <div class="eng-teaser__eyebrow">${a.eyebrow}</div>
           <h3 class="eng-teaser__title"><a href="post.html" style="color:inherit;text-decoration:none;">${a.title}</a></h3>
           <p class="eng-teaser__excerpt">${a.excerpt}</p>
-          <div class="eng-teaser__footer">
-            <div class="byline__avatar" style="background:${a.authorColor};width:28px;height:28px;font-size:11px;">${a.authorInitials}</div>
-            <span style="font-size:13px;font-weight:700;color:#5E676D;">${a.author}</span>
-            <button class="bookmark-btn" aria-label="Bookmark" style="margin-left:auto;">${ICON_RIBBON}</button>
+          <div class="post-card__footer">
+            <div class="byline">
+              <div class="byline__avatar" style="background:${a.authorColor};">${a.authorInitials}</div>
+              <div class="byline__content">
+                <p class="byline__author"><span class="byline__name">${a.author}</span></p>
+              </div>
+            </div>
+            <button class="bookmark-btn" aria-label="Bookmark">${ICON_RIBBON}</button>
           </div>
-          <div class="post-card__engagement" style="margin-top:10px;">
-            <button class="eng-action">${ICON_LIKE} ${a.reactions} reactions</button>
-            <a href="#" class="eng-action">${ICON_COMMENT} ${a.replies} replies</a>
+          <div class="post-card__engagement">
+            <button class="eng-action">${ICON_LIKE} reactions</button>
+            <a href="#" class="eng-action">${ICON_COMMENT} <span>${a.replies}</span> replies</a>
           </div>
         </div>`).join('')}
     </div>`;
@@ -1448,7 +1537,7 @@ function renderFooter() {
   document.getElementById('footerCommunities').innerHTML =
     communities.map(c => `<a href="#">${c}</a>`).join('');
   document.getElementById('footerLinks').innerHTML =
-    footerLinks.map(l => `<a href="#">${l}</a>`).join('');
+    footerLinks.map(l => `<li><a href="#">${l}</a></li>`).join('');
 }
 
 /* ============================================================
@@ -1475,21 +1564,114 @@ document.addEventListener('click', e => {
 /* ============================================================
    NAV DRAWER
 ============================================================ */
+const ICON_CARET = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z"/></svg>';
+
+const navMenuItems = [
+  { title: 'Community', url: '#', items: [
+    { title: 'Forum', url: '#' },
+    { title: 'Share Your Story', url: '#' },
+    { title: 'Advocate Leaders', url: '#' },
+    { title: 'Stories', url: '#' },
+  ]},
+  { title: 'Migraine Types', url: '#', items: [
+    { title: 'Migraine With Aura', url: '#' },
+    { title: 'Migraine Without Aura', url: '#' },
+    { title: 'Chronic Migraine', url: '#' },
+    { title: 'Hemiplegic Migraine', url: '#' },
+    { title: 'Vestibular Migraine', url: '#' },
+    { title: 'Ocular Migraine', url: '#' },
+  ]},
+  { title: 'Living With Migraine', url: '#', items: [
+    { title: 'Coping', url: '#' },
+    { title: 'Emotional Health', url: '#' },
+    { title: 'Diet & Nutrition', url: '#' },
+    { title: 'Relationships', url: '#' },
+    { title: 'Workplace', url: '#' },
+  ]},
+  { title: 'Symptoms', url: '#', items: [
+    { title: 'Headache', url: '#' },
+    { title: 'Aura', url: '#' },
+    { title: 'Nausea', url: '#' },
+    { title: 'Sensitivity to Light', url: '#' },
+    { title: 'Sensitivity to Sound', url: '#' },
+  ]},
+  { title: 'Treatment', url: '#', items: [
+    { title: 'Preventive Treatment', url: '#' },
+    { title: 'Acute Treatment', url: '#' },
+    { title: 'Alternative Treatment', url: '#' },
+    { title: 'Clinical Trials', url: '#' },
+  ]},
+  { title: 'Mental Health', url: '#', items: [
+    { title: 'Anxiety', url: '#' },
+    { title: 'Depression', url: '#' },
+    { title: 'Stress', url: '#' },
+  ]},
+  { title: 'Featured Collections', url: '#', items: [
+    { title: 'Newly Diagnosed', url: '#' },
+    { title: 'Videos', url: '#' },
+    { title: 'Recipes', url: '#' },
+  ]},
+  { title: 'Health Resources', url: '#', items: [
+    { title: 'Migraine Basics', url: '#' },
+    { title: 'Diagnosis', url: '#' },
+    { title: 'Doctor Discussion Guide', url: '#' },
+  ]},
+  { title: 'Migraine & COVID-19', url: '#' },
+];
+
+function renderNavItem(item, isChild) {
+  const hasChildren = item.items && item.items.length > 0;
+  const cls = ['nav-item'];
+  if (isChild) cls.push('nav-item--child');
+
+  let html = `<li class="${cls.join(' ')}">`;
+  html += `<a class="nav-item__link" href="${item.url}">${item.title}</a>`;
+  if (hasChildren) {
+    html += `<button class="nav-item__expand" aria-expanded="false" aria-label="Expand ${item.title} navigation">${ICON_CARET}</button>`;
+    html += `<ul class="nav-item__children" style="display:none">`;
+    item.items.forEach(child => { html += renderNavItem(child, true); });
+    html += `</ul>`;
+  }
+  html += `</li>`;
+  return html;
+}
+
+function renderNavMenu() {
+  const list = document.getElementById('navList');
+  list.innerHTML = navMenuItems.map(item => renderNavItem(item, false)).join('');
+  // Attach expand/collapse handlers
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.nav-item__expand');
+    if (!btn) return;
+    const li = btn.closest('.nav-item');
+    const children = li.querySelector('.nav-item__children');
+    const isOpen = children.style.display !== 'none';
+    children.style.display = isOpen ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    btn.classList.toggle('nav-item__expand--open', !isOpen);
+  });
+}
+
 function openNav() {
   document.getElementById('navDrawer').classList.add('open');
   document.getElementById('navOverlay').classList.add('open');
+  document.getElementById('menuBtn').classList.add('hdr-btn--menu-open');
   document.getElementById('menuBtn').setAttribute('aria-expanded','true');
   document.body.style.overflow = 'hidden';
 }
 function closeNav() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('navOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('hdr-btn--menu-open');
   document.getElementById('menuBtn').setAttribute('aria-expanded','false');
   document.body.style.overflow = '';
 }
-document.getElementById('menuBtn').addEventListener('click', openNav);
-document.getElementById('navClose').addEventListener('click', closeNav);
+document.getElementById('menuBtn').addEventListener('click', () => {
+  const isOpen = document.getElementById('navDrawer').classList.contains('open');
+  isOpen ? closeNav() : openNav();
+});
 document.getElementById('navOverlay').addEventListener('click', closeNav);
+document.addEventListener('keyup', e => { if (e.key === 'Escape') closeNav(); });
 
 /* ============================================================
    LOGIN TOGGLE
@@ -1502,6 +1684,7 @@ document.getElementById('loginBtn').addEventListener('click', () => {
 /* ============================================================
    INIT
 ============================================================ */
+renderNavMenu();
 renderSlider();
 renderTopArticles();
 renderCollections();

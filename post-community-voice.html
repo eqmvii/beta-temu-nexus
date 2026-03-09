@@ -1376,6 +1376,372 @@
     .wordle__key--present { background: #b59f3b; }
     .wordle__key--absent { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
 
+    /* === SAY IT FOR ME === */
+    .sifm {
+      margin: 32px 0; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #1a0a2e 0%, #0f1b3d 40%, #0a2845 100%);
+      position: relative; padding-bottom: 24px;
+    }
+    .sifm::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 30%, rgba(139,92,246,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 70%, rgba(55,158,193,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .sifm__header {
+      position: relative; padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sifm__header-left { display: flex; align-items: center; gap: 10px; }
+    .sifm__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(139,92,246,0.25);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sifm__icon svg { width: 18px; height: 18px; fill: none; stroke: #a78bfa; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .sifm__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 0.2px;
+    }
+    .sifm__ai-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 12px; font-size: 11px; font-weight: 700;
+      color: #a78bfa; letter-spacing: 0.3px;
+    }
+    .sifm__ai-badge svg { width: 12px; height: 12px; fill: none; stroke: #a78bfa; stroke-width: 2; }
+    .sifm__subtitle {
+      position: relative; padding: 6px 24px 0; font-size: 12px; color: rgba(255,255,255,0.45);
+    }
+    /* Input state */
+    .sifm__body { position: relative; padding: 16px 24px 0; }
+    .sifm__prompt {
+      font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 14px;
+    }
+    .sifm__prompt strong { color: #fff; }
+    .sifm__textarea {
+      width: 100%; min-height: 100px; padding: 14px 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; color: #fff; font-family: inherit; font-size: 14px;
+      line-height: 1.6; resize: vertical; outline: none;
+      transition: border-color 0.2s;
+    }
+    .sifm__textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .sifm__textarea:focus { border-color: rgba(139,92,246,0.5); }
+    .sifm__format-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px; gap: 10px;
+    }
+    .sifm__format-label {
+      font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600;
+      white-space: nowrap;
+    }
+    .sifm__formats { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sifm__format-btn {
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px; color: rgba(255,255,255,0.6); font-size: 12px;
+      font-weight: 600; font-family: inherit; cursor: pointer;
+      transition: all 0.15s; display: flex; align-items: center; gap: 5px;
+    }
+    .sifm__format-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .sifm__format-btn--active {
+      background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.4);
+      color: #c4b5fd;
+    }
+    .sifm__format-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sifm__submit-row {
+      display: flex; align-items: center; justify-content: space-between; margin-top: 14px;
+    }
+    .sifm__hint {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+    .sifm__hint svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sifm__submit {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      border: none; border-radius: 999px;
+      color: #fff; font-size: 13px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      cursor: pointer; transition: all 0.2s; opacity: 0.4;
+    }
+    .sifm__submit:not(:disabled) { opacity: 1; }
+    .sifm__submit:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,58,237,0.3); }
+    .sifm__submit svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+    /* Thinking state */
+    .sifm__thinking {
+      display: none; position: relative; padding: 40px 24px;
+      text-align: center;
+    }
+    .sifm__thinking--active { display: block; }
+    .sifm__thinking-icon {
+      width: 48px; height: 48px; margin: 0 auto 16px;
+      border: 2px solid rgba(139,92,246,0.3);
+      border-top-color: #a78bfa;
+      border-radius: 50%;
+      animation: sifm-spin 1s linear infinite;
+    }
+    @keyframes sifm-spin { to { transform: rotate(360deg); } }
+    .sifm__thinking-text {
+      font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600; color: #fff;
+    }
+    .sifm__thinking-sub {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px;
+    }
+    .sifm__thinking-dots span {
+      display: inline-block; width: 4px; height: 4px; background: #a78bfa;
+      border-radius: 50%; margin-left: 2px;
+      animation: sifm-dot 1.4s ease-in-out infinite;
+    }
+    .sifm__thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .sifm__thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes sifm-dot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
+    }
+    /* Result state */
+    .sifm__result { display: none; position: relative; padding: 0 24px; }
+    .sifm__result--active { display: block; }
+    .sifm__result-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .sifm__result-format {
+      display: flex; align-items: center; gap: 6px;
+      font-family: geologica-variable, sans-serif;
+      font-size: 14px; font-weight: 700; color: #c4b5fd;
+    }
+    .sifm__result-format svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sifm__result-copy {
+      display: flex; align-items: center; gap: 4px;
+      padding: 5px 12px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.15s;
+    }
+    .sifm__result-copy:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .sifm__result-copy svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sifm__result-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 20px;
+      font-size: 14px; color: rgba(255,255,255,0.8);
+      line-height: 1.75; white-space: pre-wrap;
+    }
+    .sifm__result-card p { margin: 0 0 12px; }
+    .sifm__result-card p:last-child { margin-bottom: 0; }
+    .sifm__result-card .greeting { color: #a78bfa; font-weight: 600; }
+    .sifm__result-card .highlight { color: #c4b5fd; font-weight: 600; }
+    .sifm__result-actions {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 16px; flex-wrap: wrap;
+    }
+    .sifm__result-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 8px 16px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.15s;
+    }
+    .sifm__result-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .sifm__result-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sifm__result-btn--primary {
+      background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.3);
+      color: #c4b5fd;
+    }
+    .sifm__result-btn--primary:hover { background: rgba(139,92,246,0.35); }
+    .sifm__footer-note {
+      position: relative;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 14px 24px 0; font-size: 11px; color: rgba(255,255,255,0.25);
+    }
+    .sifm__footer-note svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    /* === MIRROR — See Yourself in the Community === */
+    .mirror {
+      margin: 32px 0; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #0a2618 0%, #0d3b35 40%, #0a3045 100%);
+      position: relative; padding-bottom: 24px;
+    }
+    .mirror::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 25% 35%, rgba(52,211,153,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse at 75% 65%, rgba(16,185,129,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .mirror__header {
+      position: relative; padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mirror__header-left { display: flex; align-items: center; gap: 10px; }
+    .mirror__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(52,211,153,0.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .mirror__icon svg { width: 18px; height: 18px; fill: none; stroke: #34d399; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .mirror__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 0.2px;
+    }
+    .mirror__ai-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 12px; font-size: 11px; font-weight: 700;
+      color: #34d399; letter-spacing: 0.3px;
+    }
+    .mirror__ai-badge svg { width: 12px; height: 12px; fill: none; stroke: #34d399; stroke-width: 2; }
+    .mirror__subtitle {
+      position: relative; padding: 6px 24px 0; font-size: 12px; color: rgba(255,255,255,0.45);
+    }
+    /* Mirror input state */
+    .mirror__body { position: relative; padding: 16px 24px 0; }
+    .mirror__prompt {
+      font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 14px;
+    }
+    .mirror__prompt strong { color: #fff; }
+    .mirror__textarea {
+      width: 100%; min-height: 100px; padding: 14px 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; color: #fff; font-family: inherit; font-size: 14px;
+      line-height: 1.6; resize: vertical; outline: none; transition: border-color 0.2s;
+    }
+    .mirror__textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .mirror__textarea:focus { border-color: rgba(52,211,153,0.5); }
+    .mirror__submit-row {
+      display: flex; align-items: center; justify-content: space-between; margin-top: 14px;
+    }
+    .mirror__hint {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+    .mirror__hint svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .mirror__submit {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #059669, #047857);
+      border: none; border-radius: 999px;
+      color: #fff; font-size: 13px; font-weight: 700;
+      font-family: geologica-variable, sans-serif;
+      cursor: pointer; transition: all 0.2s; opacity: 0.4;
+    }
+    .mirror__submit:not(:disabled) { opacity: 1; }
+    .mirror__submit:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(5,150,105,0.3); }
+    .mirror__submit svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+    /* Mirror thinking state */
+    .mirror__thinking {
+      display: none; position: relative; padding: 40px 24px; text-align: center;
+    }
+    .mirror__thinking--active { display: block; }
+    .mirror__thinking-icon {
+      width: 48px; height: 48px; margin: 0 auto 16px;
+      border: 2px solid rgba(52,211,153,0.3); border-top-color: #34d399;
+      border-radius: 50%; animation: mirror-spin 1s linear infinite;
+    }
+    @keyframes mirror-spin { to { transform: rotate(360deg); } }
+    .mirror__thinking-text {
+      font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600; color: #fff;
+    }
+    .mirror__thinking-sub {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px;
+    }
+    .mirror__thinking-dots span {
+      display: inline-block; width: 4px; height: 4px; background: #34d399;
+      border-radius: 50%; margin-left: 2px;
+      animation: mirror-dot 1.4s ease-in-out infinite;
+    }
+    .mirror__thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .mirror__thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes mirror-dot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
+    }
+    /* Mirror results state */
+    .mirror__results { display: none; position: relative; padding: 0 24px; }
+    .mirror__results--active { display: block; }
+    .mirror__empathy {
+      padding: 16px 20px; margin-bottom: 16px;
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.15);
+      border-radius: 10px; font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.6;
+    }
+    .mirror__empathy strong { color: #34d399; }
+    .mirror__match-grid {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .mirror__match-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 18px 20px; position: relative;
+      border-left: 3px solid rgba(52,211,153,0.4);
+    }
+    .mirror__match-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+    }
+    .mirror__match-member {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .mirror__match-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(52,211,153,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #34d399;
+    }
+    .mirror__match-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); }
+    .mirror__match-since { font-size: 11px; color: rgba(255,255,255,0.35); }
+    .mirror__similarity {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.25);
+      font-size: 11px; font-weight: 700; color: #34d399;
+    }
+    .mirror__match-quote {
+      font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.7;
+      font-style: italic;
+    }
+    .mirror__match-quote .mirror__highlight {
+      color: #6ee7b7; font-style: normal; font-weight: 600;
+      text-decoration: underline; text-decoration-color: rgba(52,211,153,0.35);
+      text-underline-offset: 2px;
+    }
+    .mirror__summary {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 16px; padding: 12px;
+      background: rgba(52,211,153,0.06); border-radius: 8px;
+      font-size: 13px; color: rgba(255,255,255,0.6);
+    }
+    .mirror__summary strong { color: #34d399; }
+    .mirror__summary svg { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2; }
+    .mirror__actions {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 16px; flex-wrap: wrap;
+    }
+    .mirror__action-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 8px 16px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.15s;
+    }
+    .mirror__action-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .mirror__action-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .mirror__action-btn--primary {
+      background: rgba(52,211,153,0.2); border-color: rgba(52,211,153,0.3); color: #6ee7b7;
+    }
+    .mirror__action-btn--primary:hover { background: rgba(52,211,153,0.35); }
+    .mirror__footer-note {
+      position: relative;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 14px 24px 0; font-size: 11px; color: rgba(255,255,255,0.25);
+    }
+    .mirror__footer-note svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+
     /* === EXPLORE THE COMMUNITY (Semantic Search) === */
     .explore {
       margin: 32px 0; border-radius: 12px; overflow: hidden;
@@ -1781,6 +2147,14 @@
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
       Migraine Wordle
     </button>
+    <button class="toolbar__item" data-target="say-it-for-me">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+      Say It For Me
+    </button>
+    <button class="toolbar__item" data-target="mirror">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/><path d="M2 2l20 20" opacity="0.4"/></svg>
+      Mirror
+    </button>
     <button class="toolbar__item" data-target="explore-community">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
       Explore Community
@@ -2031,6 +2405,123 @@
           <div class="wordle__board" id="wordleBoard"></div>
           <div class="wordle__msg" id="wordleMsg"></div>
           <div class="wordle__keyboard" id="wordleKeyboard"></div>
+        </div>
+
+        <div class="sifm" id="sayItForMe" data-component="say-it-for-me" style="display:none;">
+          <div class="sifm__header">
+            <div class="sifm__header-left">
+              <div class="sifm__icon">
+                <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <span class="sifm__title">Say It For Me</span>
+            </div>
+            <span class="sifm__ai-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              AI-Powered
+            </span>
+          </div>
+          <div class="sifm__subtitle">Describe your experience. We'll write something you can actually use.</div>
+
+          <!-- Input state -->
+          <div class="sifm__body" id="sifmInput">
+            <p class="sifm__prompt">
+              <strong>Tell us what living with migraine is like for you.</strong>
+              How often do attacks hit? What symptoms do you deal with? How does it affect your work, relationships, daily life? Write as much or as little as you want.
+            </p>
+            <textarea class="sifm__textarea" id="sifmTextarea" placeholder="e.g. &quot;I get about 15 migraine days a month. The nausea is the worst part — I can't eat, can't think, can barely get out of bed. My boss doesn't really get it, and I've used up all my sick days by March...&quot;" rows="4"></textarea>
+            <div class="sifm__format-row">
+              <span class="sifm__format-label">Translate into:</span>
+              <div class="sifm__formats" id="sifmFormats">
+                <button class="sifm__format-btn sifm__format-btn--active" data-format="boss">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                  Letter to My Boss
+                </button>
+                <button class="sifm__format-btn" data-format="doctor">
+                  <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  Doctor Visit Summary
+                </button>
+                <button class="sifm__format-btn" data-format="family">
+                  <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                  What I Wish You Knew
+                </button>
+              </div>
+            </div>
+            <div class="sifm__submit-row">
+              <span class="sifm__hint">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Your words stay private &mdash; never posted or shared
+              </span>
+              <button class="sifm__submit" id="sifmSubmit" disabled>
+                <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+                Write it for me
+              </button>
+            </div>
+          </div>
+
+          <!-- Thinking state -->
+          <div class="sifm__thinking" id="sifmThinking">
+            <div class="sifm__thinking-icon"></div>
+            <div class="sifm__thinking-text">Reading your experience<span class="sifm__thinking-dots"><span></span><span></span><span></span></span></div>
+            <div class="sifm__thinking-sub" id="sifmThinkingSub">Understanding your symptoms and impact</div>
+          </div>
+
+          <!-- Result state -->
+          <div class="sifm__result" id="sifmResult"></div>
+
+          <div class="sifm__footer-note">
+            <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Generated text is a starting point &mdash; always review before sharing
+          </div>
+        </div>
+
+        <div class="mirror" id="mirrorComponent" data-component="mirror" style="display:none;">
+          <div class="mirror__header">
+            <div class="mirror__header-left">
+              <div class="mirror__icon">
+                <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+              </div>
+              <span class="mirror__title">Mirror</span>
+            </div>
+            <span class="mirror__ai-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              AI-Powered
+            </span>
+          </div>
+          <div class="mirror__subtitle">Write what you're going through. We'll show you who else feels the same.</div>
+
+          <!-- Input state -->
+          <div class="mirror__body" id="mirrorInput">
+            <p class="mirror__prompt">
+              <strong>Describe your migraine experience in your own words.</strong>
+              What does an attack feel like? What have you lost or given up? What do people not understand? The more you share, the better we can match you.
+            </p>
+            <textarea class="mirror__textarea" id="mirrorTextarea" placeholder="e.g. &quot;The worst part isn't the pain — it's canceling plans again and seeing the disappointment on my kids' faces. I feel like I'm failing at everything...&quot;" rows="4"></textarea>
+            <div class="mirror__submit-row">
+              <span class="mirror__hint">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Your words stay private &mdash; never posted or shared
+              </span>
+              <button class="mirror__submit" id="mirrorSubmit" disabled>
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                Find my mirrors
+              </button>
+            </div>
+          </div>
+
+          <!-- Thinking state -->
+          <div class="mirror__thinking" id="mirrorThinking">
+            <div class="mirror__thinking-icon"></div>
+            <div class="mirror__thinking-text" id="mirrorThinkingText">Reading your words<span class="mirror__thinking-dots"><span></span><span></span><span></span></span></div>
+            <div class="mirror__thinking-sub" id="mirrorThinkingSub">Understanding your experience</div>
+          </div>
+
+          <!-- Results state -->
+          <div class="mirror__results" id="mirrorResults"></div>
+
+          <div class="mirror__footer-note">
+            <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            All community quotes are anonymized &mdash; no identifying information is shared
+          </div>
         </div>
 
         <div class="explore" id="exploreCommunity" data-component="explore-community" style="display:none;">
@@ -2880,6 +3371,295 @@ document.getElementById('repliesToggle1').addEventListener('click', function() {
     else if (/^[A-Z]$/.test(k)) handleKey(k);
   });
   buildBoard(); buildKeyboard();
+})();
+
+/* ============================================================
+   SAY IT FOR ME
+============================================================ */
+(function() {
+  var textarea = document.getElementById('sifmTextarea');
+  var submitBtn = document.getElementById('sifmSubmit');
+  var inputPane = document.getElementById('sifmInput');
+  var thinkingPane = document.getElementById('sifmThinking');
+  var thinkingSub = document.getElementById('sifmThinkingSub');
+  var resultPane = document.getElementById('sifmResult');
+  var formatBtns = document.querySelectorAll('.sifm__format-btn');
+  var selectedFormat = 'boss';
+
+  textarea.addEventListener('input', function() {
+    submitBtn.disabled = textarea.value.trim().length < 20;
+  });
+
+  formatBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      formatBtns.forEach(function(b) { b.classList.remove('sifm__format-btn--active'); });
+      btn.classList.add('sifm__format-btn--active');
+      selectedFormat = btn.getAttribute('data-format');
+    });
+  });
+
+  var OUTPUTS = {
+    boss: {
+      label: 'Letter to My Boss',
+      icon: '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',
+      text: '<p class="greeting">Dear [Manager],</p>' +
+        '<p>I\'m writing to help you better understand my medical condition and how it affects my work. I live with <span class="highlight">chronic migraine</span>, a neurological disease that causes far more than headaches.</p>' +
+        '<p>On a migraine day, I experience <span class="highlight">severe nausea, cognitive difficulty, light and sound sensitivity, and debilitating fatigue</span>. These episodes can last hours to days and are largely unpredictable. I currently experience roughly <span class="highlight">12\u201315 migraine days per month</span>, which means nearly half my month is affected to some degree.</p>' +
+        '<p>I want you to know that my absences are not a lack of commitment. I have tried multiple treatments and continue to work with my neurologist to reduce their frequency. On days when I can work, I give my full effort and make up time when I\'m able.</p>' +
+        '<p>What would help me most is <span class="highlight">flexibility on high-pain days</span> \u2014 the ability to work from a dark, quiet space or shift hours when an attack hits. I\'m committed to my role and want to find a way to be reliable while managing a condition I didn\'t choose.</p>' +
+        '<p>I\'m happy to discuss accommodations that work for both of us. Thank you for taking the time to understand.</p>'
+    },
+    doctor: {
+      label: 'Doctor Visit Summary',
+      icon: '<svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+      text: '<p><span class="highlight">Patient-Reported Summary</span></p>' +
+        '<p><strong>Attack Frequency:</strong> ~12\u201315 days/month (meets chronic migraine criteria)<br>' +
+        '<strong>Duration:</strong> Typically 8\u201324 hours, occasionally extending to 48 hours<br>' +
+        '<strong>Primary Symptoms:</strong> Unilateral throbbing pain (7\u20139/10), severe nausea, photophobia, phonophobia, cognitive fog, fatigue</p>' +
+        '<p><strong>Key Triggers Identified:</strong> Sleep disruption, barometric pressure changes, stress, skipped meals, hormonal fluctuations</p>' +
+        '<p><strong>Current Impact on Function:</strong><br>' +
+        '\u2022 Missing ~4\u20136 workdays per month<br>' +
+        '\u2022 Significant impairment on an additional 5\u20138 days<br>' +
+        '\u2022 Social isolation and relationship strain<br>' +
+        '\u2022 Reports feelings of frustration and guilt</p>' +
+        '<p><strong>Questions for This Visit:</strong><br>' +
+        '\u2022 Are there preventive options I haven\'t tried?<br>' +
+        '\u2022 Should we revisit CGRP inhibitors?<br>' +
+        '\u2022 Is there a better acute rescue plan for the worst days?</p>'
+    },
+    family: {
+      label: 'What I Wish You Knew',
+      icon: '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>',
+      text: '<p class="greeting">To the people I love \u2014</p>' +
+        '<p>When I say I have a migraine, I need you to know it\'s not just a bad headache. It\'s a <span class="highlight">neurological storm</span> that takes over my entire body. The pain is real, but it\'s only part of it.</p>' +
+        '<p>The nausea makes it impossible to eat. <span class="highlight">Light feels like knives. Sound is overwhelming.</span> My thoughts get scrambled \u2014 I can\'t find words, can\'t make decisions, can\'t follow conversations. My body feels like it\'s running a fever and fighting the flu at the same time.</p>' +
+        '<p>When I cancel plans, it\'s not because I don\'t want to be there. <span class="highlight">It breaks my heart every time.</span> When I seem distant or irritable, it\'s because I\'m using every ounce of energy just to function.</p>' +
+        '<p>What helps most: <span class="highlight">believing me</span>. Don\'t suggest I drink more water or try yoga. Just say "I\'m sorry you\'re going through this" and mean it. Give me a dark, quiet space without guilt. Check in the next day.</p>' +
+        '<p>I didn\'t choose this. I\'m doing everything I can to manage it. Your patience and understanding mean more than you\'ll ever know.</p>'
+    }
+  };
+
+  var thinkingSteps = {
+    boss: ['Understanding your symptoms and impact', 'Drafting professional language', 'Personalizing your letter'],
+    doctor: ['Extracting clinical details', 'Organizing symptom patterns', 'Formatting for your provider'],
+    family: ['Capturing the emotional weight', 'Finding the right words', 'Writing from the heart']
+  };
+
+  submitBtn.addEventListener('click', function() {
+    if (submitBtn.disabled) return;
+    inputPane.style.display = 'none';
+    thinkingPane.classList.add('sifm__thinking--active');
+
+    var steps = thinkingSteps[selectedFormat];
+    var stepIdx = 0;
+    thinkingSub.textContent = steps[0];
+    var stepInterval = setInterval(function() {
+      stepIdx++;
+      if (stepIdx < steps.length) {
+        thinkingSub.textContent = steps[stepIdx];
+      }
+    }, 1200);
+
+    setTimeout(function() {
+      clearInterval(stepInterval);
+      thinkingPane.classList.remove('sifm__thinking--active');
+      showResult(selectedFormat);
+    }, 3600);
+  });
+
+  function showResult(format) {
+    var o = OUTPUTS[format];
+    var html = '<div class="sifm__result-header">';
+    html += '<span class="sifm__result-format">' + o.icon + ' ' + o.label + '</span>';
+    html += '<button class="sifm__result-copy" id="sifmCopy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy text</button>';
+    html += '</div>';
+    html += '<div class="sifm__result-card">' + o.text + '</div>';
+    html += '<div class="sifm__result-actions">';
+    // Let them try other formats
+    Object.keys(OUTPUTS).forEach(function(key) {
+      if (key !== format) {
+        var other = OUTPUTS[key];
+        html += '<button class="sifm__result-btn sifm__result-btn--primary" data-reformat="' + key + '">' + other.icon + ' Try: ' + other.label + '</button>';
+      }
+    });
+    html += '<button class="sifm__result-btn" id="sifmStartOver"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Start over</button>';
+    html += '</div>';
+    resultPane.innerHTML = html;
+    resultPane.classList.add('sifm__result--active');
+
+    document.getElementById('sifmCopy').addEventListener('click', function() {
+      var text = resultPane.querySelector('.sifm__result-card').innerText;
+      navigator.clipboard.writeText(text).catch(function() {});
+      this.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+    });
+
+    resultPane.querySelectorAll('[data-reformat]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        resultPane.classList.remove('sifm__result--active');
+        resultPane.innerHTML = '';
+        thinkingPane.classList.add('sifm__thinking--active');
+        var newFmt = btn.getAttribute('data-reformat');
+        var steps = thinkingSteps[newFmt];
+        thinkingSub.textContent = steps[0];
+        var si = 0;
+        var iv = setInterval(function() { si++; if (si < steps.length) thinkingSub.textContent = steps[si]; }, 800);
+        setTimeout(function() {
+          clearInterval(iv);
+          thinkingPane.classList.remove('sifm__thinking--active');
+          showResult(newFmt);
+        }, 2400);
+      });
+    });
+
+    document.getElementById('sifmStartOver').addEventListener('click', function() {
+      resultPane.classList.remove('sifm__result--active');
+      resultPane.innerHTML = '';
+      textarea.value = '';
+      submitBtn.disabled = true;
+      inputPane.style.display = '';
+    });
+  }
+})();
+
+/* ============================================================
+   MIRROR — See Yourself in the Community
+============================================================ */
+(function() {
+  var textarea = document.getElementById('mirrorTextarea');
+  var submitBtn = document.getElementById('mirrorSubmit');
+  var inputPane = document.getElementById('mirrorInput');
+  var thinkingPane = document.getElementById('mirrorThinking');
+  var thinkingText = document.getElementById('mirrorThinkingText');
+  var thinkingSub = document.getElementById('mirrorThinkingSub');
+  var resultsPane = document.getElementById('mirrorResults');
+  var dots = '<span class="mirror__thinking-dots"><span></span><span></span><span></span></span>';
+
+  var MATCH_SETS = [
+    {
+      empathy: 'You\'re not alone. <strong>247 members</strong> have shared something remarkably similar.',
+      totalMembers: 247,
+      matches: [
+        { initials: 'KR', name: 'Community Member', since: 'Member since 2019', similarity: 94,
+          quote: 'The guilt is the hardest part. I\'ve <span class="mirror__highlight">missed so many of my daughter\'s soccer games</span> and school plays. People say "it\'s just a headache" but they don\'t see me <span class="mirror__highlight">lying in a dark room crying</span> because I\'m missing another moment I can\'t get back.' },
+        { initials: 'TM', name: 'Community Member', since: 'Member since 2021', similarity: 89,
+          quote: 'I used to be the reliable one at work, the one everyone counted on. Now I\'m the one who <span class="mirror__highlight">cancels at the last minute</span> and gets those looks. The <span class="mirror__highlight">disappointment on people\'s faces</span> hurts almost as much as the migraine itself.' },
+        { initials: 'SL', name: 'Community Member', since: 'Member since 2017', similarity: 86,
+          quote: 'What people don\'t understand is that it\'s not just the pain days — it\'s the <span class="mirror__highlight">fear of the next attack</span> that steals every "good" day too. I\'m always calculating: can I commit to this? What if I have to <span class="mirror__highlight">bail on my family again</span>?' }
+      ]
+    },
+    {
+      empathy: 'Your experience resonates deeply. <strong>183 members</strong> have described something strikingly close to what you wrote.',
+      totalMembers: 183,
+      matches: [
+        { initials: 'JW', name: 'Community Member', since: 'Member since 2020', similarity: 92,
+          quote: 'The nausea is what breaks me. Not just during the attack — the <span class="mirror__highlight">constant low-grade nausea</span> between episodes. I\'ve lost 15 pounds because <span class="mirror__highlight">eating feels like a gamble</span> I keep losing.' },
+        { initials: 'AR', name: 'Community Member', since: 'Member since 2018', similarity: 87,
+          quote: 'I\'ve tried explaining to my boss that <span class="mirror__highlight">migraine isn\'t something you push through</span>. The lights in our office are my worst trigger. I sit there with sunglasses on and people think I\'m being dramatic. I\'m just <span class="mirror__highlight">trying to survive the workday</span>.' },
+        { initials: 'DP', name: 'Community Member', since: 'Member since 2022', similarity: 83,
+          quote: 'Three neurologists, eight medications, and I\'m still here <span class="mirror__highlight">searching for something that works</span>. The hardest part is <span class="mirror__highlight">staying hopeful when nothing changes</span>. But reading others\' stories here reminds me I\'m not crazy.' }
+      ]
+    },
+    {
+      empathy: 'We found your mirrors. <strong>312 members</strong> have put feelings into words that echo yours.',
+      totalMembers: 312,
+      matches: [
+        { initials: 'LB', name: 'Community Member', since: 'Member since 2016', similarity: 96,
+          quote: 'The invisible illness part is the cruelest. I <span class="mirror__highlight">look fine on the outside</span> while my brain is on fire. Coworkers, friends, even family — they see me standing and assume I\'m okay. <span class="mirror__highlight">Nobody sees the battle</span> happening behind my eyes.' },
+        { initials: 'MH', name: 'Community Member', since: 'Member since 2020', similarity: 91,
+          quote: 'I grieve the person I used to be. I was spontaneous, energetic, always up for anything. Now I <span class="mirror__highlight">plan my entire life around migraine</span>. Sleep schedule, food, stress levels — everything is managed, and I still get <span class="mirror__highlight">15+ attack days a month</span>.' },
+        { initials: 'CT', name: 'Community Member', since: 'Member since 2019', similarity: 85,
+          quote: 'The loneliness is real. My friends stopped inviting me out because I <span class="mirror__highlight">cancel more often than I show up</span>. I don\'t blame them. But sitting at home during another attack, knowing <span class="mirror__highlight">everyone else is living their life</span> — that\'s its own kind of pain.' }
+      ]
+    }
+  ];
+
+  var thinkingSteps = [
+    { text: 'Reading your words', sub: 'Understanding your experience' },
+    { text: 'Searching 12,000+ community stories', sub: 'Finding semantic matches' },
+    { text: 'Finding your mirrors', sub: 'Identifying the closest experiences' },
+    { text: 'Preparing your results', sub: 'Almost there' }
+  ];
+
+  textarea.addEventListener('input', function() {
+    submitBtn.disabled = textarea.value.trim().length < 20;
+  });
+
+  submitBtn.addEventListener('click', function() {
+    if (submitBtn.disabled) return;
+    startMirror();
+  });
+
+  textarea.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey && !submitBtn.disabled) {
+      e.preventDefault();
+      startMirror();
+    }
+  });
+
+  function startMirror() {
+    inputPane.style.display = 'none';
+    thinkingPane.classList.add('mirror__thinking--active');
+
+    var step = 0;
+    function nextStep() {
+      if (step < thinkingSteps.length) {
+        thinkingText.innerHTML = thinkingSteps[step].text + dots;
+        thinkingSub.textContent = thinkingSteps[step].sub;
+        step++;
+        setTimeout(nextStep, 800 + Math.random() * 500);
+      } else {
+        showResults();
+      }
+    }
+    nextStep();
+  }
+
+  function showResults() {
+    thinkingPane.classList.remove('mirror__thinking--active');
+
+    var set = MATCH_SETS[Math.floor(Math.random() * MATCH_SETS.length)];
+    var html = '';
+
+    html += '<div class="mirror__empathy">' + set.empathy + '</div>';
+    html += '<div class="mirror__match-grid">';
+
+    set.matches.forEach(function(m) {
+      html += '<div class="mirror__match-card">';
+      html += '<div class="mirror__match-header">';
+      html += '<div class="mirror__match-member">';
+      html += '<div class="mirror__match-avatar">' + m.initials + '</div>';
+      html += '<div><div class="mirror__match-name">' + m.name + '</div>';
+      html += '<div class="mirror__match-since">' + m.since + '</div></div>';
+      html += '</div>';
+      html += '<span class="mirror__similarity">' + m.similarity + '% similar</span>';
+      html += '</div>';
+      html += '<div class="mirror__match-quote">&ldquo;' + m.quote + '&rdquo;</div>';
+      html += '</div>';
+    });
+
+    html += '</div>';
+
+    html += '<div class="mirror__summary">';
+    html += '<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>';
+    html += '<strong>' + set.totalMembers + ' community members</strong>&nbsp;share your experience';
+    html += '</div>';
+
+    html += '<div class="mirror__actions">';
+    html += '<button class="mirror__action-btn mirror__action-btn--primary" id="mirrorShare"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg> Share your own story</button>';
+    html += '<button class="mirror__action-btn" id="mirrorReset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Search again</button>';
+    html += '</div>';
+
+    resultsPane.innerHTML = html;
+    resultsPane.classList.add('mirror__results--active');
+
+    document.getElementById('mirrorReset').addEventListener('click', function() {
+      resultsPane.classList.remove('mirror__results--active');
+      resultsPane.innerHTML = '';
+      textarea.value = '';
+      submitBtn.disabled = true;
+      inputPane.style.display = '';
+    });
+  }
 })();
 
 /* ============================================================
