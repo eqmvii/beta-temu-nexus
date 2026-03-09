@@ -1982,6 +1982,235 @@
     .explore__reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
     .explore__reset svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+    /* === ASK YOUR DOCTOR CHECKLIST === */
+    .ayd {
+      margin: 32px 0; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+      position: relative; min-height: 200px;
+    }
+    .ayd::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 25% 50%, rgba(99,102,241,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse at 75% 30%, rgba(139,92,246,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ayd__header {
+      position: relative; padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ayd__header-left { display: flex; align-items: center; gap: 10px; }
+    .ayd__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(99,102,241,0.25);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ayd__icon svg { width: 18px; height: 18px; fill: none; stroke: #a5b4fc; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ayd__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 0.2px;
+    }
+    .ayd__badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.2));
+      border: 1px solid rgba(99,102,241,0.25);
+      border-radius: 12px; font-size: 10px; font-weight: 700;
+      color: #a5b4fc; text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .ayd__badge svg { width: 12px; height: 12px; fill: none; stroke: #a5b4fc; stroke-width: 2; }
+    .ayd__subtitle {
+      position: relative; padding: 8px 24px 0;
+      font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.5);
+    }
+    .ayd__body { position: relative; padding: 16px 24px 20px; }
+    .ayd__intro {
+      font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.65); margin-bottom: 16px;
+    }
+    .ayd__intro strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+    /* Category tabs */
+    .ayd__categories {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .ayd__cat-btn {
+      padding: 6px 14px; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ayd__cat-btn:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); }
+    .ayd__cat-btn--active {
+      background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.4);
+      color: #a5b4fc;
+    }
+
+    /* Question list */
+    .ayd__questions {
+      list-style: none; padding: 0; margin: 0 0 16px;
+    }
+    .ayd__question {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 12px; margin-bottom: 4px;
+      border-radius: 8px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .ayd__question:hover { background: rgba(255,255,255,0.04); }
+    .ayd__question-check {
+      width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 5px; flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .ayd__question-check svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity 0.15s; }
+    .ayd__question--checked .ayd__question-check {
+      background: #6366f1; border-color: #6366f1;
+    }
+    .ayd__question--checked .ayd__question-check svg { opacity: 1; }
+    .ayd__question-text {
+      font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.75);
+    }
+    .ayd__question--checked .ayd__question-text { color: #a5b4fc; }
+    .ayd__question-meta {
+      font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 2px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .ayd__question-meta svg { width: 10px; height: 10px; fill: none; stroke: rgba(255,255,255,0.3); stroke-width: 2; }
+
+    /* Custom question input */
+    .ayd__custom-row {
+      display: flex; gap: 8px; margin-bottom: 16px;
+    }
+    .ayd__custom-input {
+      flex: 1; padding: 10px 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; font-size: 13px; font-family: inherit; color: #fff;
+      outline: none; transition: border-color 0.2s;
+    }
+    .ayd__custom-input::placeholder { color: rgba(255,255,255,0.25); }
+    .ayd__custom-input:focus { border-color: rgba(99,102,241,0.5); }
+    .ayd__custom-add {
+      padding: 10px 18px; border: none; border-radius: 8px;
+      background: rgba(99,102,241,0.3); color: #a5b4fc;
+      font-size: 12px; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .ayd__custom-add:hover { background: rgba(99,102,241,0.45); }
+    .ayd__custom-add:disabled { opacity: 0.35; cursor: default; }
+
+    /* Checklist counter + actions */
+    .ayd__actions-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .ayd__counter {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+    }
+    .ayd__counter strong { color: #a5b4fc; }
+    .ayd__action-buttons { display: flex; gap: 8px; }
+    .ayd__action-btn {
+      padding: 8px 18px; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all 0.15s;
+    }
+    .ayd__action-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .ayd__action-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ayd__action-btn--primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-color: transparent; color: #fff;
+      box-shadow: 0 2px 12px rgba(99,102,241,0.3);
+    }
+    .ayd__action-btn--primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(99,102,241,0.4); }
+    .ayd__action-btn--primary:disabled { opacity: 0.35; cursor: default; transform: none; box-shadow: none; }
+
+    /* Print preview modal */
+    .ayd__preview-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .ayd__preview-overlay--active { display: flex; }
+    .ayd__preview-modal {
+      background: #fff; border-radius: 12px; padding: 32px;
+      max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: ayd-modal-in 0.3s ease;
+    }
+    @keyframes ayd-modal-in { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .ayd__preview-title {
+      font-family: 'Merriweather', serif; font-size: 18px; font-weight: 700;
+      color: #1a1a2e; margin-bottom: 4px;
+    }
+    .ayd__preview-subtitle {
+      font-size: 13px; color: #888; margin-bottom: 20px;
+    }
+    .ayd__preview-list {
+      list-style: none; padding: 0; margin: 0 0 24px;
+    }
+    .ayd__preview-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+      font-size: 14px; color: #333; line-height: 1.5;
+    }
+    .ayd__preview-item:last-child { border-bottom: none; }
+    .ayd__preview-checkbox {
+      width: 16px; height: 16px; border: 2px solid #ccc;
+      border-radius: 3px; flex-shrink: 0; margin-top: 3px;
+    }
+    .ayd__preview-cat {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #6366f1; margin-bottom: 4px;
+    }
+    .ayd__preview-note {
+      margin-top: 20px; padding: 12px 16px;
+      background: #f8f8fc; border-radius: 8px; border-left: 3px solid #6366f1;
+    }
+    .ayd__preview-note-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #6366f1; margin-bottom: 4px;
+    }
+    .ayd__preview-note-lines {
+      display: flex; flex-direction: column; gap: 12px; padding-top: 4px;
+    }
+    .ayd__preview-note-line {
+      border: none; border-bottom: 1px solid #ddd; height: 1px;
+    }
+    .ayd__preview-actions {
+      display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px;
+    }
+    .ayd__preview-btn {
+      padding: 10px 24px; border: 1px solid #ddd; border-radius: 8px;
+      background: #fff; color: #555; font-size: 13px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .ayd__preview-btn:hover { background: #f5f5f5; }
+    .ayd__preview-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ayd__preview-btn--print {
+      background: #6366f1; border-color: #6366f1; color: #fff;
+    }
+    .ayd__preview-btn--print:hover { background: #5558e6; }
+
+    .ayd__footer-note {
+      position: relative; padding: 0 24px 16px;
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .ayd__footer-note svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.25); stroke-width: 2; stroke-linecap: round; }
+
+    @media print {
+      body * { visibility: hidden; }
+      .ayd__preview-overlay, .ayd__preview-overlay * { visibility: visible; }
+      .ayd__preview-overlay { position: absolute; background: none; backdrop-filter: none; }
+      .ayd__preview-modal { box-shadow: none; max-height: none; }
+      .ayd__preview-actions { display: none; }
+    }
+
     /* === ONBOARDING WIZARD === */
     .onboarding-overlay {
       position: fixed; inset: 0; z-index: 9999;
@@ -2209,6 +2438,10 @@
     <button class="toolbar__item" data-target="explore-community">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
       Explore Community
+    </button>
+    <button class="toolbar__item" data-target="ask-your-doctor">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Ask Your Doctor
     </button>
   </div>
 </div>
@@ -2621,6 +2854,55 @@
 
           <!-- Results state -->
           <div class="explore__results" id="exploreResults"></div>
+        </div>
+        <div class="ayd" id="askYourDoctor" data-component="ask-your-doctor" style="display:none;">
+          <div class="ayd__header">
+            <div class="ayd__header-left">
+              <div class="ayd__icon">
+                <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              </div>
+              <span class="ayd__title">Ask Your Doctor</span>
+            </div>
+            <span class="ayd__badge">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+              Community-Sourced
+            </span>
+          </div>
+          <div class="ayd__subtitle">Build a printable checklist of questions to bring to your next appointment. Sourced from what real patients wish they'd asked.</div>
+
+          <div class="ayd__body" id="aydBody">
+            <p class="ayd__intro">
+              <strong>Going blank in the doctor's office is incredibly common.</strong>
+              Browse questions other community members wished they had asked, check the ones that matter to you, and add your own. Print or copy your personalized checklist before your visit.
+            </p>
+
+            <div class="ayd__categories" id="aydCategories"></div>
+            <ul class="ayd__questions" id="aydQuestions"></ul>
+
+            <div class="ayd__custom-row">
+              <input class="ayd__custom-input" id="aydCustomInput" type="text" placeholder="Add your own question..." maxlength="200">
+              <button class="ayd__custom-add" id="aydCustomAdd" disabled>+ Add</button>
+            </div>
+
+            <div class="ayd__actions-bar">
+              <div class="ayd__counter" id="aydCounter"><strong>0</strong> questions selected</div>
+              <div class="ayd__action-buttons">
+                <button class="ayd__action-btn" id="aydCopy">
+                  <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  Copy
+                </button>
+                <button class="ayd__action-btn ayd__action-btn--primary" id="aydPreview" disabled>
+                  <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                  Preview &amp; Print
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ayd__footer-note">
+            <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Questions sourced from community discussions &mdash; not medical advice. Always consult your healthcare provider.
+          </div>
         </div>
       </div>
       <!-- ========== END COMPONENT SLOT ========== -->
@@ -3845,6 +4127,243 @@ document.getElementById('repliesToggle1').addEventListener('click', function() {
       inputPane.style.display = '';
     });
   }
+})();
+
+/* ============================================================
+   ASK YOUR DOCTOR — Checklist Builder
+============================================================ */
+(function() {
+  var QUESTIONS = {
+    'Treatment Options': [
+      { q: 'Are there preventive medications I haven\'t tried yet?', asked: 89 },
+      { q: 'Should we consider CGRP inhibitors (Aimovig, Ajovy, Emgality)?', asked: 156 },
+      { q: 'What\'s the difference between my acute and preventive medications?', asked: 72 },
+      { q: 'Are there non-medication treatments worth trying (Botox, nerve blocks, neuromodulation)?', asked: 134 },
+      { q: 'How long should I try a preventive before we decide it\'s not working?', asked: 98 },
+      { q: 'Is it safe to combine my current medications?', asked: 67 }
+    ],
+    'Symptoms & Diagnosis': [
+      { q: 'Could my migraines actually be a different type of headache disorder?', asked: 44 },
+      { q: 'Should I be concerned about my aura symptoms?', asked: 112 },
+      { q: 'Why do my migraines seem to be getting more frequent?', asked: 203 },
+      { q: 'Is it normal to have nausea/dizziness/brain fog between attacks?', asked: 178 },
+      { q: 'Should I get imaging (MRI/CT) to rule out other conditions?', asked: 88 },
+      { q: 'Could hormonal changes be contributing to my migraine pattern?', asked: 145 }
+    ],
+    'Daily Life & Triggers': [
+      { q: 'What lifestyle changes would make the biggest difference?', asked: 167 },
+      { q: 'Should I be keeping a migraine diary, and what should I track?', asked: 93 },
+      { q: 'How do I handle migraine at work — can you help with accommodation documentation?', asked: 211 },
+      { q: 'Are there specific foods or supplements I should try or avoid?', asked: 124 },
+      { q: 'How much is sleep affecting my migraines?', asked: 76 },
+      { q: 'Is exercise helping or hurting? What kind is safe during prodrome?', asked: 58 }
+    ],
+    'When to Worry': [
+      { q: 'When should I go to the ER for a migraine?', asked: 189 },
+      { q: 'Am I overusing acute medications? What is medication overuse headache?', asked: 234 },
+      { q: 'Are there warning signs I should never ignore?', asked: 142 },
+      { q: 'Could my migraine be connected to another condition (anxiety, depression, TMJ)?', asked: 117 }
+    ],
+    'Next Steps': [
+      { q: 'Should I see a headache specialist instead of a general neurologist?', asked: 196 },
+      { q: 'Are there clinical trials I might qualify for?', asked: 63 },
+      { q: 'What should I do when my rescue medication doesn\'t work?', asked: 248 },
+      { q: 'Can we create a written migraine action plan I can follow during an attack?', asked: 87 },
+      { q: 'How often should I be following up with you?', asked: 55 }
+    ]
+  };
+
+  var categories = Object.keys(QUESTIONS);
+  var activeCategory = categories[0];
+  var checkedQuestions = {}; // key: question text, value: category
+  var customQuestions = []; // { q: text, cat: 'Your Questions' }
+
+  var catContainer = document.getElementById('aydCategories');
+  var qList = document.getElementById('aydQuestions');
+  var counter = document.getElementById('aydCounter');
+  var previewBtn = document.getElementById('aydPreview');
+  var copyBtn = document.getElementById('aydCopy');
+  var customInput = document.getElementById('aydCustomInput');
+  var customAdd = document.getElementById('aydCustomAdd');
+
+  function renderCategories() {
+    catContainer.innerHTML = '';
+    categories.forEach(function(cat) {
+      var btn = document.createElement('button');
+      btn.className = 'ayd__cat-btn' + (cat === activeCategory ? ' ayd__cat-btn--active' : '');
+      btn.textContent = cat;
+      var catCount = getCheckedCountForCat(cat);
+      if (catCount > 0) btn.textContent = cat + ' (' + catCount + ')';
+      btn.addEventListener('click', function() {
+        activeCategory = cat;
+        renderCategories();
+        renderQuestions();
+      });
+      catContainer.appendChild(btn);
+    });
+    // Add "Your Questions" tab if custom questions exist
+    if (customQuestions.length > 0) {
+      var btn = document.createElement('button');
+      btn.className = 'ayd__cat-btn' + (activeCategory === 'Your Questions' ? ' ayd__cat-btn--active' : '');
+      var ct = customQuestions.filter(function(cq) { return checkedQuestions[cq.q]; }).length;
+      btn.textContent = 'Your Questions' + (ct > 0 ? ' (' + ct + ')' : '');
+      btn.addEventListener('click', function() {
+        activeCategory = 'Your Questions';
+        renderCategories();
+        renderQuestions();
+      });
+      catContainer.appendChild(btn);
+    }
+  }
+
+  function getCheckedCountForCat(cat) {
+    if (cat === 'Your Questions') {
+      return customQuestions.filter(function(cq) { return checkedQuestions[cq.q]; }).length;
+    }
+    var qs = QUESTIONS[cat] || [];
+    return qs.filter(function(item) { return checkedQuestions[item.q]; }).length;
+  }
+
+  function renderQuestions() {
+    qList.innerHTML = '';
+    var items = activeCategory === 'Your Questions'
+      ? customQuestions.map(function(cq) { return { q: cq.q, asked: null }; })
+      : (QUESTIONS[activeCategory] || []);
+
+    items.forEach(function(item) {
+      var li = document.createElement('li');
+      li.className = 'ayd__question' + (checkedQuestions[item.q] ? ' ayd__question--checked' : '');
+      li.innerHTML = '<div class="ayd__question-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<div><div class="ayd__question-text">' + item.q + '</div>' +
+        (item.asked !== null ? '<div class="ayd__question-meta"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> ' + item.asked + ' members asked this</div>' : '<div class="ayd__question-meta">Your question</div>') +
+        '</div>';
+      li.addEventListener('click', function() {
+        if (checkedQuestions[item.q]) {
+          delete checkedQuestions[item.q];
+        } else {
+          checkedQuestions[item.q] = activeCategory;
+        }
+        li.classList.toggle('ayd__question--checked');
+        updateCounter();
+        renderCategories();
+      });
+      qList.appendChild(li);
+    });
+  }
+
+  function updateCounter() {
+    var count = Object.keys(checkedQuestions).length;
+    counter.innerHTML = '<strong>' + count + '</strong> question' + (count !== 1 ? 's' : '') + ' selected';
+    previewBtn.disabled = count === 0;
+  }
+
+  function getCheckedByCategory() {
+    var result = {};
+    Object.keys(checkedQuestions).forEach(function(q) {
+      var cat = checkedQuestions[q];
+      if (!result[cat]) result[cat] = [];
+      result[cat].push(q);
+    });
+    return result;
+  }
+
+  // Custom question
+  customInput.addEventListener('input', function() {
+    customAdd.disabled = customInput.value.trim().length < 5;
+  });
+  customInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !customAdd.disabled) addCustom();
+  });
+  customAdd.addEventListener('click', addCustom);
+
+  function addCustom() {
+    var text = customInput.value.trim();
+    if (text.length < 5) return;
+    // Add ? if missing
+    if (!/\?$/.test(text)) text += '?';
+    customQuestions.push({ q: text });
+    checkedQuestions[text] = 'Your Questions';
+    customInput.value = '';
+    customAdd.disabled = true;
+    activeCategory = 'Your Questions';
+    renderCategories();
+    renderQuestions();
+    updateCounter();
+  }
+
+  // Copy
+  copyBtn.addEventListener('click', function() {
+    var grouped = getCheckedByCategory();
+    var lines = ['MY DOCTOR VISIT QUESTIONS', '========================', ''];
+    Object.keys(grouped).forEach(function(cat) {
+      lines.push(cat.toUpperCase());
+      grouped[cat].forEach(function(q) { lines.push('[ ] ' + q); });
+      lines.push('');
+    });
+    lines.push('Notes:', '___________________________________', '___________________________________', '___________________________________');
+    lines.push('', 'Generated at migraine.com — questions sourced from community discussions');
+    navigator.clipboard.writeText(lines.join('\n')).catch(function() {});
+    copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+    setTimeout(function() {
+      copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+    }, 2000);
+  });
+
+  // Preview
+  previewBtn.addEventListener('click', showPreview);
+
+  function showPreview() {
+    var overlay = document.getElementById('aydPreviewOverlay');
+    if (overlay) overlay.remove();
+
+    overlay = document.createElement('div');
+    overlay.className = 'ayd__preview-overlay ayd__preview-overlay--active';
+    overlay.id = 'aydPreviewOverlay';
+
+    var grouped = getCheckedByCategory();
+    var html = '<div class="ayd__preview-modal">';
+    html += '<div class="ayd__preview-title">My Doctor Visit Questions</div>';
+    html += '<div class="ayd__preview-subtitle">Prepared on ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + ' &mdash; migraine.com</div>';
+    html += '<ul class="ayd__preview-list">';
+
+    Object.keys(grouped).forEach(function(cat) {
+      grouped[cat].forEach(function(q, i) {
+        html += '<li class="ayd__preview-item">';
+        html += '<div class="ayd__preview-checkbox"></div>';
+        html += '<div>';
+        if (i === 0) html += '<div class="ayd__preview-cat">' + cat + '</div>';
+        html += q;
+        html += '</div></li>';
+      });
+    });
+
+    html += '</ul>';
+    html += '<div class="ayd__preview-note">';
+    html += '<div class="ayd__preview-note-label">Notes</div>';
+    html += '<div class="ayd__preview-note-lines">';
+    for (var i = 0; i < 5; i++) html += '<hr class="ayd__preview-note-line">';
+    html += '</div></div>';
+
+    html += '<div class="ayd__preview-actions">';
+    html += '<button class="ayd__preview-btn" id="aydPreviewClose">Close</button>';
+    html += '<button class="ayd__preview-btn ayd__preview-btn--print" id="aydPreviewPrint">';
+    html += '<svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>';
+    html += ' Print</button>';
+    html += '</div></div>';
+
+    overlay.innerHTML = html;
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.remove();
+    });
+    document.getElementById('aydPreviewClose').addEventListener('click', function() { overlay.remove(); });
+    document.getElementById('aydPreviewPrint').addEventListener('click', function() { window.print(); });
+  }
+
+  renderCategories();
+  renderQuestions();
+  updateCounter();
 })();
 </script>
 </body>
