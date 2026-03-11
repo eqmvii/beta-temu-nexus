@@ -258,6 +258,100 @@
       list-style: none; overflow: hidden;
     }
 
+    /* === NAV VIDEO HUB === */
+    .nav-video-hub {
+      margin: 16px; padding: 16px;
+      background: linear-gradient(145deg, #003a4d 0%, #00232e 100%);
+      border-radius: 10px;
+      border: 1px solid rgba(55,158,193,0.25);
+    }
+    .nav-video-hub__header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+    }
+    .nav-video-hub__icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .nav-video-hub__title {
+      font-size: 15px; font-weight: 800; color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .nav-video-hub__badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: var(--cyan); border-radius: 9px;
+      padding: 2px 7px; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .nav-video-hub__subtitle {
+      font-size: 12px; color: #8fb8c9; margin: 0 0 12px 0;
+    }
+    /* Featured video */
+    .nav-video-featured {
+      display: block; text-decoration: none; border-radius: 8px;
+      overflow: hidden; margin-bottom: 10px;
+      background: #001820; transition: transform 0.15s;
+    }
+    .nav-video-featured:hover { transform: scale(1.02); }
+    .nav-video-featured__thumb {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a5276 0%, #0b2e3f 60%, #134a5e 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-video-featured__play svg { width: 44px; height: 44px; opacity: 0.9; }
+    .nav-video-featured:hover .nav-video-featured__play svg { opacity: 1; }
+    .nav-video-featured__duration {
+      position: absolute; bottom: 6px; right: 6px;
+      background: rgba(0,0,0,0.75); color: #fff;
+      font-size: 11px; font-weight: 600; padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .nav-video-featured__info { padding: 8px 10px; }
+    .nav-video-featured__label {
+      display: block; font-size: 10px; font-weight: 700;
+      color: var(--cyan); text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 2px;
+    }
+    .nav-video-featured__name {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #fff; line-height: 1.3;
+    }
+    /* Video grid */
+    .nav-video-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 12px;
+    }
+    .nav-video-thumb {
+      display: block; text-decoration: none; border-radius: 6px;
+      overflow: hidden; background: #001820;
+      transition: transform 0.15s;
+    }
+    .nav-video-thumb:hover { transform: scale(1.03); }
+    .nav-video-thumb__img {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-video-thumb__img svg { width: 26px; height: 26px; opacity: 0.8; }
+    .nav-video-thumb:hover .nav-video-thumb__img svg { opacity: 1; }
+    .nav-video-thumb__dur {
+      position: absolute; bottom: 3px; right: 3px;
+      background: rgba(0,0,0,0.75); color: #fff;
+      font-size: 9px; font-weight: 600; padding: 1px 4px;
+      border-radius: 2px;
+    }
+    .nav-video-thumb__label {
+      padding: 5px 6px; font-size: 11px; font-weight: 600;
+      color: #d0e8f0; line-height: 1.25;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    /* CTA link */
+    .nav-video-hub__cta {
+      display: flex; align-items: center; gap: 4px; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--cyan);
+      text-decoration: none; padding: 8px;
+      border: 1px solid rgba(55,158,193,0.35); border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-video-hub__cta:hover {
+      background: var(--cyan); color: #fff;
+    }
+
     /* === AD SLOTS === */
     .ad-slot { text-align: center; position: relative; }
     .ad-label {
@@ -1274,6 +1368,38 @@
   </form>
   <div class="nav-drawer__nav">
     <ul class="nav-drawer__list" id="navList"></ul>
+
+    <!-- Video Hub -->
+    <div class="nav-video-hub">
+      <div class="nav-video-hub__header">
+        <svg class="nav-video-hub__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="#fff" stroke-width="1.5"/><path d="M10 9l5 3-5 3V9z" fill="#fff"/></svg>
+        <span class="nav-video-hub__title">Video Hub</span>
+        <span class="nav-video-hub__badge">New</span>
+      </div>
+      <p class="nav-video-hub__subtitle">Expert insights, patient stories &amp; more</p>
+
+      <!-- Featured video preview -->
+      <a href="#" class="nav-video-featured" id="navVideoFeatured">
+        <div class="nav-video-featured__thumb">
+          <div class="nav-video-featured__play">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="23" fill="rgba(0,0,0,0.5)" stroke="#fff" stroke-width="2"/><path d="M19 14l14 10-14 10V14z" fill="#fff"/></svg>
+          </div>
+          <span class="nav-video-featured__duration">4:32</span>
+        </div>
+        <div class="nav-video-featured__info">
+          <span class="nav-video-featured__label">Featured</span>
+          <span class="nav-video-featured__name">Understanding Your Migraine Triggers</span>
+        </div>
+      </a>
+
+      <!-- Video grid -->
+      <div class="nav-video-grid" id="navVideoGrid"></div>
+
+      <a href="#" class="nav-video-hub__cta">
+        Browse all videos
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M6.3 12.7l4.4-4.4c.2-.2.2-.5 0-.7L6.3 3.3c-.2-.2-.5-.2-.7 0l-.7.7c-.2.2-.2.5 0 .7L8.2 8l-3.3 3.3c-.2.2-.2.5 0 .7l.7.7c.2.2.5.2.7 0z"/></svg>
+      </a>
+    </div>
   </div>
 </nav>
 <!-- ===================== END HEADER ===================== -->
@@ -1962,6 +2088,26 @@ document.getElementById('menuBtn').addEventListener('click', () => {
 document.getElementById('navOverlay').addEventListener('click', closeNav);
 document.addEventListener('keyup', e => { if (e.key === 'Escape') closeNav(); });
 renderNavMenu();
+
+/* ============================================================
+   NAV VIDEO GRID
+============================================================ */
+const navVideos = [
+  { title: 'Living With Chronic Migraine', duration: '3:15', bg: 'linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%)' },
+  { title: 'Doctor Q&A: New Treatments', duration: '6:48', bg: 'linear-gradient(135deg, #7b2d8b 0%, #4a1259 100%)' },
+  { title: 'My Migraine Journey', duration: '5:21', bg: 'linear-gradient(135deg, #c44536 0%, #772e25 100%)' },
+  { title: 'Stress & Migraine Link', duration: '2:57', bg: 'linear-gradient(135deg, #1a5276 0%, #0b2e3f 100%)' },
+];
+const PLAY_MINI = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="23" fill="rgba(0,0,0,0.45)" stroke="#fff" stroke-width="2"/><path d="M19 14l14 10-14 10V14z" fill="#fff"/></svg>';
+document.getElementById('navVideoGrid').innerHTML = navVideos.map(v => `
+  <a href="#" class="nav-video-thumb">
+    <div class="nav-video-thumb__img" style="background:${v.bg}">
+      ${PLAY_MINI}
+      <span class="nav-video-thumb__dur">${v.duration}</span>
+    </div>
+    <div class="nav-video-thumb__label">${v.title}</div>
+  </a>
+`).join('');
 
 /* ============================================================
    LOGIN TOGGLE
