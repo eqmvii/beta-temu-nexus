@@ -1306,6 +1306,153 @@
       margin: 16px auto;
     }
     .footer-disclaimer a { color: inherit; text-decoration: underline; }
+
+    /* === ACCESSIBILITY MENU === */
+    .accessibility-menu {
+      position: fixed;
+      top: calc(var(--header-h) + 12px);
+      right: 8px;
+      padding: 24px;
+      width: 200px;
+      background: var(--hu-light);
+      border-radius: var(--radius);
+      z-index: 300;
+      transform: translateY(0);
+      transition: transform 300ms ease-out, opacity 300ms ease-out;
+    }
+    .accessibility-menu[hidden] {
+      display: block !important;
+      transform: translateY(-150%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 300ms ease-in, opacity 300ms ease-in;
+    }
+    .accessibility-menu::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -8px;
+      right: 82px;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid var(--hu-light);
+      border-left: 8px solid transparent;
+    }
+    .accessibility-menu__options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 0;
+      list-style: none;
+    }
+    .a11y-option {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 16px;
+      padding: 0;
+      width: 44px;
+      height: 44px;
+      font-weight: 800;
+      text-align: center;
+      background: #fff;
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+    .a11y-option::after {
+      content: '';
+      position: absolute;
+      right: 4px; bottom: -8px; left: 4px;
+      height: 0;
+      background: var(--cyan-dark);
+      border-radius: 2px;
+    }
+    .a11y-option:hover::after { height: 2px; }
+    .a11y-option--selected::after,
+    .a11y-option--selected:hover::after { height: 4px; }
+    .a11y-option--font-reg  { font-size: 1rem; }
+    .a11y-option--font-lg   { font-size: 1.5rem; }
+    .a11y-option--font-xl   { font-size: 1.8rem; }
+    .a11y-option--contrast-low { background: #D5DEE3; }
+    .a11y-option--contrast-light { color: #000; border: 2px solid #000; }
+    .a11y-option--contrast-dark  { color: #fff; background: #000; }
+    .accessibility-menu__reset {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--cyan);
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: center;
+    }
+    .accessibility-menu__reset:hover { background: #2e8aac; }
+
+    /* === ACCESSIBILITY: FONT SIZE OVERRIDES === */
+    body.font-lg .article-body p,
+    body.font-lg .article-body li,
+    body.font-lg .article-body blockquote {
+      font-size: 24px;
+      line-height: 32px;
+    }
+    body.font-xl .article-body p,
+    body.font-xl .article-body li,
+    body.font-xl .article-body blockquote {
+      font-size: 30px;
+      line-height: 38px;
+    }
+    body.font-lg .post-card__title,
+    body.font-lg .article-header__title { font-size: 28px; line-height: 36px; }
+    body.font-xl .post-card__title,
+    body.font-xl .article-header__title { font-size: 34px; line-height: 42px; }
+
+    /* === ACCESSIBILITY: CONTRAST OVERRIDES === */
+    body.contrast-low {
+      color: var(--gray);
+      background: #D5DEE3;
+    }
+    body.contrast-low .header { background: var(--gray); }
+    body.contrast-low .article-body a { color: var(--gray-dark); }
+
+    body.contrast-light {
+      color: #000;
+      background: #fff;
+    }
+    body.contrast-light .header { background: #000; }
+    body.contrast-light .footer { background: #000; }
+    body.contrast-light .article-sidebar,
+    body.contrast-light .announce-bar,
+    body.contrast-light .footer-signup {
+      background: #fff;
+      border: 1px solid #000;
+    }
+    body.contrast-light .article-body a { color: #000; text-decoration: underline; }
+    body.contrast-light .post-card { border: 1px solid #000; }
+
+    body.contrast-dark {
+      color: #fff;
+      background: #000;
+    }
+    body.contrast-dark .header { background: #000; border-bottom: 1px solid #333; }
+    body.contrast-dark .footer { background: #000; border-top: 1px solid #333; }
+    body.contrast-dark .announce-bar { background: #111; color: #fff; }
+    body.contrast-dark .announce-bar a { color: #8cf; }
+    body.contrast-dark .article-sidebar,
+    body.contrast-dark .footer-signup {
+      background: #111;
+      border: 1px solid #333;
+    }
+    body.contrast-dark .article-body a { color: #8cf; }
+    body.contrast-dark .post-card { background: #111; border: 1px solid #333; }
+    body.contrast-dark .post-card__title,
+    body.contrast-dark .article-header__title,
+    body.contrast-dark .article-header__author-name { color: #fff; }
+    body.contrast-dark img { filter: brightness(0.85); }
   </style>
 </head>
 <body>
@@ -1354,6 +1501,38 @@
     <button class="hdr-subscribe">Subscribe</button>
   </div>
 </header>
+
+<!-- Accessibility Menu -->
+<div class="accessibility-menu" id="a11yMenu" hidden
+     aria-label="Accessibility tools — change font size and contrast">
+  <ul class="accessibility-menu__options">
+    <li><button class="a11y-option a11y-option--font-reg a11y-option--selected"
+                data-setting="fontSize" data-value="font-reg"
+                aria-label="Regular font size">A</button></li>
+    <li><button class="a11y-option a11y-option--font-lg"
+                data-setting="fontSize" data-value="font-lg"
+                aria-label="Large font size">A</button></li>
+    <li><button class="a11y-option a11y-option--font-xl"
+                data-setting="fontSize" data-value="font-xl"
+                aria-label="Extra large font size">A</button></li>
+  </ul>
+  <ul class="accessibility-menu__options">
+    <li><button class="a11y-option a11y-option--contrast-reg a11y-option--selected"
+                data-setting="contrast" data-value="contrast-reg"
+                aria-label="Regular contrast">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-low"
+                data-setting="contrast" data-value="contrast-low"
+                aria-label="Low contrast">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-light"
+                data-setting="contrast" data-value="contrast-light"
+                aria-label="High contrast light">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-dark"
+                data-setting="contrast" data-value="contrast-dark"
+                aria-label="High contrast dark">T</button></li>
+  </ul>
+  <button class="accessibility-menu__reset" id="a11yReset"
+          aria-label="Reset accessibility settings">Reset</button>
+</div>
 
 <!-- Nav Overlay -->
 <div class="nav-overlay" id="navOverlay"></div>
@@ -2142,6 +2321,91 @@ document.getElementById('repliesToggle1').addEventListener('click', function() {
   const showing = list.style.display !== 'none';
   list.style.display = showing ? 'none' : 'block';
   this.textContent = showing ? 'View 1 previous reply' : 'Hide 1 previous reply';
+});
+
+/* ============================================================
+   ACCESSIBILITY MENU
+============================================================ */
+const a11yMenu = document.getElementById('a11yMenu');
+const a11yBtn = document.querySelector('.hdr-btn--accessibility');
+const a11yReset = document.getElementById('a11yReset');
+
+const A11Y_STORAGE_KEY = 'temu_a11y_settings';
+const A11Y_DEFAULTS = { fontSize: 'font-reg', contrast: 'contrast-reg' };
+const FONT_CLASSES = ['font-reg', 'font-lg', 'font-xl'];
+const CONTRAST_CLASSES = ['contrast-reg', 'contrast-low', 'contrast-light', 'contrast-dark'];
+
+function loadA11ySettings() {
+  try {
+    const stored = localStorage.getItem(A11Y_STORAGE_KEY);
+    return stored ? { ...A11Y_DEFAULTS, ...JSON.parse(stored) } : { ...A11Y_DEFAULTS };
+  } catch { return { ...A11Y_DEFAULTS }; }
+}
+
+function saveA11ySettings(settings) {
+  try { localStorage.setItem(A11Y_STORAGE_KEY, JSON.stringify(settings)); } catch {}
+}
+
+function applyA11ySettings(settings) {
+  FONT_CLASSES.forEach(c => document.body.classList.remove(c));
+  CONTRAST_CLASSES.forEach(c => document.body.classList.remove(c));
+  if (settings.fontSize !== 'font-reg') document.body.classList.add(settings.fontSize);
+  if (settings.contrast !== 'contrast-reg') document.body.classList.add(settings.contrast);
+
+  a11yMenu.querySelectorAll('.a11y-option').forEach(btn => {
+    const group = btn.dataset.setting;
+    const val = btn.dataset.value;
+    btn.classList.toggle('a11y-option--selected', settings[group] === val);
+  });
+}
+
+let a11ySettings = loadA11ySettings();
+applyA11ySettings(a11ySettings);
+
+/* Toggle menu */
+a11yBtn.addEventListener('click', () => {
+  const isHidden = a11yMenu.hasAttribute('hidden');
+  if (isHidden) {
+    a11yMenu.removeAttribute('hidden');
+    a11yMenu.focus();
+  } else {
+    a11yMenu.setAttribute('hidden', '');
+  }
+});
+
+/* Close on outside click */
+document.addEventListener('click', e => {
+  if (!a11yMenu.hasAttribute('hidden') &&
+      !a11yMenu.contains(e.target) &&
+      !a11yBtn.contains(e.target)) {
+    a11yMenu.setAttribute('hidden', '');
+  }
+});
+
+/* Close on Escape */
+document.addEventListener('keyup', e => {
+  if (e.key === 'Escape' && !a11yMenu.hasAttribute('hidden')) {
+    a11yMenu.setAttribute('hidden', '');
+    a11yBtn.focus();
+  }
+});
+
+/* Option clicks */
+a11yMenu.addEventListener('click', e => {
+  const btn = e.target.closest('.a11y-option');
+  if (!btn) return;
+  const group = btn.dataset.setting;
+  const val = btn.dataset.value;
+  a11ySettings[group] = val;
+  saveA11ySettings(a11ySettings);
+  applyA11ySettings(a11ySettings);
+});
+
+/* Reset */
+a11yReset.addEventListener('click', () => {
+  a11ySettings = { ...A11Y_DEFAULTS };
+  saveA11ySettings(a11ySettings);
+  applyA11ySettings(a11ySettings);
 });
 </script>
 </body>

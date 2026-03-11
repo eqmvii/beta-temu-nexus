@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forums | Migraine.com</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect fill='%231E7EBE' width='256' height='256'/%3E%3Cg transform='translate(-0.5,0.074)'%3E%3Cpath d='M98 254V205H80C71 205 63 202 57 195 50 189 47 181 47 172V77C47 69 50 61 57 55 63 50 71 47 80 47H178C196 47 209 60 209 77V172C209 181 206 189 200 195 195 202 187 205 178 205H150L98 254ZM80 52C72 52 65 55 60 59 55 64 52 70 52 77V172C52 187 65 201 80 201H103V242L148 201H178C185 201 192 198 196 192 201 187 204 180 204 172V77C204 70 201 64 197 59 192 54 185 52 178 52Z' fill='%23fff' opacity='.4'/%3E%3Cpolygon fill='%23fff' opacity='.8' points='85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'geologica-variable';font-style:normal;font-weight:100 900;font-display:swap;src:url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations')}
+@font-face{font-family:'geologica-variable';font-style:oblique 10deg;font-weight:100 900;font-display:swap;src:url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations')}
+:root{--cyan:#379EC1;--cyan-dark:#002E3B;--cyan-darker:#002029;--cyan-light:#67C7E5;--cyan-lighter:#EAF8FC;--cyan-lighter-hover:#D5EEF5;--brand:#1E7EBE;--white:#fff;--gray:#8C9BA5;--gray-dark:#5E676D;--hu-light:#B3C4CD;--hu-lighter:#ECF0F3;--hu-lightest:#F5F7F9;--hu-neutral:#4A6572;--shadow:0 0 10px 2px rgba(179,196,205,.3);--radius:4px;--radius-card:6px;--max-w:1080px;--header-h:48px;--announce-h:32px;--spacing:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-size:1.1875rem;line-height:1.8;color:var(--cyan-darker);background:var(--white);padding-top:var(--header-h)}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+ul{list-style:none}
+img{display:block;max-width:100%}
+
+/* === HEADER === */
+.header{position:fixed;top:0;left:0;right:0;z-index:299;height:var(--header-h);min-width:320px;background:var(--cyan-darker);display:flex;align-items:center}
+.header__left{display:flex;align-items:center}
+.header__right{display:flex;align-items:center;margin-left:auto}
+.site-logo{display:inline-block;width:48px;height:48px;min-width:48px;margin-right:8px;text-decoration:none;flex-shrink:0}
+.site-logo__avatar{width:48px;height:48px;overflow:hidden}
+.site-logo__avatar svg{width:48px;height:48px;display:block}
+.hdr-btn{background:transparent;border:none;color:#fff;display:flex;align-items:center;height:48px;min-width:48px;padding:4px;margin-left:4px;font-size:1rem;font-weight:600;font-family:inherit;white-space:nowrap}
+.hdr-btn:hover{opacity:.85}
+.hdr-btn svg{width:20px;height:20px;flex-shrink:0;fill:#fff;pointer-events:none}
+.hdr-btn__text{font-weight:600;margin-left:8px}
+.hdr-btn--accessibility{margin-left:auto}
+.hamburger{width:16px;height:16px;position:relative;flex-shrink:0}
+.hamburger::before,.hamburger::after,.hamburger__filling::before,.hamburger__filling::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:100%;height:2px;background:#fff;border-radius:1px;transition:transform 300ms,opacity 300ms}
+.hamburger::before{top:0}
+.hamburger::after{bottom:0}
+.hamburger__filling{position:absolute;top:50%;transform:translateY(-50%);width:100%;height:2px}
+.hamburger__filling::before,.hamburger__filling::after{top:0}
+.hdr-btn--menu-open .hamburger::before,.hdr-btn--menu-open .hamburger::after{opacity:0}
+.hdr-btn--menu-open .hamburger__filling::before{transform:translateX(-50%) rotate(45deg) scaleX(1.3)}
+.hdr-btn--menu-open .hamburger__filling::after{transform:translateX(-50%) rotate(-45deg) scaleX(1.3)}
+.hdr-subscribe{padding:4px 24px;min-height:36px;background:#0B474E;color:#39E3E1;border:none;border-radius:32px;font-size:16px;font-weight:600;font-family:inherit;white-space:nowrap;margin:0 8px;line-height:1;transition:background 200ms;display:inline-flex;align-items:center;justify-content:center}
+.hdr-subscribe:hover{background:#06343C;color:#39E3E1}
+.avatar-btn{display:none;width:30px;height:30px;background:#4CAF7D;border:2px solid #fff;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;margin-left:4px}
+.avatar-btn.show{display:flex}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:400}
+.nav-overlay.open{display:block}
+.nav-drawer{position:fixed;top:var(--header-h);left:0;bottom:0;width:320px;max-width:calc(100vw - 32px);background:var(--cyan-dark);z-index:401;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .2s ease-in-out}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer__nav{flex:1;overflow-x:hidden;overflow-y:auto;padding:0 0 32px}
+.nav-list{padding:8px 0}
+.nav-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-item--child{border-bottom:none}
+.nav-item__link{display:block;padding:10px 20px;color:#fff;font-size:15px;font-weight:600;text-decoration:none}
+.nav-item--child .nav-item__link{font-weight:400;padding:8px 20px 8px 32px}
+.nav-item__expand{position:absolute;right:0;top:0;width:48px;height:44px;background:none;border:none;display:flex;align-items:center;justify-content:center}
+.nav-item__expand svg{width:14px;height:14px;fill:#fff;transform:rotate(0deg);transition:transform .2s}
+.nav-item__expand--open svg{transform:rotate(180deg)}
+.nav-item{position:relative}
+
+/* === ANNOUNCE BAR === */
+.announce-bar{position:sticky;top:var(--header-h);left:0;right:0;z-index:298;background:#ACE3ED;display:flex;justify-content:center;text-align:center;padding:12px 16px;line-height:1.2;color:var(--cyan-darker)}
+.announce-bar a{font-weight:600}
+
+/* === FORUMS INDEX HEADER === */
+.forums-index-header{position:relative;margin:0 auto;width:100%;max-width:var(--max-w);overflow:hidden;background:linear-gradient(100deg,#C3E9F5 10%,#9DF4F2 90%);border-radius:0 0 var(--radius-card) var(--radius-card)}
+.forums-index-header__mural{display:flex;flex-direction:column;padding:6px 0 0;height:240px;transform:scale(1.1);transform-origin:top}
+.forums-index-header__mural-row{display:flex;flex-grow:0;justify-content:center;margin:0 0 6px}
+.forums-index-header__mural-row:nth-child(odd){animation:odd-row-shift 10s ease-in-out infinite alternate}
+.forums-index-header__mural-row:nth-child(even){animation:even-row-shift 8s ease-in-out infinite alternate}
+.forums-index-header__mural-bubble{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;margin:0 3px;width:120px;height:32px;border-radius:16px}
+.forums-index-header__mural-row:nth-child(odd) .forums-index-header__mural-bubble{transform:translateX(25%)}
+.forums-index-header__mural-row:nth-child(odd) .forums-index-header__mural-bubble--position-2{margin-right:160px}
+.forums-index-header__mural-row:nth-child(odd) .forums-index-header__mural-bubble--position-3{margin-left:auto}
+.forums-index-header__mural-row:nth-child(even) .forums-index-header__mural-bubble{transform:translateX(-25%)}
+.forums-index-header__mural-row:nth-child(even) .forums-index-header__mural-bubble--position-3{margin-right:160px}
+.forums-index-header__mural-row:nth-child(even) .forums-index-header__mural-bubble--position-4{margin-left:auto}
+/* Visible (opaque) bubbles */
+.forums-index-header__mural-bubble--13,
+.forums-index-header__mural-bubble--22,
+.forums-index-header__mural-bubble--32,
+.forums-index-header__mural-bubble--35,
+.forums-index-header__mural-bubble--45{background:rgba(255,255,255,.5)}
+.forums-index-header__mural-bubble--13 .forums-index-header__mural-dots,
+.forums-index-header__mural-bubble--13 .forums-index-header__mural-dots::before,
+.forums-index-header__mural-bubble--13 .forums-index-header__mural-dots::after,
+.forums-index-header__mural-bubble--22 .forums-index-header__mural-dots,
+.forums-index-header__mural-bubble--22 .forums-index-header__mural-dots::before,
+.forums-index-header__mural-bubble--22 .forums-index-header__mural-dots::after,
+.forums-index-header__mural-bubble--32 .forums-index-header__mural-dots,
+.forums-index-header__mural-bubble--32 .forums-index-header__mural-dots::before,
+.forums-index-header__mural-bubble--32 .forums-index-header__mural-dots::after,
+.forums-index-header__mural-bubble--35 .forums-index-header__mural-dots,
+.forums-index-header__mural-bubble--35 .forums-index-header__mural-dots::before,
+.forums-index-header__mural-bubble--35 .forums-index-header__mural-dots::after,
+.forums-index-header__mural-bubble--45 .forums-index-header__mural-dots,
+.forums-index-header__mural-bubble--45 .forums-index-header__mural-dots::before,
+.forums-index-header__mural-bubble--45 .forums-index-header__mural-dots::after{background:#fff}
+/* Transparent bubbles */
+.forums-index-header__mural-bubble--12,
+.forums-index-header__mural-bubble--15,
+.forums-index-header__mural-bubble--21,
+.forums-index-header__mural-bubble--23,
+.forums-index-header__mural-bubble--24,
+.forums-index-header__mural-bubble--33,
+.forums-index-header__mural-bubble--34,
+.forums-index-header__mural-bubble--42,
+.forums-index-header__mural-bubble--43,
+.forums-index-header__mural-bubble--51,
+.forums-index-header__mural-bubble--54,
+.forums-index-header__mural-bubble--55,
+.forums-index-header__mural-bubble--61,
+.forums-index-header__mural-bubble--62,
+.forums-index-header__mural-bubble--64{background:rgba(255,255,255,.2)}
+/* Bubble animation */
+.forums-index-header__mural-bubble--12{animation:bubble-phase 8s linear -600ms infinite}
+.forums-index-header__mural-bubble--12 .forums-index-header__mural-dots{animation:dot-phase 8s linear -600ms infinite}
+.forums-index-header__mural-bubble--13{animation:bubble-phase 8s linear -1200ms infinite}
+.forums-index-header__mural-bubble--13 .forums-index-header__mural-dots{animation:dot-phase 8s linear -1200ms infinite}
+.forums-index-header__mural-bubble--15{animation:bubble-phase 8s linear -1800ms infinite}
+.forums-index-header__mural-bubble--15 .forums-index-header__mural-dots{animation:dot-phase 8s linear -1800ms infinite}
+.forums-index-header__mural-bubble--21{animation:bubble-phase 8s linear -2400ms infinite}
+.forums-index-header__mural-bubble--21 .forums-index-header__mural-dots{animation:dot-phase 8s linear -2400ms infinite}
+.forums-index-header__mural-bubble--22{animation:bubble-phase 8s linear -3000ms infinite}
+.forums-index-header__mural-bubble--22 .forums-index-header__mural-dots{animation:dot-phase 8s linear -3000ms infinite}
+.forums-index-header__mural-bubble--23{animation:bubble-phase 8s linear -3600ms infinite}
+.forums-index-header__mural-bubble--23 .forums-index-header__mural-dots{animation:dot-phase 8s linear -3600ms infinite}
+.forums-index-header__mural-bubble--24{animation:bubble-phase 8s linear -4200ms infinite}
+.forums-index-header__mural-bubble--24 .forums-index-header__mural-dots{animation:dot-phase 8s linear -4200ms infinite}
+.forums-index-header__mural-bubble--32{animation:bubble-phase 8s linear -4800ms infinite}
+.forums-index-header__mural-bubble--32 .forums-index-header__mural-dots{animation:dot-phase 8s linear -4800ms infinite}
+.forums-index-header__mural-bubble--33{animation:bubble-phase 8s linear -5400ms infinite}
+.forums-index-header__mural-bubble--33 .forums-index-header__mural-dots{animation:dot-phase 8s linear -5400ms infinite}
+.forums-index-header__mural-bubble--34{animation:bubble-phase 8s linear -6000ms infinite}
+.forums-index-header__mural-bubble--34 .forums-index-header__mural-dots{animation:dot-phase 8s linear -6000ms infinite}
+.forums-index-header__mural-bubble--35{animation:bubble-phase 8s linear -6600ms infinite}
+.forums-index-header__mural-bubble--35 .forums-index-header__mural-dots{animation:dot-phase 8s linear -6600ms infinite}
+.forums-index-header__mural-bubble--42{animation:bubble-phase 8s linear -7200ms infinite}
+.forums-index-header__mural-bubble--42 .forums-index-header__mural-dots{animation:dot-phase 8s linear -7200ms infinite}
+.forums-index-header__mural-bubble--43{animation:bubble-phase 8s linear -7800ms infinite}
+.forums-index-header__mural-bubble--43 .forums-index-header__mural-dots{animation:dot-phase 8s linear -7800ms infinite}
+.forums-index-header__mural-bubble--45{animation:bubble-phase 8s linear -8400ms infinite}
+.forums-index-header__mural-bubble--45 .forums-index-header__mural-dots{animation:dot-phase 8s linear -8400ms infinite}
+.forums-index-header__mural-bubble--51{animation:bubble-phase 8s linear -9000ms infinite}
+.forums-index-header__mural-bubble--51 .forums-index-header__mural-dots{animation:dot-phase 8s linear -9000ms infinite}
+.forums-index-header__mural-bubble--54{animation:bubble-phase 8s linear -9600ms infinite}
+.forums-index-header__mural-bubble--54 .forums-index-header__mural-dots{animation:dot-phase 8s linear -9600ms infinite}
+.forums-index-header__mural-bubble--55{animation:bubble-phase 8s linear -10200ms infinite}
+.forums-index-header__mural-bubble--55 .forums-index-header__mural-dots{animation:dot-phase 8s linear -10200ms infinite}
+.forums-index-header__mural-bubble--61{animation:bubble-phase 8s linear -10800ms infinite}
+.forums-index-header__mural-bubble--61 .forums-index-header__mural-dots{animation:dot-phase 8s linear -10800ms infinite}
+.forums-index-header__mural-bubble--62{animation:bubble-phase 8s linear -11400ms infinite}
+.forums-index-header__mural-bubble--62 .forums-index-header__mural-dots{animation:dot-phase 8s linear -11400ms infinite}
+.forums-index-header__mural-bubble--64{animation:bubble-phase 8s linear -12000ms infinite}
+.forums-index-header__mural-bubble--64 .forums-index-header__mural-dots{animation:dot-phase 8s linear -12000ms infinite}
+.forums-index-header__mural-dots{position:relative;width:8px;height:8px;border-radius:50%}
+.forums-index-header__mural-dots::before,.forums-index-header__mural-dots::after{content:'';display:block;position:absolute;width:8px;height:8px;border-radius:50%}
+.forums-index-header__mural-dots::before{right:16px}
+.forums-index-header__mural-dots::after{left:16px}
+.forums-index-header__content{position:relative;margin:-240px 0 0;padding:32px 32px 16px;text-align:center}
+.forums-index-header__heading{font-family:geologica-variable,sans-serif;font-size:48px;font-weight:800;color:var(--cyan-darker);line-height:1.1;margin-bottom:4px}
+.forums-index-header__subtitle{font-size:18px;line-height:1.4;color:var(--cyan-darker);margin:0 0 16px}
+.forums-index-header__cta{display:flex;justify-content:space-between;align-items:center;margin:0 auto;max-width:640px}
+.forums-index-header__cta-button{flex:1;padding:12px 24px;background:var(--brand);color:#fff;border:none;border-radius:var(--radius);font-size:16px;font-weight:700;font-family:inherit;white-space:nowrap;transition:background 200ms}
+.forums-index-header__cta-button:hover{background:#1a6da6}
+.forums-index-header__search{flex:2;margin-left:16px;position:relative}
+.forums-index-header__search-input{width:100%;padding:10px 40px 10px 16px;border:1px solid var(--hu-light);border-radius:var(--radius);font-size:16px;font-family:inherit;outline:none;color:var(--cyan-darker)}
+.forums-index-header__search-input:focus{border-color:var(--cyan)}
+.forums-index-header__search-input::placeholder{color:var(--gray)}
+.forums-index-header__search-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;padding:4px;display:flex;align-items:center}
+.forums-index-header__search-btn svg{width:20px;height:20px;fill:var(--gray)}
+
+@keyframes bubble-phase{0%{opacity:1}40%{opacity:1}50%{opacity:0}90%{opacity:1}100%{opacity:1}}
+@keyframes dot-phase{0%{opacity:1}35%{opacity:1}40%{opacity:0}85%{opacity:0}90%{opacity:1}100%{opacity:1}}
+@keyframes odd-row-shift{0%{transform:translateX(0)}100%{transform:translateX(15px)}}
+@keyframes even-row-shift{0%{transform:translateX(0)}100%{transform:translateX(-15px)}}
+
+/* === BROWSING CONTROLS === */
+.forums-index__browsing-controls{display:flex;justify-content:space-between;margin:16px auto;max-width:1024px;padding:0 24px}
+.forums-index__sort{width:200px;max-width:48%;position:relative}
+.forums-index__sort select{width:100%;padding:8px 16px;padding-right:40px;min-height:44px;border:0;border-radius:var(--radius);font-size:18px;font-weight:600;font-family:inherit;color:var(--cyan-darker);background:var(--hu-lighter);outline:none;appearance:none;cursor:pointer}
+.forums-index__sort-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:var(--cyan-darker);pointer-events:none;line-height:0}
+
+/* === CONTENT LAYOUT === */
+.forums-index__content{display:flex;flex-wrap:wrap;justify-content:space-between;margin:0 auto;max-width:1024px;padding:0 24px}
+.forums-index__threads{width:60%}
+.forums-index__tag-picker{width:32%;max-width:350px}
+
+/* === THREAD TEASER === */
+.thread-teaser{background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow);margin:24px 0 0;padding:24px 24px 32px}
+.thread-teaser__status{color:var(--gray-dark);font-size:14px;font-weight:700;margin-bottom:4px}
+.thread-teaser__featured{display:inline-block;color:var(--brand)}
+.thread-teaser__activity{display:inline-block;position:relative}
+.thread-teaser__featured + .thread-teaser__activity{margin-left:8px}
+.thread-teaser__featured + .thread-teaser__activity::before{content:'\00B7';display:inline;margin-right:8px;color:var(--hu-neutral);font-weight:900}
+.thread-teaser__heading{font-family:geologica-variable,sans-serif;font-size:20px;font-weight:700;line-height:1.35;margin:4px 0 8px}
+.thread-teaser__heading a{color:var(--cyan-darker);text-decoration:none}
+.thread-teaser__heading a:hover{color:var(--gray-dark);text-decoration:none}
+.thread-teaser__excerpt{font-size:14px;line-height:1.4;color:var(--gray-dark);margin-bottom:8px;overflow:hidden}
+.thread-teaser__excerpt a{color:inherit;text-decoration:none}
+.thread-teaser__engagement{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:16px}
+
+/* === ENGAGEMENT BAR === */
+.engagement-bar{display:inline-block;flex-shrink:0}
+.engagement-bar__actions{display:flex;flex-wrap:wrap-reverse;justify-content:flex-start;gap:8px}
+.engagement-bar__action{display:flex;align-items:center;gap:4px;padding:0 12px;height:40px;font-size:14px;text-decoration:none;background:var(--cyan-lighter);border:0;border-radius:20px;cursor:pointer;transition:background 200ms,color 200ms;color:var(--cyan-darker)}
+.engagement-bar__action:hover{background:var(--cyan-lighter-hover);color:inherit;text-decoration:none}
+.engagement-bar__action-icon{width:28px;height:28px;fill:var(--cyan)}
+.engagement-bar__action-count{font-weight:600}
+.engagement-bar__action-text{font-weight:600}
+
+/* === TAG LIST (inline pills on teasers) === */
+.tag-list{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:14px;line-height:1.4;list-style:none;padding:0;margin:0}
+.tag-list__tag-link{display:inline-block;padding:4px 12px;color:var(--cyan-darker);font-size:12px;font-weight:600;background:var(--cyan-lighter);border-radius:99px;transition:background 200ms;text-decoration:none}
+.tag-list__tag-link:hover{background:var(--cyan-lighter-hover);text-decoration:none}
+
+/* === TAG PICKER (sidebar) === */
+.tag-picker{margin-top:0;padding:32px;min-height:600px}
+.tag-picker__heading{font-family:geologica-variable,sans-serif;font-size:18px;font-weight:800;color:var(--cyan-darker);margin-bottom:4px}
+.tag-picker__instructions{font-size:14px;line-height:1.4;color:var(--gray-dark);margin-bottom:24px}
+.tag-picker__search{position:relative;margin-bottom:16px}
+.tag-picker__search-input{width:100%;padding:8px 36px 8px 12px;border:1px solid var(--hu-light);border-radius:var(--radius);font-size:14px;font-family:inherit;outline:none;color:var(--cyan-darker)}
+.tag-picker__search-input:focus{border-color:var(--cyan)}
+.tag-picker__search-input::placeholder{color:var(--gray)}
+.tag-picker__search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:var(--gray);pointer-events:none}
+.tag-picker__tag-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px 8px}
+.tag-picker__tag{padding:6px 16px;font-size:13px;font-weight:600;background:var(--cyan-lighter);border:0;border-radius:99px;cursor:pointer;transition:background 200ms;color:var(--cyan-darker);font-family:inherit}
+.tag-picker__tag:hover{background:var(--cyan-lighter-hover)}
+.tag-picker__tag--selected{color:#fff;background:var(--cyan)}
+.tag-picker__tag--selected:hover{background:#2d8aac}
+
+/* === PAGINATION === */
+/* === PAGINATION CONTROLS === */
+.pagination-controls{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;margin:48px 0 16px;color:var(--cyan);font-weight:800;text-align:center}
+.pagination-controls__number{margin:4px;padding:20px 0;min-width:44px;line-height:0;text-decoration:none;border-radius:var(--radius);color:var(--cyan);font-weight:800;font-size:16px;display:inline-flex;align-items:center;justify-content:center}
+.pagination-controls__number:hover{background:var(--hu-lighter);text-decoration:none}
+.pagination-controls__current-page-number{margin:4px;padding:20px 0;min-width:44px;line-height:0;color:var(--hu-light);font-weight:800;font-size:16px;background:none;border:none;cursor:default;display:inline-flex;align-items:center;justify-content:center;font-family:inherit}
+.pagination-controls__dots{padding:20px 0;width:44px;color:var(--hu-light);font-weight:800;font-size:16px;display:inline-flex;align-items:center;justify-content:center}
+.pagination-controls__nav-container{margin:4px}
+.pagination-controls__nav-button{display:inline-flex;align-items:center;justify-content:center;padding:16px 8px;font-weight:800;line-height:0;text-decoration:none;border-radius:var(--radius);color:var(--cyan)}
+.pagination-controls__nav-button:hover{background:var(--hu-lighter);text-decoration:none}
+.pagination-controls__nav-button--disabled{opacity:.3;pointer-events:none}
+.pagination-controls__button-icon{width:16px;height:16px;fill:var(--cyan)}
+.pagination-controls__button-icon--prev{transform:rotate(90deg)}
+.pagination-controls__button-icon--next{transform:rotate(-90deg)}
+
+/* === FOOTER === */
+.footer-signup{background:var(--hu-lighter);padding:32px 0}
+.footer-signup__inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:flex-start}
+.footer-signup__form{display:inline-block;margin-right:48px;max-width:504px}
+.footer-signup__label{font-family:geologica-variable,sans-serif;font-size:18px;font-weight:600;color:var(--cyan-dark);margin-bottom:16px;display:block}
+.footer-signup__row{display:flex;height:48px}
+.footer-signup__input{width:100%;min-width:280px;padding:8px 4px 8px 24px;border:1px solid #D9DFE3;border-right:none;border-radius:24px 0 0 24px;font-size:18px;font-family:inherit;outline:none;color:var(--cyan-darker)}
+.footer-signup__input:focus{border-color:var(--cyan)}
+.footer-signup__btn{padding:0 16px;background:var(--cyan);color:#fff;border:1px solid #D9DFE3;border-left:none;border-radius:0 24px 24px 0;font-size:16px;font-weight:600;font-family:inherit;white-space:nowrap}
+.footer-signup__btn:hover{background:#2d8aac}
+.footer-signup__notice{font-size:14px;color:rgba(0,32,41,.6);margin-top:16px;line-height:1.6}
+.footer-signup__notice a{color:inherit;text-decoration:underline}
+.footer-top-socials{display:inline-flex;align-items:center;gap:24px;margin-top:44px}
+.footer-top-social{display:inline-block;text-decoration:none}
+.footer-top-social svg{width:44px;height:44px;fill:var(--cyan-dark);display:block}
+.footer-top-social:hover svg{fill:var(--cyan)}
+.footer-bottom{background:var(--cyan-dark);padding:32px 24px}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex}
+.footer-left{flex-shrink:0;margin-right:56px}
+.footer-hu-logo{display:block;width:220px;height:52px;margin-bottom:8px}
+.footer-hu-logo svg{width:100%;height:100%;display:block}
+.footer-intro{font-size:16px;line-height:1.6;color:#fff;max-width:280px;margin-bottom:24px}
+.footer-socials{display:flex;gap:4px;margin-bottom:24px;margin-left:-10px}
+.footer-social{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%}
+.footer-social svg{width:16px;height:16px;fill:rgba(255,255,255,.6)}
+.footer-social:hover svg{fill:#fff}
+.footer-communities{flex:1}
+.footer-communities h3{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:1px;margin-bottom:12px}
+.communities-grid{display:flex;flex-wrap:wrap;gap:4px 16px}
+.communities-grid a{color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;white-space:nowrap}
+.communities-grid a:hover{color:#fff;text-decoration:underline}
+.footer-divider{max-width:var(--max-w);margin:24px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 24px;margin-bottom:16px}
+.footer-links li a{color:rgba(255,255,255,.5);font-size:13px;text-decoration:none}
+.footer-links li a:hover{color:#fff;text-decoration:underline}
+.footer-disclaimer{font-size:11px;line-height:1.6;color:rgba(255,255,255,.35);padding-bottom:16px}
+.footer-disclaimer a{color:rgba(255,255,255,.5)}
+
+/* === AD SLOTS === */
+.ad-slot{display:flex;flex-direction:column;align-items:center}
+.ad-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:4px}
+.leaderboard-wrap{display:flex;justify-content:center;padding:16px 0 8px}
+.ad-leaderboard{max-width:728px;width:100%;height:90px;margin:0 auto;border-radius:var(--radius);overflow:hidden;position:relative}
+.fake-ad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:24px;padding:0 32px;color:#fff;font-size:14px}
+.fake-ad__brand{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.fake-ad__tagline{font-size:13px;max-width:280px;line-height:1.3}
+.fake-ad__cta{padding:6px 18px;border:1.5px solid #fff;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+.fake-ad__rx{font-size:9px;opacity:.7;letter-spacing:.5px}
+.fake-ad__isi{font-size:8px;opacity:.5;position:absolute;bottom:2px;left:8px;right:8px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* === ACCESSIBILITY MENU === */
+.accessibility-menu{position:fixed;top:calc(var(--header-h) + 12px);right:8px;padding:24px;width:200px;background:var(--hu-light);border-radius:var(--radius);z-index:300;transform:translateY(0);transition:transform 300ms ease-out,opacity 300ms ease-out}
+.accessibility-menu[hidden]{display:block !important;transform:translateY(-150%);opacity:0;pointer-events:none;transition:transform 300ms ease-in,opacity 300ms ease-in}
+.accessibility-menu::after{content:'';display:block;position:absolute;top:-8px;right:82px;border-right:8px solid transparent;border-bottom:8px solid var(--hu-light);border-left:8px solid transparent}
+.accessibility-menu__options{display:flex;flex-wrap:wrap;justify-content:space-between;margin-bottom:16px;padding:0;list-style:none}
+.a11y-option{display:inline-flex;align-items:center;justify-content:center;position:relative;margin-bottom:16px;padding:0;width:44px;height:44px;font-weight:800;text-align:center;background:#fff;border:0;border-radius:var(--radius);cursor:pointer}
+.a11y-option::after{content:'';position:absolute;right:4px;bottom:-8px;left:4px;height:0;background:var(--cyan-dark);border-radius:2px}
+.a11y-option:hover::after{height:2px}
+.a11y-option--selected::after,.a11y-option--selected:hover::after{height:4px}
+.a11y-option--font-reg{font-size:1rem}
+.a11y-option--font-lg{font-size:1.5rem}
+.a11y-option--font-xl{font-size:1.8rem}
+.a11y-option--contrast-low{background:#D5DEE3}
+.a11y-option--contrast-light{color:#000;border:2px solid #000}
+.a11y-option--contrast-dark{color:#fff;background:#000}
+.accessibility-menu__reset{display:block;width:100%;padding:8px;font-size:14px;font-weight:600;color:#fff;background:var(--cyan);border:0;border-radius:var(--radius);cursor:pointer;text-align:center}
+.accessibility-menu__reset:hover{background:#2e8aac}
+
+/* === ACCESSIBILITY: FONT SIZE OVERRIDES === */
+body.font-lg .thread-teaser__heading{font-size:24px;line-height:32px}
+body.font-xl .thread-teaser__heading{font-size:30px;line-height:38px}
+body.font-lg .thread-teaser__excerpt,body.font-lg .tag-picker__instructions{font-size:18px;line-height:26px}
+body.font-xl .thread-teaser__excerpt,body.font-xl .tag-picker__instructions{font-size:22px;line-height:30px}
+body.font-lg .forums-index-header__subtitle{font-size:22px;line-height:30px}
+body.font-xl .forums-index-header__subtitle{font-size:26px;line-height:34px}
+
+/* === ACCESSIBILITY: CONTRAST OVERRIDES === */
+body.contrast-low{color:var(--gray);background:#D5DEE3}
+body.contrast-low .header{background:var(--gray)}
+body.contrast-light{color:#000;background:#fff}
+body.contrast-light .header{background:#000}
+body.contrast-light .footer-bottom{background:#000}
+body.contrast-light .thread-teaser,.contrast-light .tag-picker{border:1px solid #000}
+body.contrast-light .announce-bar,.contrast-light .footer-signup{background:#fff;border:1px solid #000}
+body.contrast-dark{color:#fff;background:#000}
+body.contrast-dark .header{background:#000;border-bottom:1px solid #333}
+body.contrast-dark .footer-bottom{background:#000;border-top:1px solid #333}
+body.contrast-dark .announce-bar{background:#111;color:#fff}
+body.contrast-dark .announce-bar a{color:#8cf}
+body.contrast-dark .thread-teaser{background:#111;border:1px solid #333;box-shadow:none}
+body.contrast-dark .thread-teaser__heading a{color:#fff}
+body.contrast-dark .tag-picker{background:#111;border:1px solid #333;box-shadow:none}
+body.contrast-dark .footer-signup{background:#111;border:1px solid #333}
+body.contrast-dark .forums-index-header{background:linear-gradient(100deg,#1a3a4a 10%,#0a2a2a 90%)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header__left">
+    <a href="index.html" class="site-logo" aria-label="Migraine.com home">
+      <div class="site-logo__avatar">
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><rect fill="#1E7EBE" width="256" height="256"/><g transform="translate(-0.5,0.074)"><path d="M98 254V205H80C71 205 63 202 57 195 50 189 47 181 47 172V77C47 69 50 61 57 55 63 50 71 47 80 47H178C196 47 209 60 209 77V172C209 181 206 189 200 195 195 202 187 205 178 205H150L98 254ZM80 52C72 52 65 55 60 59 55 64 52 70 52 77V172C52 187 65 201 80 201H103V242L148 201H178C185 201 192 198 196 192 201 187 204 180 204 172V77C204 70 201 64 197 59 192 54 185 52 178 52Z" fill="#fff" opacity=".4"/><polygon fill="#fff" opacity=".8" points="85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164"/></g></svg>
+      </div>
+    </a>
+    <button class="hdr-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+      <div class="hamburger"><div class="hamburger__filling"></div></div>
+      <span class="hdr-btn__text">Menu</span>
+    </button>
+  </div>
+  <div class="header__right">
+    <button class="hdr-btn hdr-btn--accessibility" aria-label="Accessibility Tools"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg><span class="hdr-btn__text">Accessibility</span></button>
+    <button class="hdr-btn" id="loginBtn" aria-label="Log in"><span class="hdr-btn__text">Log in</span></button>
+    <button class="avatar-btn" id="avatarBtn" aria-label="Account">EM</button>
+    <button class="hdr-subscribe">Subscribe</button>
+  </div>
+</header>
+
+<!-- Accessibility Menu -->
+<div class="accessibility-menu" id="a11yMenu" hidden aria-label="Accessibility tools — change font size and contrast">
+  <ul class="accessibility-menu__options">
+    <li><button class="a11y-option a11y-option--font-reg a11y-option--selected" data-setting="fontSize" data-value="font-reg" aria-label="Regular font size">A</button></li>
+    <li><button class="a11y-option a11y-option--font-lg" data-setting="fontSize" data-value="font-lg" aria-label="Large font size">A</button></li>
+    <li><button class="a11y-option a11y-option--font-xl" data-setting="fontSize" data-value="font-xl" aria-label="Extra large font size">A</button></li>
+  </ul>
+  <ul class="accessibility-menu__options">
+    <li><button class="a11y-option a11y-option--contrast-reg a11y-option--selected" data-setting="contrast" data-value="contrast-reg" aria-label="Regular contrast">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-low" data-setting="contrast" data-value="contrast-low" aria-label="Low contrast">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-light" data-setting="contrast" data-value="contrast-light" aria-label="High contrast light">T</button></li>
+    <li><button class="a11y-option a11y-option--contrast-dark" data-setting="contrast" data-value="contrast-dark" aria-label="High contrast dark">T</button></li>
+  </ul>
+  <button class="accessibility-menu__reset" id="a11yReset" aria-label="Reset accessibility settings">Reset</button>
+</div>
+
+<!-- NAV DRAWER -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer__nav">
+    <ul class="nav-list" id="navList"></ul>
+  </div>
+</nav>
+
+<!-- ANNOUNCE BAR -->
+<div class="announce-bar">
+  <span>Tell us about your symptoms and experiences — <a href="#">Take our survey</a></span>
+</div>
+
+<!-- LEADERBOARD AD -->
+<div class="leaderboard-wrap">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-leaderboard">
+      <div class="fake-ad" style="background:linear-gradient(135deg,#1a3a5c 0%,#2d6a9f 50%,#1a3a5c 100%)">
+        <div class="fake-ad__rx">Rx Only</div>
+        <div class="fake-ad__brand">Relivio&trade;</div>
+        <div class="fake-ad__tagline">Fast-acting migraine relief. Ask your doctor if Relivio is right for you.</div>
+        <div class="fake-ad__cta">Learn More</div>
+        <div class="fake-ad__isi">Important Safety Information. Talk to your doctor about side effects. Not for everyone. Rx only. See full Prescribing Information.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORUMS INDEX HEADER -->
+<div class="forums-index-header">
+  <div class="forums-index-header__mural" id="muralContainer"></div>
+  <div class="forums-index-header__content">
+    <h1 class="forums-index-header__heading">Forums</h1>
+    <p class="forums-index-header__subtitle">
+      Read conversations, start a discussion, and connect with others about migraine.
+    </p>
+    <div class="forums-index-header__cta">
+      <button class="forums-index-header__cta-button">Start a discussion</button>
+      <div class="forums-index-header__search">
+        <input type="text" class="forums-index-header__search-input" placeholder="Search discussions" aria-label="Search discussions">
+        <button class="forums-index-header__search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-5.2-5.2M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BROWSING CONTROLS -->
+<div class="forums-index__browsing-controls">
+  <div class="forums-index__sort">
+    <select aria-label="Sort forums">
+      <option value="RECENT" selected>Recent</option>
+      <option value="POPULAR">Popular</option>
+      <option value="UNANSWERED">Unanswered</option>
+    </select>
+    <svg class="forums-index__sort-arrow" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z"/></svg>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="forums-index__content">
+  <!-- THREADS -->
+  <div class="forums-index__threads" id="threadsList"></div>
+
+  <!-- TAG PICKER SIDEBAR -->
+  <div class="forums-index__tag-picker">
+    <div class="tag-picker">
+      <h2 class="tag-picker__heading">Categories</h2>
+      <p class="tag-picker__instructions">Select a category to find topics that interest you.</p>
+      <div class="tag-picker__search">
+        <input type="text" class="tag-picker__search-input" placeholder="Search categories" aria-label="Search categories" id="tagSearchInput">
+        <svg class="tag-picker__search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-5.2-5.2M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" fill="none" stroke="var(--gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <ol class="tag-picker__tag-list" id="tagPickerList"></ol>
+    </div>
+  </div>
+</div>
+
+<!-- PAGINATION -->
+<nav class="pagination-controls" id="pagination" aria-label="pagination"></nav>
+
+<!-- NEWSLETTER / FOOTER SIGNUP -->
+<div class="footer-signup">
+<div class="footer-signup__inner">
+<form class="footer-signup__form" onsubmit="return false;">
+<label class="footer-signup__label" for="nlEmail">Stay connected with the community</label>
+<div class="footer-signup__row">
+<input id="nlEmail" class="footer-signup__input" type="email" placeholder="Enter your email" aria-label="Email">
+<button class="footer-signup__btn" type="submit">Subscribe</button>
+</div>
+<p class="footer-signup__notice">By providing your email address, you are agreeing to our <a href="#">Privacy Notice</a> and <a href="#">Terms of Use</a>.</p>
+</form>
+<div class="footer-top-socials">
+<a href="#" class="footer-top-social" aria-label="Facebook"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 24.09c0-13.26-10.75-24-24-24s-24 10.74-24 24c0 11.26 7.75 20.7 18.2 23.29v-15.96h-4.95v-7.33h4.95v-3.16c0-8.17 3.7-11.96 11.72-11.96 1.52 0 4.14.3 5.22.6v6.65c-.57-.06-1.55-.09-2.77-.09-3.94 0-5.46 1.49-5.46 5.37v2.59h7.84l-1.35 7.33h-6.49v16.49c11.88-1.44 21.09-11.55 21.09-23.82z"/></svg></a>
+<a href="#" class="footer-top-social" aria-label="Instagram"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 23.95c-.01-6.52-.04-7.33-.16-9.89s-.53-4.3-1.13-5.82c-.62-1.58-1.44-2.91-2.78-4.25-1.34-1.33-2.68-2.15-4.26-2.76-1.53-.59-3.27-.99-5.83-1.1-2.55-.11-3.37-.13-9.89-.13-6.52.01-7.33.04-9.89.17-2.55.12-4.3.53-5.82 1.13-1.58.61-2.92 1.44-4.25 2.78s-2.15 2.67-2.76 4.25c-.59 1.53-.99 3.27-1.1 5.83s-.13 3.37-.13 9.89.04 7.33.17 9.89c.12 2.55.53 4.3 1.13 5.82.62 1.58 1.44 2.91 2.78 4.25s2.67 2.15 4.26 2.76c1.53.59 3.27.99 5.83 1.1 2.55.11 3.38.14 9.89.13 6.52-.01 7.34-.04 9.9-.16s4.29-.53 5.82-1.13c1.58-.62 2.92-1.44 4.25-2.78s2.15-2.68 2.76-4.26c.59-1.53.99-3.27 1.1-5.82.11-2.56.14-3.38.13-9.9zm-4.45 9.71c-.1 2.34-.49 3.61-.82 4.46-.43 1.12-.95 1.92-1.79 2.76s-1.64 1.36-2.76 1.8c-.84.33-2.12.72-4.45.83-2.53.12-3.29.14-9.7.16s-7.17-.01-9.7-.12c-2.34-.1-3.61-.49-4.46-.82-1.12-.43-1.92-.95-2.76-1.79s-1.36-1.64-1.8-2.76c-.33-.85-.72-2.12-.83-4.46-.12-2.53-.14-3.29-.16-9.7s.01-7.17.12-9.7c.1-2.34.49-3.61.82-4.46.43-1.12.95-1.92 1.79-2.76s1.64-1.36 2.76-1.8c.85-.33 2.11-.72 4.45-.83 2.53-.12 3.29-.14 9.7-.16 6.41-.01 7.17.01 9.7.12 2.34.1 3.61.49 4.46.82 1.12.43 1.92.95 2.76 1.79s1.36 1.64 1.8 2.76c.33.84.72 2.11.83 4.45.12 2.53.15 3.29.16 9.7s-.01 7.17-.12 9.7z"/><path d="m33.91 11.17c0 1.59 1.29 2.88 2.88 2.88s2.88-1.29 2.88-2.88-1.29-2.88-2.88-2.88c-1.59 0-2.88 1.29-2.87 2.88"/><path d="m23.98 11.68c-6.81.01-12.31 5.54-12.3 12.35s5.54 12.31 12.35 12.3 12.31-5.54 12.3-12.35-5.54-12.31-12.35-12.3zm.04 20.32c-4.42 0-8.01-3.56-8.02-7.98 0-4.42 3.57-8.01 7.98-8.02 4.42 0 8.01 3.57 8.02 7.98s-3.57 8.01-7.98 8.02z"/></svg></a>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-bottom">
+<div class="footer-inner">
+<div class="footer-left">
+<a href="#" class="footer-hu-logo" aria-label="Health Union"><svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 180 48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientTransform="matrix(163.73 163.1 -163.1 163.73 444.54 744.98)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1499d5"/><stop offset=".52" stop-color="#19a7d1"/><stop offset="1" stop-color="#2ad6c5"/></linearGradient><linearGradient id="b" gradientTransform="matrix(-168.32 -163.11 163.11 -168.32 592.3 796.57)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1099d5"/><stop offset=".52" stop-color="#2486d6"/><stop offset="1" stop-color="#6549db"/></linearGradient><linearGradient id="c" gradientTransform="matrix(-113.56 -40.35 40.35 -113.56 852.57 149.45)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#024fb3"/><stop offset="1" stop-color="#0162af"/></linearGradient><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="11.26" x2="313.43" y1="320" y2="320"><stop offset="0" stop-color="#bd27e9"/><stop offset="1" stop-color="#4e67d3"/></linearGradient><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="524.14" x2="788.74" y1="337.18" y2="337.18"><stop offset="0" stop-color="#35c7c3"/><stop offset="1" stop-color="#54d091"/></linearGradient><path d="m0 230.73h800v237.38h-800z" fill="none" transform="matrix(.225 0 0 .2022 0 -46.66)"/><g fill-rule="nonzero"><path d="m728.5 788.32h-34.47c-3.6 0-5.03-1.79-4.31-5.38l30.76-144.1c.72-3.59 1.82-5.37 4.44-5.38 2.15-.01 3.23 1.77 3.23 1.77 2.77 4.2 28.16 52 28.16 52h106.57c26.76 0 37.18 6.82 37.18 23.66 0 3.95-.54 8.6-1.62 13.63l-3 14.12h34.47c3.6 0 5.03 1.8 4.31 5.38l-30.76 144.1c-.72 3.6-1.83 5.37-4.45 5.38-2.14.02-3.22-1.76-3.22-1.76-2.78-4.2-28.16-52.01-28.16-52.01h-106.57c-26.76 0-37.18-6.81-37.18-23.66 0-3.94.54-8.6 1.62-13.62z" fill="#1099d5" transform="matrix(.12209 0 0 .12209 -4.62 -69.21)"/><path d="m640.76 744.24c3.78 0 5.29 1.89 4.53 5.66l-32.33 151.78c-.76 3.77-1.92 5.65-4.67 5.66a4.15 4.15 0 0 1-3.39-1.86c-2.92-4.42-29.6-54.78-29.6-54.78h-112c-28.13 0-39.08-7.17-39.08-24.91 0-4.16.57-9.06 1.7-14.35l13.03-61.54c.4-2.04 1.25-3.53 2.55-4.47-1.3.94-2.14 2.43-2.55 4.47l-9.88 46.66h158.8c3.78 0 6.05-1.89 6.8-5.66l9.88-46.66h36.22zm-197.29.27-.07.02.07-.02.07-.02zm1.74-.26h-.04.12zm.35 0 .17-.01h-.17z" fill="url(#a)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/><path d="m429.06 796.56h-36.22c-3.78 0-5.29-1.89-4.53-5.66l32.33-151.78c.76-3.77 1.92-5.64 4.67-5.66a4.15 4.15 0 0 1 3.39 1.86c2.92 4.42 29.6 54.78 29.6 54.78h112c28.13 0 39.08 7.17 39.08 24.91 0 4.16-.57 9.07-1.7 14.35l-3.15 14.88h-158.8c-3.78 0-6.05 1.89-6.8 5.66l-9.88 46.66z" fill="url(#b)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/></g><path d="m724.34 149.5 7.61-35.98c.59-2.9 2.33-4.36 5.24-4.36h122.47l-7.62 35.98c-.58 2.91-2.32 4.37-5.24 4.37h-122.46z" fill="url(#c)" transform="matrix(-.15031 0 0 -.15031 213.6 43.44)"/><path d="m22.46 291.53c-1.22 0-1.95.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.47 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm178.98 0c-1.22 0-1.95.6-2.2 1.83l-8.94 42c-.24 1.21.24 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.19-1.82l8.95-42c.24-1.22-.25-1.83-1.46-1.83zm24.25 11.32c-.97 0-1.58.49-1.77 1.46l-1.46 6.82c-.18.97.19 1.46 1.16 1.46h5.54l-2.56 12.11a25.12 25.12 0 0 0-.67 5.18c0 5.17 2.86 7.3 10.6 7.3h8.15c.97 0 1.64-.49 1.83-1.46l1.4-6.82c.18-.97-.19-1.46-1.16-1.46h-6.09c-1.64 0-2.37-.24-2.37-1.46 0-.36.06-.79.18-1.28l2.56-12.11h8.52c.97 0 1.58-.49 1.76-1.46l1.47-6.82c.18-.97-.19-1.46-1.16-1.46h-8.52l1.7-7.85c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.21 0-1.94.61-2.19 1.83l-1.7 7.85zm-130.5 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.44 12.24-2.44 13.57 0 5.73 3.53 8.1 12.6 8.1h26.48c.97 0 1.58-.49 1.83-1.46l1.46-7c.18-.97-.18-1.46-1.16-1.46h-25.26c-2.74 0-3.59-.61-3.59-2.01 0-.37.06-.8.3-2h28.37c2.43 0 3.71-.86 4.26-3.54 1.83-8.28 2-9.68 2-10.9 0-4.32-2.49-5.96-9.18-5.96zm45.63 0c-.98 0-1.58.49-1.83 1.46l-1.46 7c-.18.98.18 1.46 1.16 1.46h25.26c2.74 0 3.59.55 3.59 1.95 0 .36-.06.85-.37 2.07h-22.21c-7.37 0-10.29 2.92-11.39 8.16-.9 4.56-1.03 5.66-1.03 6.63 0 3.9 2.2 5.6 8.1 5.6h29.58c3.59 0 4.75-.91 5.6-5l3.53-16.67c.36-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm132.01-11.32c-1.22 0-1.94.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.48 3.28l-3.6 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm-109.3 36.58h-17.48c-.85 0-1.22-.36-1.22-1.03 0-.13 0-.3.25-1.52.18-1.04.85-1.59 1.89-1.59h18.68l-.55 2.68c-.18.97-.73 1.46-1.58 1.46zm-74.06-12.05c.67-3.17 1.58-4.14 5.05-4.14h14.6c.86 0 1.22.3 1.22.97 0 .19 0 .37-.48 2.56-.06.43-.3.6-.73.6h-19.66z" fill="url(#d)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -.88 -53.06)"/><path d="m758.3 302.85c-11.2 0-15.52 3.6-17.46 12.66l-4.27 19.85c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l3.58-16.87c.92-4.13 1.77-5.1 5.24-5.1h15.95c2.25 0 2.98.36 2.98 1.82 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.19-19.85c.37-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm-227.22-.03c-1.22 0-1.95.61-2.19 1.83l-4.2 19.84a22.6 22.6 0 0 0-.55 4.63c0 5.72 3.53 8.03 12.6 8.03h17.35c11.2 0 15.58-3.59 17.53-12.66l4.2-19.84c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.22 0-1.94.61-2.19 1.83l-3.59 16.86c-.85 4.14-1.76 5.11-5.23 5.11h-15.47c-2.25 0-2.98-.36-2.98-1.82 0-.8.19-1.83.49-3.3l3.6-16.85c.23-1.22-.25-1.83-1.47-1.83zm124.82 0c-1.22 0-2 .61-2.25 1.83l-6.51 30.68c-.25 1.21.24 1.82 1.46 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l6.5-30.68c.25-1.22-.17-1.83-1.4-1.83h-8.2zm40 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.43 12.24-2.43 13.58 0 5.72 3.53 8.1 12.6 8.1h17.59c11.2 0 15.64-3.6 17.53-12.67 2.25-10.71 2.43-12.17 2.43-13.51 0-5.78-3.53-8.16-12.66-8.16h-17.6zm-89.65 0c-11.2 0-15.52 3.6-17.47 12.66l-4.26 19.84c-.24 1.22.24 1.83 1.46 1.83h8.22c1.21 0 1.95-.6 2.19-1.82l3.59-16.87c.91-4.13 1.76-5.1 5.24-5.1h15.94c2.25 0 2.99.36 2.99 1.82 0 .79-.19 1.82-.5 3.28l-3.58 16.87c-.25 1.21.24 1.82 1.46 1.82h8.22c1.21 0 1.94-.6 2.19-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.62 0-5.73-3.53-8.04-12.6-8.04zm83.62 14.8c.92-4.15 1.77-5.12 5.24-5.12h15.15c2.5 0 3.47.49 3.47 2.31 0 .73-.18 1.65-1.46 7.55-.91 4.14-1.76 5.11-5.23 5.11h-15.16c-2.5 0-3.47-.48-3.47-2.31 0-.73.19-1.64 1.46-7.55zm-31.23-27.76c-1.22 0-1.95.6-2.2 1.82l-1.33 6.09c-.24 1.22.24 1.83 1.46 1.83h8.22c1.22 0 1.95-.61 2.19-1.83l1.34-6.09c.24-1.21-.25-1.82-1.46-1.82z" fill="url(#e)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -11.55 -53.06)"/></svg></a>
+<p class="footer-intro">Migraine.com is a Health Union community. Health Union reaches millions of people through condition-specific online health communities and a Social Health Network of patient leaders across virtually all health conditions.</p>
+<div class="footer-socials">
+<a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 200 208" xmlns="http://www.w3.org/2000/svg"><path d="m185.22 0c8.16 0 14.78 6.66 14.78 14.88v177.94c0 8.22-6.62 14.88-14.78 14.88h-170.44c-8.16 0-14.78-6.66-14.78-14.88v-177.94c0-8.21 6.62-14.88 14.78-14.88zm-50.45 77.87c-15.94 0-23.13 9-27.16 15.38l-.06.1v-13.28h-30.21c.12 2.6.17 11.88.17 23.65v1.41c0 4.18-.01 8.53-.02 12.9l-.01 6.03c0 1.07 0 2.13-.01 3.19l0 1.27c-.05 18.98-.13 36.07-.14 38.49v.29h30.21v-52.37c0-2.8.2-5.6.99-7.61 2.18-5.6 7.15-11.4 15.5-11.4 10.93 0 15.3 8.6 15.3 21.21v50.17h30.21v-53.77c0-28.81-14.9-42.21-34.78-42.21zm-74.15 2.2h-30.21v93.78h30.21zm-14.9-45.21c-10.33 0-17.09 7-17.09 16.2 0 9 6.56 16.2 16.69 16.2h.2c10.53 0 17.09-7.2 17.09-16.2-.2-9.2-6.56-16.2-16.89-16.2z"/></svg></a>
+</div>
+</div>
+<div class="footer-communities">
+<h3>OUR COMMUNITIES</h3>
+<div class="communities-grid" id="footerCommunities"></div>
+</div>
+</div>
+<div class="footer-divider">
+<ul class="footer-links" id="footerLinks"></ul>
+<p class="footer-disclaimer">&copy; 2026 Health Union, LLC. All rights reserved. This information is not designed to replace a physician's independent judgment about the appropriateness or risks of a procedure for a given patient. Always consult your doctor about your medical conditions. Migraine.com does not provide medical advice, diagnosis or treatment. Use of the site is conditional upon your acceptance of our terms of use. This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
+</div>
+</div>
+</footer>
+
+<script>
+let $=id=>document.getElementById(id);
+
+/* === ICONS === */
+var ICON_LIKE='<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path class="reaction-icon-background" d="m46.82 21.02c-.45-1.59-1.38-2.79-2.7-3.47-1.51-.77-3.63-.54-5.87-.3-1.57.17-3.52.38-4.34.06-.37-.18-2.06-1.81-.64-4.8 1.62-3.43 2.65-7.03-.82-10.11-1.42-1.26-3.09-2.58-4.97-2.26-2.02.34-3 2.11-4.64 5.03-.91 1.62-2.04 3.64-3.67 6.06-5.29 7.86-11.8 7.4-12.14 7.37h-.21c-1.89-.01-3.37.54-4.42 1.62-1.35 1.39-1.37 3.06-1.36 3.32v13.75c0 2.08.89 3.24 1.63 3.86 1.53 1.26 3.5 1.09 4.09 1 4.81-.34 10.67-.28 11.81.34 2.06 1.17 6.49 3.68 12.22 3.68.97 0 1.98-.07 3.03-.24 5.54-.87 6.58-3.66 7.26-5.5.27-.74.46-1.2.79-1.52 2.26-2.15 3.85-3.86 3.85-6.34 0-.56-.07-1.09-.13-1.61-.15-1.23-.22-1.97.26-2.75 1.02-1.66 1.68-4.67.97-7.2z"/><path d="m30.78 46.17c-5.73 0-10.16-2.51-12.22-3.68-1.13-.62-7-.68-11.81-.34-.59.09-2.56.26-4.09-1-.74-.61-1.63-1.78-1.63-3.86v-13.75c0-.26.01-1.93 1.36-3.32 1.05-1.08 2.54-1.63 4.42-1.63h.21c.34.04 6.85.5 12.14-7.36 1.63-2.42 2.76-4.44 3.67-6.06 1.64-2.93 2.63-4.69 4.64-5.03 1.89-.31 3.56 1 4.97 2.26 3.47 3.08 2.44 6.68.82 10.11-1.41 2.99.27 4.62.64 4.8.82.33 2.77.11 4.34-.06 2.24-.24 4.35-.47 5.87.3 1.32.68 2.25 1.87 2.7 3.47.71 2.53.05 5.54-.97 7.2-.48.78-.41 1.51-.26 2.75.06.51.13 1.05.13 1.61 0 2.48-1.6 4.19-3.85 6.34-.33.32-.52.78-.79 1.52-.68 1.85-1.72 4.63-7.26 5.5-1.04.16-2.05.24-3.03.24z"/></svg>';
+var ICON_REPLY='<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m31.94 16.22h-24.83l11.33-10.7c.8-.76.84-2.02.08-2.83s-2.02-.84-2.83-.08l-14.89 14.07c-.4.38-.63.9-.63 1.45v.04.04c0 .74.41 1.38 1.01 1.73l14.66 13.88c.39.37.88.55 1.37.55.53 0 1.06-.21 1.45-.62.76-.8.72-2.07-.08-2.83l-11.31-10.7h24.65c7.36 0 11.93 3.86 11.93 10.07 0 6.73-4.2 10.43-11.84 10.43-1.1 0-2 .9-2 2s.9 2 2 2c9.92 0 15.84-5.39 15.84-14.43 0-8.42-6.4-14.07-15.93-14.07z"/></svg>';
+
+/* === FORUM CATEGORIES === */
+var TAGS=[
+  {id:'1',name:'Acute Treatment'},
+  {id:'2',name:'Aura'},
+  {id:'3',name:'Chronic Migraine'},
+  {id:'4',name:'Coping'},
+  {id:'5',name:'Diet & Nutrition'},
+  {id:'6',name:'Emotional Health'},
+  {id:'7',name:'Getting a Diagnosis'},
+  {id:'8',name:'Just Want to Talk'},
+  {id:'9',name:'Managing Triggers'},
+  {id:'10',name:'Medication Side Effects'},
+  {id:'11',name:'Newly Diagnosed'},
+  {id:'12',name:'Preventive Treatment'},
+  {id:'13',name:'Relationships'},
+  {id:'14',name:'Support'},
+  {id:'15',name:'Symptoms'},
+  {id:'16',name:'Treatment'},
+  {id:'17',name:'Vestibular Migraine'},
+  {id:'18',name:'Workplace'}
+];
+
+/* === THREAD DATA === */
+var THREADS=[
+  {id:'t1',isFeatured:true,lastActiveAt:'Active today',name:'Has anyone tried the new CGRP inhibitor?',body:'I just got prescribed Zavzpret (zavegepant) nasal spray and I\'m nervous about starting it. My neurologist says it\'s different from the injectable CGRPs I\'ve tried before. Has anyone here used it yet? What was your experience like?...',replyCount:47,tags:[{id:'16',name:'Treatment'},{id:'1',name:'Acute Treatment'}]},
+  {id:'t2',isFeatured:false,lastActiveAt:'Active today',name:'Migraine and missing out on life',body:'I was supposed to go to my best friend\'s wedding last weekend and I couldn\'t make it. Another migraine took that from me. I\'m so tired of cancelling plans and watching life happen without me...',replyCount:83,tags:[{id:'4',name:'Coping'},{id:'6',name:'Emotional Health'}]},
+  {id:'t3',isFeatured:false,lastActiveAt:'Active today',name:'Weather changes as a trigger — does anyone else deal with this?',body:'Every time the barometric pressure drops, I know a migraine is coming. I\'ve started tracking it with a weather app and the correlation is almost 100%. My doctor doesn\'t seem to take it seriously though...',replyCount:62,tags:[{id:'9',name:'Managing Triggers'},{id:'15',name:'Symptoms'}]},
+  {id:'t4',isFeatured:true,lastActiveAt:'Active today',name:'Botox round 3 — finally seeing results',body:'For anyone who is thinking about quitting Botox after the first or second round: please hang in there. I saw almost no improvement after my first two rounds and was ready to give up. Round 3 has been a game changer...',replyCount:38,tags:[{id:'12',name:'Preventive Treatment'},{id:'16',name:'Treatment'}]},
+  {id:'t5',isFeatured:false,lastActiveAt:'Active yesterday',name:'How do you explain migraine to your employer?',body:'I just started a new job and I\'m dreading the conversation about needing accommodations. My last boss was terrible about it — told me to "just take an Advil." How have you all handled this?...',replyCount:56,tags:[{id:'18',name:'Workplace'},{id:'13',name:'Relationships'}]},
+  {id:'t6',isFeatured:false,lastActiveAt:'Active yesterday',name:'Vestibular migraine — feeling so alone',body:'I was just diagnosed with vestibular migraine after months of dizziness, brain fog, and feeling like the floor is moving. I didn\'t even know this was a type of migraine. Is anyone else dealing with this?...',replyCount:91,tags:[{id:'17',name:'Vestibular Migraine'},{id:'14',name:'Support'}]},
+  {id:'t7',isFeatured:false,lastActiveAt:'Active 2 days ago',name:'Magnesium supplements — which type works best?',body:'My neurologist suggested I try magnesium supplements as a preventive. But when I went to the store, there were like 10 different types. Glycinate, citrate, oxide, threonate... Which one have you all had luck with?...',replyCount:44,tags:[{id:'12',name:'Preventive Treatment'},{id:'5',name:'Diet & Nutrition'}]},
+  {id:'t8',isFeatured:false,lastActiveAt:'Active 3 days ago',name:'Aura without headache — is this normal?',body:'For the past month I\'ve been getting visual auras (the zigzag lines and blind spots) but no headache follows. It\'s freaking me out. My doctor says it can happen but I\'d love to hear from others who experience this...',replyCount:29,tags:[{id:'2',name:'Aura'},{id:'15',name:'Symptoms'}]},
+  {id:'t9',isFeatured:false,lastActiveAt:'Active 4 days ago',name:'Newly diagnosed at 45 — feeling overwhelmed',body:'I always thought my "bad headaches" were just stress. Turns out I\'ve probably had migraine my whole life. Now I\'m learning about triggers, auras, and treatment options and it\'s a lot to take in...',replyCount:67,tags:[{id:'11',name:'Newly Diagnosed'},{id:'7',name:'Getting a Diagnosis'}]},
+  {id:'t10',isFeatured:false,lastActiveAt:'Active 6 days ago',name:'Does anyone else get migraine from screens?',body:'Working from home means 8+ hours of screen time and my migraines have gotten so much worse. I\'ve tried blue light glasses, f.lux, dark mode everything... nothing seems to help enough...',replyCount:53,tags:[{id:'9',name:'Managing Triggers'},{id:'18',name:'Workplace'}]}
+];
+
+/* === RENDER FUNCTIONS === */
+function renderMural(){
+  var html='';
+  for(var row=1;row<=6;row++){
+    html+='<div class="forums-index-header__mural-row">';
+    for(var b=1;b<=5;b++){
+      html+='<div class="forums-index-header__mural-bubble forums-index-header__mural-bubble--position-'+b+' forums-index-header__mural-bubble--'+row+b+'"><div class="forums-index-header__mural-dots"></div></div>';
+    }
+    html+='</div>';
+  }
+  $('muralContainer').innerHTML=html;
+}
+
+function renderThreads(threads){
+  var html='';
+  threads.forEach(function(t){
+    html+='<article class="thread-teaser">';
+    html+='<div class="thread-teaser__status">';
+    if(t.isFeatured)html+='<span class="thread-teaser__featured">Featured</span>';
+    html+='<span class="thread-teaser__activity">'+t.lastActiveAt+'</span>';
+    html+='</div>';
+    html+='<h2 class="thread-teaser__heading"><a href="#">'+t.name+'</a></h2>';
+    html+='<p class="thread-teaser__excerpt"><a href="#">'+t.body+'</a></p>';
+    html+='<div class="thread-teaser__engagement">';
+    html+='<div class="engagement-bar"><div class="engagement-bar__actions">';
+    html+='<button class="engagement-bar__action"><svg class="engagement-bar__action-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_LIKE.replace(/<\/?svg[^>]*>/g,'')+'</svg></button>';
+    html+='<a href="#" class="engagement-bar__action"><svg class="engagement-bar__action-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_REPLY.replace(/<\/?svg[^>]*>/g,'')+'</svg><span class="engagement-bar__action-count">'+t.replyCount+'</span><span class="engagement-bar__action-text">'+(t.replyCount===1?'reply':'replies')+'</span></a>';
+    html+='</div></div>';
+    if(t.tags&&t.tags.length>0){
+      html+='<ul class="tag-list">';
+      t.tags.forEach(function(tag){
+        html+='<li class="tag-list__tag"><a href="#" class="tag-list__tag-link">'+tag.name+'</a></li>';
+      });
+      html+='</ul>';
+    }
+    html+='</div>';
+    html+='</article>';
+  });
+  $('threadsList').innerHTML=html;
+}
+
+function renderTagPicker(tags){
+  var html='';
+  tags.forEach(function(tag){
+    html+='<li><button type="button" class="tag-picker__tag" data-tag-id="'+tag.id+'">'+tag.name+'</button></li>';
+  });
+  $('tagPickerList').innerHTML=html;
+}
+
+function renderPagination(){
+  var caretPath='m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z';
+  var caretSvg=function(cls){return '<svg class="pagination-controls__button-icon '+cls+'" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="'+caretPath+'"/></svg>'};
+  var html='';
+  html+='<div class="pagination-controls__nav-container"><a href="#" class="pagination-controls__nav-button pagination-controls__nav-button--disabled" aria-label="Previous page">'+caretSvg('pagination-controls__button-icon--prev')+'</a></div>';
+  html+='<button class="pagination-controls__current-page-number" aria-current="page">1</button>';
+  html+='<a href="#" class="pagination-controls__number">2</a>';
+  html+='<a href="#" class="pagination-controls__number">3</a>';
+  html+='<a href="#" class="pagination-controls__number">4</a>';
+  html+='<a href="#" class="pagination-controls__number">5</a>';
+  html+='<span class="pagination-controls__dots">...</span>';
+  html+='<a href="#" class="pagination-controls__number">12</a>';
+  html+='<div class="pagination-controls__nav-container"><a href="#" class="pagination-controls__nav-button" aria-label="Next page">'+caretSvg('pagination-controls__button-icon--next')+'</a></div>';
+  $('pagination').innerHTML=html;
+}
+
+/* === TAG PICKER INTERACTIVITY === */
+function setupTagPicker(){
+  var selectedTags=[];
+  $('tagPickerList').addEventListener('click',function(e){
+    var btn=e.target.closest('.tag-picker__tag');
+    if(!btn)return;
+    var tagId=btn.getAttribute('data-tag-id');
+    if(btn.classList.contains('tag-picker__tag--selected')){
+      btn.classList.remove('tag-picker__tag--selected');
+      selectedTags=selectedTags.filter(function(id){return id!==tagId});
+    } else {
+      if(selectedTags.length>=3)return;
+      btn.classList.add('tag-picker__tag--selected');
+      selectedTags.push(tagId);
+    }
+    filterThreads(selectedTags);
+  });
+
+  $('tagSearchInput').addEventListener('input',function(){
+    var q=this.value.toLowerCase();
+    var items=$('tagPickerList').querySelectorAll('.tag-picker__tag');
+    items.forEach(function(btn){
+      var li=btn.parentElement;
+      li.style.display=btn.textContent.toLowerCase().includes(q)?'':'none';
+    });
+  });
+}
+
+function filterThreads(selectedTagIds){
+  if(selectedTagIds.length===0){
+    renderThreads(THREADS);
+    return;
+  }
+  var filtered=THREADS.filter(function(t){
+    return t.tags.some(function(tag){return selectedTagIds.includes(tag.id)});
+  });
+  renderThreads(filtered.length>0?filtered:THREADS);
+}
+
+/* === NAV DRAWER (shared) === */
+var IK='<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z"/></svg>';
+var navItems=[{title:'Community',url:'#',items:[{title:'Forum',url:'#'},{title:'Share Your Story',url:'#'},{title:'Advocate Leaders',url:'#'},{title:'Stories',url:'#'}]},{title:'Migraine Types',url:'#',items:[{title:'Migraine With Aura',url:'#'},{title:'Migraine Without Aura',url:'#'},{title:'Chronic Migraine',url:'#'},{title:'Hemiplegic Migraine',url:'#'},{title:'Vestibular Migraine',url:'#'},{title:'Ocular Migraine',url:'#'}]},{title:'Living With Migraine',url:'#',items:[{title:'Coping',url:'#'},{title:'Emotional Health',url:'#'},{title:'Diet & Nutrition',url:'#'},{title:'Relationships',url:'#'},{title:'Workplace',url:'#'}]},{title:'Symptoms',url:'#',items:[{title:'Headache',url:'#'},{title:'Aura',url:'#'},{title:'Nausea',url:'#'},{title:'Sensitivity to Light',url:'#'},{title:'Sensitivity to Sound',url:'#'}]},{title:'Treatment',url:'#',items:[{title:'Preventive Treatment',url:'#'},{title:'Acute Treatment',url:'#'},{title:'Alternative Treatment',url:'#'},{title:'Clinical Trials',url:'#'}]},{title:'Mental Health',url:'#',items:[{title:'Anxiety',url:'#'},{title:'Depression',url:'#'},{title:'Stress',url:'#'}]},{title:'Featured Collections',url:'#',items:[{title:'Newly Diagnosed',url:'#'},{title:'Videos',url:'#'},{title:'Recipes',url:'#'}]},{title:'Health Resources',url:'#',items:[{title:'Migraine Basics',url:'#'},{title:'Diagnosis',url:'#'},{title:'Doctor Discussion Guide',url:'#'}]},{title:'Migraine & COVID-19',url:'#'}];
+var CM=['AdvancedBreastCancer.net','AdvancedOvarianCancer.net','Allergies.net','AlzheimersDisease.net','Asthma.net','AtopicDermatitis.net','ATTR-Amyloidosis.net','BloodCancer.com','CardiovascularDisease.net','ChronicDryEye.net','COPD.net','CrohnsDisease.net','Cystic-Fibrosis.com','DiabetesType2.com','Endometriosis.net','EpilepsyDisease.com','HeartFailure.net','HepatitisC.net','H-I-V.net','InflammatoryBowelDisease.net','LungCancer.net','MacularDegeneration.net','Migraine.com','MultipleSclerosis.net','Myasthenia-Gravis.net','Neuromyelitis-Optica.net','Obesity.net','ParkinsonsDisease.net','PlaquePsoriasis.com','ProstateCancer.net','RareDisease.net','RheumatoidArthritis.net','SkinCancer.net','Sleep-Disorders.net','SpinalMuscularAtrophy.net','Type2Diabetes.com'];
+var FL=['About Us','Terms of Use','Privacy Notice','Your Privacy Choices','Cookie Settings','Community Rules','Ad Choices'];
+
+var rNav=function(item,child){var h=item.items&&item.items.length;var html='<li class="nav-item'+(child?' nav-item--child':'')+'"><a class="nav-item__link" href="'+item.url+'">'+item.title+'</a>';if(h){html+='<button class="nav-item__expand" aria-expanded="false" aria-label="Expand '+item.title+' navigation">'+IK+'</button><ul class="nav-item__children" style="display:none">';item.items.forEach(function(c){html+=rNav(c,true)});html+='</ul>'}return html+'</li>'};
+var nL=$('navList');
+nL.innerHTML=navItems.map(function(i){return rNav(i,false)}).join('');
+nL.addEventListener('click',function(e){var btn=e.target.closest('.nav-item__expand');if(!btn)return;var ch=btn.closest('.nav-item').querySelector('.nav-item__children');var o=ch.style.display!=='none';ch.style.display=o?'none':'block';btn.setAttribute('aria-expanded',o?'false':'true');btn.classList.toggle('nav-item__expand--open',!o)});
+var mB=$('menuBtn'),nD=$('navDrawer'),nO=$('navOverlay');
+var toggleNav=function(open){nD.classList.toggle('open',open);nO.classList.toggle('open',open);mB.classList.toggle('hdr-btn--menu-open',open);mB.setAttribute('aria-expanded',open?'true':'false');document.body.style.overflow=open?'hidden':''};
+mB.addEventListener('click',function(){toggleNav(!nD.classList.contains('open'))});
+nO.addEventListener('click',function(){toggleNav(false)});
+document.addEventListener('keyup',function(e){if(e.key==='Escape')toggleNav(false)});
+$('loginBtn').addEventListener('click',function(){this.style.display='none';$('avatarBtn').classList.add('show')});
+
+/* === FOOTER DATA === */
+$('footerCommunities').innerHTML=CM.map(function(c){return '<a href="#">'+c+'</a>'}).join('');
+$('footerLinks').innerHTML=FL.map(function(l){return '<li><a href="#">'+l+'</a></li>'}).join('');
+
+/* === INIT === */
+renderMural();
+renderThreads(THREADS);
+renderTagPicker(TAGS);
+renderPagination();
+setupTagPicker();
+
+/* === ACCESSIBILITY MENU === */
+var a11yMenu=$('a11yMenu');
+var a11yBtn=document.querySelector('.hdr-btn--accessibility');
+var a11yReset=$('a11yReset');
+var A11Y_KEY='temu_a11y_settings';
+var A11Y_DEFAULTS={fontSize:'font-reg',contrast:'contrast-reg'};
+var FONT_CLS=['font-reg','font-lg','font-xl'];
+var CONTRAST_CLS=['contrast-reg','contrast-low','contrast-light','contrast-dark'];
+
+function loadA11y(){try{var s=localStorage.getItem(A11Y_KEY);return s?Object.assign({},A11Y_DEFAULTS,JSON.parse(s)):Object.assign({},A11Y_DEFAULTS)}catch(e){return Object.assign({},A11Y_DEFAULTS)}}
+function saveA11y(s){try{localStorage.setItem(A11Y_KEY,JSON.stringify(s))}catch(e){}}
+function applyA11y(s){
+  FONT_CLS.forEach(function(c){document.body.classList.remove(c)});
+  CONTRAST_CLS.forEach(function(c){document.body.classList.remove(c)});
+  if(s.fontSize!=='font-reg')document.body.classList.add(s.fontSize);
+  if(s.contrast!=='contrast-reg')document.body.classList.add(s.contrast);
+  a11yMenu.querySelectorAll('.a11y-option').forEach(function(btn){
+    btn.classList.toggle('a11y-option--selected',s[btn.dataset.setting]===btn.dataset.value);
+  });
+}
+var a11ySettings=loadA11y();
+applyA11y(a11ySettings);
+
+a11yBtn.addEventListener('click',function(){
+  if(a11yMenu.hasAttribute('hidden')){a11yMenu.removeAttribute('hidden');a11yMenu.focus()}
+  else{a11yMenu.setAttribute('hidden','')}
+});
+document.addEventListener('click',function(e){
+  if(!a11yMenu.hasAttribute('hidden')&&!a11yMenu.contains(e.target)&&!a11yBtn.contains(e.target))
+    a11yMenu.setAttribute('hidden','');
+});
+document.addEventListener('keyup',function(e){
+  if(e.key==='Escape'&&!a11yMenu.hasAttribute('hidden')){a11yMenu.setAttribute('hidden','');a11yBtn.focus()}
+});
+a11yMenu.addEventListener('click',function(e){
+  var btn=e.target.closest('.a11y-option');if(!btn)return;
+  a11ySettings[btn.dataset.setting]=btn.dataset.value;
+  saveA11y(a11ySettings);applyA11y(a11ySettings);
+});
+a11yReset.addEventListener('click',function(){
+  a11ySettings=Object.assign({},A11Y_DEFAULTS);
+  saveA11y(a11ySettings);applyA11y(a11ySettings);
+});
+</script>
+</body>
+</html>
