@@ -418,6 +418,100 @@
       padding: 32px 24px;
     }
 
+    /* === POLL + AD SIDE BY SIDE (matches prod layout) === */
+    .poll-ad-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 40px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .poll-ad-row .poll-card {
+      max-width: 480px;
+      flex: 1;
+    }
+    .poll-ad-row .ad-slot {
+      flex-shrink: 0;
+    }
+
+    /* === LEADERBOARD AD === */
+    .leaderboard-slot {
+      text-align: center;
+      padding: 16px 24px 8px;
+    }
+    .ad-leaderboard {
+      width: 728px;
+      height: 90px;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+
+    /* === LEARN MORE + RELATED ARTICLES (matches prod pv-recos) === */
+    .pv-recos-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 100px;
+      text-align: center;
+    }
+    .pv-recos-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 500px;
+      max-width: 500px;
+      padding: 10px;
+      margin: 10px 0;
+      background: var(--hu-light);
+    }
+    .pv-recos-h2 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: rgba(0,32,41,0.6);
+      margin-bottom: 24px;
+    }
+    .pv-recos-h3 {
+      font-size: 19px;
+      color: var(--cyan-dark);
+      margin-bottom: 24px;
+    }
+    .pv-recos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 1080px;
+    }
+    .pv-reco-container {
+      width: 220px;
+      padding: 10px;
+      text-align: center;
+    }
+    .pv-reco-container a {
+      text-decoration: none;
+      color: var(--cyan-darker);
+    }
+    .pv-reco-container a:hover { text-decoration: underline; }
+    .pv-reco-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+    }
+    .pv-reco-container h3 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-top: 12px;
+      color: var(--cyan-darker);
+    }
+
     /* === NEWSLETTER / FOOTER === */
     .footer-signup {
       background: var(--hu-lighter); padding: 32px 0;
@@ -525,6 +619,20 @@
   <div class="nav-drawer__nav"><ul class="nav-drawer__list" id="navList"></ul></div>
 </nav>
 
+<!-- LEADERBOARD AD (top of page, matches prod) -->
+<div class="leaderboard-slot">
+  <span class="ad-label">Advertisement</span>
+  <div class="ad-leaderboard">
+    <div class="fake-ad" style="background:linear-gradient(135deg,#1a6b8a 0%,#379EC1 50%,#67C7E5 100%);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg width="28" height="28" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><rect fill="#1E7EBE" width="256" height="256" rx="40"/><g transform="translate(-0.5,0.074)"><polygon fill="#fff" opacity=".9" points="85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164"/></g></svg>
+        <span style="font-weight:700;letter-spacing:1px;">Ready to <span style="background:#E8A838;padding:2px 6px;border-radius:3px;font-style:italic;">engage with other people</span> living with migraine?</span>
+      </div>
+      <div style="font-size:11px;font-weight:700;margin-left:8px;">See what's happening &rarr;</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===================== CAS PAGE ===================== -->
 <div class="layout--cas">
 
@@ -562,9 +670,9 @@
       </div>
     </div>
 
-    <!-- SECTION 3: Poll 1 -->
+    <!-- SECTION 3: Poll 1 + Ad (side by side, matches prod) -->
     <div class="content__container">
-      <div class="poll-section">
+      <div class="poll-ad-row">
         <div class="poll-card">
           <div class="poll-card__icon">
             <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
@@ -587,12 +695,6 @@
             <button class="poll-card__submit">Submit</button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4: Ad slot -->
-    <div class="content__container">
-      <div class="cas-ad-slot">
         <div class="ad-slot">
           <span class="ad-label">Advertisement</span>
           <div class="ad-square">
@@ -638,9 +740,9 @@
       </div>
     </div>
 
-    <!-- SECTION 7: Poll 2 -->
+    <!-- SECTION 7: Poll 2 + Ad (side by side) -->
     <div class="content__container">
-      <div class="poll-section">
+      <div class="poll-ad-row">
         <div class="poll-card">
           <div class="poll-card__icon">
             <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
@@ -663,6 +765,16 @@
               <label class="poll-option"><div class="poll-option__radio"></div> Much worse</label>
             </div>
             <button class="poll-card__submit">Submit</button>
+          </div>
+        </div>
+        <div class="ad-slot">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-square">
+            <div class="fake-ad" style="background:linear-gradient(160deg,#002E3B 0%,#1a6b8a 60%,#67C7E5 100%);">
+              <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.7;margin-bottom:4px;">in America</div>
+              <div style="font-size:16px;font-weight:700;line-height:1.3;">Tell us about<br>the <span style="background:#E8A838;padding:1px 4px;">unseen</span> side<br>of a diagnosis.</div>
+              <div class="fake-ad__cta" style="margin-top:10px;">Be heard &rarr;</div>
+            </div>
           </div>
         </div>
       </div>
@@ -745,9 +857,41 @@
       </div>
     </div>
 
-    <!-- SECTION 13: Poll 3 -->
+    <!-- SECTION 13: Learn More + Related Articles (matches prod pv-recos) -->
     <div class="content__container">
-      <div class="poll-section">
+      <div class="pv-recos-section">
+        <div class="pv-recos-title">
+          <h2 class="pv-recos-h2">Learn More</h2>
+          <p class="pv-recos-h3">...about how others are living with this condition.</p>
+        </div>
+        <div class="pv-recos">
+          <div class="pv-reco-container">
+            <a href="#"><img class="pv-reco-img" src="http://eqmvii.github.io/beta-temu-nexus/assets/reco-barriers.jpg" alt="Getting the Migraine Care We Need"></a>
+            <a href="#"><h3>Getting the Migraine Care We Need: The Barriers We Face</h3></a>
+          </div>
+          <div class="pv-reco-container">
+            <a href="#"><img class="pv-reco-img" src="http://eqmvii.github.io/beta-temu-nexus/assets/reco-impact.jpg" alt="When Can Do Turns into Can't Do"></a>
+            <a href="#"><h3>When &ldquo;Can Do&rdquo; Turns into &ldquo;Can&rsquo;t Do&rdquo;: The Impact of Migraine</h3></a>
+          </div>
+          <div class="pv-reco-container">
+            <a href="#"><img class="pv-reco-img" src="http://eqmvii.github.io/beta-temu-nexus/assets/reco-relationships.jpg" alt="The Toll of Migraine on Relationships"></a>
+            <a href="#"><h3>The Toll of Migraine on Relationships</h3></a>
+          </div>
+          <div class="pv-reco-container">
+            <a href="#"><img class="pv-reco-img" src="http://eqmvii.github.io/beta-temu-nexus/assets/reco-triggers.png" alt="Our Most Surprising Migraine Triggers"></a>
+            <a href="#"><h3>Our Most Surprising Migraine Triggers</h3></a>
+          </div>
+          <div class="pv-reco-container">
+            <a href="#"><img class="pv-reco-img" src="http://eqmvii.github.io/beta-temu-nexus/assets/reco-tips.jpg" alt="Living With Migraine: Tips to Take Back Our Power"></a>
+            <a href="#"><h3>Living With Migraine: Tips to Take Back Our Power</h3></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 14: Poll 3 + Ad (side by side) -->
+    <div class="content__container">
+      <div class="poll-ad-row">
         <div class="poll-card">
           <div class="poll-card__icon">
             <svg viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
@@ -768,6 +912,15 @@
               <label class="poll-option"><div class="poll-option__radio"></div> Never</label>
             </div>
             <button class="poll-card__submit">Submit</button>
+          </div>
+        </div>
+        <div class="ad-slot">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-square">
+            <div class="fake-ad" style="background:linear-gradient(150deg,#67C7E5 0%,#379EC1 50%,#1a6b8a 100%);">
+              <div style="font-size:14px;font-weight:700;line-height:1.4;">People are talking<br>in the forums!</div>
+              <div style="margin-top:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">See what's happening &raquo;</div>
+            </div>
           </div>
         </div>
       </div>
@@ -833,7 +986,7 @@ document.getElementById('footerLinks').innerHTML = footerLinks.map(l => `<li><a 
 /* Nav drawer */
 const ICON_CARET = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m24.44 42.45-22.71-22.71c-1.56-1.56-1.56-4.09 0-5.66 1.56-1.56 4.09-1.56 5.66 0l17.05 17.05 16.27-16.27c1.56-1.56 4.09-1.56 5.66 0 1.56 1.56 1.56 4.09 0 5.66z"/></svg>';
 const navMenuItems = [
-  { title:'Community', url:'#', items:[{title:'Forum',url:'#'},{title:'Share Your Story',url:'#'},{title:'Stories',url:'#'}]},
+  { title:'Community', url:'#', items:[{title:'Forum',url:'forums.html'},{title:'Share Your Story',url:'#'},{title:'Stories',url:'#'}]},
   { title:'Migraine Types', url:'#', items:[{title:'Chronic Migraine',url:'#'},{title:'Migraine With Aura',url:'#'},{title:'Vestibular Migraine',url:'#'}]},
   { title:'Living With Migraine', url:'#', items:[{title:'Coping',url:'#'},{title:'Emotional Health',url:'#'},{title:'Relationships',url:'#'}]},
   { title:'Treatment', url:'#', items:[{title:'Preventive Treatment',url:'#'},{title:'Acute Treatment',url:'#'}]},

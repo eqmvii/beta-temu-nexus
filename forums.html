@@ -203,11 +203,20 @@ img{display:block;max-width:100%}
 /* === ENGAGEMENT BAR === */
 .engagement-bar{display:inline-block;flex-shrink:0}
 .engagement-bar__actions{display:flex;flex-wrap:wrap-reverse;justify-content:flex-start;gap:8px}
-.engagement-bar__action{display:flex;align-items:center;gap:4px;padding:0 12px;height:40px;font-size:14px;text-decoration:none;background:var(--cyan-lighter);border:0;border-radius:20px;cursor:pointer;transition:background 200ms,color 200ms;color:var(--cyan-darker)}
+.engagement-bar__action{display:flex;align-items:center;gap:4px;padding:0 12px;height:44px;font-size:14px;text-decoration:none;background:var(--cyan-lighter);border:0;border-radius:22px;cursor:pointer;transition:background 200ms,color 200ms;color:var(--cyan-darker)}
 .engagement-bar__action:hover{background:var(--cyan-lighter-hover);color:inherit;text-decoration:none}
-.engagement-bar__action-icon{width:28px;height:28px;fill:var(--cyan)}
+.engagement-bar__action-icon{width:28px;height:28px;fill:var(--cyan);display:flex;align-items:center}
+.engagement-bar__action-icon svg{width:28px;height:28px}
 .engagement-bar__action-count{font-weight:600}
 .engagement-bar__action-text{font-weight:600}
+/* === REACTION BUTTON (like pill) === */
+.reaction-button{display:flex;align-items:center;gap:4px;padding:0 12px;height:44px;font-size:14px;background:#E2FCFC;border:0;border-radius:22px;cursor:pointer;transition:background 200ms}
+.reaction-button:hover{background:#B7F5F4}
+.reaction-button__icon{width:28px;height:28px;display:flex;align-items:center}
+.reaction-button__icon svg{width:28px;height:28px}
+.reaction-button__icon--default{fill:#0EAEAC}
+.reaction-button__count{font-weight:600}
+.reaction-button__text{font-weight:600}
 
 /* === TAG LIST (inline pills on teasers) === */
 .tag-list{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:14px;line-height:1.4;list-style:none;padding:0;margin:0}
@@ -219,10 +228,10 @@ img{display:block;max-width:100%}
 .tag-picker__heading{font-family:geologica-variable,sans-serif;font-size:18px;font-weight:800;color:var(--cyan-darker);margin-bottom:4px}
 .tag-picker__instructions{font-size:14px;line-height:1.4;color:var(--gray-dark);margin-bottom:24px}
 .tag-picker__search{position:relative;margin-bottom:16px}
-.tag-picker__search-input{width:100%;padding:8px 36px 8px 12px;border:1px solid var(--hu-light);border-radius:var(--radius);font-size:14px;font-family:inherit;outline:none;color:var(--cyan-darker)}
+.tag-picker__search-input{width:100%;padding:10px 16px 10px 40px;border:1px solid var(--hu-light);border-radius:22px;font-size:16px;font-family:inherit;outline:none;color:var(--cyan-darker)}
 .tag-picker__search-input:focus{border-color:var(--cyan)}
 .tag-picker__search-input::placeholder{color:var(--gray)}
-.tag-picker__search-icon{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:var(--gray);pointer-events:none}
+.tag-picker__search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:var(--gray);pointer-events:none}
 .tag-picker__tag-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px 8px}
 .tag-picker__tag{padding:6px 16px;font-size:13px;font-weight:600;background:var(--cyan-lighter);border:0;border-radius:99px;cursor:pointer;transition:background 200ms;color:var(--cyan-darker);font-family:inherit}
 .tag-picker__tag:hover{background:var(--cyan-lighter-hover)}
@@ -571,8 +580,8 @@ function renderThreads(threads){
     html+='<p class="thread-teaser__excerpt"><a href="#">'+t.body+'</a></p>';
     html+='<div class="thread-teaser__engagement">';
     html+='<div class="engagement-bar"><div class="engagement-bar__actions">';
-    html+='<button class="engagement-bar__action"><svg class="engagement-bar__action-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_LIKE.replace(/<\/?svg[^>]*>/g,'')+'</svg></button>';
-    html+='<a href="#" class="engagement-bar__action"><svg class="engagement-bar__action-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_REPLY.replace(/<\/?svg[^>]*>/g,'')+'</svg><span class="engagement-bar__action-count">'+t.replyCount+'</span><span class="engagement-bar__action-text">'+(t.replyCount===1?'reply':'replies')+'</span></a>';
+    html+='<button class="reaction-button"><span class="reaction-button__icon reaction-button__icon--default"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_LIKE.replace(/<\/?svg[^>]*>/g,'')+'</svg></span><span class="reaction-button__text">reactions</span></button>';
+    html+='<a href="#" class="engagement-bar__action"><span class="engagement-bar__action-icon"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">'+ICON_REPLY.replace(/<\/?svg[^>]*>/g,'')+'</svg></span><span class="engagement-bar__action-count">'+t.replyCount+'</span><span class="engagement-bar__action-text">'+(t.replyCount===1?'reply':'replies')+'</span></a>';
     html+='</div></div>';
     if(t.tags&&t.tags.length>0){
       html+='<ul class="tag-list">';
