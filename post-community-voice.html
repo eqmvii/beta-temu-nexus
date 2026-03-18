@@ -1982,6 +1982,283 @@
     .explore__reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
     .explore__reset svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+    /* === SEARCH MODAL === */
+    .search-modal-overlay {
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,20,27,0.75); backdrop-filter: blur(6px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding-top: 80px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .search-modal-overlay--open {
+      opacity: 1; visibility: visible;
+    }
+    .search-modal {
+      width: 620px; max-height: calc(100vh - 120px);
+      background: linear-gradient(135deg, #002029 0%, #0a2f3d 40%, #0d3b4d 100%);
+      border-radius: 16px; overflow: hidden; overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(55,158,193,0.15);
+      transform: translateY(-20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+    }
+    .search-modal-overlay--open .search-modal {
+      transform: translateY(0) scale(1);
+    }
+    .search-modal::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(55,158,193,0.1) 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 80%, rgba(30,126,190,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .search-modal__close {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .search-modal__close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .search-modal__header {
+      position: relative; padding: 28px 28px 0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .search-modal__icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(55,158,193,0.3), rgba(30,126,190,0.25));
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .search-modal__icon svg { width: 22px; height: 22px; fill: none; stroke: var(--cyan-light); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .search-modal__header-text h2 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 700; color: #fff; margin: 0; letter-spacing: 0.2px;
+    }
+    .search-modal__header-text p {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin: 2px 0 0; line-height: 1.3;
+    }
+    .search-modal__ai-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; margin-left: 8px;
+      background: linear-gradient(135deg, rgba(103,199,229,0.15), rgba(30,126,190,0.2));
+      border: 1px solid rgba(103,199,229,0.25);
+      border-radius: 10px; font-size: 9px; font-weight: 700;
+      color: var(--cyan-light); text-transform: uppercase; letter-spacing: 0.8px;
+      vertical-align: middle;
+    }
+    .search-modal__ai-tag svg { width: 10px; height: 10px; fill: none; stroke: var(--cyan-light); stroke-width: 2; }
+
+    /* Search input phase */
+    .search-modal__input-phase { position: relative; padding: 20px 28px 24px; }
+    .search-modal__prompt {
+      font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.65); margin-bottom: 14px;
+    }
+    .search-modal__prompt strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+    .search-modal__textarea {
+      width: 100%; min-height: 90px; max-height: 150px; padding: 14px 16px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; font-size: 14px; font-family: inherit; color: #fff;
+      line-height: 1.6; outline: none; resize: vertical;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .search-modal__textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .search-modal__textarea:focus {
+      border-color: rgba(55,158,193,0.5);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 3px rgba(55,158,193,0.1);
+    }
+    .search-modal__chips {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+    }
+    .search-modal__chip {
+      padding: 6px 14px; border-radius: 20px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6); font-size: 12px; font-family: inherit; cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .search-modal__chip:hover {
+      background: rgba(55,158,193,0.15); border-color: rgba(55,158,193,0.3); color: var(--cyan-light);
+    }
+    .search-modal__submit-row {
+      display: flex; align-items: center; justify-content: space-between; margin-top: 16px;
+    }
+    .search-modal__hint {
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .search-modal__hint svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.25); stroke-width: 2; stroke-linecap: round; }
+    .search-modal__submit {
+      padding: 10px 28px; border: none; border-radius: 8px;
+      background: linear-gradient(135deg, var(--cyan), var(--brand));
+      color: #fff; font-size: 13px; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: transform 0.1s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 2px 12px rgba(55,158,193,0.3);
+    }
+    .search-modal__submit:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(55,158,193,0.4); }
+    .search-modal__submit:active { transform: scale(0.98); }
+    .search-modal__submit:disabled { opacity: 0.4; cursor: default; transform: none; box-shadow: none; }
+    .search-modal__submit svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Thinking phase */
+    .search-modal__thinking {
+      display: none; padding: 48px 28px 40px; text-align: center; position: relative;
+    }
+    .search-modal__thinking--active { display: block; }
+    .search-modal__thinking-orb-wrap {
+      width: 80px; height: 80px; margin: 0 auto 24px; position: relative;
+    }
+    .search-modal__thinking-orb {
+      width: 80px; height: 80px; border-radius: 50%; position: relative;
+      background: radial-gradient(circle, rgba(103,199,229,0.25) 0%, transparent 70%);
+    }
+    .search-modal__thinking-orb::before {
+      content: ''; position: absolute; inset: 6px; border-radius: 50%;
+      border: 2.5px solid transparent; border-top-color: var(--cyan-light); border-right-color: var(--cyan);
+      animation: sm-spin 1s linear infinite;
+    }
+    .search-modal__thinking-orb::after {
+      content: ''; position: absolute; inset: 16px; border-radius: 50%;
+      border: 2.5px solid transparent; border-bottom-color: var(--brand); border-left-color: var(--cyan-light);
+      animation: sm-spin 1.5s linear infinite reverse;
+    }
+    .search-modal__thinking-core {
+      position: absolute; inset: 24px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(103,199,229,0.4) 0%, rgba(30,126,190,0.15) 100%);
+      animation: sm-pulse 2s ease-in-out infinite;
+    }
+    @keyframes sm-spin { to { transform: rotate(360deg); } }
+    @keyframes sm-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    .search-modal__thinking-text {
+      font-family: geologica-variable, sans-serif;
+      font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 6px;
+    }
+    .search-modal__thinking-sub {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 20px;
+    }
+    .search-modal__thinking-dots {
+      display: inline-flex; gap: 4px; margin-left: 3px;
+    }
+    .search-modal__thinking-dots span {
+      width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5);
+      animation: sm-dot 1.4s ease-in-out infinite;
+    }
+    .search-modal__thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .search-modal__thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes sm-dot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
+    }
+    .search-modal__progress-bar {
+      width: 280px; height: 3px; margin: 0 auto; border-radius: 2px;
+      background: rgba(255,255,255,0.06); overflow: hidden; position: relative;
+    }
+    .search-modal__progress-fill {
+      position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--brand));
+      border-radius: 2px; transition: width 0.6s ease-out;
+    }
+    .search-modal__thinking-steps {
+      margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .search-modal__step-item {
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.3s;
+    }
+    .search-modal__step-item--done { color: rgba(74,222,128,0.7); }
+    .search-modal__step-item--active { color: rgba(255,255,255,0.7); }
+    .search-modal__step-check { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; }
+    .search-modal__step-check svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Results phase */
+    .search-modal__results {
+      display: none; padding: 0 28px 28px; position: relative;
+    }
+    .search-modal__results--active { display: block; }
+    .search-modal__results-intro {
+      padding: 16px 20px; margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(55,158,193,0.1), rgba(30,126,190,0.08));
+      border: 1px solid rgba(55,158,193,0.15); border-radius: 10px;
+      font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.7);
+      opacity: 0; animation: sm-fade-in 0.6s ease 0.1s forwards;
+    }
+    .search-modal__results-intro strong { color: var(--cyan-light); font-weight: 600; }
+    @keyframes sm-fade-in { to { opacity: 1; } }
+    .search-modal__results-group { margin-bottom: 20px; }
+    .search-modal__results-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.35); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .search-modal__results-label svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .search-modal__result-card {
+      display: block; padding: 14px 16px; margin-bottom: 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      cursor: pointer; opacity: 0; animation: sm-card-in 0.5s ease forwards;
+    }
+    .search-modal__result-card:nth-child(2) { animation-delay: 0.15s; }
+    .search-modal__result-card:nth-child(3) { animation-delay: 0.3s; }
+    .search-modal__result-card:nth-child(4) { animation-delay: 0.45s; }
+    .search-modal__result-card:hover {
+      background: rgba(255,255,255,0.08); border-color: rgba(55,158,193,0.3);
+      transform: translateX(4px); text-decoration: none;
+    }
+    @keyframes sm-card-in { to { opacity: 1; } }
+    .search-modal__result-type {
+      display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; padding: 2px 8px; border-radius: 3px; margin-bottom: 6px;
+    }
+    .search-modal__result-type--article { background: rgba(30,126,190,0.2); color: var(--cyan-light); }
+    .search-modal__result-type--forum { background: rgba(74,222,128,0.15); color: #4ADE80; }
+    .search-modal__result-type--story { background: rgba(251,191,36,0.15); color: #FBBF24; }
+    .search-modal__result-relevance {
+      float: right; font-size: 10px; font-weight: 700; color: rgba(55,158,193,0.8);
+      padding: 2px 8px; border-radius: 10px; background: rgba(55,158,193,0.1);
+    }
+    .search-modal__result-title {
+      font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9);
+      margin-bottom: 4px; line-height: 1.4;
+    }
+    .search-modal__result-excerpt {
+      font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5;
+    }
+    .search-modal__result-excerpt em { color: var(--cyan-light); font-style: normal; font-weight: 600; }
+    .search-modal__result-meta {
+      display: flex; align-items: center; gap: 10px; margin-top: 8px;
+      font-size: 11px; color: rgba(255,255,255,0.35);
+    }
+    .search-modal__result-meta svg { width: 11px; height: 11px; fill: none; stroke: rgba(255,255,255,0.35); stroke-width: 2; stroke-linecap: round; }
+    .search-modal__result-meta-item { display: flex; align-items: center; gap: 3px; }
+    .search-modal__results-footer {
+      display: flex; align-items: center; gap: 10px; margin-top: 12px;
+    }
+    .search-modal__reset {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .search-modal__reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+    .search-modal__reset svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .search-modal__view-all {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 20px; background: linear-gradient(135deg, var(--cyan), var(--brand));
+      border: none; border-radius: 8px; color: #fff; font-size: 12px; font-weight: 700;
+      font-family: inherit; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(55,158,193,0.3);
+    }
+    .search-modal__view-all:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(55,158,193,0.4); }
+    .search-modal__view-all svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
     /* === ASK YOUR DOCTOR CHECKLIST === */
     .ayd {
       margin: 32px 0; border-radius: 12px; overflow: hidden;
@@ -2530,6 +2807,64 @@
   </div>
 </nav>
 <!-- ===================== END HEADER ===================== -->
+
+<!-- SEARCH MODAL -->
+<div class="search-modal-overlay" id="searchOverlay">
+  <div class="search-modal">
+    <button class="search-modal__close" id="searchClose">&times;</button>
+
+    <div class="search-modal__header">
+      <div class="search-modal__icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="search-modal__header-text">
+        <h2>Find what matters to you <span class="search-modal__ai-tag"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> AI-Powered</span></h2>
+        <p>Personalized search across 12,000+ articles, stories, and forum posts</p>
+      </div>
+    </div>
+
+    <!-- Input phase -->
+    <div class="search-modal__input-phase" id="searchInput">
+      <div class="search-modal__prompt">
+        <strong>Tell us where you are in your migraine journey</strong> so we can surface the most relevant content for you. The more detail you share, the better we can match.
+      </div>
+      <textarea class="search-modal__textarea" id="searchTextarea" placeholder="e.g. I was diagnosed 6 months ago and I'm struggling to find a preventive that works. I've tried topiramate but the side effects were awful. Looking for others who've been through something similar..."></textarea>
+      <div class="search-modal__chips">
+        <button class="search-modal__chip" data-text="I'm newly diagnosed and don't know where to start">Newly diagnosed</button>
+        <button class="search-modal__chip" data-text="I've had chronic migraine for years and nothing seems to work anymore">Treatment-resistant</button>
+        <button class="search-modal__chip" data-text="I need help explaining migraine to my family and coworkers">Explaining to others</button>
+        <button class="search-modal__chip" data-text="I'm looking for community — I feel alone in this">Finding community</button>
+        <button class="search-modal__chip" data-text="I want to learn about CGRP medications and newer treatments">New treatments</button>
+      </div>
+      <div class="search-modal__submit-row">
+        <span class="search-modal__hint">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Your input stays private &mdash; never shared
+        </span>
+        <button class="search-modal__submit" id="searchSubmit" disabled>
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Search the community
+        </button>
+      </div>
+    </div>
+
+    <!-- Thinking phase -->
+    <div class="search-modal__thinking" id="searchThinking">
+      <div class="search-modal__thinking-orb-wrap">
+        <div class="search-modal__thinking-orb">
+          <div class="search-modal__thinking-core"></div>
+        </div>
+      </div>
+      <div class="search-modal__thinking-text" id="searchThinkingText"></div>
+      <div class="search-modal__thinking-sub" id="searchThinkingSub"></div>
+      <div class="search-modal__progress-bar"><div class="search-modal__progress-fill" id="searchProgressFill"></div></div>
+      <div class="search-modal__thinking-steps" id="searchStepList"></div>
+    </div>
+
+    <!-- Results phase -->
+    <div class="search-modal__results" id="searchResults"></div>
+  </div>
+</div>
 
 <!-- LEADERBOARD AD -->
 <div class="post-leaderboard">
@@ -4364,6 +4699,247 @@ document.getElementById('repliesToggle1').addEventListener('click', function() {
   renderCategories();
   renderQuestions();
   updateCounter();
+})();
+
+/* ============================================================
+   SEARCH MODAL
+============================================================ */
+(function() {
+  var overlay = document.getElementById('searchOverlay');
+  var modal = overlay.querySelector('.search-modal');
+  var closeBtn = document.getElementById('searchClose');
+  var textarea = document.getElementById('searchTextarea');
+  var submitBtn = document.getElementById('searchSubmit');
+  var inputPhase = document.getElementById('searchInput');
+  var thinkingPhase = document.getElementById('searchThinking');
+  var thinkingText = document.getElementById('searchThinkingText');
+  var thinkingSub = document.getElementById('searchThinkingSub');
+  var progressFill = document.getElementById('searchProgressFill');
+  var stepList = document.getElementById('searchStepList');
+  var resultsPhase = document.getElementById('searchResults');
+  var chips = overlay.querySelectorAll('.search-modal__chip');
+  var dots = '<span class="search-modal__thinking-dots"><span></span><span></span><span></span></span>';
+
+  // Open
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    overlay.classList.add('search-modal-overlay--open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { textarea.focus(); }, 350);
+  });
+
+  // Close
+  function closeModal() {
+    overlay.classList.remove('search-modal-overlay--open');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('search-modal-overlay--open')) closeModal();
+  });
+
+  // Chips
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      textarea.value = chip.getAttribute('data-text');
+      textarea.dispatchEvent(new Event('input'));
+      textarea.focus();
+    });
+  });
+
+  // Enable/disable submit
+  textarea.addEventListener('input', function() {
+    submitBtn.disabled = textarea.value.trim().length < 10;
+  });
+
+  submitBtn.addEventListener('click', function() {
+    if (submitBtn.disabled) return;
+    startSearch();
+  });
+  textarea.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey && !submitBtn.disabled) {
+      e.preventDefault();
+      startSearch();
+    }
+  });
+
+  var THINKING_STEPS = [
+    { text: 'Understanding your journey', sub: 'Analyzing key themes and needs', pct: 15 },
+    { text: 'Scanning 12,847 community posts', sub: 'Matching against articles, stories, and forums', pct: 40 },
+    { text: 'Ranking by relevance to you', sub: 'Weighing topic match, recency, and engagement', pct: 65 },
+    { text: 'Building personalized results', sub: 'Selecting the best content for your situation', pct: 85 },
+    { text: 'Finalizing your results', sub: 'Almost ready', pct: 100 }
+  ];
+
+  var SEARCH_RESULTS = [
+    {
+      intro: 'Based on your journey, we found content from members and experts who truly understand what you\'re going through. <strong>These were selected specifically for where you are right now.</strong>',
+      articles: [
+        { title: 'Navigating Your First Year With Migraine', excerpt: 'From the <em>shock of diagnosis</em> to finding your footing — a guide by someone who\'s been there. Covers what to expect, how to talk to your doctor, and building your support system.', author: 'Kerrie S.', readTime: '8 min', reactions: 247, relevance: '97%' },
+        { title: 'The Treatment Landscape: What I Wish I\'d Known', excerpt: 'A breakdown of <em>preventive vs. acute treatments</em>, CGRP inhibitors, and what questions to ask your neurologist before your next appointment.', author: 'Dr. Marcus R.', readTime: '12 min', reactions: 412, relevance: '94%' }
+      ],
+      stories: [
+        { title: 'I Tried 7 Preventives Before Finding One That Works', excerpt: 'The <em>side effects nearly broke me</em>, but here\'s what I learned about advocating for myself through every failed medication.', author: 'Sarah M.', readTime: '5 min', reactions: 189, relevance: '92%' }
+      ],
+      forums: [
+        { title: 'Just diagnosed — what do I do first?', excerpt: '142 members shared their "first steps" — the thread that <em>hundreds wish they\'d found sooner</em>', replies: 142, relevance: '96%' },
+        { title: 'Topiramate side effects: what\'s normal?', excerpt: 'Honest experiences from <em>members who\'ve been on it</em> — brain fog, tingling, weight loss, and when to call your doctor', replies: 89, relevance: '91%' }
+      ]
+    },
+    {
+      intro: 'We matched your experience against thousands of community voices. <strong>Here\'s what resonated most with your story.</strong>',
+      articles: [
+        { title: 'An Open Letter to Those Without Migraine', excerpt: '<em>Migraine is not "just a headache."</em> This letter bridges the gap between patients and the people who love them. The most-shared article in our community\'s history.', author: 'Kerrie S.', readTime: '7 min', reactions: 1340, relevance: '98%' },
+        { title: 'When Migraine Becomes Your Unwanted Companion', excerpt: 'After a decade of chronic migraine, here\'s how I <em>stopped fighting and started adapting</em> — and why that shift changed everything.', author: 'Lisa T.', readTime: '10 min', reactions: 603, relevance: '93%' }
+      ],
+      stories: [
+        { title: 'The Day I Stopped Apologizing for Being Sick', excerpt: 'I spent years feeling guilty for <em>canceling plans and missing work</em>. This is the story of how I found self-compassion.', author: 'Jamie L.', readTime: '4 min', reactions: 312, relevance: '95%' }
+      ],
+      forums: [
+        { title: 'Things people say that make you feel unseen', excerpt: 'A cathartic thread about the <em>invisible side of migraine</em> — "you don\'t look sick," "have you tried drinking water?"', replies: 312, relevance: '96%' },
+        { title: 'How do you explain migraine to your boss?', excerpt: 'Real scripts and strategies from members who\'ve <em>navigated workplace disclosure</em>', replies: 178, relevance: '89%' }
+      ]
+    },
+    {
+      intro: 'Your search connected with some of the most powerful content in our community. <strong>These are personally curated for your situation.</strong>',
+      articles: [
+        { title: 'Redefining "Good Days" With Chronic Migraine', excerpt: 'What does a good day look like when you\'ve had migraine for 15 years? It\'s <em>more than pain-free</em> — it\'s about reclaiming small victories.', author: 'James W.', readTime: '6 min', reactions: 288, relevance: '95%' },
+        { title: 'CGRP Inhibitors: A Patient\'s Honest Review', excerpt: 'After trying Aimovig, Ajovy, and Emgality, here\'s my <em>unfiltered experience</em> with the newest class of migraine preventives.', author: 'Rachel K.', readTime: '9 min', reactions: 534, relevance: '93%' }
+      ],
+      stories: [
+        { title: 'Finding My People: How This Community Changed My Life', excerpt: 'I joined expecting medical tips. Instead I found <em>people who finally understood</em> — and that changed more than any medication.', author: 'Monica D.', readTime: '6 min', reactions: 445, relevance: '97%' }
+      ],
+      forums: [
+        { title: 'Veterans check-in: how are you really doing?', excerpt: 'An honest space for <em>long-term migraineurs</em> to share without sugarcoating', replies: 267, relevance: '94%' },
+        { title: 'Has anyone switched treatments after 5+ years?', excerpt: 'Stories of <em>hope from members who found new relief</em> when they thought nothing would work', replies: 134, relevance: '90%' }
+      ]
+    }
+  ];
+
+  function startSearch() {
+    inputPhase.style.display = 'none';
+    thinkingPhase.classList.add('search-modal__thinking--active');
+    progressFill.style.width = '0%';
+
+    // Build step checklist
+    stepList.innerHTML = THINKING_STEPS.map(function(s, i) {
+      return '<div class="search-modal__step-item" id="searchStep' + i + '">' +
+        '<span class="search-modal__step-check"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></span>' +
+        s.text + '</div>';
+    }).join('');
+
+    var step = 0;
+    function nextStep() {
+      if (step < THINKING_STEPS.length) {
+        var s = THINKING_STEPS[step];
+        thinkingText.innerHTML = s.text + dots;
+        thinkingSub.textContent = s.sub;
+        progressFill.style.width = s.pct + '%';
+
+        // Mark previous as done
+        if (step > 0) {
+          var prev = document.getElementById('searchStep' + (step - 1));
+          prev.classList.remove('search-modal__step-item--active');
+          prev.classList.add('search-modal__step-item--done');
+          prev.querySelector('.search-modal__step-check').innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        }
+        var cur = document.getElementById('searchStep' + step);
+        cur.classList.add('search-modal__step-item--active');
+
+        step++;
+        setTimeout(nextStep, 700 + Math.random() * 500);
+      } else {
+        // Mark last as done
+        var last = document.getElementById('searchStep' + (step - 1));
+        last.classList.remove('search-modal__step-item--active');
+        last.classList.add('search-modal__step-item--done');
+        last.querySelector('.search-modal__step-check').innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(showSearchResults, 400);
+      }
+    }
+    nextStep();
+  }
+
+  function showSearchResults() {
+    thinkingPhase.classList.remove('search-modal__thinking--active');
+    var set = SEARCH_RESULTS[Math.floor(Math.random() * SEARCH_RESULTS.length)];
+    var html = '';
+
+    html += '<div class="search-modal__results-intro">' + set.intro + '</div>';
+
+    // Articles
+    html += '<div class="search-modal__results-group">';
+    html += '<div class="search-modal__results-label"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Recommended Articles</div>';
+    set.articles.forEach(function(a) {
+      html += '<a class="search-modal__result-card" href="#">';
+      html += '<span class="search-modal__result-relevance">' + a.relevance + ' match</span>';
+      html += '<span class="search-modal__result-type search-modal__result-type--article">Article</span>';
+      html += '<div class="search-modal__result-title">' + a.title + '</div>';
+      html += '<div class="search-modal__result-excerpt">' + a.excerpt + '</div>';
+      html += '<div class="search-modal__result-meta">';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + a.author + '</span>';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + a.readTime + '</span>';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ' + a.reactions + '</span>';
+      html += '</div></a>';
+    });
+    html += '</div>';
+
+    // Stories
+    html += '<div class="search-modal__results-group">';
+    html += '<div class="search-modal__results-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Community Stories</div>';
+    set.stories.forEach(function(s) {
+      html += '<a class="search-modal__result-card" href="#">';
+      html += '<span class="search-modal__result-relevance">' + s.relevance + ' match</span>';
+      html += '<span class="search-modal__result-type search-modal__result-type--story">Story</span>';
+      html += '<div class="search-modal__result-title">' + s.title + '</div>';
+      html += '<div class="search-modal__result-excerpt">' + s.excerpt + '</div>';
+      html += '<div class="search-modal__result-meta">';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + s.author + '</span>';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + s.readTime + '</span>';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ' + s.reactions + '</span>';
+      html += '</div></a>';
+    });
+    html += '</div>';
+
+    // Forums
+    html += '<div class="search-modal__results-group">';
+    html += '<div class="search-modal__results-label"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Community Conversations</div>';
+    set.forums.forEach(function(f) {
+      html += '<a class="search-modal__result-card" href="#">';
+      html += '<span class="search-modal__result-relevance">' + f.relevance + ' match</span>';
+      html += '<span class="search-modal__result-type search-modal__result-type--forum">Forum</span>';
+      html += '<div class="search-modal__result-title">' + f.title + '</div>';
+      html += '<div class="search-modal__result-excerpt">' + f.excerpt + '</div>';
+      html += '<div class="search-modal__result-meta">';
+      html += '<span class="search-modal__result-meta-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> ' + f.replies + ' replies</span>';
+      html += '</div></a>';
+    });
+    html += '</div>';
+
+    // Footer
+    html += '<div class="search-modal__results-footer">';
+    html += '<button class="search-modal__reset" id="searchReset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> New search</button>';
+    html += '<button class="search-modal__view-all"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> View all results</button>';
+    html += '</div>';
+
+    resultsPhase.innerHTML = html;
+    resultsPhase.classList.add('search-modal__results--active');
+
+    // Scroll modal to top of results
+    modal.scrollTop = 0;
+
+    document.getElementById('searchReset').addEventListener('click', function() {
+      resultsPhase.classList.remove('search-modal__results--active');
+      resultsPhase.innerHTML = '';
+      textarea.value = '';
+      submitBtn.disabled = true;
+      progressFill.style.width = '0%';
+      inputPhase.style.display = '';
+      setTimeout(function() { textarea.focus(); }, 100);
+    });
+  }
 })();
 </script>
 </body>
