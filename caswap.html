@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parenting and Migraine: Guilt, Genetics, and Coping Tips — Migraine.com</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect fill='%231E7EBE' width='256' height='256'/%3E%3Cg transform='translate(-0.5,0.074)'%3E%3Cpath d='M98 254V205H80C71 205 63 202 57 195 50 189 47 181 47 172V77C47 69 50 61 57 55 63 50 71 47 80 47H178C196 47 209 60 209 77V172C209 181 206 189 200 195 195 202 187 205 178 205H150L98 254ZM80 52C72 52 65 55 60 59 55 64 52 70 52 77V172C52 187 65 201 80 201H103V242L148 201H178C185 201 192 198 196 192 201 187 204 180 204 172V77C204 70 201 64 197 59 192 54 185 52 178 52Z' fill='%23fff' opacity='.4'/%3E%3Cpolygon fill='%23fff' opacity='.8' points='85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164'/%3E%3C/g%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: oblique 10deg;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    /* === TOKENS === */
+    :root {
+      --cyan:        #379EC1;
+      --cyan-dark:   #002E3B;
+      --cyan-darker: #002029;
+      --cyan-light:  #67C7E5;
+      --cyan-lighter:#EAF8FC;
+      --brand:       #1E7EBE;
+      --white:       #ffffff;
+      --gray:        #8C9BA5;
+      --gray-dark:   #5E676D;
+      --hu-light:    #B3C4CD;
+      --hu-lighter:  #ECF0F3;
+      --hu-lightest: #F5F7F9;
+      --hu-neutral:  #4A6572;
+      --shadow:      0 0 10px 2px rgba(179,196,205,0.3);
+      --shadow-card: 0 2px 8px rgba(0,32,41,0.08);
+      --radius:      4px;
+      --radius-card: 6px;
+      --max-w:       1080px;
+      --header-h:    48px;
+      --announce-h:  32px;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      font-size: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-size: 1.1875rem;
+      line-height: 1.8;
+      color: var(--cyan-darker);
+      background: var(--white);
+      padding-top: var(--header-h);
+    }
+    a { color: inherit; text-decoration: underline; text-decoration-color: var(--cyan); text-decoration-thickness: 2px; text-underline-offset: 0.0625em; }
+    a:hover { color: var(--cyan); }
+    button { font-family: inherit; cursor: pointer; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* === CONTENT DRIVER BANNER (announce bar) === */
+    .announce-bar {
+      position: sticky;
+      top: var(--header-h); left: 0; right: 0;
+      z-index: 298;
+      background: #ACE3ED;
+      display: flex; justify-content: center;
+      text-align: center;
+      padding: 12px 16px;
+      line-height: 1.2;
+      color: var(--cyan-darker);
+    }
+    .announce-bar a { font-weight: 600; }
+
+    /* === HEADER === */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 299;
+      height: var(--header-h);
+      background: var(--cyan-darker);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px 0 60px;
+    }
+    .header__left  { display: flex; align-items: center; }
+    .header__right { display: flex; align-items: center; }
+
+    .site-logo {
+      position: absolute; top: 0; left: 0;
+      width: 48px; height: 48px;
+      display: block;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .site-logo__avatar {
+      width: 48px; height: 48px;
+      overflow: hidden;
+    }
+    .site-logo__avatar svg { width: 48px; height: 48px; display: block; }
+    .site-logo__name {
+      color: #fff;
+      font-family: geologica-variable, sans-serif;
+      font-size: 17px; font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .hdr-btn {
+      background: transparent; border: 0; cursor: pointer;
+      color: #fff;
+      display: flex; justify-content: center; align-items: center;
+      padding: 4px;
+      min-width: 48px; height: 48px;
+      font-size: 16px; font-weight: 600; font-family: inherit;
+      white-space: nowrap;
+      margin-left: 4px;
+    }
+    .hdr-btn:hover { background: rgba(255,255,255,0.08); }
+    .hdr-btn svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+      fill: #fff;
+      pointer-events: none;
+    }
+    .hdr-btn__text {
+      margin-left: 8px;
+      font-weight: 600;
+      pointer-events: none;
+    }
+    .hdr-btn--accessibility { margin-left: auto; }
+    .hdr-btn--search { margin-left: 0; }
+    .hdr-btn--log-in { margin-right: 12px; }
+
+    .hamburger {
+      width: 16px; height: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hamburger::before, .hamburger::after,
+    .hamburger__filling::before, .hamburger__filling::after {
+      content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 2px; background: #fff; border-radius: 1px;
+      transition: transform 300ms, opacity 300ms;
+    }
+    .hamburger::before { top: 0; }
+    .hamburger::after { bottom: 0; }
+    .hamburger__filling {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; height: 2px;
+    }
+    .hamburger__filling::before, .hamburger__filling::after {
+      top: 0;
+    }
+    .hdr-btn--menu-open .hamburger::before,
+    .hdr-btn--menu-open .hamburger::after { opacity: 0; }
+    .hdr-btn--menu-open .hamburger__filling::before {
+      transform: translateX(-50%) rotate(45deg) scaleX(1.3);
+    }
+    .hdr-btn--menu-open .hamburger__filling::after {
+      transform: translateX(-50%) rotate(-45deg) scaleX(1.3);
+    }
+
+    .hdr-subscribe {
+      padding: 4px 24px;
+      min-height: 36px;
+      background: #0B474E; color: #39E3E1;
+      border: none; border-radius: 32px;
+      font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer;
+      white-space: nowrap; margin: 0 8px;
+      line-height: 1;
+      transition: background 200ms;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .hdr-subscribe:hover { background: #06343C; color: #39E3E1; }
+
+
+
+    /* === AD SLOTS === */
+    .ad-slot { text-align: center; position: relative; }
+    .ad-label {
+      display: block; font-size: 10px; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .ad-leaderboard {
+      width: 728px; height: 90px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-square {
+      width: 300px; height: 250px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-halfpage {
+      width: 300px; height: 600px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .fake-ad {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 5px; padding: 10px;
+      text-align: center; color: #fff;
+      position: relative;
+    }
+    .fake-ad__rx  { font-size: 10px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; }
+    .fake-ad__brand { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .fake-ad__tagline { font-size: 11px; line-height: 1.35; opacity: 0.88; max-width: 260px; }
+    .fake-ad__cta {
+      margin-top: 6px; padding: 5px 14px;
+      border-radius: 3px; font-size: 11px; font-weight: 700;
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5);
+    }
+    .fake-ad__isi {
+      position: absolute; bottom: 5px; left: 8px; right: 8px;
+      font-size: 8.5px; opacity: 0.55; line-height: 1.3;
+    }
+
+    /* === PAGE WRAP === */
+    .page-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* === CAS LEADERBOARD === */
+    .cas-leaderboard {
+      padding: 14px 0 12px;
+      background: var(--hu-lightest);
+      border-bottom: 1px solid var(--hu-lighter);
+      text-align: center;
+    }
+
+    /* === CAS LAYOUT === */
+    .cas-layout {
+      padding: 0;
+      text-align: center;
+      background: transparent;
+    }
+
+    /* === CAS HERO === */
+    .cas-hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      overflow: hidden;
+    }
+    .cas-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* === CAS HEADING === */
+    .cas-heading {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 24px 24px 16px;
+      text-align: center;
+    }
+    .cas-heading h1 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--cyan-dark);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .cas-heading .cas-byline {
+      font-size: 14px;
+      color: var(--gray-dark);
+      margin-top: 8px;
+    }
+    .cas-heading .cas-byline a {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* === FEATURE SECTION === */
+    .feature-section {
+      margin: 0;
+    }
+    .feature-section__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+      min-height: 300px;
+      position: relative;
+    }
+    .feature-section__image {
+      flex: 0 0 500px;
+      overflow: hidden;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+    .feature-section__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-section__content {
+      flex: 1;
+      padding: 32px;
+      color: #fff;
+    }
+    .feature-section__content h2 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .feature-section__content h2 a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .feature-section__content h2 a:hover {
+      text-decoration: underline;
+    }
+    .feature-section__content p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #fff;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+    .feature-section__footer {
+      display: flex;
+      align-items: center;
+    }
+
+    /* === CAS COLUMNS (2-col: main + sidebar) === */
+    .cas-columns-wrap {
+      background: var(--cyan-lighter);
+    }
+    .cas-columns {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 8px 32px 24px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .cas-columns__main {
+      flex: 2;
+      padding-right: 32px;
+    }
+    .cas-columns__sidebar {
+      flex: 1;
+      padding-left: 32px;
+    }
+
+    /* === CAS POST TEASER (article cards) === */
+    .cas-teaser {
+      background: transparent;
+      box-shadow: none;
+      margin: 0 0 32px;
+      padding: 0 0 24px;
+      border-bottom: 1px solid var(--hu-lighter);
+    }
+    .cas-teaser:last-child {
+      border-bottom: none;
+    }
+    .cas-teaser a {
+      text-decoration: none;
+    }
+    .cas-teaser__image {
+      display: block;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      overflow: hidden;
+      max-width: 72%;
+    }
+    .cas-teaser__image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .cas-teaser__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .cas-teaser__heading a {
+      color: var(--cyan-darker);
+      text-decoration: none;
+    }
+    .cas-teaser__heading a:hover {
+      color: var(--cyan);
+    }
+    .cas-teaser__summary {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--cyan-darker);
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+    .cas-teaser__engagement {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .cas-teaser__eng-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--gray-dark);
+    }
+    .cas-teaser__eng-item svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--cyan);
+    }
+
+    /* === CAS SIDEBAR TEASER === */
+    .sidebar-teaser {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--hu-lighter);
+    }
+    .sidebar-teaser:last-child {
+      border-bottom: none;
+    }
+    .sidebar-teaser__image {
+      display: block;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .sidebar-teaser__image img {
+      width: 100%;
+      height: auto;
+    }
+    .sidebar-teaser__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .sidebar-teaser__heading a {
+      color: var(--cyan-darker);
+      text-decoration: none;
+    }
+    .sidebar-teaser__heading a:hover {
+      color: var(--cyan);
+    }
+    .sidebar-teaser__summary {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--gray-dark);
+    }
+
+    /* === POLL COMPONENT (matches prod .poll) === */
+    .poll {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin: 24px 0;
+      background: #D9DFE3;
+    }
+    .poll__main {
+      display: flex;
+    }
+    .poll__image {
+      flex-shrink: 0;
+      width: 205px;
+      background: var(--cyan-lighter);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .poll__icon { width: 125px; height: 125px; }
+    .poll__icon svg { display: block; width: 100%; height: auto; }
+
+    /* Poll bar chart animation */
+    @keyframes poll-line-1 {
+      0% { height: 32px; }
+      8% { height: 55px; }
+      16% { height: 50px; }
+      24% { height: 32px; }
+      100% { height: 32px; }
+    }
+    @keyframes poll-line-2 {
+      0% { height: 66px; }
+      8% { height: 40px; }
+      24% { height: 66px; }
+      100% { height: 66px; }
+    }
+    @keyframes poll-line-3 {
+      0% { height: 49px; }
+      8% { height: 40px; }
+      16% { height: 60px; }
+      24% { height: 49px; }
+      100% { height: 49px; }
+    }
+    .poll__icon--animated .poll-icon__line-1 {
+      animation: poll-line-1 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
+    .poll__icon--animated .poll-icon__line-2 {
+      animation: poll-line-2 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
+    .poll__icon--animated .poll-icon__line-3 {
+      animation: poll-line-3 5s cubic-bezier(0.37, 0, 0.46, 1.42) infinite;
+    }
+    .poll__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px 16px 40px;
+    }
+    .poll__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--cyan);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .poll__question {
+      font-family: geologica-variable, sans-serif;
+      font-size: 19px; font-weight: 700;
+      color: var(--cyan-darker);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+    .poll-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px;
+    }
+    .poll-form__options {
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+    .poll-radio {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+    .poll-radio__input {
+      flex-shrink: 0;
+      margin: 0 8px;
+      width: 24px; height: 24px;
+      border: 3px solid var(--cyan);
+      border-radius: 50%;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.2s;
+    }
+    .poll-radio__input:hover { background: var(--cyan-lighter); }
+    .poll-radio__input:checked {
+      background: var(--cyan);
+      box-shadow: inset 0 0 0 2px #fff;
+    }
+    .poll-radio__label {
+      font-size: 18px; font-weight: 600;
+      color: var(--cyan-darker);
+      cursor: pointer; line-height: 1.3;
+    }
+    .poll__submit {
+      min-width: 150px;
+      min-height: 48px;
+      padding: 13px 20px;
+      background: var(--cyan); color: #fff;
+      border: 2px solid var(--cyan);
+      border-radius: var(--radius);
+      font-size: 18px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .poll__submit:hover { background: #2C7D99; border-color: #2C7D99; }
+
+    /* === RECOMMENDED READING (bottom section) === */
+    .recommended-reading {
+      background: var(--cyan-lighter);
+      padding: 32px;
+      border-top: 1px solid var(--hu-lighter);
+    }
+    .recommended-reading__list {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      padding: 0;
+      list-style: none;
+      gap: 0;
+    }
+    .recommended-reading__item {
+      flex: 1;
+      border-right: 1px solid var(--hu-lighter);
+      padding: 0 16px;
+      text-align: center;
+    }
+    .recommended-reading__item:last-child {
+      border-right: 0;
+    }
+    .recommended-reading__item:first-child {
+      padding-left: 0;
+    }
+    .recommended-reading__item:last-child {
+      padding-right: 0;
+    }
+    .recommended-reading-teaser {
+      text-align: center;
+    }
+    .recommended-reading-teaser__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+    .recommended-reading-teaser__link:hover {
+      text-decoration: none;
+    }
+    .recommended-reading-teaser__image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 10px;
+    }
+    .recommended-reading-teaser__title {
+      font-family: geologica-variable, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--cyan-darker);
+      margin: 0;
+    }
+    .recommended-reading-teaser__link:hover .recommended-reading-teaser__title {
+      color: var(--cyan);
+    }
+
+    /* === FOOTER-SIGNUP === */
+    .footer-signup {
+      background: var(--hu-lighter);
+      padding: 32px 0;
+    }
+    .footer-signup__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: flex-start;
+    }
+    .footer-signup__form {
+      display: inline-block;
+      margin-right: 48px;
+      max-width: 504px;
+    }
+    .footer-signup__label {
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--cyan-dark);
+      margin-bottom: 16px; display: block;
+    }
+    .footer-signup__row { display: flex; height: 48px; }
+    .footer-signup__input {
+      width: 100%; min-width: 280px; padding: 8px 4px 8px 24px;
+      border: 1px solid #D9DFE3; border-right: none;
+      border-radius: 24px 0 0 24px;
+      font-size: 18px; font-family: inherit; outline: none;
+      color: var(--cyan-darker);
+    }
+    .footer-signup__input:focus { border-color: var(--cyan); }
+    .footer-signup__btn {
+      padding: 0 16px;
+      background: var(--cyan); color: #fff;
+      border: 1px solid #D9DFE3; border-left: none;
+      border-radius: 0 24px 24px 0;
+      font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer;
+      white-space: nowrap;
+    }
+    .footer-signup__btn:hover { background: #2d8aac; }
+    .footer-signup__notice {
+      font-size: 14px; color: rgba(0,32,41,0.6);
+      margin-top: 16px; line-height: 1.6;
+    }
+    .footer-signup__notice a { color: inherit; text-decoration: underline; }
+    /* Social follow icons in footer top */
+    .footer-top-socials {
+      display: inline-flex; align-items: center; gap: 24px;
+      margin-top: 44px;
+    }
+    .footer-top-social {
+      display: inline-block; text-decoration: none;
+    }
+    .footer-top-social svg {
+      width: 44px; height: 44px;
+      fill: var(--cyan-dark); display: block;
+    }
+    .footer-top-social:hover svg { fill: var(--cyan); }
+
+    /* === FOOTER === */
+    .footer-bottom {
+      background: var(--cyan-dark);
+      padding: 32px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex;
+      justify-content: flex-start;
+      gap: 0;
+    }
+    .footer-left {
+      flex-shrink: 0;
+      margin-right: 56px;
+    }
+    .footer-hu-logo {
+      display: block;
+      width: 220px; height: 52px;
+      margin-bottom: 8px;
+    }
+    .footer-hu-logo svg { width: 100%; height: 100%; display: block; }
+    .footer-intro {
+      font-size: 16px; line-height: 1.6;
+      color: #fff; max-width: 280px;
+      margin-bottom: 24px;
+    }
+    .footer-socials {
+      display: flex; gap: 4px;
+      margin-bottom: 24px;
+      margin-left: -10px;
+    }
+    .footer-social {
+      display: inline-block; text-decoration: none;
+      padding: 10px;
+    }
+    .footer-social svg { width: 24px; height: 24px; fill: var(--hu-light); display: block; }
+    .footer-social:hover svg { fill: #fff; }
+    .footer-communities {
+      flex-grow: 1;
+    }
+    .footer-communities h3 {
+      font-size: 16px; font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .communities-grid {
+      column-count: 3;
+      column-gap: 12px;
+      padding-left: 0;
+    }
+    .communities-grid a {
+      font-size: 16px; color: #fff;
+      line-height: 2;
+      display: block;
+    }
+    .communities-grid a:hover { color: var(--hu-light); text-decoration: none; }
+    .footer-divider {
+      max-width: var(--max-w); margin: 20px auto 0;
+      padding: 16px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 14px;
+      padding: 0; list-style: none;
+    }
+    .footer-links li {
+      display: inline-block;
+      margin-right: 24px;
+    }
+    .footer-links a {
+      font-size: 16px; color: var(--hu-light);
+      text-transform: uppercase; line-height: 1;
+    }
+    .footer-links a:hover { color: var(--hu-light); text-decoration: none; }
+    .footer-disclaimer {
+      font-size: 14px; color: var(--hu-light); line-height: 1.6;
+      margin: 16px auto;
+    }
+    .footer-disclaimer a { color: inherit; text-decoration: underline; }
+
+    /* === CAS SWITCHER TOOLBAR === */
+    .cas-switcher {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 500;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 8px;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .cas-switcher__label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      padding-bottom: 4px;
+    }
+    .cas-switcher__btn {
+      width: 44px;
+      height: 44px;
+      padding: 4px;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .cas-switcher__btn:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .cas-switcher__btn--active {
+      background: rgba(103,199,229,0.1);
+      border-color: rgba(103,199,229,0.25);
+    }
+    .cas-switcher__btn img {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" role="banner">
+  <a class="site-logo" href="index.html" aria-label="Migraine.com home">
+    <div class="site-logo__avatar">
+      <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+        <rect fill="#1E7EBE" width="256" height="256"/>
+        <g transform="translate(-0.5,0.074)">
+          <path d="M98 254V205H80C71 205 63 202 57 195 50 189 47 181 47 172V77C47 69 50 61 57 55 63 50 71 47 80 47H178C196 47 209 60 209 77V172C209 181 206 189 200 195 195 202 187 205 178 205H150L98 254ZM80 52C72 52 65 55 60 59 55 64 52 70 52 77V172C52 187 65 201 80 201H103V242L148 201H178C185 201 192 198 196 192 201 187 204 180 204 172V77C204 70 201 64 197 59 192 54 185 52 178 52Z" fill="#fff" opacity=".4"/>
+          <polygon fill="#fff" opacity=".8" points="85,164 85,87 101,87 131,137 124,137 153,87 169,87 169,164 153,164 153,108 156,109 133,149 121,149 97,109 100,108 100,164"/>
+        </g>
+      </svg>
+    </div>
+  </a>
+  <div class="header__left">
+    <span class="hdr-btn">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="#fff"><rect y="1" width="16" height="2" rx="1"/><rect y="7" width="16" height="2" rx="1"/><rect y="13" width="16" height="2" rx="1"/></svg>
+      <span class="hdr-btn__text">Menu</span>
+    </span>
+    <button class="hdr-btn hdr-btn--search" aria-label="Search">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m46.28 37.72-8.76-8.76c1.42-2.73 2.24-5.83 2.24-9.12-0-10.91-8.88-19.79-19.79-19.79s-19.8 8.88-19.8 19.8 8.88 19.8 19.8 19.8c3.16 0 6.14-.76 8.8-2.09l8.84 8.84c1 1 2.33 1.55 3.75 1.55s2.75-.55 3.75-1.55l1.19-1.19c1-1 1.55-2.33 1.55-3.75s-.55-2.75-1.55-3.75zm-42.11-17.87c0-8.71 7.09-15.8 15.8-15.8s15.8 7.09 15.8 15.8c0 4.14-1.62 7.91-4.24 10.73l-.83.83c-2.82 2.62-6.59 4.24-10.73 4.24-8.71 0-15.8-7.09-15.8-15.8zm39.28 22.54-1.19 1.19c-.49.49-1.34.49-1.83 0l-8.12-8.12 1.24-1.24c.27-.25.53-.51.78-.78l1-1 8.12 8.12c.25.24.38.57.38.92s-.14.67-.38.92z"/></svg>
+      <span class="hdr-btn__text">Search</span>
+    </button>
+  </div>
+  <div class="header__right">
+    <button class="hdr-btn hdr-btn--accessibility" aria-label="Accessibility Tools">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg>
+      <span class="hdr-btn__text">Accessibility</span>
+    </button>
+    <span class="hdr-btn hdr-btn--log-in">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m40.69 39.91c3.94-4.13 6.37-9.71 6.37-15.86 0-12.68-10.32-23-23-23s-23 10.33-23 23.01c0 6.14 2.43 11.73 6.37 15.86v.03s.37.36.37.36c.04.04.08.07.11.11l.22.22s.02.01.02.02c.52.5 1.06.97 1.62 1.41.03.02.06.04.08.07.54.42 1.1.83 1.67 1.2.05.04.11.07.16.1.55.35 1.12.68 1.7.99.08.04.15.08.23.12.57.29 1.15.56 1.74.8.09.04.17.07.26.1.59.23 1.2.45 1.81.63.08.02.17.05.25.07.62.18 1.26.34 1.9.46.07.01.14.02.21.04.66.12 1.32.22 2 .29.05 0 .09 0 .14.01.7.06 1.4.1 2.12.1s1.42-.04 2.12-.1c.05 0 .09 0 .14-.01.68-.07 1.34-.17 2-.29.07-.01.14-.02.21-.04.64-.13 1.27-.28 1.9-.46.08-.02.17-.05.25-.07.62-.19 1.22-.4 1.81-.63.09-.03.17-.07.26-.1.59-.24 1.17-.51 1.74-.8.08-.04.16-.08.23-.12.58-.31 1.15-.64 1.7-.99.06-.04.11-.07.17-.11.58-.38 1.13-.78 1.67-1.2.03-.02.06-.05.09-.07.56-.44 1.1-.92 1.61-1.41 0 0 .02-.02.03-.02l.28-.26s.04-.04.06-.05l.38-.36v-.03zm-16.63-34.85c10.47 0 19 8.52 19 19 0 4.11-1.33 7.91-3.55 11.02-1.63-3.69-4.89-7.14-8.94-9.03 2.01-1.79 3.28-4.39 3.28-7.29 0-5.4-4.39-9.79-9.79-9.79s-9.79 4.39-9.79 9.79c0 2.9 1.27 5.49 3.28 7.29-4.05 1.89-7.3 5.34-8.94 9.03-2.23-3.11-3.55-6.91-3.55-11.02-0-10.48 8.52-19 19-19zm12.29 33.46c-.27.23-.55.44-.84.66-.19.15-.38.29-.58.43-.26.18-.53.35-.79.52-.24.15-.48.3-.72.44-.25.14-.51.28-.76.41-.27.14-.55.28-.83.4-.25.11-.5.22-.75.32-.3.12-.61.23-.92.34-.25.08-.49.17-.74.24-.33.1-.67.18-1.01.26-.24.06-.48.12-.72.16-.38.07-.77.13-1.16.18-.21.03-.41.06-.62.08-.6.06-1.21.09-1.83.09s-1.23-.03-1.83-.09c-.21-.02-.41-.06-.62-.08-.39-.05-.78-.1-1.16-.18-.24-.05-.48-.11-.72-.16-.34-.08-.68-.16-1.01-.26-.25-.07-.5-.16-.74-.24-.31-.11-.62-.22-.93-.34-.25-.1-.5-.21-.75-.32-.28-.13-.56-.26-.84-.4-.26-.13-.51-.26-.76-.41-.24-.14-.48-.29-.72-.44-.27-.17-.53-.34-.79-.52-.2-.14-.38-.29-.58-.43-.28-.22-.57-.43-.84-.66-.03-.03-.06-.06-.09-.08 1.11-4.7 6.49-9.89 12.38-9.89s11.27 5.2 12.38 9.89c-.03.03-.06.06-.09.09zm-18.07-19.77c0-3.19 2.6-5.79 5.79-5.79s5.79 2.6 5.79 5.79-2.6 5.79-5.79 5.79-5.79-2.6-5.79-5.79z"/></svg>
+      <span class="hdr-btn__text">Log in</span>
+    </span>
+    <button class="hdr-subscribe">Subscribe</button>
+  </div>
+</header>
+
+<!-- LEADERBOARD AD -->
+<div class="cas-leaderboard">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-leaderboard">
+      <div id="ad-leaderboard" class="fake-ad" style="background:linear-gradient(150deg,#2c5f2d 0%,#97bc62 100%);">
+        <div class="fake-ad__rx">Rx Only</div>
+        <div class="fake-ad__brand">Qulipta&reg;</div>
+        <div class="fake-ad__tagline">A once-daily oral preventive treatment for episodic migraine in adults.</div>
+        <div class="fake-ad__cta">Learn More</div>
+        <div class="fake-ad__isi">See full Prescribing Information including Medication Guide.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAS PAGE HEADING -->
+<div class="cas-heading">
+  <h1>Parenting and Migraine: Guilt, Genetics, and Coping Tips</h1>
+</div>
+
+<!-- FEATURE SECTION: First featured article with dark background -->
+<!-- Original article: https://migraine.com/parenting-guilt-genetics-coping-tips -->
+<div class="feature-section" style="background: #2C3B5C;">
+  <div class="feature-section__wrapper">
+    <div class="feature-section__image">
+      <a href="#">
+        <img src="https://migraine.com/wp-content/uploads/2019/11/M-67484-hub-img-left_5.jpg" alt="Migraine Doesn't Make You a Bad Parent image">
+      </a>
+    </div>
+    <div class="feature-section__content">
+      <h2><a href="#">Migraine Doesn't Make You a Bad Parent</a></h2>
+      <p>Insecurity and self-esteem issues often go hand-in-hand with chronic illness. Whether it's the migraine disease itself or a connected condition such as depression or anxiety, the daily struggles of living...</p>
+    </div>
+  </div>
+</div>
+
+<!-- CAS TWO-COLUMN LAYOUT: main articles + sidebar -->
+<div class="cas-columns-wrap">
+<div class="cas-columns">
+  <!-- === MAIN COLUMN === -->
+  <div class="cas-columns__main">
+
+    <!-- Article: Unique Symptoms of Childhood Migraines -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2017/10/98368_custom-1080x412.jpg" alt="Unique Symptoms of Childhood Migraines image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Unique Symptoms of Childhood Migraines</a></h2>
+      <p class="cas-teaser__summary">We all know how adults describe this condition: throbbing, stabbing, pounding pain. And problems that go with it like nausea, light and sound sensitivity. But with children...</p>
+    </article>
+
+    <!-- Article: Circle of Life -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2017/02/M-109536-parenting-children-with-migraine-custom-1080x412.jpg" alt="Circle of Life: Parenting a Child who has Migraine image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Circle of Life: Parenting a Child who has Migraine</a></h2>
+      <p class="cas-teaser__summary">Seeing your child in pain is some of the worst feelings a parent can experience. Looking back on my childhood and teen years, I can only imagine the agony my...</p>
+    </article>
+
+    <!-- Community Poll -->
+    <div class="poll">
+      <div class="poll__main">
+        <div class="poll__image">
+          <div class="poll__icon poll__icon--animated">
+            <svg class="poll-icon" viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+              <circle class="poll-icon__bg" cx="59" cy="59" fill="#fff" r="59"/>
+              <g class="poll-icon__main-group" fill="#379ec1" transform="translate(25 89), scale(1 -1)">
+                <rect class="poll-icon__line-1" height="32" width="16" rx="8" x="0" y="0"/>
+                <rect class="poll-icon__line-2" height="66" width="16" opacity=".8" rx="8" x="24.5" y="0"/>
+                <rect class="poll-icon__line-3" height="49" width="16" opacity=".65" rx="8" x="51" y="0"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="poll__content">
+          <h2 class="poll__heading">Community Poll</h2>
+          <p class="poll__question">Does migraine affect your parenting?</p>
+          <form class="poll-form" onsubmit="return false;">
+            <div class="poll-form__options">
+              <label class="poll-radio"><input type="radio" class="poll-radio__input" name="cas-poll" value="yes"><span class="poll-radio__label">Yes, significantly</span></label>
+              <label class="poll-radio"><input type="radio" class="poll-radio__input" name="cas-poll" value="somewhat"><span class="poll-radio__label">Somewhat</span></label>
+              <label class="poll-radio"><input type="radio" class="poll-radio__input" name="cas-poll" value="not-much"><span class="poll-radio__label">Not very much</span></label>
+              <label class="poll-radio"><input type="radio" class="poll-radio__input" name="cas-poll" value="no-children"><span class="poll-radio__label">I don't have any children</span></label>
+            </div>
+            <button class="poll__submit" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article: Three Ways Migraine Prepared Me -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2019/05/migraine-parenting-107982-custom_edit-1080x412.jpg" alt="Three Ways Migraine Prepared Me to Be a Parent image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Three Ways Migraine Prepared Me to Be a Parent</a></h2>
+      <p class="cas-teaser__summary">When we think of migraine we often think of the negative aspects: missed work or school days, cancelled plans, staring at the ceiling while the world passes by...</p>
+    </article>
+
+    <!-- Article: Stay-At-Home-Mom -->
+    <article class="cas-teaser">
+      <h2 class="cas-teaser__heading"><a href="#">I'm a Stay-At-Home-Mom with Migraines: Here's My Plan</a></h2>
+      <p class="cas-teaser__summary">I'm a Virgo. This automatically means I have a plan for everything. I plan vacations, meals, activities and even my outfits. My husband and coworkers think I'm absolutely insane. I've had migraines since...</p>
+    </article>
+
+    <!-- Article: Seven Tips for Parents -->
+    <article class="cas-teaser">
+      <h2 class="cas-teaser__heading"><a href="#">Seven Tips for Parents</a></h2>
+      <p class="cas-teaser__summary">Navigating life with a chronic condition like migraine can be challenging. Adding children and parenting stress into the mix can make it feel like an impossible task at times. Yet...</p>
+    </article>
+
+  </div>
+
+  <!-- === SIDEBAR === -->
+  <div class="cas-columns__sidebar">
+    <!-- Sidebar Ad -->
+    <div style="margin-bottom: 24px;">
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-square">
+          <div id="ad-square" class="fake-ad" style="background:linear-gradient(150deg,#6b3fa0 0%,#e091c0 100%);">
+            <div class="fake-ad__rx">Rx Only</div>
+            <div class="fake-ad__brand">Chillaxa&reg;</div>
+            <div class="fake-ad__tagline">Finally, a migraine pill that tastes like a tiny vacation. Ask your doctor about Chillaxa.</div>
+            <div class="fake-ad__cta">Learn More</div>
+            <div class="fake-ad__isi">Side effects may include spontaneous relaxation and excessive chill vibes. Not a real medication.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Article: Becoming a New Parent -->
+    <article class="sidebar-teaser">
+      <a href="#" class="sidebar-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2018/08/100165_combo-1080x412.jpg" alt="Becoming a New Parent with Migraine image">
+      </a>
+      <h3 class="sidebar-teaser__heading"><a href="#">Becoming a New Parent with Migraine: What to Know and How to Cope</a></h3>
+      <p class="sidebar-teaser__summary">Congratulations! You're expecting, adopting, or your partner is, and... cliche or true: it's an exciting time, but also a challenging one. I'm a new mom of a...</p>
+    </article>
+
+    <!-- Sidebar Article: Parenting While Managing -->
+    <article class="sidebar-teaser">
+      <h3 class="sidebar-teaser__heading"><a href="#">Parenting While Managing a Chronic Illness</a></h3>
+      <p class="sidebar-teaser__summary">Whether or not you have a child, most individuals would agree that parenting is hard. There is really no wrong way to take a child, new trends, latest...</p>
+    </article>
+
+    <!-- Sidebar Article: Life with Chronic Migraine Mommy -->
+    <article class="sidebar-teaser">
+      <h3 class="sidebar-teaser__heading"><a href="#">Life with Chronic Migraine Mommy</a></h3>
+      <p class="sidebar-teaser__summary">I was sitting with my two daughters in the living room last night watching the first action-filled episode of the Beast, which is now on Netflix. It is a...</p>
+    </article>
+
+    <!-- Sidebar Ad (bottom) — half-page 300x600 -->
+    <div style="margin-top: 24px;">
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-halfpage">
+          <div id="ad-halfpage" class="fake-ad" style="background:linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%);">
+            <div class="fake-ad__rx">Rx Only</div>
+            <div class="fake-ad__brand">Nurtec&reg; ODT</div>
+            <div class="fake-ad__tagline">You may be able to get Nurtec ODT for as little as $0.</div>
+            <div class="fake-ad__cta">Learn More</div>
+            <div class="fake-ad__isi">See full Prescribing Information.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- RECOMMENDED READING -->
+<div class="recommended-reading">
+  <ul class="recommended-reading__list">
+    <li class="recommended-reading__item">
+      <div class="recommended-reading-teaser">
+        <a href="#" class="recommended-reading-teaser__link">
+          <img class="recommended-reading-teaser__image" src="https://migraine.com/wp-content/uploads/2019/11/109808-reco2-184x184.jpg" alt="Did I Cause This? Parenting Children with Migraine image" loading="lazy">
+          <h3 class="recommended-reading-teaser__title">Did I Cause This? Parenting Children with Migraine</h3>
+        </a>
+      </div>
+    </li>
+    <li class="recommended-reading__item">
+      <div class="recommended-reading-teaser">
+        <a href="#" class="recommended-reading-teaser__link">
+          <img class="recommended-reading-teaser__image" src="https://migraine.com/wp-content/uploads/2019/10/107629-reco-184x184.jpg" alt="Advocating For Children With Migraine image" loading="lazy">
+          <h3 class="recommended-reading-teaser__title">Advocating For Children With Migraine</h3>
+        </a>
+      </div>
+    </li>
+    <li class="recommended-reading__item">
+      <div class="recommended-reading-teaser">
+        <a href="#" class="recommended-reading-teaser__link">
+          <img class="recommended-reading-teaser__image" src="https://migraine.com/wp-content/uploads/2019/10/109536-reco-184x184.jpg" alt="Parenting and Fatigue image" loading="lazy">
+          <h3 class="recommended-reading-teaser__title">Parenting and Fatigue</h3>
+        </a>
+      </div>
+    </li>
+    <li class="recommended-reading__item">
+      <div class="recommended-reading-teaser">
+        <a href="#" class="recommended-reading-teaser__link">
+          <img class="recommended-reading-teaser__image" src="https://migraine.com/wp-content/uploads/2019/10/100251-reco-184x184.jpg" alt="Passing On Migraine image" loading="lazy">
+          <h3 class="recommended-reading-teaser__title">Passing On Migraine</h3>
+        </a>
+      </div>
+    </li>
+    <li class="recommended-reading__item">
+      <div class="recommended-reading-teaser">
+        <a href="#" class="recommended-reading-teaser__link">
+          <img class="recommended-reading-teaser__image" src="https://migraine.com/wp-content/uploads/2019/10/91877-reco-184x184.jpg" alt="The Baby Question image" loading="lazy">
+          <h3 class="recommended-reading-teaser__title">The Baby Question</h3>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- NEWSLETTER / FOOTER TOP -->
+<div class="footer-signup">
+  <div class="footer-signup__inner">
+    <form class="footer-signup__form" onsubmit="return false;">
+      <label class="footer-signup__label" for="nlEmail">Stay connected with the community</label>
+      <div class="footer-signup__row">
+        <input id="nlEmail" class="footer-signup__input" type="email" placeholder="Enter your email" aria-label="Email">
+        <button class="footer-signup__btn" type="submit">Subscribe</button>
+      </div>
+      <p class="footer-signup__notice">By providing your email address, you are agreeing to our <a href="#">Privacy Notice</a> and <a href="#">Terms of Use</a>.</p>
+    </form>
+    <div class="footer-top-socials">
+      <a href="#" class="footer-top-social" aria-label="Facebook">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 24.09c0-13.26-10.75-24-24-24s-24 10.74-24 24c0 11.26 7.75 20.7 18.2 23.29v-15.96h-4.95v-7.33h4.95v-3.16c0-8.17 3.7-11.96 11.72-11.96 1.52 0 4.14.3 5.22.6v6.65c-.57-.06-1.55-.09-2.77-.09-3.94 0-5.46 1.49-5.46 5.37v2.59h7.84l-1.35 7.33h-6.49v16.49c11.88-1.44 21.09-11.55 21.09-23.82z"/></svg>
+      </a>
+      <a href="#" class="footer-top-social" aria-label="Instagram">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m48 23.95c-.01-6.52-.04-7.33-.16-9.89s-.53-4.3-1.13-5.82c-.62-1.58-1.44-2.91-2.78-4.25-1.34-1.33-2.68-2.15-4.26-2.76-1.53-.59-3.27-.99-5.83-1.1-2.55-.11-3.37-.13-9.89-.13-6.52.01-7.33.04-9.89.17-2.55.12-4.3.53-5.82 1.13-1.58.61-2.92 1.44-4.25 2.78s-2.15 2.67-2.76 4.25c-.59 1.53-.99 3.27-1.1 5.83s-.13 3.37-.13 9.89.04 7.33.17 9.89c.12 2.55.53 4.3 1.13 5.82.62 1.58 1.44 2.91 2.78 4.25s2.67 2.15 4.26 2.76c1.53.59 3.27.99 5.83 1.1 2.55.11 3.38.14 9.89.13 6.52-.01 7.34-.04 9.9-.16s4.29-.53 5.82-1.13c1.58-.62 2.92-1.44 4.25-2.78s2.15-2.68 2.76-4.26c.59-1.53.99-3.27 1.1-5.82.11-2.56.14-3.38.13-9.9zm-4.45 9.71c-.1 2.34-.49 3.61-.82 4.46-.43 1.12-.95 1.92-1.79 2.76s-1.64 1.36-2.76 1.8c-.84.33-2.12.72-4.45.83-2.53.12-3.29.14-9.7.16s-7.17-.01-9.7-.12c-2.34-.1-3.61-.49-4.46-.82-1.12-.43-1.92-.95-2.76-1.79s-1.36-1.64-1.8-2.76c-.33-.85-.72-2.12-.83-4.46-.12-2.53-.14-3.29-.16-9.7s.01-7.17.12-9.7c.1-2.34.49-3.61.82-4.46.43-1.12.95-1.92 1.79-2.76s1.64-1.36 2.76-1.8c.85-.33 2.11-.72 4.45-.83 2.53-.12 3.29-.14 9.7-.16 6.41-.01 7.17.01 9.7.12 2.34.1 3.61.49 4.46.82 1.12.43 1.92.95 2.76 1.79s1.36 1.64 1.8 2.76c.33.84.72 2.11.83 4.45.12 2.53.15 3.29.16 9.7s-.01 7.17-.12 9.7z"/><path d="m33.91 11.17c0 1.59 1.29 2.88 2.88 2.88s2.88-1.29 2.88-2.88-1.29-2.88-2.88-2.88c-1.59 0-2.88 1.29-2.87 2.88"/><path d="m23.98 11.68c-6.81.01-12.31 5.54-12.3 12.35s5.54 12.31 12.35 12.3 12.31-5.54 12.3-12.35-5.54-12.31-12.35-12.3zm.04 20.32c-4.42 0-8.01-3.56-8.02-7.98 0-4.42 3.57-8.01 7.98-8.02 4.42 0 8.01 3.57 8.02 7.98s-3.57 8.01-7.98 8.02z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== BEGIN FOOTER ===================== -->
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="#" class="footer-hu-logo" aria-label="Health Union">
+          <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 180 48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientTransform="matrix(163.73 163.1 -163.1 163.73 444.54 744.98)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1499d5"/><stop offset=".52" stop-color="#19a7d1"/><stop offset="1" stop-color="#2ad6c5"/></linearGradient><linearGradient id="b" gradientTransform="matrix(-168.32 -163.11 163.11 -168.32 592.3 796.57)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1099d5"/><stop offset=".52" stop-color="#2486d6"/><stop offset="1" stop-color="#6549db"/></linearGradient><linearGradient id="c" gradientTransform="matrix(-113.56 -40.35 40.35 -113.56 852.57 149.45)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#024fb3"/><stop offset="1" stop-color="#0162af"/></linearGradient><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="11.26" x2="313.43" y1="320" y2="320"><stop offset="0" stop-color="#bd27e9"/><stop offset="1" stop-color="#4e67d3"/></linearGradient><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="524.14" x2="788.74" y1="337.18" y2="337.18"><stop offset="0" stop-color="#35c7c3"/><stop offset="1" stop-color="#54d091"/></linearGradient><path d="m0 230.73h800v237.38h-800z" fill="none" transform="matrix(.225 0 0 .2022 0 -46.66)"/><g fill-rule="nonzero"><path d="m728.5 788.32h-34.47c-3.6 0-5.03-1.79-4.31-5.38l30.76-144.1c.72-3.59 1.82-5.37 4.44-5.38 2.15-.01 3.23 1.77 3.23 1.77 2.77 4.2 28.16 52 28.16 52h106.57c26.76 0 37.18 6.82 37.18 23.66 0 3.95-.54 8.6-1.62 13.63l-3 14.12h34.47c3.6 0 5.03 1.8 4.31 5.38l-30.76 144.1c-.72 3.6-1.83 5.37-4.45 5.38-2.14.02-3.22-1.76-3.22-1.76-2.78-4.2-28.16-52.01-28.16-52.01h-106.57c-26.76 0-37.18-6.81-37.18-23.66 0-3.94.54-8.6 1.62-13.62z" fill="#1099d5" transform="matrix(.12209 0 0 .12209 -4.62 -69.21)"/><path d="m640.76 744.24c3.78 0 5.29 1.89 4.53 5.66l-32.33 151.78c-.76 3.77-1.92 5.65-4.67 5.66a4.15 4.15 0 0 1-3.39-1.86c-2.92-4.42-29.6-54.78-29.6-54.78h-112c-28.13 0-39.08-7.17-39.08-24.91 0-4.16.57-9.06 1.7-14.35l13.03-61.54c.4-2.04 1.25-3.53 2.55-4.47-1.3.94-2.14 2.43-2.55 4.47l-9.88 46.66h158.8c3.78 0 6.05-1.89 6.8-5.66l9.88-46.66h36.22zm-197.29.27-.07.02.07-.02.07-.02zm1.74-.26h-.04.12zm.35 0 .17-.01h-.17z" fill="url(#a)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/><path d="m429.06 796.56h-36.22c-3.78 0-5.29-1.89-4.53-5.66l32.33-151.78c.76-3.77 1.92-5.64 4.67-5.66a4.15 4.15 0 0 1 3.39 1.86c2.92 4.42 29.6 54.78 29.6 54.78h112c28.13 0 39.08 7.17 39.08 24.91 0 4.16-.57 9.07-1.7 14.35l-3.15 14.88h-158.8c-3.78 0-6.05 1.89-6.8 5.66l-9.88 46.66z" fill="url(#b)" transform="matrix(.11592 0 0 .11592 34.64 -65.3)"/></g><path d="m724.34 149.5 7.61-35.98c.59-2.9 2.33-4.36 5.24-4.36h122.47l-7.62 35.98c-.58 2.91-2.32 4.37-5.24 4.37h-122.46z" fill="url(#c)" transform="matrix(-.15031 0 0 -.15031 213.6 43.44)"/><path d="m22.46 291.53c-1.22 0-1.95.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.47 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm178.98 0c-1.22 0-1.95.6-2.2 1.83l-8.94 42c-.24 1.21.24 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.19-1.82l8.95-42c.24-1.22-.25-1.83-1.46-1.83zm24.25 11.32c-.97 0-1.58.49-1.77 1.46l-1.46 6.82c-.18.97.19 1.46 1.16 1.46h5.54l-2.56 12.11a25.12 25.12 0 0 0-.67 5.18c0 5.17 2.86 7.3 10.6 7.3h8.15c.97 0 1.64-.49 1.83-1.46l1.4-6.82c.18-.97-.19-1.46-1.16-1.46h-6.09c-1.64 0-2.37-.24-2.37-1.46 0-.36.06-.79.18-1.28l2.56-12.11h8.52c.97 0 1.58-.49 1.76-1.46l1.47-6.82c.18-.97-.19-1.46-1.16-1.46h-8.52l1.7-7.85c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.21 0-1.94.61-2.19 1.83l-1.7 7.85zm-130.5 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.44 12.24-2.44 13.57 0 5.73 3.53 8.1 12.6 8.1h26.48c.97 0 1.58-.49 1.83-1.46l1.46-7c.18-.97-.18-1.46-1.16-1.46h-25.26c-2.74 0-3.59-.61-3.59-2.01 0-.37.06-.8.3-2h28.37c2.43 0 3.71-.86 4.26-3.54 1.83-8.28 2-9.68 2-10.9 0-4.32-2.49-5.96-9.18-5.96zm45.63 0c-.98 0-1.58.49-1.83 1.46l-1.46 7c-.18.98.18 1.46 1.16 1.46h25.26c2.74 0 3.59.55 3.59 1.95 0 .36-.06.85-.37 2.07h-22.21c-7.37 0-10.29 2.92-11.39 8.16-.9 4.56-1.03 5.66-1.03 6.63 0 3.9 2.2 5.6 8.1 5.6h29.58c3.59 0 4.75-.91 5.6-5l3.53-16.67c.36-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm132.01-11.32c-1.21 0-1.94.6-2.19 1.83l-8.95 42c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.68-21.98h19.66c2.25 0 2.98.37 2.98 1.83 0 .79-.18 1.82-.48 3.28l-3.6 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.63 0-5.72-3.53-8.03-12.6-8.03h-20.33l2.01-9.5c.24-1.21-.24-1.82-1.46-1.82zm-109.3 36.58h-17.48c-.85 0-1.22-.36-1.22-1.03 0-.13 0-.3.25-1.52.18-1.04.85-1.59 1.89-1.59h18.68l-.55 2.68c-.18.97-.73 1.46-1.58 1.46zm-74.06-12.05c.67-3.17 1.58-4.14 5.05-4.14h14.6c.86 0 1.22.3 1.22.97 0 .19 0 .37-.48 2.56-.06.43-.3.6-.73.6h-19.66z" fill="url(#d)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -.88 -53.06)"/><path d="m758.3 302.85c-11.2 0-15.52 3.6-17.46 12.66l-4.27 19.85c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l3.58-16.87c.92-4.13 1.77-5.1 5.24-5.1h15.95c2.25 0 2.98.36 2.98 1.82 0 .79-.18 1.82-.49 3.28l-3.59 16.87c-.24 1.21.25 1.82 1.46 1.82h8.22c1.22 0 1.95-.6 2.2-1.82l4.19-19.85c.37-1.7.55-3.28.55-4.63 0-5.72-3.53-8.03-12.6-8.03zm-227.22-.03c-1.22 0-1.95.61-2.19 1.83l-4.2 19.84a22.6 22.6 0 0 0-.55 4.63c0 5.72 3.53 8.03 12.6 8.03h17.35c11.2 0 15.58-3.59 17.53-12.66l4.2-19.84c.24-1.22-.24-1.83-1.46-1.83h-8.22c-1.22 0-1.94.61-2.19 1.83l-3.59 16.86c-.85 4.14-1.76 5.11-5.23 5.11h-15.47c-2.25 0-2.98-.36-2.98-1.82 0-.8.19-1.83.49-3.3l3.6-16.85c.23-1.22-.25-1.83-1.47-1.83zm124.82 0c-1.22 0-2 .61-2.25 1.83l-6.51 30.68c-.25 1.21.24 1.82 1.46 1.82h8.21c1.22 0 1.95-.6 2.2-1.82l6.5-30.68c.25-1.22-.17-1.83-1.4-1.83h-8.2zm40 0c-11.2 0-15.58 3.6-17.47 12.66-2.25 10.71-2.43 12.24-2.43 13.58 0 5.72 3.53 8.1 12.6 8.1h17.59c11.2 0 15.64-3.6 17.53-12.67 2.25-10.71 2.43-12.17 2.43-13.51 0-5.78-3.53-8.16-12.66-8.16h-17.6zm-89.65 0c-11.2 0-15.52 3.6-17.47 12.66l-4.26 19.84c-.24 1.22.24 1.83 1.46 1.83h8.22c1.21 0 1.95-.6 2.19-1.82l3.59-16.87c.91-4.13 1.76-5.1 5.24-5.1h15.94c2.25 0 2.99.36 2.99 1.82 0 .79-.19 1.82-.5 3.28l-3.58 16.87c-.25 1.21.24 1.82 1.46 1.82h8.22c1.21 0 1.94-.6 2.19-1.82l4.2-19.85c.36-1.7.54-3.28.54-4.62 0-5.73-3.53-8.04-12.6-8.04zm83.62 14.8c.92-4.15 1.77-5.12 5.24-5.12h15.15c2.5 0 3.47.49 3.47 2.31 0 .73-.18 1.65-1.46 7.55-.91 4.14-1.76 5.11-5.23 5.11h-15.16c-2.5 0-3.47-.48-3.47-2.31 0-.73.19-1.64 1.46-7.55zm-31.23-27.76c-1.22 0-1.95.6-2.2 1.82l-1.33 6.09c-.24 1.22.24 1.83 1.46 1.83h8.22c1.22 0 1.95-.61 2.19-1.83l1.34-6.09c.24-1.21-.25-1.82-1.46-1.82z" fill="url(#e)" fill-rule="nonzero" transform="matrix(.2408 0 0 .2408 -11.55 -53.06)"/></svg>
+        </a>
+        <p class="footer-intro">
+          Migraine.com is a Health Union community. Health Union reaches millions of people
+          through condition-specific online health communities and a Social Health Network of
+          patient leaders across virtually all health conditions.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 200 208" xmlns="http://www.w3.org/2000/svg"><path d="m185.22 0c8.16 0 14.78 6.66 14.78 14.88v177.94c0 8.22-6.62 14.88-14.78 14.88h-170.44c-8.16 0-14.78-6.66-14.78-14.88v-177.94c0-8.21 6.62-14.88 14.78-14.88zm-50.45 77.87c-15.94 0-23.13 9-27.16 15.38l-.06.1v-13.28h-30.21c.12 2.6.17 11.88.17 23.65v1.41c0 4.18-.01 8.53-.02 12.9l-.01 6.03c0 1.07 0 2.13-.01 3.19l0 1.27c-.05 18.98-.13 36.07-.14 38.49v.29h30.21v-52.37c0-2.8.2-5.6.99-7.61 2.18-5.6 7.15-11.4 15.5-11.4 10.93 0 15.3 8.6 15.3 21.21v50.17h30.21v-53.77c0-28.81-14.9-42.21-34.78-42.21zm-74.15 2.2h-30.21v93.78h30.21zm-14.9-45.21c-10.33 0-17.09 7-17.09 16.2 0 9 6.56 16.2 16.69 16.2h.2c10.53 0 17.09-7.2 17.09-16.2-.2-9.2-6.56-16.2-16.89-16.2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-communities">
+        <h3>OUR COMMUNITIES</h3>
+        <div class="communities-grid" id="footerCommunities"></div>
+      </div>
+    </div>
+    <div class="footer-divider">
+      <ul class="footer-links" id="footerLinks"></ul>
+      <p class="footer-disclaimer">
+        &copy; 2026 Health Union, LLC. All rights reserved. This information is not designed to
+        replace a physician's independent judgment about the appropriateness or risks of a procedure
+        for a given patient. Always consult your doctor about your medical conditions. Migraine.com
+        does not provide medical advice, diagnosis or treatment. Use of the site is conditional upon
+        your acceptance of our terms of use. This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- ===================== END FOOTER ===================== -->
+
+<!-- CAS SWITCHER TOOLBAR -->
+<div class="cas-switcher">
+  <div class="cas-switcher__label">Site</div>
+  <button class="cas-switcher__btn cas-switcher__btn--active" data-site="migraine">
+    <img src="https://migraine.com/images/logo_avatar.svg" alt="Migraine.com" width="32" height="32">
+  </button>
+  <button class="cas-switcher__btn" data-site="bladder">
+    <img src="https://bladdercancer.net/images/logo_avatar.svg" alt="BladderCancer.net" width="32" height="32">
+  </button>
+</div>
+
+<script>
+/* ============================================================
+   FOOTER DATA
+============================================================ */
+const communities = [
+  'AdvancedBreastCancer.net','AdvancedOvarianCancer.net','Allergies.net',
+  'AlzheimersDisease.net','Asthma.net','AtopicDermatitis.net',
+  'ATTR-Amyloidosis.net','BladderCancer.net','BloodCancer.com','CardiovascularDisease.net',
+  'ChronicDryEye.net','COPD.net','CrohnsDisease.net',
+  'Cystic-Fibrosis.com','DiabetesType2.com','Endometriosis.net',
+  'EpilepsyDisease.com','HeartFailure.net','HepatitisC.net',
+  'H-I-V.net','InflammatoryBowelDisease.net','LungCancer.net',
+  'MacularDegeneration.net','Migraine.com','MultipleSclerosis.net',
+  'Myasthenia-Gravis.net','Neuromyelitis-Optica.net','Obesity.net',
+  'ParkinsonsDisease.net','PlaquePsoriasis.com','ProstateCancer.net',
+  'RareDisease.net','RheumatoidArthritis.net','SkinCancer.net',
+  'Sleep-Disorders.net','SpinalMuscularAtrophy.net','Type2Diabetes.com',
+];
+const footerLinks = ['About Us','Terms of Use','Privacy Notice','Your Privacy Choices','Cookie Settings','Community Rules','Ad Choices'];
+
+document.getElementById('footerCommunities').innerHTML =
+  communities.filter(c => c !== 'Migraine.com').map(c => `<a href="#">${c}</a>`).join('');
+document.getElementById('footerLinks').innerHTML =
+  footerLinks.map(l => `<li><a href="#">${l}</a></li>`).join('');
+
+/* ============================================================
+   CAS SWITCHER
+============================================================ */
+var originalLogoHTML = document.querySelector('.site-logo__avatar').innerHTML;
+
+var SITE_DATA = {
+  migraine: {
+    logo: null,
+    pageTitle: 'Parenting and Migraine: Guilt, Genetics, and Coping Tips',
+    feature: {
+      bg: '#2C3B5C',
+      title: "Migraine Doesn't Make You a Bad Parent",
+      teaser: "Insecurity and self-esteem issues often go hand-in-hand with chronic illness. Whether it's the migraine disease itself or a connected condition such as depression or anxiety, the daily struggles of living...",
+      imgSrc: 'https://migraine.com/wp-content/uploads/2019/11/M-67484-hub-img-left_5.jpg',
+      imgAlt: "Migraine Doesn't Make You a Bad Parent image"
+    },
+    mainArticles: [
+      { title: 'Unique Symptoms of Childhood Migraines', teaser: "We all know how adults describe this condition: throbbing, stabbing, pounding pain. And problems that go with it like nausea, light and sound sensitivity. But with children...", imgSrc: 'https://migraine.com/wp-content/uploads/2017/10/98368_custom-1080x412.jpg', imgAlt: 'Unique Symptoms of Childhood Migraines image' },
+      { title: 'Circle of Life: Parenting a Child who has Migraine', teaser: "Seeing your child in pain is some of the worst feelings a parent can experience. Looking back on my childhood and teen years, I can only imagine the agony my...", imgSrc: 'https://migraine.com/wp-content/uploads/2017/02/M-109536-parenting-children-with-migraine-custom-1080x412.jpg', imgAlt: 'Circle of Life: Parenting a Child who has Migraine image' },
+      { title: 'Three Ways Migraine Prepared Me to Be a Parent', teaser: "When we think of migraine we often think of the negative aspects: missed work or school days, cancelled plans, staring at the ceiling while the world passes by...", imgSrc: 'https://migraine.com/wp-content/uploads/2019/05/migraine-parenting-107982-custom_edit-1080x412.jpg', imgAlt: 'Three Ways Migraine Prepared Me to Be a Parent image' },
+      { title: "I'm a Stay-At-Home-Mom with Migraines: Here's My Plan", teaser: "I'm a Virgo. This automatically means I have a plan for everything. I plan vacations, meals, activities and even my outfits. My husband and coworkers think I'm absolutely insane. I've had migraines since...", imgSrc: null },
+      { title: 'Seven Tips for Parents', teaser: "Navigating life with a chronic condition like migraine can be challenging. Adding children and parenting stress into the mix can make it feel like an impossible task at times. Yet...", imgSrc: null }
+    ],
+    poll: {
+      question: 'Does migraine affect your parenting?',
+      options: ['Yes, significantly', 'Somewhat', 'Not very much', "I don't have any children"]
+    },
+    sidebar: [
+      { title: 'Becoming a New Parent with Migraine: What to Know and How to Cope', teaser: "Congratulations! You're expecting, adopting, or your partner is, and... cliche or true: it's an exciting time, but also a challenging one. I'm a new mom of a...", imgSrc: 'https://migraine.com/wp-content/uploads/2018/08/100165_combo-1080x412.jpg', imgAlt: 'Becoming a New Parent with Migraine image' },
+      { title: 'Parenting While Managing a Chronic Illness', teaser: "Whether or not you have a child, most individuals would agree that parenting is hard. There is really no wrong way to take a child, new trends, latest...", imgSrc: null },
+      { title: 'Life with Chronic Migraine Mommy', teaser: "I was sitting with my two daughters in the living room last night watching the first action-filled episode of the Beast, which is now on Netflix. It is a...", imgSrc: null }
+    ],
+    recommended: [
+      { title: 'Did I Cause This? Parenting Children with Migraine', imgSrc: 'https://migraine.com/wp-content/uploads/2019/11/109808-reco2-184x184.jpg' },
+      { title: 'Advocating For Children With Migraine', imgSrc: 'https://migraine.com/wp-content/uploads/2019/10/107629-reco-184x184.jpg' },
+      { title: 'Parenting and Fatigue', imgSrc: 'https://migraine.com/wp-content/uploads/2019/10/109536-reco-184x184.jpg' },
+      { title: 'Passing On Migraine', imgSrc: 'https://migraine.com/wp-content/uploads/2019/10/100251-reco-184x184.jpg' },
+      { title: 'The Baby Question', imgSrc: 'https://migraine.com/wp-content/uploads/2019/10/91877-reco-184x184.jpg' }
+    ],
+    ads: {
+      leaderboard: { bg: 'linear-gradient(150deg,#2c5f2d 0%,#97bc62 100%)', rx: 'Rx Only', brand: 'Qulipta&reg;', tagline: 'A once-daily oral preventive treatment for episodic migraine in adults.', cta: 'Learn More', isi: 'See full Prescribing Information including Medication Guide.' },
+      square: { bg: 'linear-gradient(150deg,#6b3fa0 0%,#e091c0 100%)', rx: 'Rx Only', brand: 'Chillaxa&reg;', tagline: 'Finally, a migraine pill that tastes like a tiny vacation. Ask your doctor about Chillaxa.', cta: 'Learn More', isi: 'Side effects may include spontaneous relaxation and excessive chill vibes. Not a real medication.' },
+      halfpage: { bg: 'linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%)', rx: 'Rx Only', brand: 'Nurtec&reg; ODT', tagline: 'You may be able to get Nurtec ODT for as little as $0.', cta: 'Learn More', isi: 'See full Prescribing Information.' }
+    }
+  },
+  bladder: {
+    logo: 'https://bladdercancer.net/images/logo_avatar.svg',
+    pageTitle: "Bladder Cancer: A Woman's Perspective and the Female Experience",
+    feature: {
+      bg: '#d39a20',
+      title: 'A Post-Radical Cystectomy Gynecology Experience',
+      teaser: "About 4 months after I completed active treatment, I went to a new gynecologist. It was my first gynecology appointment after receiving a radical cystectomy. After 2 office visits, prescribed...",
+      imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/03/B-9588-hub-img-02.png',
+      imgAlt: 'A Post-Radical Cystectomy Gynecology Experience image'
+    },
+    mainArticles: [
+      { title: "One Woman's Bladder Tumor Resection Experience", teaser: "My son picked me up for the 45-minute drive to the surgical pavilion at UW Medical Center. I was nervous but ready to get this over with...", imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/03/B-living-tumor-resection-experience.jpg', imgAlt: "One Woman's Bladder Tumor Resection Experience image" },
+      { title: 'The "Not So Nice" Things I Wish I\'d Known Before My Cystectomy', teaser: "Before my cystectomy, I read every piece of information I was given, over and over. I thought I was prepared, but there were things no one told me about...", imgSrc: 'https://bladdercancer.net/wp-content/uploads/2020/02/B-5511-radical-cystectomy-post-op-1080x412.jpg', imgAlt: 'Things I Wish I Had Known Before My Cystectomy image' },
+      { title: 'Pelvic Floor Prolapse: Should You be Worried?', teaser: "If you have bladder cancer, your doctor might recommend a procedure called a radical cystectomy. While this surgery can be life-saving, it can also lead to complications...", imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/03/B-clinical-pelvic-floor-prolapse.jpg', imgAlt: 'Pelvic Floor Prolapse image' },
+      { title: 'Bladder Cancer in Women', teaser: "Some people refer to bladder cancer as an 'old man's cancer.' After all, it is the 4th leading type of cancer in men. But women get bladder cancer too, and it is often diagnosed at a later stage...", imgSrc: null },
+      { title: 'Radical Cystectomy and Sex: A Woman\'s Perspective', teaser: "I had a radical cystectomy just over a year ago. Prior to surgery, I was informed that the surgery would involve the removal of my bladder, uterus, and part of my vaginal wall...", imgSrc: null }
+    ],
+    poll: {
+      question: 'Did you feel prepared for life after bladder cancer treatment?',
+      options: ['Yes, I knew what to expect', 'Somewhat, but there were surprises', 'No, I wish I had known more', 'I have not had treatment yet']
+    },
+    sidebar: [
+      { title: 'Female Anatomy Changes with a Radical Cystectomy', teaser: "Ladies! Let's dish about the bits 'n' pieces. When I was heading into my radical cystectomy with a radical hysterectomy, I had so many questions...", imgSrc: 'https://bladdercancer.net/wp-content/uploads/2021/09/B-living-female-anatomy-changes-1080x412.jpg', imgAlt: 'Female Anatomy Changes with a Radical Cystectomy image' },
+      { title: 'How I Handled Menopause and HRT', teaser: "Hormone replacement therapy (HRT) isn't suitable for everyone, and there are some huge risks. But after my radical cystectomy threw me into surgical menopause...", imgSrc: null },
+      { title: 'Facing My Body Dysmorphia', teaser: "Prior to my diagnosis, I had experienced a gradual loss of about 35 pounds over a year. After surgery, my body changed in ways I never expected...", imgSrc: null }
+    ],
+    recommended: [
+      { title: 'Bladder Cancer and Pregnancy', imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/02/4138-reco.jpg' },
+      { title: 'Menopause After Bladder Cancer Surgery', imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/02/3549-reco.jpg' },
+      { title: 'For The Next Me', imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/02/9482-reco.jpg' },
+      { title: "Mom's Entry into this World", imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/02/9480-reco.jpg' },
+      { title: 'Gender Differences in Bladder Cancer', imgSrc: 'https://bladdercancer.net/wp-content/uploads/2022/02/154-reco.jpg' }
+    ],
+    ads: {
+      leaderboard: { bg: 'linear-gradient(150deg,#8B5E00 0%,#D4A535 100%)', rx: 'Rx Only', brand: 'Urovanta&reg;', tagline: 'A targeted therapy for adults with locally advanced or metastatic urothelial carcinoma.', cta: 'Learn More', isi: 'See full Prescribing Information including Boxed Warning and Medication Guide.' },
+      square: { bg: 'linear-gradient(150deg,#0B4D4D 0%,#1A8A7A 100%)', rx: 'Rx Only', brand: 'Cystara&reg;', tagline: 'Immunotherapy that works with your body to help fight advanced bladder cancer. Talk to your oncologist.', cta: 'Is Cystara Right for You?', isi: 'Cystara may cause your immune system to attack normal organs. Not a real medication.' },
+      halfpage: { bg: 'linear-gradient(150deg,#3B1F5E 0%,#6B4C9A 100%)', rx: 'Rx Only', brand: 'Balvecio&reg;', tagline: 'Maintenance therapy after first-line platinum-based chemotherapy for advanced bladder cancer.', cta: 'See if You Qualify', isi: 'See full Prescribing Information. Serious side effects may occur.' }
+    }
+  }
+};
+
+function applySiteData(site) {
+  var data = SITE_DATA[site];
+
+  // Logo
+  var avatar = document.querySelector('.site-logo__avatar');
+  if (site === 'migraine') {
+    avatar.innerHTML = originalLogoHTML;
+  } else {
+    avatar.innerHTML = '<img src="' + data.logo + '" alt="' + site + '" width="48" height="48" style="display:block">';
+  }
+
+  // Page title (h1)
+  document.querySelector('.cas-heading h1').textContent = data.pageTitle;
+
+  // Feature section
+  var featureEl = document.querySelector('.feature-section');
+  featureEl.style.background = data.feature.bg;
+  featureEl.querySelector('.feature-section__content h2 a').textContent = data.feature.title;
+  featureEl.querySelector('.feature-section__content p').textContent = data.feature.teaser;
+  var featureImg = featureEl.querySelector('.feature-section__image img');
+  featureImg.src = data.feature.imgSrc;
+  featureImg.alt = data.feature.imgAlt;
+
+  // Main column articles
+  var teasers = document.querySelectorAll('.cas-columns__main > .cas-teaser');
+  data.mainArticles.forEach(function(article, i) {
+    if (!teasers[i]) return;
+    var el = teasers[i];
+    el.querySelector('.cas-teaser__heading a').textContent = article.title;
+    el.querySelector('.cas-teaser__summary').textContent = article.teaser;
+    var imgLink = el.querySelector('.cas-teaser__image');
+    if (article.imgSrc) {
+      if (imgLink) {
+        imgLink.querySelector('img').src = article.imgSrc;
+        imgLink.querySelector('img').alt = article.imgAlt || article.title;
+        imgLink.style.display = '';
+      } else {
+        var a = document.createElement('a');
+        a.href = '#';
+        a.className = 'cas-teaser__image';
+        a.innerHTML = '<img src="' + article.imgSrc + '" alt="' + (article.imgAlt || article.title) + '">';
+        el.insertBefore(a, el.firstChild);
+      }
+    } else if (imgLink) {
+      imgLink.style.display = 'none';
+    }
+  });
+
+  // Poll
+  document.querySelector('.poll__question').textContent = data.poll.question;
+  var labels = document.querySelectorAll('.poll-radio__label');
+  data.poll.options.forEach(function(opt, i) {
+    if (labels[i]) labels[i].textContent = opt;
+  });
+
+  // Sidebar articles
+  var sidebarEls = document.querySelectorAll('.sidebar-teaser');
+  data.sidebar.forEach(function(article, i) {
+    if (!sidebarEls[i]) return;
+    var el = sidebarEls[i];
+    el.querySelector('.sidebar-teaser__heading a').textContent = article.title;
+    el.querySelector('.sidebar-teaser__summary').textContent = article.teaser;
+    var imgLink = el.querySelector('.sidebar-teaser__image');
+    if (article.imgSrc) {
+      if (imgLink) {
+        imgLink.querySelector('img').src = article.imgSrc;
+        imgLink.querySelector('img').alt = article.imgAlt || article.title;
+        imgLink.style.display = '';
+      } else {
+        var a = document.createElement('a');
+        a.href = '#';
+        a.className = 'sidebar-teaser__image';
+        a.innerHTML = '<img src="' + article.imgSrc + '" alt="' + (article.imgAlt || article.title) + '">';
+        el.insertBefore(a, el.firstChild);
+      }
+    } else if (imgLink) {
+      imgLink.style.display = 'none';
+    }
+  });
+
+  // Recommended reading
+  var recoItems = document.querySelectorAll('.recommended-reading__item');
+  data.recommended.forEach(function(rec, i) {
+    if (!recoItems[i]) return;
+    recoItems[i].querySelector('.recommended-reading-teaser__title').textContent = rec.title;
+    recoItems[i].querySelector('.recommended-reading-teaser__image').src = rec.imgSrc;
+    recoItems[i].querySelector('.recommended-reading-teaser__image').alt = rec.title;
+  });
+
+  // Ads
+  var adSlots = [
+    { id: 'ad-leaderboard', key: 'leaderboard' },
+    { id: 'ad-square', key: 'square' },
+    { id: 'ad-halfpage', key: 'halfpage' }
+  ];
+  adSlots.forEach(function(slot) {
+    var el = document.getElementById(slot.id);
+    var ad = data.ads[slot.key];
+    if (!el || !ad) return;
+    el.style.background = ad.bg;
+    el.querySelector('.fake-ad__rx').textContent = ad.rx;
+    el.querySelector('.fake-ad__brand').innerHTML = ad.brand;
+    el.querySelector('.fake-ad__tagline').textContent = ad.tagline;
+    el.querySelector('.fake-ad__cta').textContent = ad.cta;
+    el.querySelector('.fake-ad__isi').textContent = ad.isi;
+  });
+
+  // Footer
+  var siteName = site === 'migraine' ? 'Migraine.com' : 'BladderCancer.net';
+
+  // Footer intro
+  document.querySelector('.footer-intro').textContent =
+    siteName + ' is a Health Union community. Health Union reaches millions of people through condition-specific online health communities and a Social Health Network of patient leaders across virtually all health conditions.';
+
+  // Footer communities — exclude the current site
+  document.getElementById('footerCommunities').innerHTML =
+    communities.filter(function(c) { return c !== siteName; })
+      .map(function(c) { return '<a href="#">' + c + '</a>'; }).join('');
+
+  // Footer disclaimer
+  document.querySelector('.footer-disclaimer').innerHTML =
+    '&copy; 2026 Health Union, LLC. All rights reserved. This information is not designed to replace a physician\u2019s independent judgment about the appropriateness or risks of a procedure for a given patient. Always consult your doctor about your medical conditions. ' + siteName + ' does not provide medical advice, diagnosis or treatment. Use of the site is conditional upon your acceptance of our terms of use. This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.';
+}
+
+document.querySelectorAll('.cas-switcher__btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var site = this.dataset.site;
+    document.querySelectorAll('.cas-switcher__btn').forEach(function(b) {
+      b.classList.remove('cas-switcher__btn--active');
+    });
+    this.classList.add('cas-switcher__btn--active');
+    applySiteData(site);
+  });
+});
+
+</script>
+
+</body>
+</html>
