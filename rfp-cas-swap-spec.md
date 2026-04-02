@@ -109,18 +109,14 @@ This document enumerates every swap point, what fields to change, and where to f
 
 ## Ads (3 items, 3 different sizes)
 
-Each ad has the same set of fields to swap:
-- `style="background:linear-gradient(...)"` — gradient colors
-- `.fake-ad__rx` — regulatory label (e.g. "Rx Only")
-- `.fake-ad__brand` — drug/brand name
-- `.fake-ad__tagline` — ad copy
-- `.fake-ad__cta` — call-to-action text
-- `.fake-ad__isi` — important safety information
+All three ads share the same solid background color (`#6b3fa0`) and display only the brand name centered in white. Fields to swap per ad:
+- `style="background:#6b3fa0"` — background color
+- `.fake-ad__brand` — brand name or logo text
 
 ### A1 — Leaderboard ad
 - **Location:** `div.cas-leaderboard` (top of page, below header)
 - **Size:** 728 x 90
-- **Current brand:** Qulipta
+- **Current brand:** Chillaxa
 
 ### A2 — Sidebar square ad
 - **Location:** top of `.cas-columns__sidebar`
@@ -130,7 +126,7 @@ Each ad has the same set of fields to swap:
 ### A3 — Sidebar half-page ad
 - **Location:** bottom of `.cas-columns__sidebar`
 - **Size:** 300 x 600
-- **Current brand:** Nurtec ODT
+- **Current brand:** Chillaxa
 
 ---
 
@@ -140,11 +136,10 @@ Each ad has the same set of fields to swap:
 - **Location:** `div.poll` (between M2 and M3 in main column)
 - **Fields to swap:**
   - `p.poll__question` — currently `"Does migraine affect your parenting?"`
-  - 4x `span.poll-radio__label` — currently:
+  - 3x `span.poll-radio__label` — currently:
     1. `"Yes, significantly"`
     2. `"Somewhat"`
     3. `"Not very much"`
-    4. `"I don't have any children"`
 
 ---
 
