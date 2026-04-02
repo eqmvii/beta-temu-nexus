@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SWAP:B1 — Page title: "[CAS Topic] — [Community Site Name]" -->
+  <title>Parenting and Migraine: Guilt, Genetics, and Coping Tips — Migraine.com</title>
+  <!-- SWAP:B2 — Favicon URL for target community -->
+  <link rel="icon" href="https://migraine.com/favicon.ico">
+  <style>
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'geologica-variable';
+      font-style: oblique 10deg;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('http://eqmvii.github.io/beta-temu-nexus/assets/geologica-variable.woff2') format('woff2-variations');
+    }
+    /* === TOKENS === */
+    :root {
+      --cyan:        #379EC1;
+      --cyan-dark:   #002E3B;
+      --cyan-darker: #002029;
+      --cyan-light:  #67C7E5;
+      --cyan-lighter:#EAF8FC;
+      --brand:       #1E7EBE;
+      --white:       #ffffff;
+      --gray:        #8C9BA5;
+      --gray-dark:   #5E676D;
+      --hu-light:    #B3C4CD;
+      --hu-lighter:  #ECF0F3;
+      --hu-lightest: #F5F7F9;
+      --hu-neutral:  #4A6572;
+      --shadow:      0 0 10px 2px rgba(179,196,205,0.3);
+      --shadow-card: 0 2px 8px rgba(0,32,41,0.08);
+      --radius:      4px;
+      --radius-card: 6px;
+      --max-w:       1080px;
+      --header-h:    48px;
+      --announce-h:  32px;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      font-size: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-size: 1.1875rem;
+      line-height: 1.8;
+      color: var(--cyan-darker);
+      background: var(--white);
+      padding-top: var(--header-h);
+    }
+    a { color: inherit; text-decoration: underline; text-decoration-color: var(--cyan); text-decoration-thickness: 2px; text-underline-offset: 0.0625em; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* === CONTENT DRIVER BANNER (announce bar) === */
+    .announce-bar {
+      position: sticky;
+      top: var(--header-h); left: 0; right: 0;
+      z-index: 298;
+      background: #ACE3ED;
+      display: flex; justify-content: center;
+      text-align: center;
+      padding: 12px 16px;
+      line-height: 1.2;
+      color: var(--cyan-darker);
+    }
+    .announce-bar a { font-weight: 600; }
+
+    /* === HEADER === */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 299;
+      height: var(--header-h);
+      background: var(--cyan-darker);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px 0 60px;
+    }
+    .header__left  { display: flex; align-items: center; }
+    .header__right { display: flex; align-items: center; }
+
+    .site-logo {
+      position: absolute; top: 0; left: 0;
+      width: 48px; height: 48px;
+      display: block;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .site-logo__image { width: 48px; height: 48px; display: block; }
+    .site-logo__name {
+      color: #fff;
+      font-family: geologica-variable, sans-serif;
+      font-size: 17px; font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .hdr-btn {
+      background: transparent; border: 0;
+      color: #fff;
+      display: flex; justify-content: center; align-items: center;
+      padding: 4px;
+      min-width: 48px; height: 48px;
+      font-size: 16px; font-weight: 600; font-family: inherit;
+      white-space: nowrap;
+      margin-left: 4px;
+    }
+    .hdr-btn svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+      fill: #fff;
+      pointer-events: none;
+    }
+    .hdr-btn__text {
+      margin-left: 8px;
+      font-weight: 600;
+      pointer-events: none;
+    }
+    .hdr-btn--accessibility { margin-left: auto; }
+    .hdr-btn--search { margin-left: 0; }
+    .hdr-btn--log-in { margin-right: 12px; }
+
+    .hamburger {
+      width: 16px; height: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hamburger::before, .hamburger::after,
+    .hamburger__filling::before, .hamburger__filling::after {
+      content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+      width: 100%; height: 2px; background: #fff; border-radius: 1px;
+    }
+    .hamburger::before { top: 0; }
+    .hamburger::after { bottom: 0; }
+    .hamburger__filling {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; height: 2px;
+    }
+    .hamburger__filling::before, .hamburger__filling::after {
+      top: 0;
+    }
+
+    .hdr-subscribe {
+      padding: 4px 24px;
+      min-height: 36px;
+      background: #0B474E; color: #39E3E1;
+      border: none; border-radius: 32px;
+      font-size: 16px; font-weight: 600; font-family: inherit;
+      white-space: nowrap; margin: 0 8px;
+      line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    /* === AD SLOTS === */
+    .ad-slot { text-align: center; position: relative; }
+    .ad-label {
+      display: block; font-size: 10px; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .ad-leaderboard {
+      width: 728px; height: 90px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-square {
+      width: 300px; height: 250px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .ad-halfpage {
+      width: 300px; height: 600px;
+      margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--hu-lighter);
+    }
+    .fake-ad {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 5px; padding: 10px;
+      text-align: center; color: #fff;
+      position: relative;
+    }
+    .fake-ad__rx  { font-size: 10px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; }
+    .fake-ad__brand { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .fake-ad__tagline { font-size: 11px; line-height: 1.35; opacity: 0.88; max-width: 260px; }
+    .fake-ad__cta {
+      margin-top: 6px; padding: 5px 14px;
+      border-radius: 3px; font-size: 11px; font-weight: 700;
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5);
+    }
+    .fake-ad__isi {
+      position: absolute; bottom: 5px; left: 8px; right: 8px;
+      font-size: 8.5px; opacity: 0.55; line-height: 1.3;
+    }
+
+    /* === PAGE WRAP === */
+    .page-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* === CAS LEADERBOARD === */
+    .cas-leaderboard {
+      padding: 14px 0 12px;
+      background: var(--hu-lightest);
+      border-bottom: 1px solid var(--hu-lighter);
+      text-align: center;
+    }
+
+    /* === CAS LAYOUT === */
+    .cas-layout {
+      padding: 0;
+      text-align: center;
+      background: transparent;
+    }
+
+    /* === CAS HERO === */
+    .cas-hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      overflow: hidden;
+    }
+    .cas-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* === CAS HEADING === */
+    .cas-heading {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 24px 24px 16px;
+      text-align: center;
+    }
+    .cas-heading h1 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--cyan-dark);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .cas-heading .cas-byline {
+      font-size: 14px;
+      color: var(--gray-dark);
+      margin-top: 8px;
+    }
+    .cas-heading .cas-byline a {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* === FEATURE SECTION === */
+    .feature-section {
+      margin: 0;
+    }
+    .feature-section__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+      min-height: 300px;
+      position: relative;
+    }
+    .feature-section__image {
+      flex: 0 0 500px;
+      overflow: hidden;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+    .feature-section__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-section__content {
+      flex: 1;
+      padding: 32px;
+      color: #fff;
+    }
+    .feature-section__content h2 {
+      font-family: geologica-variable, sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .feature-section__content h2 a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .feature-section__content p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #fff;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+    .feature-section__footer {
+      display: flex;
+      align-items: center;
+    }
+
+    /* === CAS COLUMNS (2-col: main + sidebar) === */
+    .cas-columns-wrap {
+      background: var(--cyan-lighter);
+    }
+    .cas-columns {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 8px 32px 24px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .cas-columns__main {
+      flex: 2;
+      padding-right: 32px;
+    }
+    .cas-columns__sidebar {
+      flex: 1;
+      padding-left: 32px;
+    }
+
+    /* === CAS POST TEASER (article cards) === */
+    .cas-teaser {
+      background: transparent;
+      box-shadow: none;
+      margin: 0 0 32px;
+      padding: 0 0 24px;
+      border-bottom: 1px solid var(--hu-lighter);
+    }
+    .cas-teaser:last-child {
+      border-bottom: none;
+    }
+    .cas-teaser a {
+      text-decoration: none;
+    }
+    .cas-teaser__image {
+      display: block;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      overflow: hidden;
+      max-width: 72%;
+    }
+    .cas-teaser__image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .cas-teaser__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .cas-teaser__heading a {
+      color: var(--cyan-darker);
+      text-decoration: none;
+    }
+    .cas-teaser__summary {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--cyan-darker);
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+    .cas-teaser__engagement {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .cas-teaser__eng-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--gray-dark);
+    }
+    .cas-teaser__eng-item svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--cyan);
+    }
+
+    /* === CAS SIDEBAR TEASER === */
+    .sidebar-teaser {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--hu-lighter);
+    }
+    .sidebar-teaser:last-child {
+      border-bottom: none;
+    }
+    .sidebar-teaser__image {
+      display: block;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .sidebar-teaser__image img {
+      width: 100%;
+      height: auto;
+    }
+    .sidebar-teaser__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .sidebar-teaser__heading a {
+      color: var(--cyan-darker);
+      text-decoration: none;
+    }
+    .sidebar-teaser__summary {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--gray-dark);
+    }
+
+    /* === POLL COMPONENT === */
+    .poll {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin: 24px 0;
+      background: #D9DFE3;
+    }
+    .poll__main {
+      display: flex;
+    }
+    .poll__image {
+      flex-shrink: 0;
+      width: 205px;
+      background: var(--cyan-lighter);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .poll__icon { width: 125px; height: 125px; }
+    .poll__icon svg { display: block; width: 100%; height: auto; }
+    .poll__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px 16px 40px;
+    }
+    .poll__heading {
+      font-family: geologica-variable, sans-serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--cyan);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .poll__question {
+      font-family: geologica-variable, sans-serif;
+      font-size: 19px; font-weight: 700;
+      color: var(--cyan-darker);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+    .poll-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px;
+    }
+    .poll-form__options {
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+    .poll-radio {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .poll-radio__circle {
+      flex-shrink: 0;
+      margin: 0 8px;
+      width: 24px; height: 24px;
+      border: 3px solid var(--cyan);
+      border-radius: 50%;
+      background: transparent;
+    }
+    .poll-radio__label {
+      font-size: 18px; font-weight: 600;
+      color: var(--cyan-darker);
+      line-height: 1.3;
+    }
+    .poll__submit {
+      min-width: 150px;
+      min-height: 48px;
+      padding: 13px 20px;
+      background: var(--cyan); color: #fff;
+      border: 2px solid var(--cyan);
+      border-radius: var(--radius);
+      font-size: 18px; font-weight: 600;
+      font-family: inherit;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" role="banner">
+  <!-- SWAP:B3 — Site logo: aria-label, img src, img alt -->
+  <a class="site-logo" href="index.html" aria-label="Migraine.com home">
+    <img class="site-logo__image" src="https://migraine.com/images/logo_avatar.svg" alt="Migraine.com" width="48" height="48">
+  </a>
+  <div class="header__left">
+    <span class="hdr-btn">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="#fff"><rect y="1" width="16" height="2" rx="1"/><rect y="7" width="16" height="2" rx="1"/><rect y="13" width="16" height="2" rx="1"/></svg>
+      <span class="hdr-btn__text">Menu</span>
+    </span>
+    <span class="hdr-btn hdr-btn--search" aria-label="Search">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m46.28 37.72-8.76-8.76c1.42-2.73 2.24-5.83 2.24-9.12-0-10.91-8.88-19.79-19.79-19.79s-19.8 8.88-19.8 19.8 8.88 19.8 19.8 19.8c3.16 0 6.14-.76 8.8-2.09l8.84 8.84c1 1 2.33 1.55 3.75 1.55s2.75-.55 3.75-1.55l1.19-1.19c1-1 1.55-2.33 1.55-3.75s-.55-2.75-1.55-3.75zm-42.11-17.87c0-8.71 7.09-15.8 15.8-15.8s15.8 7.09 15.8 15.8c0 4.14-1.62 7.91-4.24 10.73l-.83.83c-2.82 2.62-6.59 4.24-10.73 4.24-8.71 0-15.8-7.09-15.8-15.8zm39.28 22.54-1.19 1.19c-.49.49-1.34.49-1.83 0l-8.12-8.12 1.24-1.24c.27-.25.53-.51.78-.78l1-1 8.12 8.12c.25.24.38.57.38.92s-.14.67-.38.92z"/></svg>
+      <span class="hdr-btn__text">Search</span>
+    </span>
+  </div>
+  <div class="header__right">
+    <span class="hdr-btn hdr-btn--accessibility" aria-label="Accessibility Tools">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m39.98 34.85c4.91-4.33 7.58-9.24 7.7-9.47.32-.6.32-1.32-.01-1.91-.36-.65-9.04-16.02-23.64-16.02-3.09 0-6.17.74-9.18 2.19l-6.52-6.54c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l39.01 39.14c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83l-7.36-7.38zm-15.95-23.4c10.32 0 17.52 9.86 19.56 13.01-.97 1.55-3.16 4.72-6.4 7.54l-4.25-4.26c.36-1.02.57-2.11.57-3.25 0-5.35-4.33-9.68-9.68-9.68-1.14 0-2.23.2-3.24.56l-2.69-2.7c2.04-.81 4.1-1.22 6.15-1.22z"/><path d="m14.12 21.76-5.38-5.4s0 0 0 0l-4.07-4.08c-.78-.78-2.05-.78-2.83 0s-.78 2.05 0 2.83l2.73 2.74c-2.61 2.97-4.05 5.47-4.12 5.6-.33.58-.35 1.29-.05 1.89.33.66 8.21 16.1 23.64 16.1 1.24 0 2.49-.11 3.71-.33l2.09 2.1c.39.39.9.59 1.42.59s1.02-.19 1.41-.58c.78-.78.78-2.05 0-2.83zm9.91 15.67c-10.92 0-17.65-9.8-19.52-12.93.57-.87 1.55-2.27 2.88-3.82l16.7 16.76h-.05z"/></svg>
+      <span class="hdr-btn__text">Accessibility</span>
+    </span>
+    <span class="hdr-btn hdr-btn--log-in">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="m40.69 39.91c3.94-4.13 6.37-9.71 6.37-15.86 0-12.68-10.32-23-23-23s-23 10.33-23 23.01c0 6.14 2.43 11.73 6.37 15.86v.03s.37.36.37.36c.04.04.08.07.11.11l.22.22s.02.01.02.02c.52.5 1.06.97 1.62 1.41.03.02.06.04.08.07.54.42 1.1.83 1.67 1.2.05.04.11.07.16.1.55.35 1.12.68 1.7.99.08.04.15.08.23.12.57.29 1.15.56 1.74.8.09.04.17.07.26.1.59.23 1.2.45 1.81.63.08.02.17.05.25.07.62.18 1.26.34 1.9.46.07.01.14.02.21.04.66.12 1.32.22 2 .29.05 0 .09 0 .14.01.7.06 1.4.1 2.12.1s1.42-.04 2.12-.1c.05 0 .09 0 .14-.01.68-.07 1.34-.17 2-.29.07-.01.14-.02.21-.04.64-.13 1.27-.28 1.9-.46.08-.02.17-.05.25-.07.62-.19 1.22-.4 1.81-.63.09-.03.17-.07.26-.1.59-.24 1.17-.51 1.74-.8.08-.04.16-.08.23-.12.58-.31 1.15-.64 1.7-.99.06-.04.11-.07.17-.11.58-.38 1.13-.78 1.67-1.2.03-.02.06-.05.09-.07.56-.44 1.1-.92 1.61-1.41 0 0 .02-.02.03-.02l.28-.26s.04-.04.06-.05l.38-.36v-.03zm-16.63-34.85c10.47 0 19 8.52 19 19 0 4.11-1.33 7.91-3.55 11.02-1.63-3.69-4.89-7.14-8.94-9.03 2.01-1.79 3.28-4.39 3.28-7.29 0-5.4-4.39-9.79-9.79-9.79s-9.79 4.39-9.79 9.79c0 2.9 1.27 5.49 3.28 7.29-4.05 1.89-7.3 5.34-8.94 9.03-2.23-3.11-3.55-6.91-3.55-11.02-0-10.48 8.52-19 19-19zm12.29 33.46c-.27.23-.55.44-.84.66-.19.15-.38.29-.58.43-.26.18-.53.35-.79.52-.24.15-.48.3-.72.44-.25.14-.51.28-.76.41-.27.14-.55.28-.83.4-.25.11-.5.22-.75.32-.3.12-.61.23-.92.34-.25.08-.49.17-.74.24-.33.1-.67.18-1.01.26-.24.06-.48.12-.72.16-.38.07-.77.13-1.16.18-.21.03-.41.06-.62.08-.6.06-1.21.09-1.83.09s-1.23-.03-1.83-.09c-.21-.02-.41-.06-.62-.08-.39-.05-.78-.1-1.16-.18-.24-.05-.48-.11-.72-.16-.34-.08-.68-.16-1.01-.26-.25-.07-.5-.16-.74-.24-.31-.11-.62-.22-.93-.34-.25-.1-.5-.21-.75-.32-.28-.13-.56-.26-.84-.4-.26-.13-.51-.26-.76-.41-.24-.14-.48-.29-.72-.44-.27-.17-.53-.34-.79-.52-.2-.14-.38-.29-.58-.43-.28-.22-.57-.43-.84-.66-.03-.03-.06-.06-.09-.08 1.11-4.7 6.49-9.89 12.38-9.89s11.27 5.2 12.38 9.89c-.03.03-.06.06-.09.09zm-18.07-19.77c0-3.19 2.6-5.79 5.79-5.79s5.79 2.6 5.79 5.79-2.6 5.79-5.79 5.79-5.79-2.6-5.79-5.79z"/></svg>
+      <span class="hdr-btn__text">Log in</span>
+    </span>
+    <span class="hdr-subscribe">Subscribe</span>
+  </div>
+</header>
+
+<!-- LEADERBOARD AD -->
+<div class="cas-leaderboard">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <!-- SWAP:A1 — Leaderboard ad (728x90): gradient, brand, tagline, CTA, ISI -->
+    <div class="ad-leaderboard">
+      <div class="fake-ad" style="background:linear-gradient(150deg,#2c5f2d 0%,#97bc62 100%);">
+        <div class="fake-ad__rx">Rx Only</div>
+        <div class="fake-ad__brand">Qulipta&reg;</div>
+        <div class="fake-ad__tagline">A once-daily oral preventive treatment for episodic migraine in adults.</div>
+        <div class="fake-ad__cta">Learn More</div>
+        <div class="fake-ad__isi">See full Prescribing Information including Medication Guide.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAS PAGE HEADING -->
+<div class="cas-heading">
+  <!-- SWAP:H1 — CAS page heading -->
+  <h1>Parenting and Migraine: Guilt, Genetics, and Coping Tips</h1>
+</div>
+
+<!-- SWAP:F1 — Feature article: image src+alt (500px wide), title, summary, background color -->
+<div class="feature-section" style="background: #2C3B5C;">
+  <div class="feature-section__wrapper">
+    <div class="feature-section__image">
+      <a href="#">
+        <img src="https://migraine.com/wp-content/uploads/2019/11/M-67484-hub-img-left_5.jpg" alt="Migraine Doesn't Make You a Bad Parent image">
+      </a>
+    </div>
+    <div class="feature-section__content">
+      <h2><a href="#">Migraine Doesn't Make You a Bad Parent</a></h2>
+      <p>Insecurity and self-esteem issues often go hand-in-hand with chronic illness. Whether it's the migraine disease itself or a connected condition such as depression or anxiety, the daily struggles of living...</p>
+    </div>
+  </div>
+</div>
+
+<!-- CAS TWO-COLUMN LAYOUT: main articles + sidebar -->
+<div class="cas-columns-wrap">
+<div class="cas-columns">
+  <!-- === MAIN COLUMN === -->
+  <div class="cas-columns__main">
+
+    <!-- SWAP:M1 — Main article 1: image src+alt (1080x412), title, summary -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2017/10/98368_custom-1080x412.jpg" alt="Unique Symptoms of Childhood Migraines image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Unique Symptoms of Childhood Migraines</a></h2>
+      <p class="cas-teaser__summary">We all know how adults describe this condition: throbbing, stabbing, pounding pain. And problems that go with it like nausea, light and sound sensitivity. But with children...</p>
+    </article>
+
+    <!-- SWAP:M2 — Main article 2: image src+alt (1080x412), title, summary -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2017/02/M-109536-parenting-children-with-migraine-custom-1080x412.jpg" alt="Circle of Life: Parenting a Child who has Migraine image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Circle of Life: Parenting a Child who has Migraine</a></h2>
+      <p class="cas-teaser__summary">Seeing your child in pain is some of the worst feelings a parent can experience. Looking back on my childhood and teen years, I can only imagine the agony my...</p>
+    </article>
+
+    <!-- SWAP:P1 — Community poll: question text + 4 option labels -->
+    <div class="poll">
+      <div class="poll__main">
+        <div class="poll__image">
+          <div class="poll__icon">
+            <svg class="poll-icon" viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg">
+              <circle class="poll-icon__bg" cx="59" cy="59" fill="#fff" r="59"/>
+              <g class="poll-icon__main-group" fill="#379ec1" transform="translate(25 89), scale(1 -1)">
+                <rect class="poll-icon__line-1" height="32" width="16" rx="8" x="0" y="0"/>
+                <rect class="poll-icon__line-2" height="66" width="16" opacity=".8" rx="8" x="24.5" y="0"/>
+                <rect class="poll-icon__line-3" height="49" width="16" opacity=".65" rx="8" x="51" y="0"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="poll__content">
+          <h2 class="poll__heading">Community Poll</h2>
+          <p class="poll__question">Does migraine affect your parenting?</p>
+          <div class="poll-form">
+            <div class="poll-form__options">
+              <div class="poll-radio"><span class="poll-radio__circle"></span><span class="poll-radio__label">Yes, significantly</span></div>
+              <div class="poll-radio"><span class="poll-radio__circle"></span><span class="poll-radio__label">Somewhat</span></div>
+              <div class="poll-radio"><span class="poll-radio__circle"></span><span class="poll-radio__label">Not very much</span></div>
+              <div class="poll-radio"><span class="poll-radio__circle"></span><span class="poll-radio__label">I don't have any children</span></div>
+            </div>
+            <span class="poll__submit">Submit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWAP:M3 — Main article 3: image src+alt (1080x412), title, summary -->
+    <article class="cas-teaser">
+      <a href="#" class="cas-teaser__image">
+        <img src="https://migraine.com/wp-content/uploads/2019/05/migraine-parenting-107982-custom_edit-1080x412.jpg" alt="Three Ways Migraine Prepared Me to Be a Parent image">
+      </a>
+      <h2 class="cas-teaser__heading"><a href="#">Three Ways Migraine Prepared Me to Be a Parent</a></h2>
+      <p class="cas-teaser__summary">When we think of migraine we often think of the negative aspects: missed work or school days, cancelled plans, staring at the ceiling while the world passes by...</p>
+    </article>
+
+    <!-- SWAP:M4 — Main article 4: title, summary (NO image) -->
+    <article class="cas-teaser">
+      <h2 class="cas-teaser__heading"><a href="#">I'm a Stay-At-Home-Mom with Migraines: Here's My Plan</a></h2>
+      <p class="cas-teaser__summary">I'm a Virgo. This automatically means I have a plan for everything. I plan vacations, meals, activities and even my outfits. My husband and coworkers think I'm absolutely insane. I've had migraines since...</p>
+    </article>
+
+
+  </div>
+
+  <!-- === SIDEBAR === -->
+  <div class="cas-columns__sidebar">
+    <!-- SWAP:A2 — Sidebar ad (300x250): gradient, brand, tagline, CTA, ISI -->
+    <div style="margin-bottom: 24px;">
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-square">
+          <div class="fake-ad" style="background:linear-gradient(150deg,#6b3fa0 0%,#e091c0 100%);">
+            <div class="fake-ad__rx">Rx Only</div>
+            <div class="fake-ad__brand">Chillaxa&reg;</div>
+            <div class="fake-ad__tagline">Finally, a migraine pill that tastes like a tiny vacation. Ask your doctor about Chillaxa.</div>
+            <div class="fake-ad__cta">Learn More</div>
+            <div class="fake-ad__isi">Side effects may include spontaneous relaxation and excessive chill vibes. Not a real medication.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SWAP:S1 — Sidebar article 1: title, summary (NO image) -->
+    <article class="sidebar-teaser">
+      <h3 class="sidebar-teaser__heading"><a href="#">Parenting While Managing a Chronic Illness</a></h3>
+      <p class="sidebar-teaser__summary">Whether or not you have a child, most individuals would agree that parenting is hard. There is really no wrong way to take a child, new trends, latest...</p>
+    </article>
+
+    <!-- SWAP:S2 — Sidebar article 2: title, summary (NO image) -->
+    <article class="sidebar-teaser">
+      <h3 class="sidebar-teaser__heading"><a href="#">Life with Chronic Migraine Mommy</a></h3>
+      <p class="sidebar-teaser__summary">I was sitting with my two daughters in the living room last night watching the first action-filled episode of the Beast, which is now on Netflix. It is a...</p>
+    </article>
+
+    <!-- SWAP:A3 — Sidebar ad (300x600): gradient, brand, tagline, CTA, ISI -->
+    <div style="margin-top: 24px;">
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-halfpage">
+          <div class="fake-ad" style="background:linear-gradient(150deg,#1a3a6b 0%,#2979b5 100%);">
+            <div class="fake-ad__rx">Rx Only</div>
+            <div class="fake-ad__brand">Nurtec&reg; ODT</div>
+            <div class="fake-ad__tagline">You may be able to get Nurtec ODT for as little as $0.</div>
+            <div class="fake-ad__cta">Learn More</div>
+            <div class="fake-ad__isi">See full Prescribing Information.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</body>
+</html>
