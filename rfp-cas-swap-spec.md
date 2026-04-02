@@ -54,7 +54,7 @@ This document enumerates every swap point, what fields to change, and where to f
 
 ---
 
-## Main Column Articles (4 items; first 3 have images, last 1 text-only)
+## Main Column Articles (4 items; first 2 have images, last 2 text-only)
 
 ### M1 — Main article 1 (has image)
 - **Location:** 1st `article.cas-teaser` in `.cas-columns__main`
@@ -74,14 +74,11 @@ This document enumerates every swap point, what fields to change, and where to f
   - `p.cas-teaser__summary` text
 - **Image specs:** same as M1
 
-### M3 — Main article 3 (has image)
+### M3 — Main article 3 (NO image)
 - **Location:** 4th `article.cas-teaser` (after the poll)
 - **Fields to swap:**
-  - `img src` — currently `https://migraine.com/.../migraine-parenting-107982-custom_edit-1080x412.jpg`
-  - `img alt`
   - `h2 > a` text — currently `"Three Ways Migraine Prepared Me to Be a Parent"`
   - `p.cas-teaser__summary` text
-- **Image specs:** same as M1
 
 ### M4 — Main article 4 (NO image)
 - **Location:** 5th `article.cas-teaser`
@@ -154,7 +151,7 @@ All three ads share the same solid background color (`#6b3fa0`) and display only
 | F1 | Feature | yes | 500px wide | Full-width hero band |
 | M1 | Article | yes | 1080x412 | Main column, 1st |
 | M2 | Article | yes | 1080x412 | Main column, 2nd |
-| M3 | Article | yes | 1080x412 | Main column, 4th (after poll) |
+| M3 | Article | no | — | Main column, 4th (after poll) |
 | M4 | Article | no | — | Main column, 5th |
 | S1 | Article | no | — | Sidebar, 1st |
 | S2 | Article | no | — | Sidebar, 2nd |
